@@ -1,0 +1,45 @@
+{
+  "site": {
+    "title": "Emma NailStudio | Luxe Nagelsalon",
+    "description": "Emma NailStudio biedt professionele nagelbehandelingen van topkwaliteit. Ontdek BIAB, gellak, manicure, nail art en meer.",
+    "domain": "nailsalonemma.nl",
+    "language": "nl"
+  },
+  "salon": {
+    "name": "Emma NailStudio",
+    "logo": "./images/logo.png",
+    "tagline": "Luxe nagelverzorging voor perfecte nagels",
+    "description": "Welkom bij Emma NailStudio, waar professionele nagelverzorging en luxe ervaring samenkomen. Met jarenlange ervaring en passie voor perfecte nagels, creëren we prachtige resultaten die je zelfvertrouwen geven."
+  },
+  "contact": {
+    "phone": "+31 6 12345678",
+    "email": "info@nailsalonemma.nl",
+    "address": "Hoofdstraat 123, 1234 AB Amsterdam",
+    "mapLink": "https://www.google.com/maps/search/Hoofdstraat+123+Amsterdam",
+    "whatsapp": {
+      "number": "+31612345678",
+      "message": "Hallo Emma NailStudio, ik wil graag een afspraak maken voor een nagelbehandeling."
+    }
+  },
+  "hours": {
+    "monday": "10:00 - 18:00",
+    "tuesday": "10:00 - 18:00",
+    "wednesday": "10:00 - 18:00",
+    "thursday": "10:00 - 19:00",
+    "friday": "10:00 - 19:00",
+    "saturday": "09:00 - 17:00",
+    "sunday": "Gesloten"
+  },
+  "social": {
+    "instagram": "https://instagram.com",
+    "facebook": "https://facebook.com",
+    "whatsappBusiness": "https://wa.me/31612345678"
+  },
+  "colors": {
+    "primary": "#d4a574",
+    "secondary": "#f5f0eb",
+    "accent": "#8b7355",
+    "text": "#333333",
+    "lightText": "#666666"
+  }
+}

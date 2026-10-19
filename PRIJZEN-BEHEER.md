@@ -1,0 +1,369 @@
+# Prijzenlijst Beheren - Emma NailStudio
+
+## 📋 Hoe Prijzen Aanpassen?
+
+**Alles staat in één bestand:** `data/services.json`
+
+Alle wijzigingen daar verschijnen AUTOMATISCH op:
+- ✅ Homepage
+- ✅ Behandelingen kaarten
+- ✅ Prijslijst tabel
+- ✅ Contact info
+
+**Geen HTML/CSS aanpassingen nodig!**
+
+---
+
+## 🔧 Prijzen Wijzigen
+
+### Stap 1: Open bestand
+```
+Bestand: C:\MyDocs\DEVOPS\EmStudio\data\services.json
+Gebruik: Kladblok, VS Code, of elke teksteneditor
+```
+
+### Stap 2: Vind behandeling
+Zoek naar de naam van de behandeling, bijvoorbeeld:
+
+```json
+{
+  "id": "new-set-witte-poeder",
+  "name": "New Set Witte Poeder",
+  "category": "Nagels - Poeder",
+  "description": "Nieuwe set kunstnagels...",
+  "price": 38,  ← WIJZIG HIER!
+  "duration": "60 minuten",
+  "image": "./images/gallery/witte-poeder.jpg"
+}
+```
+
+### Stap 3: Wijzig prijs
+Verander het getal (38 → uw prijs)
+
+### Stap 4: Opslaan
+Ctrl+S of File → Save
+
+### Stap 5: Website vernieuwen
+Refresh browser (Ctrl+F5)
+Prijs is bijgewerkt! ✅
+
+---
+
+## 📊 Huidge Prijzenlijst
+
+| Behandeling | Huidge Prijs | Duur |
+|------------|-----------|------|
+| Wenkbrauw Epileren met Touw | €7 | 15 min |
+| Wenkbrauw Verven + Epileren | €15 | 30 min |
+| Boven/Onderlip Epileren | €8 | 15 min |
+| New Set Nagels | €28 | 60 min |
+| New Set Witte Poeder | €38 | 60 min |
+| Opvullen Witte Poeder | €35 | 45 min |
+| Opvullen Naturel | €35 | 45 min |
+| Naturel Roze Poeder (Nieuwe Set) | €32 | 60 min |
+| Naturel Opvullen Roze Poeder | €27 | 45 min |
+| Shellac | €17 | 40 min |
+| Manicure | €10 | 30 min |
+| Pedicure | €28 | 45 min |
+| Teennagels | €30 | 30 min |
+| Design Nagel (Glitter) | €38 | 60 min |
+| Opvullen 2 Kleuren (Glitter) | €30 | 45 min |
+| Opvullen Gellac | €28 | 40 min |
+| Roze Poeder + Witte Randje (Nieuwe Set) | €40 | 60 min |
+| Alleen Verwijderen | €8 | 20 min |
+| Babyboom Nieuwe Set | €40 | 60 min |
+| Opvullen BabyBoom | €38 | 45 min |
+| Verwijderen + Verzorging | €3 | 30 min |
+| Nieuw Set op Eigen Nagel | €25 | 50 min |
+| Nails Design Vanaf... | €40 | 60+ min |
+
+---
+
+## ✏️ Behandeling Toevoegen
+
+1. Open `data/services.json`
+2. Vind het laatste item in `services` array
+3. Kopieer dit blok en plak het erna:
+
+```json
+{
+  "id": "unique-id-hier",
+  "name": "Behandeling Naam",
+  "category": "Categorie",
+  "description": "Omschrijving",
+  "price": 25,
+  "duration": "45 minuten",
+  "image": "./images/gallery/foto.jpg"
+}
+```
+
+### Veld uitleg:
+- **id**: Unieke identifier (geen spaties, kebab-case: `mijn-behandeling`)
+- **name**: Weergegeven naam op website
+- **category**: Groepering (bijv: "Nagels - Poeder")
+- **description**: Korte omschrijving
+- **price**: Prijs in EUR (getal zonder €)
+- **duration**: Behandelingstijd
+- **image**: Afbeelding pad (optioneel)
+
+**Let op:** Zet komma na vorig item! ✓
+
+---
+
+## ❌ Behandeling Verwijderen
+
+1. Open `data/services.json`
+2. Vind behandeling
+3. Verwijder het hele blok (inclusief komma's)
+
+**Voorbeeld:**
+```json
+// VERWIJDER DEZE BLOK:
+{
+  "id": "shellac",
+  "name": "Shellac",
+  ...
+}
+```
+
+---
+
+## 🏷️ Categorie Aanpassen
+
+Huidge categorieën:
+- Wenkbrauwen
+- Nagels - Poeder
+- Nagels - Gellak
+- Nagels - Design
+- Nagels - Overig
+- Hands & Feet
+
+**Zelf maken:**
+Wijzig `"category"` naar uw kategorie:
+
+```json
+"category": "Uw Nieuwe Categorie"
+```
+
+---
+
+## 📝 JSON Format Regels
+
+**BELANGRIJK - anders werkt het niet:**
+
+✅ **Correct:**
+```json
+"price": 25,
+"price": 28.50,
+```
+
+❌ **Fout:**
+```json
+"price": 25€,      // Nee, alleen getal!
+"price": €25,      // Nee!
+"price": "25",     // Nee, geen quotes!
+```
+
+✅ **Correct - komma's:**
+```json
+{
+  "id": "item1",
+  "name": "Naam",
+  "price": 25,     ← komma na elke regel
+  "duration": "30 min"  ← GEEN komma na laatste!
+}
+```
+
+❌ **Fout:**
+```json
+{
+  "id": "item1",
+  "name": "Naam",
+  "price": 25      ← KOMMA VERGETEN!
+  "duration": "30 min"
+}
+```
+
+**Validatie:** Gebruik https://jsonlint.com/ om fouten te checken
+
+---
+
+## 🧪 Testen
+
+### Lokaal testen:
+```bash
+cd C:\MyDocs\DEVOPS\EmStudio
+python -m http.server 8000
+# Open http://localhost:8000
+```
+
+### Controleer:
+1. ✓ Behandelingskaarten tonen juiste prijzen
+2. ✓ Prijstabel tabel toon juiste prijzen
+3. ✓ Geen console errors (F12)
+
+### Als iets fout gaat:
+1. Controleer JSON op https://jsonlint.com/
+2. Check komma's en spaties
+3. Zorg geen speciale tekens (€, %, etc.)
+4. Ctrl+F5 om cache te vernieuwen
+
+---
+
+## 💡 Praktische Voorbeelden
+
+### Voorbeeld 1: Prijs verlagen
+
+**Van:** €38 → **Naar:** €35
+```json
+// VOOR:
+"name": "New Set Witte Poeder",
+"price": 38,
+
+// NA:
+"name": "New Set Witte Poeder",
+"price": 35,
+```
+
+### Voorbeeld 2: Duur wijzigen
+
+**Van:** 60 minuten → **Naar:** 75 minuten
+```json
+// VOOR:
+"duration": "60 minuten",
+
+// NA:
+"duration": "75 minuten",
+```
+
+### Voorbeeld 3: Omschrijving updaten
+
+```json
+// VOOR:
+"description": "Oude beschrijving",
+
+// NA:
+"description": "Nieuwe, betere beschrijving hier",
+```
+
+### Voorbeeld 4: Nieuwe behandeling toevoegen
+
+```json
+{
+  "id": "brows-lamination",
+  "name": "Wenkbrauw Lamineren",
+  "category": "Wenkbrauwen",
+  "description": "Permanente wenkbrauw wave behandeling",
+  "price": 45,
+  "duration": "45 minuten",
+  "image": "./images/gallery/brows-lam.jpg"
+}
+```
+
+---
+
+## 🎯 Workflow Voorbeeld
+
+**Scenario:** Wilt u "Shellac" verhoging van €17 naar €20
+
+**Stap-voor-stap:**
+
+1. **Open bestand**
+   - `C:\MyDocs\DEVOPS\EmStudio\data\services.json`
+   - Met Kladblok of VS Code
+
+2. **Zoek Shellac**
+   - Ctrl+F → Typ "Shellac"
+   - Vind deze regel: `"price": 17,`
+
+3. **Wijzig prijs**
+   ```json
+   // VOOR:
+   "price": 17,
+
+   // NA:
+   "price": 20,
+   ```
+
+4. **Opslaan**
+   - Ctrl+S
+
+5. **Vernieuw website**
+   - Browser refresh (Ctrl+F5)
+   - Shellac is nu €20! ✅
+
+---
+
+## 🔐 Best Practices
+
+✅ **Doen:**
+- Maak backup van services.json voordat je grote wijzigingen doet
+- Valideer JSON op jsonlint.com
+- Test na elke wijziging
+- Gebruik consistent formaat
+
+❌ **Niet doen:**
+- Niet handmatig HTML aanpassen (alles komt uit JSON!)
+- Niet speciale tekens in JSON gebruiken
+- Niet vergeten komma's
+- Niet quotes om getallen zetten
+
+---
+
+## ❓ Veelgestelde Vragen
+
+**V: Hoe voeg ik korting toe?**
+A: Voeg behandeling toe met negatieve prijs:
+```json
+{
+  "id": "discount-10",
+  "name": "Winter Korting 10%",
+  "category": "Specials",
+  "description": "€10 korting op boekingen",
+  "price": -10,
+  "duration": "N/A"
+}
+```
+
+**V: Werken decimale prijzen?**
+A: Ja! `"price": 35.50` werkt perfect.
+
+**V: Kan ik emoji gebruiken in beschrijving?**
+A: Ja, maar gebruik escape karakter: `\"` voor quotes
+```json
+"description": "Nagels met glitter ✨ effect"  // Ok
+"description": "Nagels met \"extra\" glitter"  // Ok
+```
+
+**V: Waarom werkt mijn wijziging niet?**
+A: Waarschijnlijke oorzaken:
+- JSON is ongeldig (jsonlint.com)
+- Komma vergeten
+- Quotes om getallen gezet
+- Browser cache (Ctrl+F5)
+- Server niet gestart (python -m http.server 8000)
+
+**V: Kan ik nieuwe categorieën maken?**
+A: Ja! Zet gewoon een naam in `"category"`:
+```json
+"category": "Mijn Nieuwe Categorie"
+```
+
+---
+
+## 📞 Support
+
+**Problemen?**
+1. Check JSON op https://jsonlint.com/
+2. Vergelijk met voorbeelden hierboven
+3. Maak backup en probeer opnieuw
+4. Refresh browser (Ctrl+F5)
+
+**Meer info:**
+- README.md - Volledige handleiding
+- QUICK-REFERENCE.md - Snelle tips
+- ACCESSIBILITY.md - Accessibility features
+
+---
+
+**Vragen? Raadpleeg README.md!** 📖

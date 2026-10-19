@@ -1,0 +1,87 @@
+ALLE 10 BESTANDSNAMEN DIE JE MOET AANMAKEN
+============================================
+
+Kopieer deze bestandsnamen en maak JPG-bestanden met deze EXACT namen:
+
+1. lip-epileren.jpg
+2. manicure.jpg
+3. new-set-nagels.jpg
+4. pedicure.jpg
+5. roze-poeder.jpg
+6. shellac.jpg
+7. teennagels.jpg
+8. wenkbrauw-epileren.jpg
+9. wenkbrauw-verven.jpg
+10. witte-poeder.jpg
+
+PLAATS DEZE IN:
+C:\MyDocs\DEVOPS\EmStudio\images\services\
+
+============================================
+WELKE BEHANDELING GEBRUIKT WELKE FOTO
+============================================
+
+1. lip-epileren.jpg
+   ├─ Boven en Onderlip Epileren met Touw
+
+2. manicure.jpg
+   ├─ Manicure
+
+3. new-set-nagels.jpg
+   ├─ New Set Nagels
+   ├─ Opvullen Naturel Nagel
+   ├─ Alleen Verwijderen
+   ├─ Verwijderen Set Inclusief Verzorging
+   └─ Nieuw Set op Eigen Nagel
+
+4. pedicure.jpg
+   ├─ Pedicure
+
+5. roze-poeder.jpg
+   ├─ Naturel Roze Poeder (Nieuwe Set)
+   ├─ Naturel Opvullen Roze Poeder
+   ├─ Nieuw Set Roze Poeder en Witte Randje
+   ├─ Babyboom Nieuwe Set
+   └─ Opvullen BabyBoom
+
+6. shellac.jpg
+   ├─ Shellac
+   ├─ Design Nagel (met Glitter)
+   ├─ Opvullen 2 Kleuren (met Glitter)
+   ├─ Opvullen met Gellak Inclusief
+   └─ Nails Design Vanaf...
+
+7. teennagels.jpg
+   ├─ Teennagels
+
+8. wenkbrauw-epileren.jpg
+   ├─ Wenkbrauw Epileren met Touw
+
+9. wenkbrauw-verven.jpg
+   ├─ Wenkbrauw Verven en Epileren met Touw
+
+10. witte-poeder.jpg
+    ├─ New Set Witte Poeder
+    └─ Opvullen Witte Poeder
+
+============================================
+SNEL STAPPENPLAN
+============================================
+
+1. Verzamel je 10 mooiste nagel-foto's
+2. Rename naar bovenstaande bestandsnamen
+3. Sleep naar: C:\MyDocs\DEVOPS\EmStudio\images\services\
+4. Browser refresh (Ctrl+F5)
+5. Website toont alle foto's!
+
+============================================
+TIPS
+============================================
+
+✓ Zorg dat bestandsnamen EXACT gelijk zijn
+✓ Alle bestanden moeten .jpg zijn (lowercase)
+✓ Geen spaties of bijzondere karakters
+✓ Resolutie: minstens 300x300px
+✓ Bestandsgrootte: max 500KB per foto
+
+Veel succes! 💅✨

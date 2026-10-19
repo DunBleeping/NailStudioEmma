@@ -1,0 +1,8 @@
+# Images must never undergo line-ending conversion
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.v001 binary

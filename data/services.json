@@ -1,0 +1,213 @@
+{
+  "extras": [],
+  "services": [
+    {
+      "name": "Wenkbrauw Epileren met Touw",
+      "price": 15,
+      "description": "Professioneel epileren van wenkbrauwen met touw voor een schoon, gedefinieerd resultaat.",
+      "image": "./images/services/wenkbrauw-epileren.jpg",
+      "id": "wenkbrauw-epileren",
+      "duration": "15 minuten",
+      "category": "Wenkbrauwen"
+    },
+    {
+      "name": "Wenkbrauw Verven en Epileren met Touw",
+      "price": 15,
+      "description": "Combinatie van wenkbrauw epileren en verven voor een perfecte, definieerde look.",
+      "image": "./images/services/wenkbrauw-verven.jpg",
+      "id": "wenkbrauw-verven-epileren",
+      "duration": "30 minuten",
+      "category": "Wenkbrauwen"
+    },
+    {
+      "name": "Boven en Onderlip Epileren met Touw",
+      "price": 8,
+      "description": "Professioneel epileren van boven- en onderlip voor een glad resultaat.",
+      "image": "./images/services/lip-epileren.jpg",
+      "id": "bovenlip-onderlip-epileren",
+      "duration": "15 minuten",
+      "category": "Wenkbrauwen"
+    },
+    {
+      "name": "New Set Nagels",
+      "price": 28,
+      "description": "Compleet nieuwe set kunstnagels - klassieke poedertechniek.",
+      "image": "./images/services/new-set-nagels.jpg",
+      "id": "new-set-nagels",
+      "duration": "60 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "New Set Witte Poeder",
+      "price": 38,
+      "description": "Nieuwe set kunstnagels met witte poedertechniek voor Frans uiterlijk.",
+      "image": "./images/services/witte-poeder.jpg",
+      "id": "new-set-witte-poeder",
+      "duration": "60 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Opvullen Witte Poeder",
+      "price": 35,
+      "description": "Opvulbeurt voor bestaande witte poeder nagels.",
+      "image": "./images/services/witte-poeder.jpg",
+      "id": "opvullen-witte-poeder",
+      "duration": "45 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Opvullen Naturel Nagel",
+      "price": 35,
+      "description": "Opvulbeurt voor natuurlijke nagels in poedertechniek.",
+      "image": "./images/services/new-set-nagels.jpg",
+      "id": "opvullen-naturel",
+      "duration": "45 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Naturel Roze Poeder (Nieuwe Set)",
+      "price": 32,
+      "description": "Nieuwe set kunstnagels met naturel roze poedertechniek - elegant en subtiel.",
+      "image": "./images/services/roze-poeder.jpg",
+      "id": "naturel-roze-poeder-new",
+      "duration": "60 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Naturel Opvullen Roze Poeder",
+      "price": 27,
+      "description": "Opvulbeurt voor bestaande roze poeder nagels.",
+      "image": "./images/services/roze-poeder.jpg",
+      "id": "naturel-opvullen-roze-poeder",
+      "duration": "45 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Shellac",
+      "price": 17,
+      "description": "Shellac gel manicure - lange houdbaarheid tot 3 weken.",
+      "image": "./images/services/shellac.jpg",
+      "id": "shellac",
+      "duration": "40 minuten",
+      "category": "Nagels - Gellak"
+    },
+    {
+      "name": "Manicure",
+      "price": 10,
+      "description": "Klassieke manicure met handverzorging en nagellak.",
+      "image": "./images/services/manicure.jpg",
+      "id": "manicure",
+      "duration": "30 minuten",
+      "category": "Hands & Feet"
+    },
+    {
+      "name": "Pedicure",
+      "price": 28,
+      "description": "Complete voetenverzorging met pedicure.",
+      "image": "./images/services/pedicure.jpg",
+      "id": "pedicure",
+      "duration": "45 minuten",
+      "category": "Hands & Feet"
+    },
+    {
+      "name": "Teennagels",
+      "price": 30,
+      "description": "Decoratie en styling van teennagels.",
+      "image": "./images/services/teennagels.jpg",
+      "id": "teennagels",
+      "duration": "30 minuten",
+      "category": "Hands & Feet"
+    },
+    {
+      "name": "Design Nagel (met Glitter)",
+      "price": 38,
+      "description": "Kunstnagels met speciaal design en glitter afwerking.",
+      "image": "./images/services/shellac.jpg",
+      "id": "design-nagel-glitter",
+      "duration": "60 minuten",
+      "category": "Nagels - Design"
+    },
+    {
+      "name": "Opvullen 2 Kleuren (met Glitter)",
+      "price": 30,
+      "description": "Opvulbeurt met twee kleuren en glitter effect.",
+      "image": "./images/services/shellac.jpg",
+      "id": "opvullen-2-kleuren-glitter",
+      "duration": "45 minuten",
+      "category": "Nagels - Design"
+    },
+    {
+      "name": "Opvullen met Gellak Inclusief",
+      "price": 28,
+      "description": "Opvulbeurt met gellak inclusief.",
+      "image": "./images/services/shellac.jpg",
+      "id": "opvullen-gellak",
+      "duration": "40 minuten",
+      "category": "Nagels - Gellak"
+    },
+    {
+      "name": "Nieuw Set Roze Poeder en Witte Randje",
+      "price": 40,
+      "description": "Nieuwe set kunstnagels met roze poeder en witte randje - klassieke Frans look.",
+      "image": "./images/services/roze-poeder.jpg",
+      "id": "new-set-roze-witte-randje",
+      "duration": "60 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Alleen Verwijderen",
+      "price": 8,
+      "description": "Veilige verwijdering van kunstnagels zonder extra verzorging.",
+      "image": "./images/services/new-set-nagels.jpg",
+      "id": "alleen-verwijderen",
+      "duration": "20 minuten",
+      "category": "Nagels - Overig"
+    },
+    {
+      "name": "Babyboom Nieuwe Set",
+      "price": 40,
+      "description": "Nieuwe set kunstnagels met Babyboom effect.",
+      "image": "./images/services/roze-poeder.jpg",
+      "id": "babyboom-new-set",
+      "duration": "60 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Opvullen BabyBoom",
+      "price": 38,
+      "description": "Opvulbeurt voor bestaande BabyBoom nagels.",
+      "image": "./images/services/roze-poeder.jpg",
+      "id": "opvullen-babyboom",
+      "duration": "45 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Verwijderen Set Inclusief Verzorging",
+      "price": 3,
+      "description": "Verwijdering van kunstnagels met nagelverzorging behandeling.",
+      "image": "./images/services/new-set-nagels.jpg",
+      "id": "verwijderen-inclusief-verzorging",
+      "duration": "30 minuten",
+      "category": "Nagels - Overig"
+    },
+    {
+      "name": "Nieuw Set op Eigen Nagel",
+      "price": 25,
+      "description": "Kunstnagels op basis van uw eigen nagels - natuurlijke look.",
+      "image": "./images/services/new-set-nagels.jpg",
+      "id": "new-set-op-eigen-nagel",
+      "duration": "50 minuten",
+      "category": "Nagels - Poeder"
+    },
+    {
+      "name": "Nails Design Vanaf...",
+      "price": 40,
+      "description": "Unieke nagel designs naar uw wens. Prijs begint vanaf.",
+      "image": "./images/services/shellac.jpg",
+      "id": "nails-design-vanaf",
+      "duration": "60+ minuten",
+      "category": "Nagels - Design"
+    }
+  ]
+}
+
