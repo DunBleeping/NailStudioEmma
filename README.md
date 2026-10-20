@@ -42,6 +42,8 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 
 **Pagina van boven naar beneden:**
 
+De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **I/my**.
+
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Galerij, Contact),
    taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
    **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
@@ -61,11 +63,12 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
    bij, in beide talen. Ook mobiel blijven de vier kolommen naast elkaar staan.
    Op mobiel is de tabeltekst kleiner en blijven bedragen op één regel.
-   Alleen hier wordt de duur als klok met kwartierdelen getoond, visueel naar boven afgerond.
-   Boven een uur staan hele uren naast de klok; een + blijft zichtbaar bij een minimumduur.
+   Alleen hier wordt de duur als analoge klok met wijzers en kwartiermarkeringen getoond, visueel naar boven afgerond.
+   Elk heel uur krijgt een eigen volle klok; de resterende tijd krijgt een extra klok.
+   Anderhalf uur wordt dus een volle en een halve klok; een + blijft zichtbaar bij een minimumduur.
    De exacte duur blijft beschikbaar voor schermlezers, bij de behandelingen, in het mandje en in berichten.
    De toeslag heeft een eigen vak over de volledige tabelbreedte, met naam en prijs boven de uitleg.
-4. **Onze Behandelingen** – onder "Categorieën" een **zoekbalk** (zoekt live in naam, categorie en
+4. **Mijn Behandelingen** – onder "Categorieën" een **zoekbalk** (zoekt live in naam, categorie en
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
    en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
    knop **+ dit wil ik**, onderaan de kaart en op gelijke hoogte binnen elke rij).
@@ -83,6 +86,8 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
   Ook het grote logo in het welkomstblok wordt verborgen; het kleine headerlogo blijft altijd zichtbaar.
   Een tip bovenaan en bij Impressie verwijst naar het foto-icoontje 🖼️ rechtsboven om foto's te tonen.
   De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
+  Bij omschakelen blijft de zichtbare tekst zo veel mogelijk op dezelfde schermhoogte staan.
+  Helemaal bovenaan blijft de pagina bovenaan; bij de paginaranden kan de beschikbare scrollruimte dit beperken.
 - Lettergrootte **A–** (kleinste, 87,5%), kleur aan (geen grijswaarden).
   Een eerder opgeslagen letterkeuze blijft behouden.
 - Taal **Nederlands**; bezoekers kunnen **English** kiezen. De taal wordt onthouden (localStorage `language`).
@@ -287,7 +292,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=18`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=19`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

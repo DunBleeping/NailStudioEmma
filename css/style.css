@@ -759,25 +759,33 @@ body:not(.images-hidden) .photo-tip {
   color: var(--accent);
 }
 
-.duration-clock-hours {
-  white-space: nowrap;
-}
-
-.duration-clock-hours:empty {
-  display: none;
-}
-
 .duration-clock-face {
   display: inline-block;
   flex: 0 0 auto;
   width: 1.6rem;
   height: 1.6rem;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  background:
-    linear-gradient(to right, transparent calc(50% - 0.5px), currentColor calc(50% - 0.5px), currentColor calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-    linear-gradient(to bottom, transparent calc(50% - 0.5px), currentColor calc(50% - 0.5px), currentColor calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-    conic-gradient(var(--primary) var(--duration-angle), var(--white) 0);
+}
+
+.duration-clock-background {
+  fill: var(--white);
+}
+
+.duration-clock-fill {
+  fill: var(--primary);
+  fill-opacity: 0.55;
+}
+
+.duration-clock-outline,
+.duration-clock-markings,
+.duration-clock-hand {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.duration-clock-hand {
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 .pricing-table .add-to-cart-btn {

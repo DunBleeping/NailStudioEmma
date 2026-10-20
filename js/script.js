@@ -410,13 +410,28 @@ function renderDurationClock(service) {
   }
 
   const roundedMinutes = Math.ceil(Number(duration[1]) / 15) * 15;
-  const hours = roundedMinutes > 60 ? Math.floor(roundedMinutes / 60) : 0;
-  const quarters = hours ? (roundedMinutes % 60) / 15 : roundedMinutes / 15;
-  const hourLabel = hours ? `${hours} ${t('u')}` : '';
+  const clocks = [];
+  for (let remaining = roundedMinutes; remaining > 0; remaining -= 60) {
+    const minutes = Math.min(remaining, 60);
+    const angle = minutes * 6;
+    const fill = minutes === 60
+      ? '<circle cx="20" cy="20" r="18" class="duration-clock-fill"/>'
+      : `<path class="duration-clock-fill" d="M20 20 L20 2 A18 18 0 ${angle > 180 ? 1 : 0} 1 ${20 + 18 * Math.sin(angle * Math.PI / 180)} ${20 - 18 * Math.cos(angle * Math.PI / 180)} Z"/>`;
+    clocks.push(`
+      <svg class="duration-clock-face" viewBox="0 0 40 40" aria-hidden="true" focusable="false" data-minutes="${minutes}">
+        <circle cx="20" cy="20" r="18" class="duration-clock-background"/>
+        ${fill}
+        <circle cx="20" cy="20" r="18" class="duration-clock-outline"/>
+        <path d="M20 2v4 M38 20h-4 M20 38v-4 M2 20h4" class="duration-clock-markings"/>
+        <path d="M20 20V11" transform="rotate(${minutes / 2} 20 20)" class="duration-clock-hand"/>
+        <path d="M20 20V6" transform="rotate(${angle} 20 20)" class="duration-clock-hand"/>
+        <circle cx="20" cy="20" r="1.5" fill="currentColor"/>
+      </svg>
+    `);
+  }
   return `
     <span class="duration-clock" role="img" aria-label="${escapeHtml(t(service.duration))}" title="${escapeHtml(t(service.duration))}">
-      <span class="duration-clock-hours" aria-hidden="true">${escapeHtml(hourLabel)}</span>
-      <span class="duration-clock-face" style="--duration-angle: ${quarters * 90}deg" aria-hidden="true"></span>
+      ${clocks.join('')}
       ${duration[2] ? '<span aria-hidden="true">+</span>' : ''}
     </span>
   `;
@@ -595,7 +610,7 @@ function getAlbumPhotos(item) {
   return [{
     src: item.src,
     alt: item.alt,
-    caption: 'Voorbeeldfoto - echte resultaten van onze klanten volgen binnenkort.',
+    caption: 'Voorbeeldfoto - echte resultaten van mijn klanten volgen binnenkort.',
     isExample: true
   }];
 }
@@ -1061,10 +1076,25 @@ function initializeToggleImages() {
 
   if (toggleImagesBtn) {
     toggleImagesBtn.addEventListener('click', () => {
+      const header = document.querySelector('header');
+      const viewportTop = getComputedStyle(header).position === 'sticky'
+        ? header.getBoundingClientRect().bottom : 0;
+      const candidates = [...document.querySelectorAll('main h1, main h2, main h3, main p, main td strong, main .service-meta, main .add-to-cart-btn, main .gallery-item')];
+      const anchor = candidates.find((element) => {
+        const rect = element.getBoundingClientRect();
+        return !element.closest('.photo-tip, .services-sidebar, .gallery-overlay')
+          && rect.height > 0 && rect.top >= viewportTop && rect.top < window.innerHeight;
+      });
+      const anchorTop = anchor ? anchor.getBoundingClientRect().top : 0;
+      const scrollTop = window.scrollY;
       const isHidden = document.body.classList.toggle('images-hidden');
       toggleImagesBtn.classList.toggle('images-hidden');
       toggleImagesBtn.setAttribute('aria-pressed', String(!isHidden));
       localStorage.setItem('imagesHidden', isHidden);
+      // Keep the same visible text in place, rather than the old document scroll offset.
+      if (anchor && scrollTop > 0) {
+        window.scrollBy({ top: anchor.getBoundingClientRect().top - anchorTop, behavior: 'instant' });
+      }
     });
   }
 }

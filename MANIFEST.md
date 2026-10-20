@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=18`
+- `index.html` – de pagina; CSS/JS geladen met `?v=19`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
