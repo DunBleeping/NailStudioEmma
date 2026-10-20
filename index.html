@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=2">
+  <link rel="stylesheet" href="./css/style.css?v=3">
 
   <!-- Title -->
   <title>Emma NailStudio | Luxe Nagelsalon</title>
@@ -65,7 +65,7 @@
   }
   </script>
 </head>
-<body>
+<body class="images-hidden">
   <!-- Header / Navigation -->
   <header>
     <div class="container">
@@ -85,7 +85,7 @@
           <li><a href="#pricing">Prijzen</a></li>
           <li><a href="#gallery">Galerij</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#contact-booking" class="cta-button">Afspraak maken</a></li>
+          <li><a href="#contact" class="cta-button" data-whatsapp>Afspraak maken</a></li>
         </ul>
       </nav>
 
@@ -101,7 +101,7 @@
         </div>
 
         <!-- Toggle Images -->
-        <button id="toggle-images-btn" class="toggle-images-btn" aria-label="Foto's tonen/verbergen" title="Foto's tonen/verbergen">🖼️</button>
+        <button id="toggle-images-btn" class="toggle-images-btn images-hidden" aria-label="Foto's tonen/verbergen" title="Foto's tonen/verbergen">🖼️</button>
       </div>
     </div>
   </header>
@@ -121,7 +121,7 @@
             </p>
             <div class="hero-buttons">
               <a href="#services" class="cta-button">Bekijk behandelingen</a>
-              <a href="https://wa.me/" class="secondary-button">📱 WhatsApp</a>
+              <a href="https://wa.me/31645715179" class="secondary-button" data-whatsapp>📱 WhatsApp</a>
             </div>
           </div>
 
@@ -276,7 +276,7 @@
             <div class="contact-icon">💬</div>
             <h3>WhatsApp</h3>
             <p>Maak snel een afspraak via WhatsApp Business</p>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button" id="contact-booking">WhatsApp</a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button" id="contact-booking" data-whatsapp>WhatsApp</a>
           </div>
 
           <!-- Kaart -->
@@ -292,7 +292,7 @@
   </main>
 
   <!-- WhatsApp Floating Button -->
-  <a id="whatsapp-floating-btn" href="#" class="whatsapp-button" title="WhatsApp Business" target="_blank" rel="noopener noreferrer" aria-label="Neem contact op via WhatsApp">💬</a>
+  <a id="whatsapp-floating-btn" href="#" class="whatsapp-button" data-whatsapp title="WhatsApp Business" target="_blank" rel="noopener noreferrer" aria-label="Neem contact op via WhatsApp">💬</a>
 
   <!-- Footer -->
   <footer>
@@ -347,6 +347,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=2" defer></script>
+  <script src="./js/script.js?v=3" defer></script>
 </body>
 </html>

@@ -626,6 +626,8 @@ function initializeWhatsAppButton() {
   if (whatsappBtn) {
     setupWhatsAppButton(whatsappBtn);
   }
+
+  document.querySelectorAll('[data-whatsapp]').forEach(setupWhatsAppButton);
 }
 
 // ============================================
@@ -785,12 +787,12 @@ function applyFontSize(size) {
 // 3. Toggle Images
 function initializeToggleImages() {
   const toggleImagesBtn = document.getElementById('toggle-images-btn');
-  const savedImageState = localStorage.getItem('imagesHidden') === 'true';
+  // New visitors (no saved choice) start with images hidden
+  const savedImageState = localStorage.getItem('imagesHidden') !== 'false';
 
-  // Apply saved state on load
-  if (savedImageState) {
-    document.body.classList.add('images-hidden');
-    toggleImagesBtn.classList.add('images-hidden');
+  document.body.classList.toggle('images-hidden', savedImageState);
+  if (toggleImagesBtn) {
+    toggleImagesBtn.classList.toggle('images-hidden', savedImageState);
   }
 
   if (toggleImagesBtn) {

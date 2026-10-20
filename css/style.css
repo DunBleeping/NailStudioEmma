@@ -1199,6 +1199,11 @@ body.images-hidden .gallery-item img {
   display: none !important;
 }
 
+/* With photos hidden, show the gallery titles instead of empty tiles */
+body.images-hidden .gallery-overlay {
+  opacity: 1;
+}
+
 /* ============================================
    Services Section with Sidebar
    ============================================ */
