@@ -299,6 +299,10 @@ body.grayscale .accessibility-toggle {
    Mobile Navigation
    ============================================ */
 
+.menu-preferences {
+  display: none;
+}
+
 @media (min-width: 768px) {
   header nav {
     min-width: max-content;
@@ -313,7 +317,36 @@ body.grayscale .accessibility-toggle {
 
 @media (max-width: 767px) {
   header .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+  }
+
+  header .header-logo {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  header .header-logo-image {
+    height: 72px;
+  }
+
+  header .header-controls {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  header nav {
+    max-height: calc(100dvh - 160px);
+    overflow-y: auto;
+  }
+
+  header .menu-preferences {
+    display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
   }
 
   nav {
@@ -360,6 +393,11 @@ body.grayscale .accessibility-toggle {
 
   .mobile-menu-toggle {
     display: block;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 
@@ -688,6 +726,20 @@ body:not(.images-hidden) .photo-tip {
   width: fit-content;
   max-width: 100%;
   margin-top: 0;
+}
+
+.pricing-extra-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+.pricing-extra p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {

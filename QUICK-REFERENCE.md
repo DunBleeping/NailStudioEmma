@@ -64,6 +64,9 @@ Volledige uitleg: [README.md](README.md)
 ## 🎛️ Standaardgedrag van de site
 
 - Nieuwe bezoekers: **foto's verborgen** (knop 🖼️ zet ze aan, keuze wordt onthouden)
+- Nieuwe bezoekers: lettergrootte **A–**; bestaande letterkeuze blijft behouden.
+- Op mobiel: menu links onder logo; taal en lettergrootte in het uitklapmenu.
+- Prijslijst staat boven Onze Behandelingen; toeslagtekst gebruikt de volledige tabelbreedte.
 - Taalkeuze **Nederlands / English** in de header; keuze wordt onthouden.
   Vertalingen bijhouden in `data/translations.json` (exacte Nederlandse tekst → Engelse vertaling).
 - WhatsApp-knoppen → WhatsApp +31 6 4571 5179 met voorbereid bericht; geen afspraakknop in het hoofdmenu
@@ -82,7 +85,7 @@ Volledige uitleg: [README.md](README.md)
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=13`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=14`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
 

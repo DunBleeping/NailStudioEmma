@@ -202,20 +202,47 @@ function showErrorMessage(message) {
 
 function initializeHeader() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('nav');
+  const nav = document.getElementById('main-navigation');
+  const header = document.querySelector('header');
+  const controls = header.querySelector('.header-controls');
+  const preferences = header.querySelector('.menu-preferences');
+  const language = header.querySelector('.language-control');
+  const fontSizes = header.querySelector('.font-size-controls');
+  const mobile = window.matchMedia('(max-width: 767px)');
+  const setMenuOpen = (open) => {
+    nav.classList.toggle('active', open);
+    mobileMenuToggle.setAttribute('aria-expanded', String(open));
+  };
+  const updatePreferences = () => {
+    if (mobile.matches) {
+      preferences.append(language, fontSizes);
+    } else {
+      controls.prepend(language);
+      controls.insertBefore(fontSizes, document.getElementById('toggle-images-btn'));
+      setMenuOpen(false);
+    }
+  };
+  updatePreferences();
+  mobile.addEventListener('change', updatePreferences);
 
   if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
+      setMenuOpen(!nav.classList.contains('active'));
     });
   }
 
   // Close menu when a link is clicked
-  const navLinks = document.querySelectorAll('nav a');
+  const navLinks = nav.querySelectorAll('a');
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
-      nav.classList.remove('active');
+      setMenuOpen(false);
     });
+  });
+  header.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav.classList.contains('active')) {
+      setMenuOpen(false);
+      mobileMenuToggle.focus();
+    }
   });
 }
 
@@ -412,10 +439,13 @@ function initializePricing() {
       const priceSign = extra.price < 0 ? '-' : '+';
       const priceClass = extra.price < 0 ? 'discount' : 'price';
       row.innerHTML = `
-        <td><em>${escapeHtml(extra.name)}</em></td>
-        <td>${escapeHtml(extra.description)}</td>
-        <td class="${priceClass}">${priceSign}€${Math.abs(extra.price).toFixed(2)}</td>
-        <td></td>
+        <td colspan="4" class="pricing-extra">
+          <div class="pricing-extra-heading">
+            <strong>${escapeHtml(extra.name)}</strong>
+            <span class="${priceClass}">${priceSign}€${Math.abs(extra.price).toFixed(2)}</span>
+          </div>
+          <p>${escapeHtml(extra.description)}</p>
+        </td>
       `;
       tableBody.appendChild(row);
     });
@@ -959,7 +989,7 @@ function initializeLogoLink() {
 // 2. Font Size Controls
 function initializeFontSizeControls() {
   const fontSizeButtons = document.querySelectorAll('.font-size-btn');
-  const savedFontSize = localStorage.getItem('fontSize') || 'medium';
+  const savedFontSize = localStorage.getItem('fontSize') || 'small';
 
   // Set saved font size on load
   applyFontSize(savedFontSize);
@@ -975,7 +1005,7 @@ function initializeFontSizeControls() {
 
 function applyFontSize(size) {
   const allowed = ['small', 'medium', 'large', 'xlarge'];
-  if (!allowed.includes(size)) size = 'medium';
+  if (!allowed.includes(size)) size = 'small';
   const classes = allowed.map((s) => `font-size-${s}`);
 
   // Applied to <html> so rem units scale; body keeps the class for backwards compatibility

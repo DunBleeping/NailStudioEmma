@@ -2,7 +2,7 @@
 
 ## Taalkeuze Nederlands / English
 
-- De taalkeuze staat in de header en is met het toetsenbord te bedienen.
+- De taalkeuze staat in de header (op mobiel in het uitklapmenu) en is met het toetsenbord te bedienen.
 - De gekozen taal wordt onthouden (localStorage `language`); standaard is de site Nederlands.
 - Ook knoppen, schermlezerlabels, fototeksten, behandelingen en het mandje worden vertaald.
 - Het `lang`-attribuut op `<html>` verandert mee, zodat schermlezers de juiste uitspraak gebruiken.
@@ -37,8 +37,11 @@ Voor klanten met kleurweergave beperkingen (kleurblindheid) is er een **grijswaa
 
 ## 🔠 Lettergrootte
 
-Rechtsboven staan de knoppen **A– · A · A+ · A++**.
-- **A** = standaard; A– kleiner (87,5%), A+ (112,5%) en A++ (125%) groter
+In de header staan de knoppen **A– · A · A+ · A++**, op mobiel (< 768 px) in het uitklapmenu.
+- Nieuwe bezoekers starten met **A–** (87,5%); een bestaande letterkeuze wordt niet overschreven.
+- **A** = normale grootte (100%); A+ (112,5%) en A++ (125%) groter.
+- Het mobiele menu-icoon staat links onder het logo en geeft de open/dicht-status aan met `aria-expanded`.
+- Het uitklapmenu blijft scrollbaar bij weinig schermhoogte en sluit met een link of **Esc**.
 - De hele pagina schaalt gelijkmatig mee (de basisgrootte op `<html>` verandert, alle `rem`-maten volgen)
 - Op mobiel (≤ 768 px) zijn titels begrensd en blijven de bedieningsknoppen even groot, zodat er
   ook bij A++ niets buiten het scherm valt (getest op 390 px, iPhone-formaat)

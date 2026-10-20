@@ -29,8 +29,8 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=13">
-  <script>try{var f=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(f))document.documentElement.classList.add('font-size-'+f);}catch(e){}</script>
+  <link rel="stylesheet" href="./css/style.css?v=14">
+  <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
   <title>Emma NailStudio | Luxe Nagelsalon</title>
@@ -77,16 +77,17 @@
         </a>
       </div>
 
-      <button class="mobile-menu-toggle" data-i18n-attrs="aria-label" aria-label="Menu openen/sluiten" aria-expanded="false">☰</button>
+      <button class="mobile-menu-toggle" data-i18n-attrs="aria-label" aria-label="Menu openen/sluiten" aria-controls="main-navigation" aria-expanded="false">☰</button>
 
-      <nav role="navigation" data-i18n-attrs="aria-label" aria-label="Hoofd navigatie">
+      <nav id="main-navigation" role="navigation" data-i18n-attrs="aria-label" aria-label="Hoofd navigatie">
         <ul>
           <li><a href="#home">Home</a></li>
-          <li><a href="#services" data-i18n>Behandelingen</a></li>
           <li><a href="#pricing" data-i18n>Prijzen</a></li>
+          <li><a href="#services" data-i18n>Behandelingen</a></li>
           <li><a href="#gallery" data-i18n>Galerij</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="menu-preferences"></div>
       </nav>
 
       <div class="header-controls">
@@ -101,8 +102,8 @@
         
         <!-- Font Size Controls -->
         <div class="font-size-controls" data-i18n-attrs="aria-label" aria-label="Lettergrootte aanpassen">
-          <button class="font-size-btn" data-size="small" data-i18n-attrs="title" title="Klein">A–</button>
-          <button class="font-size-btn active" data-size="medium" data-i18n-attrs="title" title="Standaard">A</button>
+          <button class="font-size-btn active" data-size="small" data-i18n-attrs="title" title="Klein">A–</button>
+          <button class="font-size-btn" data-size="medium" data-i18n-attrs="title" title="Standaard">A</button>
           <button class="font-size-btn" data-size="large" data-i18n-attrs="title" title="Groot">A+</button>
           <button class="font-size-btn" data-size="xlarge" data-i18n-attrs="title" title="Zeer groot">A++</button>
         </div>
@@ -147,6 +148,31 @@
       </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2 data-i18n>Prijslijst</h2>
+        <p class="text-center" data-i18n style="margin-bottom: 2rem; color: #666;">
+          Alle prijzen zijn in euro's. Voor meer informatie of speciale wensen, neem contact met mij op via WhatsApp.
+        </p>
+        <div class="pricing-table">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n>Behandeling</th>
+                <th data-i18n>Duur</th>
+                <th data-i18n>Prijs</th>
+                <th data-i18n>Kiezen</th>
+              </tr>
+            </thead>
+            <tbody id="pricing-table">
+              <!-- Prijzen worden dynamisch geladen -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- Services Section with Sidebar -->
     <section id="services" class="section section-light">
       <div class="container services-container">
@@ -179,31 +205,6 @@
           <div id="services-grid" class="services-grid">
             <!-- Services worden dynamisch geladen via JavaScript -->
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="section">
-      <div class="container">
-        <h2 data-i18n>Prijslijst</h2>
-        <p class="text-center" data-i18n style="margin-bottom: 2rem; color: #666;">
-          Alle prijzen zijn in euro's. Voor meer informatie of speciale wensen, neem contact met mij op via WhatsApp.
-        </p>
-        <div class="pricing-table">
-          <table>
-            <thead>
-              <tr>
-                <th data-i18n>Behandeling</th>
-                <th data-i18n>Duur</th>
-                <th data-i18n>Prijs</th>
-                <th data-i18n>Kiezen</th>
-              </tr>
-            </thead>
-            <tbody id="pricing-table">
-              <!-- Prijzen worden dynamisch geladen -->
-            </tbody>
-          </table>
         </div>
       </div>
     </section>
@@ -351,8 +352,8 @@
         <div class="footer-section">
           <h4 data-i18n>Snelle Links</h4>
           <ul>
-            <li><a href="#services" data-i18n>Behandelingen</a></li>
             <li><a href="#pricing" data-i18n>Prijzen</a></li>
+            <li><a href="#services" data-i18n>Behandelingen</a></li>
             <li><a href="#gallery" data-i18n>Galerij</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -389,6 +390,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=13" defer></script>
+  <script src="./js/script.js?v=14" defer></script>
 </body>
 </html>
