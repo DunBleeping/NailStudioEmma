@@ -730,17 +730,24 @@ function setupWhatsAppButton(element) {
 
 function buildWhatsAppUrl() {
   const whatsappNumber = appData.settings.contact.whatsapp.number.replace(/\D/g, '');
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildBookingMessage())}`;
+}
+
+function buildSmsUrl() {
+  const number = `+${appData.settings.contact.whatsapp.number.replace(/\D/g, '')}`;
+  // iOS uses &body; Android and other clients use ?body.
+  const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+  return `sms:${number}${isApple ? '&' : '?'}body=${encodeURIComponent(buildBookingMessage())}`;
 }
 
 // Uses the cart contents when the visitor selected treatments, otherwise the default message
-function buildWhatsAppMessage() {
+function buildBookingMessage() {
   const items = getCartServices();
-  if (items.length === 0) return t(appData.settings.contact.whatsapp.message);
-
-  return ['en', 'nl'].map((language) => {
+  const languages = appData.language === 'en' ? ['en', 'nl'] : ['nl'];
+  return languages.map((language) => {
+    if (items.length === 0) return t(appData.settings.contact.whatsapp.message, {}, language);
     const lines = [
-      language === 'en' ? 'English' : 'Nederlands',
+      ...(languages.length > 1 ? [language === 'en' ? 'English' : 'Nederlands'] : []),
       t('Hallo {name}, ik wil graag een afspraak maken voor:', { name: appData.settings.salon.name }, language)
     ];
     items.forEach((item) => {
@@ -1308,6 +1315,8 @@ function renderCart() {
   if (appData.settings) {
     const orderBtn = document.getElementById('cart-order-btn');
     if (orderBtn) setupWhatsAppButton(orderBtn);
+    const smsBtn = document.getElementById('cart-sms-btn');
+    if (smsBtn) smsBtn.href = buildSmsUrl();
     initializeWhatsAppButton();
   }
 }

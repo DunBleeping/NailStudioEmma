@@ -42,10 +42,11 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 
 **Pagina van boven naar beneden:**
 
-1. **Header** – logo (`images/logo.jpg`), menu (Home, Behandelingen, Prijzen, Galerij, Contact,
-   **Afspraak maken**), taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
+1. **Header** – logo (`images/logo.jpg`), menu (Home, Behandelingen, Prijzen, Galerij, Contact),
+   taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
    **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
-   Op mobiel (≤ 768 px) wordt het menu een ☰ hamburger.
+   Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Vanaf 768 px staan de vijf links op één regel;
+   de bedieningsknoppen mogen naar een volgende rij. Er staat geen afspraakknop in het menu.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
 3. **Onze Behandelingen** – onder "Categorieën" een **zoekbalk** (zoekt live in naam, categorie en
@@ -72,8 +73,9 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 - Taal **Nederlands**; bezoekers kunnen **English** kiezen. De taal wordt onthouden (localStorage `language`).
   Omschakelen behoudt het mandje, toeslagen, zoekopdracht, categoriefilter en toegankelijkheidsvoorkeuren.
 
-**Afspraken gaan via WhatsApp** (+31 6 4571 5179). Er is geen e-mail of online agenda: *Afspraak maken*,
-de hero-knop, de contactknop en de zwevende knop openen allemaal WhatsApp met een voorbereid bericht.
+**Afspraken gaan via WhatsApp of SMS** (+31 6 4571 5179). Er is geen e-mail of online agenda.
+De hero-knop, de contactknop en de zwevende knop openen WhatsApp met een voorbereid bericht.
+De extra SMS-optie staat uitsluitend in het mandje en gebruikt hetzelfde nummer en dezelfde inhoud.
 
 **Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ dit wil ik* in het mandje. In het
 mandje staan de gekozen behandelingen met duur en prijs, het totaal en (alleen bij een nieuwe set) het
@@ -86,7 +88,8 @@ mandje staat (localStorage `cartExtrasDeclined`). Zodra alle nieuwe sets verwijd
 wordt leeggemaakt, begint een volgende nieuwe set weer met de toeslag aangevinkt.
 De toeslag telt eenmaal mee in het totaal en in beide taalversies van het WhatsApp-bericht.
 
-*Afspraak aanvragen via WhatsApp* opent WhatsApp met een ingevuld bericht, bijvoorbeeld:
+*Afspraak aanvragen via WhatsApp* en *Afspraak aanvragen via SMS* openen de gekozen app met dezelfde
+berichtinhoud. Bij taalkeuze **English** is dat bijvoorbeeld:
 
 ```
 English
@@ -109,10 +112,17 @@ Mijn voorkeur voor datum en tijd:
 ```
 
 Zolang er iets in het mandje zit, sturen ook alle andere WhatsApp-knoppen dit bericht. Het is een
-afspraakverzoek, geen betaling; Emma bevestigt via WhatsApp. Het mandje wordt in de browser onthouden
+afspraakverzoek, geen betaling; Emma bevestigt via WhatsApp of SMS. Het mandje wordt in de browser onthouden
 (localStorage `cart` en `cartExtras`).
-Het mandjebericht is **altijd eerst Engels en daarna Nederlands**, ongeacht de gekozen sitetaal.
-Zonder behandelingen gebruikt WhatsApp het korte standaardbericht in de gekozen taal.
+Bij taalkeuze **Nederlands** is het bericht **alleen Nederlands**; bij **English** is het
+**eerst Engels en daarna Nederlands**. Dit geldt voor WhatsApp én SMS. Zonder behandelingen gebruiken
+WhatsApp-links het korte standaardbericht volgens dezelfde taalregel.
+
+SMS opent een concept via `sms:`; de klant moet zelf op verzenden drukken. Een geschikte berichtenapp
+is vereist; op iPad/Mac is voor gewone SMS doorgaans een gekoppelde iPhone nodig.
+De provider kan kosten rekenen en lange berichten kunnen meerdere SMS'jes zijn.
+Voor Apple gebruiken we `&body=`, voor Android/overige clients `?body=`, met URL-gecodeerde inhoud.
+Linkopbouw en inhoud zijn getest, maar daadwerkelijk afleveren moet op een echte telefoon worden gecontroleerd.
 
 ### Vertalingen beheren
 
@@ -135,11 +145,11 @@ Zoeken werkt op zowel Nederlandse als Engelse behandelteksten, in beide talen.
 ## ✨ Functies
 
 - ✅ Volledig statisch, geen backend of build-stap
-- ✅ Nederlands/Engels met onthouden taalkeuze en tweetalige WhatsApp-mandjeberichten
+- ✅ Nederlands/Engels met onthouden taalkeuze; NL- of tweetalige berichten volgens de gekozen taal
 - ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
 - ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
 - ✅ Categoriefilter en zoekbalk voor behandelingen
-- ✅ Behandelmandje dat een ingevuld WhatsApp-afspraakverzoek maakt
+- ✅ Behandelmandje dat een ingevuld WhatsApp- of SMS-afspraakverzoek maakt
 - ✅ Impressie-albums met modal, toetsenbord- en swipe-navigatie
 - ✅ Toegankelijkheid: grijswaarden, lettergrootte, foto's uit, ARIA-labels, `prefers-reduced-motion`
   (zie [ACCESSIBILITY.md](ACCESSIBILITY.md))
@@ -257,7 +267,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=10`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=11`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
@@ -276,7 +286,7 @@ Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
 
 ## 🔐 Privacy & beveiliging
 
-- Geen cookies, geen tracking, geen formulieren – contact loopt via WhatsApp
+- Geen cookies, geen tracking, geen formulieren – contact loopt via WhatsApp of SMS
 - Alleen `localStorage` voor weergavevoorkeuren (grijswaarden, lettergrootte, foto's) en het mandje;
   er wordt niets naar een server gestuurd
 - Beveiligingsheaders in `_headers` (`nosniff`, `X-Frame-Options`, `Referrer-Policy`, ...)

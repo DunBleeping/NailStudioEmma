@@ -299,7 +299,19 @@ body.grayscale .accessibility-toggle {
    Mobile Navigation
    ============================================ */
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  header nav {
+    min-width: max-content;
+  }
+
+  header nav ul {
+    flex-wrap: nowrap;
+    gap: clamp(0.75rem, 1.8vw, 1.5rem);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 767px) {
   header .container {
     flex-wrap: wrap;
   }
@@ -1672,6 +1684,13 @@ h1, h2, h3, h4, p {
 
 .cart-order-btn:hover {
   background: #20ba5c;
+}
+
+.cart-sms-btn {
+  display: block;
+  margin-top: 0.75rem;
+  width: 100%;
+  text-align: center;
 }
 
 .cart-clear-btn {

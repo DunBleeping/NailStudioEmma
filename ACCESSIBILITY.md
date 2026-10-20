@@ -7,7 +7,7 @@
 - Ook knoppen, schermlezerlabels, fototeksten, behandelingen en het mandje worden vertaald.
 - Het `lang`-attribuut op `<html>` verandert mee, zodat schermlezers de juiste uitspraak gebruiken.
 - Omschakelen wordt aangekondigd en behoudt mandje, zoekopdracht en overige voorkeuren.
-- WhatsApp-berichten met behandelingen zijn altijd eerst Engels en daarna Nederlands.
+- WhatsApp- en SMS-berichten zijn alleen Nederlands bij **Nederlands**; bij **English** eerst Engels en daarna Nederlands.
 
 ---
 
@@ -105,14 +105,21 @@ Klik op telefoonnummer → iPhone/Android belt automatisch
 
 #### 💬 WhatsApp (afspraak maken)
 ```
-Klik op "Afspraak maken" of een WhatsApp knop → WhatsApp opent met voorbereid bericht
+Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 ```
 **Features:**
-- Alle afspraakknoppen gaan naar WhatsApp (+31 6 4571 5179); er is geen e-mail of online agenda
+- Afspraakverzoeken gaan naar WhatsApp of via de SMS-optie in het mandje (+31 6 4571 5179); geen e-mail/agenda
 - Zwevende WhatsApp knop (rechtsonder)
 - Altijd zichtbaar op mobiel
 - Pre-filled met standaardbericht, of met de gekozen behandelingen uit het mandje
 - Direct naar bedrijfs-WhatsApp
+
+#### SMS vanuit het mandje
+- Naast WhatsApp staat in het mandje **Afspraak aanvragen via SMS**.
+- Beide opties gebruiken dezelfde behandelingen, toeslagen en totaalprijs en dezelfde taalregel.
+- SMS opent een concept in de berichtenapp; verzenden doet de klant zelf.
+- Een geschikte berichtenapp is nodig; op iPad is voor SMS doorgaans een gekoppelde iPhone nodig.
+- Providerkosten zijn mogelijk, met meerdere SMS'jes bij lange berichten.
 
 #### 👆 Impressie-albums
 - Tik op een stijl → album met foto's van echte klantresultaten

@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=10`
+- `index.html` – de pagina; CSS/JS geladen met `?v=11`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -37,7 +37,8 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
 - Taalkeuze Nederlands/Engels, inclusief behandelingen, galerij en schermlezerlabels
-- Behandelmandje: WhatsApp-bericht met gekozen behandelingen, toeslag en totaal, eerst Engels dan Nederlands
+- Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
+  Nederlands = alleen NL, English = eerst EN dan NL
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
 - Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen),
   `cart`, `cartExtras`, `cartExtrasDeclined` (bewust uitgevinkte toeslagen), `language` (standaard `nl`)
@@ -66,10 +67,10 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ## Functies
 
-- Header met menu, *Afspraak maken* (WhatsApp) en toegankelijkheidsknoppen
+- Header met vijf menulinks op één regel vanaf 768 px, zonder afspraakknop, en toegankelijkheidsknoppen
 - Hero, behandelingen met zoekbalk, categoriefilter en mandje, prijslijst + toeslagen,
   Impressie-albums, over ons, contact
-- Zwevende WhatsApp-knop; alle afspraken via WhatsApp (geen e-mail/agenda)
+- Zwevende WhatsApp-knop; afspraken via WhatsApp of SMS vanuit het mandje (geen e-mail/agenda)
 - Nieuwe bezoekers zien standaard geen foto's
 - Responsive, toetsenbord- en schermlezer-vriendelijk
 - SEO: meta, Open Graph, Schema.org LocalBusiness, sitemap, robots

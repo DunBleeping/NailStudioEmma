@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=10">
+  <link rel="stylesheet" href="./css/style.css?v=11">
   <script>try{var f=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(f))document.documentElement.classList.add('font-size-'+f);}catch(e){}</script>
 
   <!-- Title -->
@@ -86,7 +86,6 @@
           <li><a href="#pricing" data-i18n>Prijzen</a></li>
           <li><a href="#gallery" data-i18n>Galerij</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#contact" class="cta-button" data-whatsapp data-i18n>Afspraak maken</a></li>
         </ul>
       </nav>
 
@@ -325,8 +324,10 @@
     <ul id="cart-items" class="cart-items"></ul>
     <div id="cart-extras" class="cart-extras"></div>
     <div class="cart-total"><span data-i18n>Totaal:</span> <strong id="cart-total">€0.00</strong></div>
-    <p class="cart-info" data-i18n>Dit is een afspraakverzoek, geen betaling. Emma bevestigt datum en tijd via WhatsApp.</p>
+    <p class="cart-info" data-i18n>Dit is een afspraakverzoek, geen betaling. Emma bevestigt datum en tijd via WhatsApp of SMS.</p>
     <a id="cart-order-btn" href="#" class="cta-button cart-order-btn" target="_blank" rel="noopener noreferrer" data-i18n>💬 Afspraak aanvragen via WhatsApp</a>
+    <a id="cart-sms-btn" href="#" class="cta-button cart-sms-btn" data-i18n>Afspraak aanvragen via SMS</a>
+    <p class="cart-info" data-i18n>SMS opent je berichtenapp; je verstuurt het bericht zelf. Een geschikte berichtenapp is nodig. Je provider kan kosten rekenen; lange berichten kunnen uit meerdere SMS'jes bestaan.</p>
     <button type="button" id="cart-clear-btn" class="cart-clear-btn" data-i18n>Mandje leegmaken</button>
   </div>
 
@@ -383,6 +384,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=10" defer></script>
+  <script src="./js/script.js?v=11" defer></script>
 </body>
 </html>
