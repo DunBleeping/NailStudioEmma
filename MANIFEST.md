@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=15`
+- `index.html` – de pagina; CSS/JS geladen met `?v=16`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -67,7 +67,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ## Functies
 
-- Header met vijf menulinks op één regel vanaf 768 px, zonder afspraakknop, en toegankelijkheidsknoppen
+- Header met zes menulinks (inclusief Zoeken) op één regel vanaf 768 px, zonder afspraakknop, en toegankelijkheidsknoppen
 - Hero, behandelingen met zoekbalk, categoriefilter en mandje, prijslijst + toeslagen,
   Impressie-albums, over ons, contact
 - Zwevende WhatsApp-knop; afspraken via WhatsApp of SMS vanuit het mandje (geen e-mail/agenda)

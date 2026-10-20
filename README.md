@@ -42,16 +42,18 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 
 **Pagina van boven naar beneden:**
 
-1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Galerij, Contact),
+1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Galerij, Contact),
    taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
    **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
-   Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Vanaf 768 px staan de vijf links op één regel;
+   Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Vanaf 768 px staan de zes links op één regel;
    de bedieningsknoppen mogen naar een volgende rij. Er staat geen afspraakknop in het menu.
    Op mobiel staat ☰ links direct onder het logo; de taalkeuze is direct zichtbaar rechts naast het logo.
    Alleen de lettergrootte staat in het uitklapmenu.
    Grijswaarden en foto's tonen blijven rechts zichtbaar. Het menu sluit met een link of **Esc**.
+   **Zoeken** gaat naar de zoekbalk voor behandelingen en geeft deze direct toetsenbordfocus.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
+   De tekst vermeldt: *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
 3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
@@ -73,6 +75,7 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 
 **Standaardinstellingen voor nieuwe bezoekers:**
 - **Foto's verborgen** – rustiger en sneller; tegels onder Impressie tonen dan titel + omschrijving.
+  Ook het grote logo in het welkomstblok wordt verborgen; het kleine headerlogo blijft altijd zichtbaar.
   Een tip bovenaan en bij Impressie verwijst naar het foto-icoontje 🖼️ rechtsboven om foto's te tonen.
   De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
 - Lettergrootte **A–** (kleinste, 87,5%), kleur aan (geen grijswaarden).
@@ -279,7 +282,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=15`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=16`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

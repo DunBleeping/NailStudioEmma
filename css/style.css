@@ -1359,8 +1359,13 @@ footer a:hover {
 }
 
 /* Hide Images Class */
+body.images-hidden .hero-image,
 body.images-hidden .service-card .service-image {
   display: none !important;
+}
+
+body.images-hidden .hero-content {
+  grid-template-columns: 1fr;
 }
 
 body.images-hidden .gallery-item img {
@@ -1555,6 +1560,7 @@ h1, h2, h3, h4, p {
 }
 
 .service-search input {
+  scroll-margin-top: 200px;
   width: 100%;
   padding: 0.7rem 1rem;
   border: 2px solid rgba(212, 165, 116, 0.5);

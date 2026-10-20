@@ -880,6 +880,9 @@ document.addEventListener('click', (e) => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
+      if (target.id === 'service-search') {
+        target.focus({ preventScroll: true });
+      }
       target.scrollIntoView({ behavior: 'smooth' });
     }
   }
