@@ -58,7 +58,7 @@ async function loadAppData() {
 
 async function fetchJSON(url) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
