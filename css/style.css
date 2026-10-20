@@ -323,8 +323,18 @@ body.grayscale .accessibility-toggle {
   }
 
   header .header-logo {
-    grid-column: 1 / -1;
+    grid-column: 1;
     grid-row: 1;
+  }
+
+  header .container > .language-control {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  header .language-control select {
+    font-size: max(16px, 0.85rem);
   }
 
   header .header-logo-image {
@@ -744,7 +754,13 @@ body:not(.images-hidden) .photo-tip {
 
 @media (max-width: 768px) {
   .pricing-table {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .pricing-table .price {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow-wrap: normal;
   }
 
   .pricing-table table {

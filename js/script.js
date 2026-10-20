@@ -215,7 +215,8 @@ function initializeHeader() {
   };
   const updatePreferences = () => {
     if (mobile.matches) {
-      preferences.append(language, fontSizes);
+      header.querySelector('.container').append(language);
+      preferences.append(fontSizes);
     } else {
       controls.prepend(language);
       controls.insertBefore(fontSizes, document.getElementById('toggle-images-btn'));

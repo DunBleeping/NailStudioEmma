@@ -2,7 +2,7 @@
 
 ## Taalkeuze Nederlands / English
 
-- De taalkeuze staat in de header (op mobiel in het uitklapmenu) en is met het toetsenbord te bedienen.
+- De taalkeuze is direct zichtbaar in de header, ook op mobiel naast het logo, en is met het toetsenbord te bedienen.
 - De gekozen taal wordt onthouden (localStorage `language`); standaard is de site Nederlands.
 - Ook knoppen, schermlezerlabels, fototeksten, behandelingen en het mandje worden vertaald.
 - Het `lang`-attribuut op `<html>` verandert mee, zodat schermlezers de juiste uitspraak gebruiken.

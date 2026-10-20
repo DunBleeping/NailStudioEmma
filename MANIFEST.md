@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=14`
+- `index.html` – de pagina; CSS/JS geladen met `?v=15`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -73,7 +73,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Zwevende WhatsApp-knop; afspraken via WhatsApp of SMS vanuit het mandje (geen e-mail/agenda)
 - Nieuwe bezoekers zien standaard geen foto's en starten op lettergrootte A–; bestaande keuzes blijven behouden
 - Prijslijst voor behandelkaarten, toeslaguitleg over volledige tabelbreedte
-- Mobiel: menu links onder logo, taal en lettergrootte in uitklapmenu
+- Mobiel: menu links onder logo, taal direct zichtbaar naast logo, lettergrootte in uitklapmenu
 - Responsive, toetsenbord- en schermlezer-vriendelijk
 - SEO: meta, Open Graph, Schema.org LocalBusiness, sitemap, robots
 
