@@ -7,7 +7,8 @@ let appData = {
   settings: null,
   services: null,
   gallery: null,
-  currentGalleryIndex: 0
+  currentGalleryIndex: 0,
+  currentPhotoIndex: 0
 };
 
 // ============================================
@@ -312,11 +313,22 @@ function initializeGallery() {
   galleryGrid.innerHTML = '';
 
   appData.gallery.images.forEach((image, index) => {
+    const photoCount = getAlbumPhotos(image).filter((p) => !p.isExample).length;
+
     const item = document.createElement('div');
     item.className = 'gallery-item';
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-label', `${image.title} - bekijk album`);
     item.onclick = (e) => {
       e.preventDefault();
       openGalleryModal(index);
+    };
+    item.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openGalleryModal(index);
+      }
     };
 
     const img = document.createElement('img');
@@ -324,11 +336,16 @@ function initializeGallery() {
     img.alt = image.alt;
     img.loading = 'lazy';
 
+    const badgeText = photoCount > 0
+      ? `📷 ${photoCount} foto${photoCount === 1 ? '' : "'s"} van klanten`
+      : '📷 Voorbeeldfoto';
+
     const overlay = document.createElement('div');
     overlay.className = 'gallery-overlay';
     overlay.innerHTML = `
       <h3>${escapeHtml(image.title)}</h3>
       <p>${escapeHtml(image.description)}</p>
+      <span class="gallery-badge">${escapeHtml(badgeText)}</span>
     `;
 
     item.appendChild(img);
@@ -383,12 +400,26 @@ function initializeGalleryModal() {
   });
 }
 
+// Each gallery item is an album: the tile shows the example photo (src),
+// the album shows the customer photos listed in "photos".
+function getAlbumPhotos(item) {
+  const photos = Array.isArray(item.photos) ? item.photos.filter((p) => p && p.src) : [];
+  if (photos.length > 0) return photos;
+  return [{
+    src: item.src,
+    alt: item.alt,
+    caption: 'Voorbeeldfoto - echte resultaten van onze klanten volgen binnenkort.',
+    isExample: true
+  }];
+}
+
 function openGalleryModal(index) {
   if (!appData.gallery || index < 0 || index >= appData.gallery.images.length) {
     return;
   }
 
   appData.currentGalleryIndex = index;
+  appData.currentPhotoIndex = 0;
   updateGalleryModal();
 
   const modal = document.getElementById('gallery-modal');
@@ -409,44 +440,44 @@ function closeGalleryModal() {
 function navigateGallery(direction) {
   if (!appData.gallery) return;
 
-  let newIndex = appData.currentGalleryIndex + direction;
+  const album = getAlbumPhotos(appData.gallery.images[appData.currentGalleryIndex]);
+  if (album.length < 2) return;
 
-  // Loop around
-  if (newIndex < 0) {
-    newIndex = appData.gallery.images.length - 1;
-  } else if (newIndex >= appData.gallery.images.length) {
-    newIndex = 0;
-  }
-
-  appData.currentGalleryIndex = newIndex;
+  appData.currentPhotoIndex = (appData.currentPhotoIndex + direction + album.length) % album.length;
   updateGalleryModal();
 }
 
 function updateGalleryModal() {
   if (!appData.gallery) return;
 
-  const image = appData.gallery.images[appData.currentGalleryIndex];
+  const item = appData.gallery.images[appData.currentGalleryIndex];
+  const album = getAlbumPhotos(item);
+  const photo = album[appData.currentPhotoIndex] || album[0];
   const modalImage = document.querySelector('.modal-image');
   const modalTitle = document.querySelector('.modal-info h3');
   const modalDesc = document.querySelector('.modal-info p');
 
   if (modalImage) {
-    modalImage.src = image.src;
-    modalImage.alt = image.alt;
+    modalImage.src = photo.src;
+    modalImage.alt = photo.alt || item.alt || item.title;
   }
 
   if (modalTitle) {
-    modalTitle.textContent = image.title;
+    modalTitle.textContent = item.title;
   }
 
   if (modalDesc) {
-    modalDesc.textContent = image.description;
+    modalDesc.textContent = photo.caption || item.description;
   }
 
-  // Update counter
+  const hasMultiple = album.length > 1;
+  document.querySelectorAll('.modal-nav').forEach((btn) => {
+    btn.style.display = hasMultiple ? '' : 'none';
+  });
+
   const counter = document.querySelector('.modal-counter');
   if (counter) {
-    counter.textContent = `${appData.currentGalleryIndex + 1} / ${appData.gallery.images.length}`;
+    counter.textContent = hasMultiple ? `Foto ${appData.currentPhotoIndex + 1} van ${album.length}` : '';
   }
 }
 

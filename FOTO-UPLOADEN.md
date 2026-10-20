@@ -131,6 +131,45 @@ Na het uploaden van foto's:
 
 ---
 
+## 🖼️ **Impressie: albums met klantfoto's**
+
+Elke tegel onder **Impressie** is een album:
+- De tegel toont één **voorbeeldfoto** (`src` in `data/gallery.json`).
+- Klikt een bezoeker op de tegel, dan opent het album met de **echte resultaten** van klanten (`photos`).
+- Zolang een album nog leeg is (`"photos": []`), ziet de bezoeker alleen de voorbeeldfoto met de tekst
+  *"Voorbeeldfoto - echte resultaten van onze klanten volgen binnenkort."*
+
+### Klantfoto's toevoegen (voorbeeld: Floral Nail Art)
+
+1. Maak een map per album en zet de foto's erin, bijvoorbeeld:
+   ```
+   images/gallery/floral/floral-01.jpg
+   images/gallery/floral/floral-02.jpg
+   ```
+   Gebruik kleine letters, geen spaties, `.jpg`, liefst max. 1200px breed en < 300 KB.
+2. Zet de foto's in `data/gallery.json` bij het juiste album onder `photos`:
+   ```json
+   {
+     "id": "gallery-3",
+     "title": "Floral Nail Art",
+     "src": "./images/gallery/nails-3.jpg?v=2",
+     ...
+     "photos": [
+       { "src": "./images/gallery/floral/floral-01.jpg", "caption": "Bloemetjes op nude BIAB" },
+       { "src": "./images/gallery/floral/floral-02.jpg", "caption": "Lentebloemen op gellak" }
+     ]
+   }
+   ```
+   `caption` (onderschrift) en `alt` (omschrijving voor schermlezers) zijn optioneel.
+3. Commit en push; Cloudflare zet het binnen een minuut live.
+
+**Tips:**
+- Wil je een eigen foto als voorbeeld op de tegel? Vervang `nails-N.jpg` en verhoog `?v=2` naar `?v=3` in `gallery.json`.
+- Vraag klanten toestemming voordat je een foto van hun handen/nagels online zet (AVG).
+- Nieuwe stijl toevoegen? Kopieer een blok in `gallery.json`, geef een uniek `id` en eigen titel/foto's.
+
+---
+
 ## 💡 **Vragen?**
 
 **Q: Kan ik dezelfde foto voor meerdere behandelingen gebruiken?**

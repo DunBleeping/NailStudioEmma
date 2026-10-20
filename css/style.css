@@ -705,6 +705,20 @@ body.grayscale .accessibility-toggle {
   text-align: center;
 }
 
+.gallery-badge {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--white);
+  font-size: 0.85rem;
+}
+
+.gallery-item:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
 /* ============================================
    Modal Gallery
    ============================================ */
