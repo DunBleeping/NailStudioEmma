@@ -74,8 +74,8 @@ Prijs is bijgewerkt! ✅
 | Alleen Verwijderen | €15 | 20 min |
 | Babyboom Nieuwe Set | €55 | 60 min |
 | Opvullen Babyboom | €50 | 45 min |
-| Nieuwe Set op Eigen Nagel* | €35 | 50 min |
-| * Verwijderen met Nieuwe Set Inclusief Verzorging (toeslag) | +€5 | – |
+| Nieuwe Set op Eigen Nagel | €35 | 50 min |
+| Toeslag: verwijderen oude lak/gellak bij een nieuwe set | +€5 | – |
 | Nails Design vanaf... | €60 | 60+ min |
 | BIAB Nieuwe Set | €45 | 60 min |
 | Opvullen BIAB | €40 | 45 min |

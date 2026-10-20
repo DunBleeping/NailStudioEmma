@@ -1,9 +1,9 @@
 {
   "extras": [
     {
-      "id": "verwijderen-inclusief-verzorging",
-      "name": "* Verwijderen met Nieuwe Set Inclusief Verzorging",
-      "description": "Bij Nieuwe Set op Eigen Nagel*",
+      "id": "verwijderen-oude-lak",
+      "name": "Verwijderen oude lak/gellak",
+      "description": "Toeslag op een nieuwe set als er nog oude lak of gellak op de nagels zit",
       "price": 5
     }
   ],
@@ -42,7 +42,8 @@
       "image": "./images/services/new-set-nagels.jpg",
       "id": "new-set-nagels",
       "duration": "60 minuten",
-      "category": "Nagels - Poeder"
+      "category": "Nagels - Poeder",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "New Set Witte Poeder",
@@ -51,7 +52,8 @@
       "image": "./images/services/witte-poeder.jpg",
       "id": "new-set-witte-poeder",
       "duration": "60 minuten",
-      "category": "Nagels - Poeder"
+      "category": "Nagels - Poeder",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Opvullen Witte Poeder",
@@ -78,7 +80,8 @@
       "image": "./images/services/roze-poeder.jpg",
       "id": "naturel-roze-poeder-new",
       "duration": "60 minuten",
-      "category": "Nagels - Poeder"
+      "category": "Nagels - Poeder",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Naturel Opvullen Roze Poeder",
@@ -123,7 +126,8 @@
       "image": "./images/services/teennagels.jpg",
       "id": "teennagels-new-set-gellak",
       "duration": "45 minuten",
-      "category": "Hands & Feet"
+      "category": "Hands & Feet",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Pedicure met Gellak",
@@ -150,7 +154,8 @@
       "image": "./images/services/shellac.jpg",
       "id": "new-set-2-kleuren-glitter",
       "duration": "75 minuten",
-      "category": "Nagels - Design"
+      "category": "Nagels - Design",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Nieuwe Set met Gellak Inclusief",
@@ -159,7 +164,8 @@
       "image": "./images/services/shellac.jpg",
       "id": "new-set-gellak",
       "duration": "60 minuten",
-      "category": "Nagels - Gellak"
+      "category": "Nagels - Gellak",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Nieuwe Set Roze Poeder en Witte Randje",
@@ -168,7 +174,8 @@
       "image": "./images/services/roze-poeder.jpg",
       "id": "new-set-roze-witte-randje",
       "duration": "60 minuten",
-      "category": "Nagels - Poeder"
+      "category": "Nagels - Poeder",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Alleen Verwijderen",
@@ -186,7 +193,8 @@
       "image": "./images/services/roze-poeder.jpg",
       "id": "babyboom-new-set",
       "duration": "60 minuten",
-      "category": "Nagels - Poeder"
+      "category": "Nagels - Poeder",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Opvullen Babyboom",
@@ -198,14 +206,14 @@
       "category": "Nagels - Poeder"
     },
     {
-      "name": "Nieuwe Set op Eigen Nagel*",
+      "name": "Nieuwe Set op Eigen Nagel",
       "price": 35,
       "description": "Kunstnagels op basis van uw eigen nagels - natuurlijke look.",
       "image": "./images/services/new-set-nagels.jpg",
       "id": "new-set-op-eigen-nagel",
       "duration": "50 minuten",
       "category": "Nagels - Poeder",
-      "note": "* Verwijderen oude set incl. verzorging: +€5"
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Nails Design vanaf...",
@@ -223,7 +231,8 @@
       "image": "./images/services/new-set-nagels.jpg",
       "id": "biab-new-set",
       "duration": "60 minuten",
-      "category": "Nagels - BIAB"
+      "category": "Nagels - BIAB",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Opvullen BIAB",
@@ -241,7 +250,8 @@
       "image": "./images/services/shellac.jpg",
       "id": "biab-new-set-gellak",
       "duration": "75 minuten",
-      "category": "Nagels - BIAB"
+      "category": "Nagels - BIAB",
+      "note": "Oude lak/gellak eerst verwijderen? +€5"
     },
     {
       "name": "Opvullen BIAB met Gellak Kleuren",
