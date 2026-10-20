@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=5`
+- `index.html` – de pagina; CSS/JS geladen met `?v=6`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -34,8 +34,11 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Laadt `settings.json`, `services.json`, `gallery.json` (altijd vers: `cache: 'no-cache'`)
 - Bouwt behandelkaarten, categoriemenu, prijstabel en "Optionele toeslagen"
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
-- WhatsApp-links op alle elementen met `data-whatsapp`
-- Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen)
+- Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
+- Behandelmandje: WhatsApp-bericht met gekozen behandelingen, toeslag en totaal
+- WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
+- Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen),
+  `cart`, `cartExtras`
 - HTML-escaping van alle JSON-inhoud
 
 ### data/
@@ -61,7 +64,8 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Functies
 
 - Header met menu, *Afspraak maken* (WhatsApp) en toegankelijkheidsknoppen
-- Hero, behandelingen met categoriefilter, prijslijst + toeslagen, Impressie-albums, over ons, contact
+- Hero, behandelingen met zoekbalk, categoriefilter en mandje, prijslijst + toeslagen,
+  Impressie-albums, over ons, contact
 - Zwevende WhatsApp-knop; alle afspraken via WhatsApp (geen e-mail/agenda)
 - Nieuwe bezoekers zien standaard geen foto's
 - Responsive, toetsenbord- en schermlezer-vriendelijk

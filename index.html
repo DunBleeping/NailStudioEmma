@@ -29,7 +29,8 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=5">
+  <link rel="stylesheet" href="./css/style.css?v=6">
+  <script>try{var f=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(f))document.documentElement.classList.add('font-size-'+f);}catch(e){}</script>
 
   <!-- Title -->
   <title>Emma NailStudio | Luxe Nagelsalon</title>
@@ -142,6 +143,10 @@
         <!-- Left Sidebar Navigation -->
         <aside class="services-sidebar" role="navigation" aria-label="Categorieën menu">
           <h3>Categorieën</h3>
+          <div class="service-search">
+            <label for="service-search" class="sr-only">Zoek een behandeling</label>
+            <input type="search" id="service-search" placeholder="🔍 Zoek behandeling, bijv. BIAB of gellak" autocomplete="off" enterkeyhint="search">
+          </div>
           <nav class="categories-nav">
             <ul id="categories-list">
               <!-- Fallback: hardcoded categories (will be replaced by JS) -->
@@ -160,6 +165,7 @@
         <!-- Main Services Grid -->
         <div class="services-main">
           <h2>Onze Behandelingen</h2>
+          <p id="services-no-results" class="services-no-results" role="status" hidden>Geen behandelingen gevonden. Probeer een ander zoekwoord of kies "Alle behandelingen".</p>
           <div id="services-grid" class="services-grid">
             <!-- Services worden dynamisch geladen via JavaScript -->
           </div>
@@ -294,6 +300,24 @@
   <!-- WhatsApp Floating Button -->
   <a id="whatsapp-floating-btn" href="#" class="whatsapp-button" data-whatsapp title="WhatsApp Business" target="_blank" rel="noopener noreferrer" aria-label="Neem contact op via WhatsApp">💬</a>
 
+  <!-- Behandelmandje -->
+  <button id="cart-btn" class="cart-button" type="button" aria-controls="cart-panel" aria-expanded="false" hidden>
+    🛒 <span class="cart-button-label">Mandje</span> <span id="cart-count" class="cart-count">0</span>
+  </button>
+
+  <div id="cart-panel" class="cart-panel" role="dialog" aria-modal="false" aria-labelledby="cart-title" hidden>
+    <div class="cart-panel-header">
+      <h3 id="cart-title">Mijn behandelingen</h3>
+      <button type="button" class="cart-close" aria-label="Mandje sluiten">&times;</button>
+    </div>
+    <ul id="cart-items" class="cart-items"></ul>
+    <div id="cart-extras" class="cart-extras"></div>
+    <div class="cart-total">Totaal: <strong id="cart-total">€0.00</strong></div>
+    <p class="cart-info">Dit is een afspraakverzoek, geen betaling. Emma bevestigt datum en tijd via WhatsApp.</p>
+    <a id="cart-order-btn" href="#" class="cta-button cart-order-btn" target="_blank" rel="noopener noreferrer">💬 Afspraak aanvragen via WhatsApp</a>
+    <button type="button" id="cart-clear-btn" class="cart-clear-btn">Mandje leegmaken</button>
+  </div>
+
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -347,6 +371,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=5" defer></script>
+  <script src="./js/script.js?v=6" defer></script>
 </body>
 </html>

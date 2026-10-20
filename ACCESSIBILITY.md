@@ -27,9 +27,23 @@ Voor klanten met kleurweergave beperkingen (kleurblindheid) is er een **grijswaa
 ## 🔠 Lettergrootte
 
 Rechtsboven staan de knoppen **A– · A · A+ · A++**.
-- **A** = standaard; A– kleiner, A+ en A++ groter
-- De gekozen grootte wordt onthouden (localStorage `fontSize`)
+- **A** = standaard; A– kleiner (87,5%), A+ (112,5%) en A++ (125%) groter
+- De hele pagina schaalt gelijkmatig mee (de basisgrootte op `<html>` verandert, alle `rem`-maten volgen)
+- Op mobiel (≤ 768 px) zijn titels begrensd en blijven de bedieningsknoppen even groot, zodat er
+  ook bij A++ niets buiten het scherm valt (getest op 390 px, iPhone-formaat)
+- iOS Safari vergroot tekst niet zelf (`-webkit-text-size-adjust: 100%`)
+- De gekozen grootte wordt onthouden (localStorage `fontSize`) en direct bij het laden toegepast
 - Handig voor klanten die slechter zien, zonder in te zoomen
+
+---
+
+## 🔍 Zoeken en 🛒 mandje
+
+- Zoekveld onder "Categorieën" met label voor schermlezers; zoekt live, Enter sluit het toetsenbord
+- Geen resultaten → melding "Geen behandelingen gevonden" (wordt voorgelezen, `role="status"`)
+- Zoekveld heeft minimaal 16 px tekst, zodat iPhone niet inzoomt bij het typen
+- Knop *+ In mandje* geeft met `aria-pressed` aan of de behandeling gekozen is
+- Mandje opent als paneel; **Esc** of × sluit het, de focus gaat terug naar de mandjeknop
 
 ---
 
@@ -84,7 +98,7 @@ Klik op "Afspraak maken" of een WhatsApp knop → WhatsApp opent met voorbereid 
 - Alle afspraakknoppen gaan naar WhatsApp (+31 6 4571 5179); er is geen e-mail of online agenda
 - Zwevende WhatsApp knop (rechtsonder)
 - Altijd zichtbaar op mobiel
-- Pre-filled met standaardbericht
+- Pre-filled met standaardbericht, of met de gekozen behandelingen uit het mandje
 - Direct naar bedrijfs-WhatsApp
 
 #### 👆 Impressie-albums

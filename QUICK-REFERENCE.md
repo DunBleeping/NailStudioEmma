@@ -66,6 +66,8 @@ Volledige uitleg: [README.md](README.md)
 - Nieuwe bezoekers: **foto's verborgen** (knop 🖼️ zet ze aan, keuze wordt onthouden)
 - **Afspraak maken** en alle WhatsApp-knoppen → WhatsApp +31 6 4571 5179 met voorbereid bericht
 - Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · 🖼️ foto's
+- Zoekbalk onder "Categorieën"; *+ In mandje* op elke behandeling → 🛒 Mandje → WhatsApp-bericht met
+  behandelingen, toeslag en totaal
 
 ---
 
@@ -74,7 +76,7 @@ Volledige uitleg: [README.md](README.md)
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=5`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=6`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
 

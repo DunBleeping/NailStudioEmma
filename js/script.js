@@ -8,7 +8,11 @@ let appData = {
   services: null,
   gallery: null,
   currentGalleryIndex: 0,
-  currentPhotoIndex: 0
+  currentPhotoIndex: 0,
+  activeCategory: 'all',
+  searchQuery: '',
+  cart: [],
+  cartExtras: []
 };
 
 // ============================================
@@ -45,6 +49,8 @@ async function loadAppData() {
     initializeCategoriesNav();
     setupCategoryLinks();
     initializeCategoriesScrollSpy();
+    initializeServiceSearch();
+    initializeCart();
 
     console.log('✓ EmStudio website loaded successfully');
   } catch (error) {
@@ -221,6 +227,8 @@ function createServiceCard(service) {
   const card = document.createElement('div');
   card.className = 'service-card';
   card.setAttribute('data-category', service.category);
+  card.setAttribute('data-id', service.id);
+  card.setAttribute('data-search', normalizeSearchText(`${service.name} ${service.category} ${service.description}`));
 
   let serviceImage = '';
   if (service.image) {
@@ -249,6 +257,7 @@ function createServiceCard(service) {
           ${noteHtml}
         </div>
       </div>
+      <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">+ In mandje</button>
     </div>
   `;
 
@@ -601,15 +610,32 @@ function initializeContact() {
 function setupWhatsAppButton(element) {
   if (!element || !appData.settings) return;
 
-  const whatsappNumber = appData.settings.contact.whatsapp.number.replace(/\D/g, '');
-  const message = encodeURIComponent(
-    appData.settings.contact.whatsapp.message
-  );
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
-
-  element.href = whatsappUrl;
+  element.href = buildWhatsAppUrl();
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
+}
+
+function buildWhatsAppUrl() {
+  const whatsappNumber = appData.settings.contact.whatsapp.number.replace(/\D/g, '');
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
+}
+
+// Uses the cart contents when the visitor selected treatments, otherwise the default message
+function buildWhatsAppMessage() {
+  const items = getCartServices();
+  if (items.length === 0) return appData.settings.contact.whatsapp.message;
+
+  const lines = [`Hallo ${appData.settings.salon.name}, ik wil graag een afspraak maken voor:`];
+  items.forEach((s) => {
+    lines.push(`- ${s.name} (${formatPrice(s.price)}, ${s.duration})`);
+  });
+  getActiveCartExtras().forEach((e) => {
+    lines.push(`- Toeslag: ${e.name} (+${formatPrice(e.price)})`);
+  });
+  lines.push(`Totaal: ${formatPrice(getCartTotal())}`);
+  lines.push('');
+  lines.push('Mijn voorkeur voor datum en tijd: ');
+  return lines.join('\n');
 }
 
 // ============================================
@@ -816,11 +842,15 @@ function initializeFontSizeControls() {
 }
 
 function applyFontSize(size) {
-  // Remove all font size classes
-  document.body.classList.remove('font-size-small', 'font-size-medium', 'font-size-large', 'font-size-xlarge');
+  const allowed = ['small', 'medium', 'large', 'xlarge'];
+  if (!allowed.includes(size)) size = 'medium';
+  const classes = allowed.map((s) => `font-size-${s}`);
 
-  // Add selected class
-  document.body.classList.add(`font-size-${size}`);
+  // Applied to <html> so rem units scale; body keeps the class for backwards compatibility
+  [document.documentElement, document.body].forEach((el) => {
+    el.classList.remove(...classes);
+    el.classList.add(`font-size-${size}`);
+  });
 
   // Update active button
   document.querySelectorAll('.font-size-btn').forEach((btn) => {
@@ -886,12 +916,33 @@ function initializeCategoriesNav() {
 }
 
 function filterServicesByCategory(category) {
-  const servicesGrid = document.getElementById('services-grid');
-  const cards = servicesGrid.querySelectorAll('.service-card');
+  appData.activeCategory = category;
+  applyServiceFilters();
+}
 
-  cards.forEach((card) => {
-    const cardCategory = card.getAttribute('data-category');
-    if (category === 'all' || cardCategory === category) {
+function normalizeSearchText(text) {
+  return String(text || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+// Category and search filters combined; every search word must match
+function applyServiceFilters() {
+  const servicesGrid = document.getElementById('services-grid');
+  if (!servicesGrid) return;
+
+  const category = appData.activeCategory || 'all';
+  const words = normalizeSearchText(appData.searchQuery).split(/\s+/).filter(Boolean);
+  let visibleCount = 0;
+
+  servicesGrid.querySelectorAll('.service-card').forEach((card) => {
+    const categoryMatch = category === 'all' || card.getAttribute('data-category') === category;
+    const haystack = card.getAttribute('data-search') || '';
+    const searchMatch = words.every((w) => haystack.includes(w));
+
+    if (categoryMatch && searchMatch) {
+      visibleCount++;
       card.style.display = '';
       setTimeout(() => {
         card.classList.add('fade-in');
@@ -901,6 +952,212 @@ function filterServicesByCategory(category) {
       card.classList.remove('fade-in');
     }
   });
+
+  const noResults = document.getElementById('services-no-results');
+  if (noResults) noResults.hidden = visibleCount > 0;
+}
+
+function initializeServiceSearch() {
+  const input = document.getElementById('service-search');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    appData.searchQuery = input.value;
+    // Searching covers all categories so a match is never hidden by an earlier category click
+    if (input.value.trim() && appData.activeCategory && appData.activeCategory !== 'all') {
+      appData.activeCategory = 'all';
+      setActiveCategory('all');
+    }
+    applyServiceFilters();
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      input.blur();
+    }
+  });
+}
+
+// ============================================
+// Treatment cart -> WhatsApp request
+// ============================================
+
+function loadStoredArray(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || '[]');
+    return Array.isArray(value) ? value : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function formatPrice(amount) {
+  return `€${Number(amount).toFixed(2)}`;
+}
+
+function getCartServices() {
+  if (!appData.services) return [];
+  return appData.cart
+    .map((id) => appData.services.services.find((s) => s.id === id))
+    .filter(Boolean);
+}
+
+// Surcharges only apply to treatments that carry a note (new sets)
+function cartAllowsExtras() {
+  return getCartServices().some((s) => s.note);
+}
+
+function getActiveCartExtras() {
+  if (!appData.services || !appData.services.extras || !cartAllowsExtras()) return [];
+  return appData.services.extras.filter((e) => appData.cartExtras.includes(e.id));
+}
+
+function getCartTotal() {
+  const services = getCartServices().reduce((sum, s) => sum + s.price, 0);
+  const extras = getActiveCartExtras().reduce((sum, e) => sum + e.price, 0);
+  return services + extras;
+}
+
+function saveCart() {
+  try {
+    localStorage.setItem('cart', JSON.stringify(appData.cart));
+    localStorage.setItem('cartExtras', JSON.stringify(appData.cartExtras));
+  } catch (e) {
+    // Storage may be unavailable (private mode); the cart still works for this visit
+  }
+}
+
+function initializeCart() {
+  if (!appData.services) return;
+
+  const validIds = new Set(appData.services.services.map((s) => s.id));
+  appData.cart = [...new Set(loadStoredArray('cart'))].filter((id) => validIds.has(id));
+  appData.cartExtras = loadStoredArray('cartExtras');
+
+  const grid = document.getElementById('services-grid');
+  if (grid) {
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.add-to-cart-btn');
+      if (!btn) return;
+      toggleCartItem(btn.getAttribute('data-id'));
+    });
+  }
+
+  const cartBtn = document.getElementById('cart-btn');
+  const panel = document.getElementById('cart-panel');
+  if (cartBtn && panel) {
+    cartBtn.addEventListener('click', () => setCartPanelOpen(panel.hidden));
+    panel.querySelector('.cart-close').addEventListener('click', () => {
+      setCartPanelOpen(false);
+      cartBtn.focus();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) {
+        setCartPanelOpen(false);
+        cartBtn.focus();
+      }
+    });
+
+    document.getElementById('cart-items').addEventListener('click', (e) => {
+      const btn = e.target.closest('.cart-remove');
+      if (btn) toggleCartItem(btn.getAttribute('data-id'));
+    });
+
+    document.getElementById('cart-extras').addEventListener('change', (e) => {
+      const box = e.target.closest('input[type="checkbox"]');
+      if (!box) return;
+      const id = box.value;
+      appData.cartExtras = appData.cartExtras.filter((x) => x !== id);
+      if (box.checked) appData.cartExtras.push(id);
+      saveCart();
+      renderCart();
+    });
+
+    document.getElementById('cart-clear-btn').addEventListener('click', () => {
+      appData.cart = [];
+      appData.cartExtras = [];
+      saveCart();
+      setCartPanelOpen(false);
+      renderCart();
+    });
+  }
+
+  renderCart();
+}
+
+function setCartPanelOpen(open) {
+  const panel = document.getElementById('cart-panel');
+  const cartBtn = document.getElementById('cart-btn');
+  if (!panel || !cartBtn) return;
+  panel.hidden = !open;
+  cartBtn.setAttribute('aria-expanded', String(open));
+  if (open) panel.querySelector('.cart-close').focus();
+}
+
+function toggleCartItem(id) {
+  if (!id) return;
+  if (appData.cart.includes(id)) {
+    appData.cart = appData.cart.filter((x) => x !== id);
+  } else {
+    appData.cart.push(id);
+  }
+  saveCart();
+  renderCart();
+}
+
+function renderCart() {
+  const services = getCartServices();
+  const count = services.length;
+
+  document.querySelectorAll('.add-to-cart-btn').forEach((btn) => {
+    const inCart = appData.cart.includes(btn.getAttribute('data-id'));
+    btn.classList.toggle('in-cart', inCart);
+    btn.setAttribute('aria-pressed', String(inCart));
+    btn.textContent = inCart ? '✓ In mandje' : '+ In mandje';
+  });
+
+  const cartBtn = document.getElementById('cart-btn');
+  if (cartBtn) {
+    cartBtn.hidden = count === 0;
+    cartBtn.setAttribute('aria-label', `Mandje met ${count} behandeling${count === 1 ? '' : 'en'} openen`);
+    document.getElementById('cart-count').textContent = String(count);
+  }
+
+  const itemsList = document.getElementById('cart-items');
+  if (itemsList) {
+    itemsList.innerHTML = services.map((s) => `
+      <li>
+        <span class="cart-item-name">${escapeHtml(s.name)}<small>${escapeHtml(s.duration)}</small></span>
+        <span class="cart-item-price">${formatPrice(s.price)}</span>
+        <button type="button" class="cart-remove" data-id="${escapeHtml(s.id)}" aria-label="${escapeHtml(s.name)} verwijderen">&times;</button>
+      </li>
+    `).join('');
+  }
+
+  const extrasBox = document.getElementById('cart-extras');
+  if (extrasBox) {
+    const extras = cartAllowsExtras() && appData.services.extras ? appData.services.extras : [];
+    extrasBox.innerHTML = extras.map((e) => `
+      <label>
+        <input type="checkbox" value="${escapeHtml(e.id)}" ${appData.cartExtras.includes(e.id) ? 'checked' : ''}>
+        <span>${escapeHtml(e.name)} (+${formatPrice(e.price)})<small>${escapeHtml(e.description)}</small></span>
+      </label>
+    `).join('');
+  }
+
+  const total = document.getElementById('cart-total');
+  if (total) total.textContent = formatPrice(getCartTotal());
+
+  const panel = document.getElementById('cart-panel');
+  if (panel && count === 0) setCartPanelOpen(false);
+
+  // Keep every WhatsApp link in sync with the cart contents
+  if (appData.settings) {
+    const orderBtn = document.getElementById('cart-order-btn');
+    if (orderBtn) setupWhatsAppButton(orderBtn);
+    initializeWhatsAppButton();
+  }
 }
 
 // ============================================

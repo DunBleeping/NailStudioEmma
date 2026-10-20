@@ -46,8 +46,10 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
    **Afspraak maken**), en de knoppen 👁️ grijswaarden, **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
    Op mobiel (≤ 768 px) wordt het menu een ☰ hamburger.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen* en *📱 WhatsApp*, groot logo.
-3. **Onze Behandelingen** – categoriemenu (links, op mobiel erboven) met 7 categorieën en
-   27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie).
+3. **Onze Behandelingen** – onder "Categorieën" een **zoekbalk** (zoekt live in naam, categorie en
+   omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
+   en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
+   knop **+ In mandje**).
 4. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Optionele toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set).
 5. **Impressie** – 6 tegels met een stijl (Klassieke Rode Nagels, BIAB Nude, Floral Nail Art,
@@ -56,7 +58,8 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 6. **Over Emma NailStudio** – introductie.
 7. **Contact & Openingstijden** – telefoon, adres, openingstijden, WhatsApp, Google Maps.
 8. **Footer** – links, social media, copyright.
-9. **Zwevende WhatsApp-knop** rechtsonder.
+9. **Zwevende WhatsApp-knop** rechtsonder, met daarboven de knop **🛒 Mandje** zodra er behandelingen
+   gekozen zijn.
 
 **Standaardinstellingen voor nieuwe bezoekers:**
 - **Foto's verborgen** – rustiger en sneller; tegels onder Impressie tonen dan titel + omschrijving.
@@ -66,12 +69,31 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 **Afspraken gaan via WhatsApp** (+31 6 4571 5179). Er is geen e-mail of online agenda: *Afspraak maken*,
 de hero-knop, de contactknop en de zwevende knop openen allemaal WhatsApp met een voorbereid bericht.
 
+**Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ In mandje* in het mandje. In het
+mandje staan de gekozen behandelingen met duur en prijs, het totaal en (alleen bij een nieuwe set) het
+vinkje *Verwijderen oude lak/gellak +€5*. *Afspraak aanvragen via WhatsApp* opent WhatsApp met een
+ingevuld bericht, bijvoorbeeld:
+
+```
+Hallo Emma NailStudio, ik wil graag een afspraak maken voor:
+- New Set Nagels (€40.00, 60 minuten)
+- Toeslag: Verwijderen oude lak/gellak (+€5.00)
+Totaal: €45.00
+
+Mijn voorkeur voor datum en tijd:
+```
+
+Zolang er iets in het mandje zit, sturen ook alle andere WhatsApp-knoppen dit bericht. Het is een
+afspraakverzoek, geen betaling; Emma bevestigt via WhatsApp. Het mandje wordt in de browser onthouden
+(localStorage `cart` en `cartExtras`).
+
 ## ✨ Functies
 
 - ✅ Volledig statisch, geen backend of build-stap
 - ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
 - ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
-- ✅ Categoriefilter voor behandelingen
+- ✅ Categoriefilter en zoekbalk voor behandelingen
+- ✅ Behandelmandje dat een ingevuld WhatsApp-afspraakverzoek maakt
 - ✅ Impressie-albums met modal, toetsenbord- en swipe-navigatie
 - ✅ Toegankelijkheid: grijswaarden, lettergrootte, foto's uit, ARIA-labels, `prefers-reduced-motion`
   (zie [ACCESSIBILITY.md](ACCESSIBILITY.md))
@@ -184,7 +206,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=5`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=6`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
@@ -204,7 +226,8 @@ Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
 ## 🔐 Privacy & beveiliging
 
 - Geen cookies, geen tracking, geen formulieren – contact loopt via WhatsApp
-- Alleen `localStorage` voor weergavevoorkeuren (grijswaarden, lettergrootte, foto's)
+- Alleen `localStorage` voor weergavevoorkeuren (grijswaarden, lettergrootte, foto's) en het mandje;
+  er wordt niets naar een server gestuurd
 - Beveiligingsheaders in `_headers` (`nosniff`, `X-Frame-Options`, `Referrer-Policy`, ...)
 - HTML-escaping van alle JSON-inhoud in `script.js`
 - HTTPS via Cloudflare
