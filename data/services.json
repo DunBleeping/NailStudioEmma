@@ -1,5 +1,12 @@
 {
-  "extras": [],
+  "extras": [
+    {
+      "id": "verwijderen-inclusief-verzorging",
+      "name": "* Verwijderen met Nieuwe Set Inclusief Verzorging",
+      "description": "Bij Nieuwe Set op Eigen Nagel*",
+      "price": 5
+    }
+  ],
   "services": [
     {
       "name": "Wenkbrauw Epileren met Touw",
@@ -191,22 +198,14 @@
       "category": "Nagels - Poeder"
     },
     {
-      "name": "Verwijderen met Nieuwe Set Inclusief Verzorging",
-      "price": 5,
-      "description": "Verwijderen van de oude set bij het zetten van een nieuwe set, inclusief nagelverzorging.",
-      "image": "./images/services/new-set-nagels.jpg",
-      "id": "verwijderen-inclusief-verzorging",
-      "duration": "30 minuten",
-      "category": "Nagels - Overig"
-    },
-    {
-      "name": "Nieuwe Set op Eigen Nagel",
+      "name": "Nieuwe Set op Eigen Nagel*",
       "price": 35,
       "description": "Kunstnagels op basis van uw eigen nagels - natuurlijke look.",
       "image": "./images/services/new-set-nagels.jpg",
       "id": "new-set-op-eigen-nagel",
       "duration": "50 minuten",
-      "category": "Nagels - Poeder"
+      "category": "Nagels - Poeder",
+      "note": "* Verwijderen oude set incl. verzorging: +€5"
     },
     {
       "name": "Nails Design vanaf...",
