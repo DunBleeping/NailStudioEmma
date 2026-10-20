@@ -403,6 +403,25 @@ function createServiceCard(service) {
 // Pricing Section
 // ============================================
 
+function renderDurationClock(service) {
+  const duration = /^(\d+)(\+)? minuten$/.exec(service.duration);
+  if (!duration) {
+    throw new Error(`Invalid treatment duration for ${service.id}: ${service.duration}`);
+  }
+
+  const roundedMinutes = Math.ceil(Number(duration[1]) / 15) * 15;
+  const hours = roundedMinutes > 60 ? Math.floor(roundedMinutes / 60) : 0;
+  const quarters = hours ? (roundedMinutes % 60) / 15 : roundedMinutes / 15;
+  const hourLabel = hours ? `${hours} ${t('u')}` : '';
+  return `
+    <span class="duration-clock" role="img" aria-label="${escapeHtml(t(service.duration))}" title="${escapeHtml(t(service.duration))}">
+      <span class="duration-clock-hours" aria-hidden="true">${escapeHtml(hourLabel)}</span>
+      <span class="duration-clock-face" style="--duration-angle: ${quarters * 90}deg" aria-hidden="true"></span>
+      ${duration[2] ? '<span aria-hidden="true">+</span>' : ''}
+    </span>
+  `;
+}
+
 function initializePricing() {
   if (!appData.services) return;
 
@@ -413,11 +432,12 @@ function initializePricing() {
 
   // Add services
   appData.services.services.forEach((service) => {
+    const durationClock = renderDurationClock(service);
     service = localizeContent(service);
     const row = document.createElement('tr');
     row.innerHTML = `
       <td><strong>${escapeHtml(service.name)}</strong></td>
-      <td class="duration">${escapeHtml(service.duration)}</td>
+      <td class="duration">${durationClock}</td>
       <td class="price">€${service.price.toFixed(2)}</td>
       <td class="pricing-action">
         <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>

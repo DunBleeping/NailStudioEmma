@@ -51,15 +51,19 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
    Alleen de lettergrootte staat in het uitklapmenu.
    Grijswaarden en foto's tonen blijven rechts zichtbaar. Het menu sluit met een link of **Esc**.
    **Zoeken** gaat naar de zoekbalk voor behandelingen en geeft deze direct toetsenbordfocus.
+   Op lage, liggende schermen zoals smartphones (hoogte maximaal 500 px, breedte maximaal 1024 px)
+   scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
-   De tekst vermeldt: *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
    Direct onder de welkomsttitel staat een smalle horizontale nagelfoto; deze schakelt mee met foto's tonen/verbergen.
 3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
    bij, in beide talen. Ook mobiel blijven de vier kolommen naast elkaar staan.
    Op mobiel is de tabeltekst kleiner en blijven bedragen op één regel.
+   Alleen hier wordt de duur als klok met kwartierdelen getoond, visueel naar boven afgerond.
+   Boven een uur staan hele uren naast de klok; een + blijft zichtbaar bij een minimumduur.
+   De exacte duur blijft beschikbaar voor schermlezers, bij de behandelingen, in het mandje en in berichten.
    De toeslag heeft een eigen vak over de volledige tabelbreedte, met naam en prijs boven de uitleg.
 4. **Onze Behandelingen** – onder "Categorieën" een **zoekbalk** (zoekt live in naam, categorie en
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
@@ -68,7 +72,7 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 5. **Impressie** – 6 tegels met een stijl (Klassieke Rode Nagels, BIAB Nude, Floral Nail Art,
    Ombre Effect, Glitter Glamour, Minimalistisch Design). Klik → **album** met foto's van echte
    klantresultaten (bladeren met pijlen, pijltjestoetsen of vegen).
-6. **Over Emma NailStudio** – introductie.
+6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
 7. **Contact & Openingstijden** – telefoon, adres, openingstijden, WhatsApp, Google Maps.
 8. **Footer** – links, social media, copyright.
 9. **Zwevende WhatsApp-knop** rechtsonder, met daarboven de knop **🛒 Mandje** zodra er behandelingen
@@ -283,7 +287,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=17`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=18`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

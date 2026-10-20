@@ -137,6 +137,12 @@ header {
   min-height: 120px;
 }
 
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 1024px) {
+  header {
+    position: relative;
+  }
+}
+
 header .container {
   display: flex;
   justify-content: space-between;
@@ -738,6 +744,40 @@ body:not(.images-hidden) .photo-tip {
 .pricing-table .duration {
   color: var(--light-text);
   font-size: 0.9rem;
+}
+
+.pricing-clock-help {
+  font-size: 0.9rem;
+}
+
+.duration-clock {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  max-width: 100%;
+  color: var(--accent);
+}
+
+.duration-clock-hours {
+  white-space: nowrap;
+}
+
+.duration-clock-hours:empty {
+  display: none;
+}
+
+.duration-clock-face {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background:
+    linear-gradient(to right, transparent calc(50% - 0.5px), currentColor calc(50% - 0.5px), currentColor calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom, transparent calc(50% - 0.5px), currentColor calc(50% - 0.5px), currentColor calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    conic-gradient(var(--primary) var(--duration-angle), var(--white) 0);
 }
 
 .pricing-table .add-to-cart-btn {
