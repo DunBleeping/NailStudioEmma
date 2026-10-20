@@ -671,6 +671,13 @@ body:not(.images-hidden) .photo-tip {
   font-size: 0.9rem;
 }
 
+.pricing-table .add-to-cart-btn {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 768px) {
   .pricing-table {
     font-size: 0.9rem;
@@ -678,7 +685,11 @@ body:not(.images-hidden) .photo-tip {
 
   .pricing-table th,
   .pricing-table td {
-    padding: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .pricing-table .add-to-cart-btn {
+    padding: 0.6rem 0.5rem;
   }
 }
 

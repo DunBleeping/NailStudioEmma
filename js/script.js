@@ -388,7 +388,10 @@ function initializePricing() {
     service = localizeContent(service);
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td><strong>${escapeHtml(service.name)}</strong></td>
+      <td>
+        <strong>${escapeHtml(service.name)}</strong>
+        <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>
+      </td>
       <td class="duration">${escapeHtml(service.duration)}</td>
       <td class="price">€${service.price.toFixed(2)}</td>
     `;
@@ -1176,14 +1179,13 @@ function initializeCart() {
   applyDefaultCartExtras();
   saveCart();
 
-  const grid = document.getElementById('services-grid');
-  if (grid) {
-    grid.addEventListener('click', (e) => {
+  document.querySelectorAll('#services-grid, #pricing-table').forEach((container) => {
+    container.addEventListener('click', (e) => {
       const btn = e.target.closest('.add-to-cart-btn');
       if (!btn) return;
       toggleCartItem(btn.getAttribute('data-id'));
     });
-  }
+  });
 
   const cartBtn = document.getElementById('cart-btn');
   const panel = document.getElementById('cart-panel');
