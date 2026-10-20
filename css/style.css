@@ -687,7 +687,7 @@ body:not(.images-hidden) .photo-tip {
   display: block;
   width: fit-content;
   max-width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
 
 @media (max-width: 768px) {
@@ -695,13 +695,24 @@ body:not(.images-hidden) .photo-tip {
     font-size: 0.9rem;
   }
 
+  .pricing-table table {
+    table-layout: fixed;
+  }
+
+  .pricing-table th:nth-child(1) { width: 33%; }
+  .pricing-table th:nth-child(2) { width: 19%; }
+  .pricing-table th:nth-child(3) { width: 21%; }
+  .pricing-table th:nth-child(4) { width: 27%; }
+
   .pricing-table th,
   .pricing-table td {
-    padding: 0.5rem;
+    padding: 0.5rem 0.3rem;
+    overflow-wrap: anywhere;
   }
 
   .pricing-table .add-to-cart-btn {
-    padding: 0.6rem 0.5rem;
+    padding: 0.6rem 0.3rem;
+    overflow-wrap: anywhere;
   }
 }
 

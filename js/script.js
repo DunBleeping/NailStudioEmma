@@ -388,12 +388,12 @@ function initializePricing() {
     service = localizeContent(service);
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>
-        <strong>${escapeHtml(service.name)}</strong>
-        <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>
-      </td>
+      <td><strong>${escapeHtml(service.name)}</strong></td>
       <td class="duration">${escapeHtml(service.duration)}</td>
       <td class="price">€${service.price.toFixed(2)}</td>
+      <td class="pricing-action">
+        <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>
+      </td>
     `;
     tableBody.appendChild(row);
   });
@@ -402,7 +402,7 @@ function initializePricing() {
   if (appData.services.extras && appData.services.extras.length > 0) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `
-      <td colspan="3" style="background: #f5f0eb; font-weight: 600; padding: 1rem;">${escapeHtml(t('Toeslagen'))}</td>
+      <td colspan="4" style="background: #f5f0eb; font-weight: 600; padding: 1rem;">${escapeHtml(t('Toeslagen'))}</td>
     `;
     tableBody.appendChild(headerRow);
 
@@ -415,6 +415,7 @@ function initializePricing() {
         <td><em>${escapeHtml(extra.name)}</em></td>
         <td>${escapeHtml(extra.description)}</td>
         <td class="${priceClass}">${priceSign}€${Math.abs(extra.price).toFixed(2)}</td>
+        <td></td>
       `;
       tableBody.appendChild(row);
     });
