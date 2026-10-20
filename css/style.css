@@ -442,6 +442,15 @@ body.grayscale .accessibility-toggle {
   font-weight: 500;
 }
 
+.hero-nail-banner {
+  width: 100%;
+  height: 4rem;
+  object-fit: cover;
+  object-position: center 60%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
 .hero-description {
   font-size: 1rem;
   color: var(--light-text);
@@ -1360,6 +1369,7 @@ footer a:hover {
 
 /* Hide Images Class */
 body.images-hidden .hero-image,
+body.images-hidden .hero-nail-banner,
 body.images-hidden .service-card .service-image {
   display: none !important;
 }

@@ -133,7 +133,7 @@ visitor.
 ## 7. Important rules (things that broke before)
 
 1. **Changed `css/style.css` or `js/script.js`?** Raise the version number `?v=N` on **both**
-   lines in `index.html` (currently `?v=16` → next is `?v=17`). Otherwise visitors may keep the
+   lines in `index.html` (currently `?v=17` → next is `?v=18`). Otherwise visitors may keep the
    old version for hours.
 2. **File names are case-sensitive on Cloudflare.** `Logo.JPG` ≠ `logo.jpg`. Use lowercase,
    no spaces.

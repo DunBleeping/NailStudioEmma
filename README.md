@@ -54,6 +54,7 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
    De tekst vermeldt: *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
+   Direct onder de welkomsttitel staat een smalle horizontale nagelfoto; deze schakelt mee met foto's tonen/verbergen.
 3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
@@ -282,7 +283,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=16`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=17`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
