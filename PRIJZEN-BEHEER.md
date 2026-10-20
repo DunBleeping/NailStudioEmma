@@ -49,33 +49,38 @@ Prijs is bijgewerkt! ✅
 
 ---
 
-## 📊 Huidge Prijzenlijst
+## 📊 Huidige Prijzenlijst
 
-| Behandeling | Huidge Prijs | Duur |
+| Behandeling | Prijs | Duur |
 |------------|-----------|------|
-| Wenkbrauw Epileren met Touw | €7 | 15 min |
-| Wenkbrauw Verven + Epileren | €15 | 30 min |
-| Boven/Onderlip Epileren | €8 | 15 min |
-| New Set Nagels | €28 | 60 min |
-| New Set Witte Poeder | €38 | 60 min |
-| Opvullen Witte Poeder | €35 | 45 min |
-| Opvullen Naturel | €35 | 45 min |
-| Naturel Roze Poeder (Nieuwe Set) | €32 | 60 min |
-| Naturel Opvullen Roze Poeder | €27 | 45 min |
-| Shellac | €17 | 40 min |
-| Manicure | €10 | 30 min |
-| Pedicure | €28 | 45 min |
-| Teennagels | €30 | 30 min |
-| Design Nagel (Glitter) | €38 | 60 min |
-| Opvullen 2 Kleuren (Glitter) | €30 | 45 min |
-| Opvullen Gellac | €28 | 40 min |
-| Roze Poeder + Witte Randje (Nieuwe Set) | €40 | 60 min |
-| Alleen Verwijderen | €8 | 20 min |
-| Babyboom Nieuwe Set | €40 | 60 min |
-| Opvullen BabyBoom | €38 | 45 min |
-| Verwijderen + Verzorging | €3 | 30 min |
-| Nieuw Set op Eigen Nagel | €25 | 50 min |
-| Nails Design Vanaf... | €40 | 60+ min |
+| Wenkbrauw Epileren met Touw | €13 | 15 min |
+| Wenkbrauw Verven en Epileren met Touw | €25 | 30 min |
+| Boven- en Onderlip Epileren met Touw | €10 | 15 min |
+| New Set Nagels | €40 | 60 min |
+| New Set Witte Poeder | €48 | 60 min |
+| Opvullen Witte Poeder | €40 | 45 min |
+| Opvullen Naturel Nagel | €35 | 45 min |
+| Naturel Roze Poeder (Nieuwe Set) | €45 | 60 min |
+| Naturel Opvullen Roze Poeder | €35 | 45 min |
+| Shellac | €25 | 40 min |
+| Manicure | €15 | 30 min |
+| Pedicure | €35 | 45 min |
+| Teennagels Nieuwe Set met Gellak | €50 | 45 min |
+| Pedicure met Gellak | €50 | 60 min |
+| Opvullen met Gellak | €40 | 40 min |
+| Nieuwe Set 2 Kleuren (met Glitter) | €60 | 75 min |
+| Nieuwe Set met Gellak Inclusief | €50 | 60 min |
+| Nieuwe Set Roze Poeder en Witte Randje | €60 | 60 min |
+| Alleen Verwijderen | €15 | 20 min |
+| Babyboom Nieuwe Set | €55 | 60 min |
+| Opvullen Babyboom | €50 | 45 min |
+| Verwijderen met Nieuwe Set Inclusief Verzorging | €5 | 30 min |
+| Nieuwe Set op Eigen Nagel | €35 | 50 min |
+| Nails Design vanaf... | €60 | 60+ min |
+| BIAB Nieuwe Set | €45 | 60 min |
+| Opvullen BIAB | €40 | 45 min |
+| BIAB Nieuwe Set met Gellak Kleuren | €55 | 75 min |
+| Opvullen BIAB met Gellak Kleuren | €50 | 60 min |
 
 ---
 
