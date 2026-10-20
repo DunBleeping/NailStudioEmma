@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=7`
+- `index.html` – de pagina; CSS/JS geladen met `?v=8`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -32,14 +32,15 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Impressie-tegels, album-modal, `prefers-reduced-motion`, print-stylesheet
 
 ### js/script.js
-- Laadt `settings.json`, `services.json`, `gallery.json` (altijd vers: `cache: 'no-cache'`)
+- Laadt `settings.json`, `services.json`, `gallery.json`, `translations.json` (altijd vers: `cache: 'no-cache'`)
 - Bouwt behandelkaarten, categoriemenu, prijstabel en "Optionele toeslagen"
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
-- Behandelmandje: WhatsApp-bericht met gekozen behandelingen, toeslag en totaal
+- Taalkeuze Nederlands/Engels, inclusief behandelingen, galerij en schermlezerlabels
+- Behandelmandje: WhatsApp-bericht met gekozen behandelingen, toeslag en totaal, eerst Engels dan Nederlands
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
 - Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen),
-  `cart`, `cartExtras`
+  `cart`, `cartExtras`, `language` (standaard `nl`)
 - HTML-escaping van alle JSON-inhoud
 
 ### data/
@@ -47,6 +48,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
   `extras`: verwijderen oude lak/gellak +€5
 - `gallery.json` – 6 Impressie-stijlen met voorbeeldfoto (`src`), albummap (`folder`) en klantfoto's (`photos`)
+- `translations.json` – Engelse vertalingen onder `en`, met de exacte Nederlandse tekst als sleutel
 - `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
 
 ### images/

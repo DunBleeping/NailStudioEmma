@@ -87,6 +87,11 @@ Elk album heeft een eigen map met een `LEESMIJ.txt` met de voorgestelde bestands
 
 Bezoekers bladeren door een album met de pijltjes, de pijltjestoetsen of door te vegen op mobiel.
 
+**Engelse versie:** voeg voor nieuwe of gewijzigde titels, omschrijvingen, alt-teksten en
+foto-onderschriften de Engelse vertaling toe onder `en` in `data/translations.json`.
+De sleutel is de exacte Nederlandse tekst uit `gallery.json` (ook voor automatisch gegenereerde
+foto-onderschriften na `update_galerij.py`). Bestandsnamen en fotopaden blijven voor beide talen gelijk.
+
 > **Let op:** zet nooit zelf bestandsnamen in `gallery.json` van foto's die nog niet bestaan.
 > Cloudflare geeft voor een ontbrekend bestand de homepage terug (en bewaart dat 30 dagen),
 > waardoor bezoekers een kapotte foto zien. Het script neemt alleen bestaande foto's op.

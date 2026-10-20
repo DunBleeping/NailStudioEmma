@@ -11,6 +11,12 @@ Alle wijzigingen daar verschijnen AUTOMATISCH op:
 
 **Geen HTML/CSS aanpassingen nodig!**
 
+**Engelse versie:** prijzen worden in beide talen uit hetzelfde bestand gebruikt. Wijzig je ook
+een naam, omschrijving, duur, categorie, notitie of toeslagtekst, voeg dan de Engelse vertaling
+van die exacte Nederlandse tekst toe onder `en` in `data/translations.json`.
+Dit geldt ook bij nieuwe behandelingen; controleer daarna de Engelse kaarten en het tweetalige
+WhatsApp-bericht. Behandel-ID's en prijzen niet vertalen.
+
 > **Bronlijst:** `data/Prijzenlijst.csv` is de actuele prijzenlijst van de salon (naam, prijs, duur).
 > De website gebruikt de CSV niet zelf: pas bij een wijziging zowel de CSV als `services.json` aan
 > (of vraag Copilot om `services.json` opnieuw uit de CSV op te bouwen).

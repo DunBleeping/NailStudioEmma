@@ -1178,9 +1178,22 @@ footer a:hover {
 /* Header Controls Container */
 .header-controls {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
   order: 3;
+}
+
+.language-control select {
+  max-width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  background: var(--secondary);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
 }
 
 /* Font Size Controls */

@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=7">
+  <link rel="stylesheet" href="./css/style.css?v=8">
   <script>try{var f=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(f))document.documentElement.classList.add('font-size-'+f);}catch(e){}</script>
 
   <!-- Title -->
@@ -77,32 +77,39 @@
         </a>
       </div>
 
-      <button class="mobile-menu-toggle" aria-label="Menu openen/sluiten" aria-expanded="false">☰</button>
+      <button class="mobile-menu-toggle" data-i18n-attrs="aria-label" aria-label="Menu openen/sluiten" aria-expanded="false">☰</button>
 
-      <nav role="navigation" aria-label="Hoofd navigatie">
+      <nav role="navigation" data-i18n-attrs="aria-label" aria-label="Hoofd navigatie">
         <ul>
           <li><a href="#home">Home</a></li>
-          <li><a href="#services">Behandelingen</a></li>
-          <li><a href="#pricing">Prijzen</a></li>
-          <li><a href="#gallery">Galerij</a></li>
+          <li><a href="#services" data-i18n>Behandelingen</a></li>
+          <li><a href="#pricing" data-i18n>Prijzen</a></li>
+          <li><a href="#gallery" data-i18n>Galerij</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#contact" class="cta-button" data-whatsapp>Afspraak maken</a></li>
+          <li><a href="#contact" class="cta-button" data-whatsapp data-i18n>Afspraak maken</a></li>
         </ul>
       </nav>
 
       <div class="header-controls">
-        <button id="accessibility-toggle" class="accessibility-toggle" aria-label="Grijswaarden modus" title="Klik voor grijswaarden modus (voor kleurblindheid)">👁️</button>
+        <label class="language-control">
+          <span class="sr-only" data-i18n>Taal kiezen</span>
+          <select id="language-select" disabled>
+            <option value="nl" lang="nl">Nederlands</option>
+            <option value="en" lang="en">English</option>
+          </select>
+        </label>
+        <button id="accessibility-toggle" class="accessibility-toggle" data-i18n-attrs="aria-label,title" aria-label="Grijswaarden modus" title="Klik voor grijswaarden modus (voor kleurblindheid)">👁️</button>
         
         <!-- Font Size Controls -->
-        <div class="font-size-controls" aria-label="Lettergrootte aanpassen">
-          <button class="font-size-btn" data-size="small" title="Klein">A–</button>
-          <button class="font-size-btn active" data-size="medium" title="Standaard">A</button>
-          <button class="font-size-btn" data-size="large" title="Groot">A+</button>
-          <button class="font-size-btn" data-size="xlarge" title="Zeer groot">A++</button>
+        <div class="font-size-controls" data-i18n-attrs="aria-label" aria-label="Lettergrootte aanpassen">
+          <button class="font-size-btn" data-size="small" data-i18n-attrs="title" title="Klein">A–</button>
+          <button class="font-size-btn active" data-size="medium" data-i18n-attrs="title" title="Standaard">A</button>
+          <button class="font-size-btn" data-size="large" data-i18n-attrs="title" title="Groot">A+</button>
+          <button class="font-size-btn" data-size="xlarge" data-i18n-attrs="title" title="Zeer groot">A++</button>
         </div>
 
         <!-- Toggle Images -->
-        <button id="toggle-images-btn" class="toggle-images-btn images-hidden" aria-label="Foto's tonen/verbergen" title="Foto's tonen/verbergen">🖼️</button>
+        <button id="toggle-images-btn" class="toggle-images-btn images-hidden" data-i18n-attrs="aria-label,title" aria-label="Foto's tonen/verbergen" title="Foto's tonen/verbergen">🖼️</button>
       </div>
     </div>
   </header>
@@ -121,13 +128,13 @@
               Ontdek onze behandelingen en laat je nails verwennen.
             </p>
             <div class="hero-buttons">
-              <a href="#services" class="cta-button">Bekijk behandelingen</a>
+              <a href="#services" class="cta-button" data-i18n>Bekijk behandelingen</a>
               <a href="https://wa.me/31645715179" class="secondary-button" data-whatsapp>📱 WhatsApp</a>
-              <a class="secondary-button" data-social="instagram" aria-disabled="true">Instagram (binnenkort)</a>
+              <a class="secondary-button" data-social="instagram" data-i18n aria-disabled="true">Instagram (binnenkort)</a>
               <a class="secondary-button" data-social="facebook" aria-disabled="true">Facebook</a>
               <a class="secondary-button" data-social="googleSearch" aria-disabled="true">Google Search</a>
             </div>
-            <p class="photo-tip">Tip: foto's zijn standaard verborgen. Klik op het foto-icoontje 🖼️ rechtsboven op de site om de foto's op deze pagina te tonen.</p>
+            <p class="photo-tip" data-i18n>Tip: foto's zijn standaard verborgen. Klik op het foto-icoontje 🖼️ rechtsboven op de site om de foto's op deze pagina te tonen.</p>
           </div>
 
           <div class="hero-image">
@@ -145,11 +152,11 @@
     <section id="services" class="section section-light">
       <div class="container services-container">
         <!-- Left Sidebar Navigation -->
-        <aside class="services-sidebar" role="navigation" aria-label="Categorieën menu">
-          <h3>Categorieën</h3>
+        <aside class="services-sidebar" role="navigation" data-i18n-attrs="aria-label" aria-label="Categorieën menu">
+          <h3 data-i18n>Categorieën</h3>
           <div class="service-search">
-            <label for="service-search" class="sr-only">Zoek een behandeling</label>
-            <input type="search" id="service-search" placeholder="🔍 Zoek behandeling, bijv. BIAB of gellak" autocomplete="off" enterkeyhint="search">
+            <label for="service-search" class="sr-only" data-i18n>Zoek een behandeling</label>
+            <input type="search" id="service-search" data-i18n-attrs="placeholder" placeholder="🔍 Zoek behandeling, bijv. BIAB of gellak" autocomplete="off" enterkeyhint="search">
           </div>
           <nav class="categories-nav">
             <ul id="categories-list">
@@ -168,8 +175,8 @@
 
         <!-- Main Services Grid -->
         <div class="services-main">
-          <h2>Onze Behandelingen</h2>
-          <p id="services-no-results" class="services-no-results" role="status" hidden>Geen behandelingen gevonden. Probeer een ander zoekwoord of kies "Alle behandelingen".</p>
+          <h2 data-i18n>Onze Behandelingen</h2>
+          <p id="services-no-results" class="services-no-results" data-i18n role="status" hidden>Geen behandelingen gevonden. Probeer een ander zoekwoord of kies "Alle behandelingen".</p>
           <div id="services-grid" class="services-grid">
             <!-- Services worden dynamisch geladen via JavaScript -->
           </div>
@@ -180,17 +187,17 @@
     <!-- Pricing Section -->
     <section id="pricing" class="section">
       <div class="container">
-        <h2>Prijslijst</h2>
-        <p class="text-center" style="margin-bottom: 2rem; color: #666;">
+        <h2 data-i18n>Prijslijst</h2>
+        <p class="text-center" data-i18n style="margin-bottom: 2rem; color: #666;">
           Alle prijzen zijn in euro's. Voor meer informatie of speciale wensen, neem contact met mij op via WhatsApp.
         </p>
         <div class="pricing-table">
           <table>
             <thead>
               <tr>
-                <th>Behandeling</th>
-                <th>Duur</th>
-                <th>Prijs</th>
+                <th data-i18n>Behandeling</th>
+                <th data-i18n>Duur</th>
+                <th data-i18n>Prijs</th>
               </tr>
             </thead>
             <tbody id="pricing-table">
@@ -204,11 +211,11 @@
     <!-- Gallery Section -->
     <section id="gallery" class="section section-light">
       <div class="container">
-        <h2>Impressie</h2>
-        <p class="text-center" style="margin-bottom: 2rem; color: #666;">
+        <h2 data-i18n>Impressie</h2>
+        <p class="text-center" data-i18n style="margin-bottom: 2rem; color: #666;">
           Klik op een stijl om foto's van echte resultaten bij onze klanten te bekijken.
         </p>
-        <p class="photo-tip">Tip: foto's zijn standaard verborgen. Klik op het foto-icoontje 🖼️ rechtsboven op de site om de foto's op deze pagina te tonen.</p>
+        <p class="photo-tip" data-i18n>Tip: foto's zijn standaard verborgen. Klik op het foto-icoontje 🖼️ rechtsboven op de site om de foto's op deze pagina te tonen.</p>
         <div id="gallery-grid" class="gallery-grid">
           <!-- Galerij-items worden dynamisch geladen -->
         </div>
@@ -219,9 +226,9 @@
     <div id="gallery-modal" class="modal">
       <div class="modal-content">
         <span class="modal-close">&times;</span>
-        <button class="modal-nav modal-prev" aria-label="Vorige foto">❮</button>
+        <button class="modal-nav modal-prev" data-i18n-attrs="aria-label" aria-label="Vorige foto">❮</button>
         <img class="modal-image" src="" alt="">
-        <button class="modal-nav modal-next" aria-label="Volgende foto">❯</button>
+        <button class="modal-nav modal-next" data-i18n-attrs="aria-label" aria-label="Volgende foto">❯</button>
         <div class="modal-info">
           <h3></h3>
           <p></p>
@@ -235,12 +242,12 @@
       <div class="container">
         <div class="about-content">
           <div class="about-text">
-            <h2>Over Emma NailStudio</h2>
+            <h2 data-i18n>Over Emma NailStudio</h2>
             <p>
               Bij Emma NailStudio creëren we prachtige nagels met professionele zorg en aandacht voor detail.
               Ontdek onze behandelingen en laat je nails verwennen door ons ervaren team.
             </p>
-            <p>
+            <p data-i18n>
               We geloven in kwaliteit en persoonslijke aandacht. Elke cliënt verdient een unieke ervaring
               die aansluit op hun wensen en stijl.
             </p>
@@ -256,27 +263,27 @@
     <!-- Contact Section -->
     <section id="contact" class="section section-light">
       <div class="container">
-        <h2>Contact & Openingstijden</h2>
+        <h2 data-i18n>Contact & Openingstijden</h2>
 
         <div class="contact-grid">
           <!-- Telefoonnummer -->
           <div class="contact-item" data-type="phone">
             <div class="contact-icon">📞</div>
-            <h3>Bel mij</h3>
+            <h3 data-i18n>Bel mij</h3>
             <a href="tel:">Laden...</a>
           </div>
 
           <!-- Adres -->
           <div class="contact-item" data-type="address">
             <div class="contact-icon">📍</div>
-            <h3>Bezoek mij</h3>
+            <h3 data-i18n>Bezoek mij</h3>
             <a href="#" target="_blank" rel="noopener noreferrer">Laden...</a>
           </div>
 
           <!-- Openingstijden -->
           <div class="contact-item" data-type="hours">
             <div class="contact-icon">🕐</div>
-            <h3>Openingstijden</h3>
+            <h3 data-i18n>Openingstijden</h3>
             <div class="hours-list">
               <!-- Uren laden via JavaScript -->
             </div>
@@ -286,7 +293,7 @@
           <div class="contact-item" data-type="whatsapp">
             <div class="contact-icon">💬</div>
             <h3>WhatsApp</h3>
-            <p>Maak snel een afspraak via WhatsApp Business</p>
+            <p data-i18n>Maak snel een afspraak via WhatsApp Business</p>
             <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button" id="contact-booking" data-whatsapp>WhatsApp</a>
           </div>
 
@@ -294,8 +301,8 @@
           <div class="contact-item" data-type="map">
             <div class="contact-icon">🗺️</div>
             <h3>Google Maps</h3>
-            <p>Bekijk onze locatie en routebeschrijving</p>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button">Kaart openen</a>
+            <p data-i18n>Bekijk onze locatie en routebeschrijving</p>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button" data-i18n>Kaart openen</a>
           </div>
         </div>
       </div>
@@ -303,24 +310,24 @@
   </main>
 
   <!-- WhatsApp Floating Button -->
-  <a id="whatsapp-floating-btn" href="#" class="whatsapp-button" data-whatsapp title="WhatsApp Business" target="_blank" rel="noopener noreferrer" aria-label="Neem contact op via WhatsApp">💬</a>
+  <a id="whatsapp-floating-btn" href="#" class="whatsapp-button" data-whatsapp title="WhatsApp Business" target="_blank" rel="noopener noreferrer" data-i18n-attrs="aria-label" aria-label="Neem contact op via WhatsApp">💬</a>
 
   <!-- Behandelmandje -->
   <button id="cart-btn" class="cart-button" type="button" aria-controls="cart-panel" aria-expanded="false" hidden>
-    🛒 <span class="cart-button-label">Mandje</span> <span id="cart-count" class="cart-count">0</span>
+    🛒 <span class="cart-button-label" data-i18n>Mandje</span> <span id="cart-count" class="cart-count">0</span>
   </button>
 
   <div id="cart-panel" class="cart-panel" role="dialog" aria-modal="false" aria-labelledby="cart-title" hidden>
     <div class="cart-panel-header">
-      <h3 id="cart-title">Mijn behandelingen</h3>
-      <button type="button" class="cart-close" aria-label="Mandje sluiten">&times;</button>
+      <h3 id="cart-title" data-i18n>Mijn behandelingen</h3>
+      <button type="button" class="cart-close" data-i18n-attrs="aria-label" aria-label="Mandje sluiten">&times;</button>
     </div>
     <ul id="cart-items" class="cart-items"></ul>
     <div id="cart-extras" class="cart-extras"></div>
-    <div class="cart-total">Totaal: <strong id="cart-total">€0.00</strong></div>
-    <p class="cart-info">Dit is een afspraakverzoek, geen betaling. Emma bevestigt datum en tijd via WhatsApp.</p>
-    <a id="cart-order-btn" href="#" class="cta-button cart-order-btn" target="_blank" rel="noopener noreferrer">💬 Afspraak aanvragen via WhatsApp</a>
-    <button type="button" id="cart-clear-btn" class="cart-clear-btn">Mandje leegmaken</button>
+    <div class="cart-total"><span data-i18n>Totaal:</span> <strong id="cart-total">€0.00</strong></div>
+    <p class="cart-info" data-i18n>Dit is een afspraakverzoek, geen betaling. Emma bevestigt datum en tijd via WhatsApp.</p>
+    <a id="cart-order-btn" href="#" class="cta-button cart-order-btn" target="_blank" rel="noopener noreferrer" data-i18n>💬 Afspraak aanvragen via WhatsApp</a>
+    <button type="button" id="cart-clear-btn" class="cart-clear-btn" data-i18n>Mandje leegmaken</button>
   </div>
 
   <!-- Footer -->
@@ -329,25 +336,25 @@
       <div class="footer-content">
         <!-- Column 1: About -->
         <div class="footer-section">
-          <h4>Over ons</h4>
+          <h4 data-i18n>Over ons</h4>
           <p data-salon-name>Emma NailStudio</p>
-          <p>Professionele nagelverzorging van topkwaliteit.</p>
+          <p data-i18n>Professionele nagelverzorging van topkwaliteit.</p>
         </div>
 
         <!-- Column 2: Quick Links -->
         <div class="footer-section">
-          <h4>Snelle Links</h4>
+          <h4 data-i18n>Snelle Links</h4>
           <ul>
-            <li><a href="#services">Behandelingen</a></li>
-            <li><a href="#pricing">Prijzen</a></li>
-            <li><a href="#gallery">Galerij</a></li>
+            <li><a href="#services" data-i18n>Behandelingen</a></li>
+            <li><a href="#pricing" data-i18n>Prijzen</a></li>
+            <li><a href="#gallery" data-i18n>Galerij</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Social -->
         <div class="footer-section">
-          <h4>Volg ons</h4>
+          <h4 data-i18n>Volg ons</h4>
           <div class="social-links">
             <!-- Social links laden via JavaScript -->
           </div>
@@ -355,10 +362,10 @@
 
         <!-- Column 4: Legal -->
         <div class="footer-section">
-          <h4>Informatie</h4>
+          <h4 data-i18n>Informatie</h4>
           <ul>
             <li><a href="#privacy">Privacy</a></li>
-            <li><a href="#terms">Voorwaarden</a></li>
+            <li><a href="#terms" data-i18n>Voorwaarden</a></li>
             <li><a href="#disclaimer">Disclaimer</a></li>
           </ul>
         </div>
@@ -366,16 +373,16 @@
 
       <div class="footer-bottom">
         <p style="margin: 0;">
-          &copy; 2024 <span data-salon-name>Emma NailStudio</span>. Alle rechten voorbehouden.
+          &copy; 2024 <span data-salon-name>Emma NailStudio</span>. <span data-i18n>Alle rechten voorbehouden.</span>
         </p>
         <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">
-          Gemaakt met ❤️ door <a href="https://github.com" target="_blank" rel="noopener noreferrer">Copilot</a>
+          <span data-i18n>Gemaakt met ❤️ door</span> <a href="https://github.com" target="_blank" rel="noopener noreferrer">Copilot</a>
         </p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=7" defer></script>
+  <script src="./js/script.js?v=8" defer></script>
 </body>
 </html>

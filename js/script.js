@@ -4,6 +4,8 @@
 
 // Global state
 let appData = {
+  language: 'nl',
+  translations: null,
   settings: null,
   services: null,
   gallery: null,
@@ -20,6 +22,7 @@ let appData = {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  initializeLanguage();
   loadAppData();
   initializeAccessibility();
 });
@@ -30,6 +33,8 @@ async function loadAppData() {
     appData.settings = await fetchJSON('./data/settings.json');
     appData.services = await fetchJSON('./data/services.json');
     appData.gallery = await fetchJSON('./data/gallery.json');
+    appData.translations = await fetchJSON('./data/translations.json');
+    translatePage();
 
     // Initialize components
     initializeHeader();
@@ -37,6 +42,7 @@ async function loadAppData() {
     initializeServices();
     initializePricing();
     initializeGallery();
+    initializeGalleryModal();
     initializeAbout();
     initializeContact();
     initializeFooter();
@@ -51,17 +57,102 @@ async function loadAppData() {
     initializeCategoriesScrollSpy();
     initializeServiceSearch();
     initializeCart();
+    document.getElementById('language-select').disabled = false;
 
     console.log('✓ EmStudio website loaded successfully');
   } catch (error) {
     console.error('Error loading app data:', error);
-    showErrorMessage('Er is een fout opgetreden bij het laden van de website.');
+    showErrorMessage(appData.language === 'en'
+      ? 'An error occurred while loading the website.'
+      : 'Er is een fout opgetreden bij het laden van de website.');
   }
 }
 
 // ============================================
 // Utility Functions
 // ============================================
+
+const pageTranslations = [];
+const missingTranslations = new Set();
+
+function t(text, values = {}, language = appData.language) {
+  let translated = text;
+  if (language === 'en' && text && appData.translations) {
+    if (Object.hasOwn(appData.translations.en, text)) {
+      translated = appData.translations.en[text];
+    } else if (!missingTranslations.has(text)) {
+      console.warn(`Missing English translation: ${text}`);
+      missingTranslations.add(text);
+    }
+  }
+  return translated.replace(/\{(\w+)\}/g, (match, key) =>
+    Object.hasOwn(values, key) ? String(values[key]) : match);
+}
+
+function localizeContent(item, language = appData.language) {
+  const localized = { ...item };
+  ['name', 'description', 'duration', 'category', 'note', 'title', 'alt', 'caption'].forEach((key) => {
+    if (typeof item[key] === 'string') localized[key] = t(item[key], {}, language);
+  });
+  return localized;
+}
+
+function initializeLanguage() {
+  try {
+    appData.language = localStorage.getItem('language') === 'en' ? 'en' : 'nl';
+  } catch (error) {
+    console.warn('Could not read language preference:', error);
+  }
+
+  document.querySelectorAll('[data-i18n], [data-i18n-attrs]').forEach((element) => {
+    if (element.hasAttribute('data-i18n')) {
+      pageTranslations.push({ element, text: element.textContent.replace(/\s+/g, ' ').trim() });
+    }
+    (element.dataset.i18nAttrs || '').split(',').filter(Boolean).forEach((attribute) => {
+      pageTranslations.push({ element, attribute, text: element.getAttribute(attribute) });
+    });
+  });
+  pageTranslations.push({ element: document.querySelector('title'), text: document.title });
+  const description = document.querySelector('meta[name="description"]');
+  pageTranslations.push({ element: description, attribute: 'content', text: description.content });
+
+  const select = document.getElementById('language-select');
+  select.value = appData.language;
+  select.addEventListener('change', () => {
+    appData.language = select.value;
+    translatePage();
+    initializeHero();
+    initializeServices();
+    initializePricing();
+    initializeGallery();
+    updateGalleryModal();
+    initializeAbout();
+    initializeContact();
+    initializeCategoriesNav();
+    setupCategoryLinks();
+    setActiveCategory(appData.activeCategory);
+    applyServiceFilters();
+    renderCart();
+    try {
+      localStorage.setItem('language', appData.language);
+    } catch (error) {
+      console.warn('Could not save language preference:', error);
+      showErrorMessage(t('Taalvoorkeur kon niet worden opgeslagen.'));
+    }
+    announceToScreenReader(t('Taal gewijzigd naar Nederlands'));
+  });
+}
+
+function translatePage() {
+  document.documentElement.lang = appData.language;
+  pageTranslations.forEach(({ element, attribute, text }) => {
+    if (attribute) element.setAttribute(attribute, t(text));
+    else element.textContent = t(text);
+  });
+  const interior = document.querySelector('.about-image img');
+  const label = t('Salon Interieur');
+  interior.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`)}`;
+}
 
 async function fetchJSON(url) {
   try {
@@ -156,7 +247,7 @@ function initializeAccessibility() {
   // Announce to screen readers
   accessibilityToggle.addEventListener('click', function() {
     const isActive = this.classList.contains('active');
-    const message = isActive ? 'Grijswaarden modus ingeschakeld' : 'Grijswaarden modus uitgeschakeld';
+    const message = t(isActive ? 'Grijswaarden modus ingeschakeld' : 'Grijswaarden modus uitgeschakeld');
     announceToScreenReader(message);
   });
 }
@@ -188,15 +279,15 @@ function initializeHero() {
   const heroDesc = heroSection.querySelector('.hero-description');
 
   if (heroTitle) {
-    heroTitle.textContent = `Welkom bij ${appData.settings.salon.name}`;
+    heroTitle.textContent = t('Welkom bij {name}', { name: appData.settings.salon.name });
   }
 
   if (heroTagline) {
-    heroTagline.textContent = appData.settings.salon.tagline;
+    heroTagline.textContent = t(appData.settings.salon.tagline);
   }
 
   if (heroDesc) {
-    heroDesc.textContent = appData.settings.salon.description;
+    heroDesc.textContent = t(appData.settings.salon.description);
   }
 
   heroSection.querySelectorAll('[data-social]').forEach((link) => {
@@ -212,7 +303,7 @@ function initializeHero() {
 
   // Setup WhatsApp button in hero
   setupWhatsAppButton(
-    heroSection.querySelector('.hero-buttons a[href*="whatsapp"]')
+    heroSection.querySelector('[data-whatsapp]')
   );
 }
 
@@ -239,13 +330,17 @@ function createServiceCard(service) {
   card.className = 'service-card';
   card.setAttribute('data-category', service.category);
   card.setAttribute('data-id', service.id);
-  card.setAttribute('data-search', normalizeSearchText(`${service.name} ${service.category} ${service.description}`));
+  const english = localizeContent(service, 'en');
+  card.setAttribute('data-search', normalizeSearchText(
+    `${service.name} ${service.category} ${service.description} ${english.name} ${english.category} ${english.description}`
+  ));
+  service = localizeContent(service);
 
   let serviceImage = '';
   if (service.image) {
     serviceImage = `<img src="${escapeHtml(service.image)}" alt="${escapeHtml(service.name)}" loading="lazy">`;
   } else {
-    serviceImage = `<p style="margin:0;">Afbeelding beschikbaar</p>`;
+    serviceImage = `<p style="margin:0;">${escapeHtml(t('Afbeelding beschikbaar'))}</p>`;
   }
 
   let noteHtml = '';
@@ -268,7 +363,7 @@ function createServiceCard(service) {
           ${noteHtml}
         </div>
       </div>
-      <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">+ dit wil ik</button>
+      <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>
     </div>
   `;
 
@@ -289,6 +384,7 @@ function initializePricing() {
 
   // Add services
   appData.services.services.forEach((service) => {
+    service = localizeContent(service);
     const row = document.createElement('tr');
     row.innerHTML = `
       <td><strong>${escapeHtml(service.name)}</strong></td>
@@ -302,11 +398,12 @@ function initializePricing() {
   if (appData.services.extras && appData.services.extras.length > 0) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `
-      <td colspan="3" style="background: #f5f0eb; font-weight: 600; padding: 1rem;">Optionele toeslagen</td>
+      <td colspan="3" style="background: #f5f0eb; font-weight: 600; padding: 1rem;">${escapeHtml(t('Optionele toeslagen'))}</td>
     `;
     tableBody.appendChild(headerRow);
 
     appData.services.extras.forEach((extra) => {
+      extra = localizeContent(extra);
       const row = document.createElement('tr');
       const priceSign = extra.price < 0 ? '-' : '+';
       const priceClass = extra.price < 0 ? 'discount' : 'price';
@@ -334,12 +431,13 @@ function initializeGallery() {
 
   appData.gallery.images.forEach((image, index) => {
     const photoCount = getAlbumPhotos(image).filter((p) => !p.isExample).length;
+    image = localizeContent(image);
 
     const item = document.createElement('div');
     item.className = 'gallery-item';
     item.setAttribute('role', 'button');
     item.setAttribute('tabindex', '0');
-    item.setAttribute('aria-label', `${image.title} - bekijk album`);
+    item.setAttribute('aria-label', t('{title} - bekijk album', { title: image.title }));
     item.onclick = (e) => {
       e.preventDefault();
       openGalleryModal(index);
@@ -357,8 +455,8 @@ function initializeGallery() {
     img.loading = 'lazy';
 
     const badgeText = photoCount > 0
-      ? `📷 ${photoCount} foto${photoCount === 1 ? '' : "'s"} van klanten`
-      : '📷 Voorbeeldfoto';
+      ? t(photoCount === 1 ? '📷 {count} klantfoto' : "📷 {count} klantfoto's", { count: photoCount })
+      : t('📷 Voorbeeldfoto');
 
     const overlay = document.createElement('div');
     overlay.className = 'gallery-overlay';
@@ -372,9 +470,6 @@ function initializeGallery() {
     item.appendChild(overlay);
     galleryGrid.appendChild(item);
   });
-
-  // Initialize modal
-  initializeGalleryModal();
 }
 
 function initializeGalleryModal() {
@@ -486,9 +581,10 @@ function navigateGallery(direction) {
 function updateGalleryModal() {
   if (!appData.gallery) return;
 
-  const item = appData.gallery.images[appData.currentGalleryIndex];
-  const album = getAlbumPhotos(item);
-  const photo = album[appData.currentPhotoIndex] || album[0];
+  const original = appData.gallery.images[appData.currentGalleryIndex];
+  const item = localizeContent(original);
+  const album = getAlbumPhotos(original);
+  const photo = localizeContent(album[appData.currentPhotoIndex] || album[0]);
   const modalImage = document.querySelector('.modal-image');
   const modalTitle = document.querySelector('.modal-info h3');
   const modalDesc = document.querySelector('.modal-info p');
@@ -513,7 +609,9 @@ function updateGalleryModal() {
 
   const counter = document.querySelector('.modal-counter');
   if (counter) {
-    counter.textContent = hasMultiple ? `Foto ${appData.currentPhotoIndex + 1} van ${album.length}` : '';
+    counter.textContent = hasMultiple
+      ? t('Foto {current} van {total}', { current: appData.currentPhotoIndex + 1, total: album.length })
+      : '';
   }
 }
 
@@ -531,7 +629,7 @@ function initializeAbout() {
   if (aboutText) {
     const descParagraph = aboutText.querySelector('p');
     if (descParagraph) {
-      descParagraph.textContent = appData.settings.salon.description;
+      descParagraph.textContent = t(appData.settings.salon.description);
     }
   }
 }
@@ -609,8 +707,8 @@ function initializeContact() {
       if (hours) {
         const div = document.createElement('div');
         div.innerHTML = `
-          <span class="day">${dayNames[index]}</span>
-          <span class="time">${escapeHtml(hours)}</span>
+          <span class="day">${escapeHtml(t(dayNames[index]))}</span>
+          <span class="time">${escapeHtml(hours === 'Gesloten' ? t(hours) : hours)}</span>
         `;
         hoursContainer.appendChild(div);
       }
@@ -634,19 +732,26 @@ function buildWhatsAppUrl() {
 // Uses the cart contents when the visitor selected treatments, otherwise the default message
 function buildWhatsAppMessage() {
   const items = getCartServices();
-  if (items.length === 0) return appData.settings.contact.whatsapp.message;
+  if (items.length === 0) return t(appData.settings.contact.whatsapp.message);
 
-  const lines = [`Hallo ${appData.settings.salon.name}, ik wil graag een afspraak maken voor:`];
-  items.forEach((s) => {
-    lines.push(`- ${s.name} (${formatPrice(s.price)}, ${s.duration})`);
-  });
-  getActiveCartExtras().forEach((e) => {
-    lines.push(`- Toeslag: ${e.name} (+${formatPrice(e.price)})`);
-  });
-  lines.push(`Totaal: ${formatPrice(getCartTotal())}`);
-  lines.push('');
-  lines.push('Mijn voorkeur voor datum en tijd: ');
-  return lines.join('\n');
+  return ['en', 'nl'].map((language) => {
+    const lines = [
+      language === 'en' ? 'English' : 'Nederlands',
+      t('Hallo {name}, ik wil graag een afspraak maken voor:', { name: appData.settings.salon.name }, language)
+    ];
+    items.forEach((item) => {
+      const service = localizeContent(item, language);
+      lines.push(`- ${service.name} (${formatPrice(service.price)}, ${service.duration})`);
+    });
+    getActiveCartExtras().forEach((item) => {
+      const extra = localizeContent(item, language);
+      lines.push(`- ${t('Toeslag:', {}, language)} ${extra.name} (+${formatPrice(extra.price)})`);
+    });
+    lines.push(`${t('Totaal:', {}, language)} ${formatPrice(getCartTotal())}`);
+    lines.push('');
+    lines.push(t('Mijn voorkeur voor datum en tijd:', {}, language));
+    return lines.join('\n');
+  }).join('\n\n---\n\n');
 }
 
 // ============================================
@@ -693,6 +798,10 @@ function initializeFooter() {
         a.rel = 'noopener noreferrer';
         a.title = link.name;
         a.textContent = link.icon;
+        if (link.name === 'WhatsApp') {
+          a.setAttribute('data-whatsapp', '');
+          setupWhatsAppButton(a);
+        }
         socialLinks.appendChild(a);
       }
     });
@@ -910,7 +1019,7 @@ function initializeCategoriesNav() {
   const allItem = document.createElement('li');
   allItem.innerHTML = `
     <a href="#" class="category-link active" data-category="all">
-      ✨ Alle behandelingen
+      ${escapeHtml(t('✨ Alle behandelingen'))}
     </a>
   `;
   categoriesList.appendChild(allItem);
@@ -920,7 +1029,7 @@ function initializeCategoriesNav() {
     const li = document.createElement('li');
     li.innerHTML = `
       <a href="#" class="category-link" data-category="${escapeHtml(category)}">
-        ${escapeHtml(category)}
+        ${escapeHtml(t(category))}
       </a>
     `;
     categoriesList.appendChild(li);
@@ -1120,20 +1229,22 @@ function toggleCartItem(id) {
 }
 
 function renderCart() {
-  const services = getCartServices();
+  const services = getCartServices().map((service) => localizeContent(service));
   const count = services.length;
 
   document.querySelectorAll('.add-to-cart-btn').forEach((btn) => {
     const inCart = appData.cart.includes(btn.getAttribute('data-id'));
     btn.classList.toggle('in-cart', inCart);
     btn.setAttribute('aria-pressed', String(inCart));
-    btn.textContent = inCart ? '✓ In mandje' : '+ dit wil ik';
+    btn.textContent = t(inCart ? '✓ In mandje' : '+ dit wil ik');
   });
 
   const cartBtn = document.getElementById('cart-btn');
   if (cartBtn) {
     cartBtn.hidden = count === 0;
-    cartBtn.setAttribute('aria-label', `Mandje met ${count} behandeling${count === 1 ? '' : 'en'} openen`);
+    cartBtn.setAttribute('aria-label', t(count === 1
+      ? 'Mandje met {count} behandeling openen'
+      : 'Mandje met {count} behandelingen openen', { count }));
     document.getElementById('cart-count').textContent = String(count);
   }
 
@@ -1143,7 +1254,7 @@ function renderCart() {
       <li>
         <span class="cart-item-name">${escapeHtml(s.name)}<small>${escapeHtml(s.duration)}</small></span>
         <span class="cart-item-price">${formatPrice(s.price)}</span>
-        <button type="button" class="cart-remove" data-id="${escapeHtml(s.id)}" aria-label="${escapeHtml(s.name)} verwijderen">&times;</button>
+        <button type="button" class="cart-remove" data-id="${escapeHtml(s.id)}" aria-label="${escapeHtml(t('{name} verwijderen', { name: s.name }))}">&times;</button>
       </li>
     `).join('');
   }
@@ -1151,12 +1262,15 @@ function renderCart() {
   const extrasBox = document.getElementById('cart-extras');
   if (extrasBox) {
     const extras = cartAllowsExtras() && appData.services.extras ? appData.services.extras : [];
-    extrasBox.innerHTML = extras.map((e) => `
+    extrasBox.innerHTML = extras.map((extra) => {
+      const e = localizeContent(extra);
+      return `
       <label>
         <input type="checkbox" value="${escapeHtml(e.id)}" ${appData.cartExtras.includes(e.id) ? 'checked' : ''}>
         <span>${escapeHtml(e.name)} (+${formatPrice(e.price)})<small>${escapeHtml(e.description)}</small></span>
       </label>
-    `).join('');
+    `;
+    }).join('');
   }
 
   const total = document.getElementById('cart-total');

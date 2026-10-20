@@ -43,7 +43,8 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 **Pagina van boven naar beneden:**
 
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Behandelingen, Prijzen, Galerij, Contact,
-   **Afspraak maken**), en de knoppen 👁️ grijswaarden, **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
+   **Afspraak maken**), taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
+   **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
    Op mobiel (≤ 768 px) wordt het menu een ☰ hamburger.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
@@ -67,6 +68,8 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
   Een tip bovenaan en bij Impressie verwijst naar het foto-icoontje 🖼️ rechtsboven om foto's te tonen.
   De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
 - Lettergrootte **A**, kleur aan (geen grijswaarden).
+- Taal **Nederlands**; bezoekers kunnen **English** kiezen. De taal wordt onthouden (localStorage `language`).
+  Omschakelen behoudt het mandje, toeslagen, zoekopdracht, categoriefilter en toegankelijkheidsvoorkeuren.
 
 **Afspraken gaan via WhatsApp** (+31 6 4571 5179). Er is geen e-mail of online agenda: *Afspraak maken*,
 de hero-knop, de contactknop en de zwevende knop openen allemaal WhatsApp met een voorbereid bericht.
@@ -77,6 +80,17 @@ vinkje *Verwijderen oude lak/gellak +€5*. *Afspraak aanvragen via WhatsApp* op
 ingevuld bericht, bijvoorbeeld:
 
 ```
+English
+Hello Emma NailStudio, I would like to book an appointment for:
+- New Nail Set (€40.00, 60 minutes)
+- Surcharge: Remove old nail polish/gel polish (+€5.00)
+Total: €45.00
+
+My preferred date and time:
+
+---
+
+Nederlands
 Hallo Emma NailStudio, ik wil graag een afspraak maken voor:
 - New Set Nagels (€40.00, 60 minuten)
 - Toeslag: Verwijderen oude lak/gellak (+€5.00)
@@ -88,10 +102,31 @@ Mijn voorkeur voor datum en tijd:
 Zolang er iets in het mandje zit, sturen ook alle andere WhatsApp-knoppen dit bericht. Het is een
 afspraakverzoek, geen betaling; Emma bevestigt via WhatsApp. Het mandje wordt in de browser onthouden
 (localStorage `cart` en `cartExtras`).
+Het mandjebericht is **altijd eerst Engels en daarna Nederlands**, ongeacht de gekozen sitetaal.
+Zonder behandelingen gebruikt WhatsApp het korte standaardbericht in de gekozen taal.
+
+### Vertalingen beheren
+
+De Nederlandse teksten blijven in `index.html` en de bestaande JSON-bestanden staan.
+`data/translations.json` bevat onder `en` de Engelse vertalingen, met de **exacte Nederlandse tekst**
+als sleutel. Bij nieuwe of gewijzigde teksten voeg je daar ook de Engelse vertaling toe:
+
+```json
+"Verwijderen oude lak/gellak": "Remove old nail polish/gel polish"
+```
+
+Dit geldt ook voor namen, omschrijvingen, duur, categorieën, notities, galerijtitels, alt-teksten en
+foto-onderschriften. Bij HTML-teksten worden witruimte en regeleinden samengevoegd tot enkele spaties.
+Markeer nieuwe vaste teksten met `data-i18n`; vertaal attributen met bijvoorbeeld
+`data-i18n-attrs="aria-label,title"`. Ontbrekende vertalingen geven een waarschuwing in de browserconsole
+en tonen voorlopig de Nederlandse tekst. Controleer dus altijd beide talen na inhoudswijzigingen.
+Prijzen, foto's en behandel-ID's worden gedeeld en hoeven niet vertaald te worden.
+Zoeken werkt op zowel Nederlandse als Engelse behandelteksten, in beide talen.
 
 ## ✨ Functies
 
 - ✅ Volledig statisch, geen backend of build-stap
+- ✅ Nederlands/Engels met onthouden taalkeuze en tweetalige WhatsApp-mandjeberichten
 - ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
 - ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
 - ✅ Categoriefilter en zoekbalk voor behandelingen
@@ -113,6 +148,7 @@ EmStudio/
 │   ├── settings.json          # Salon, contact, WhatsApp, openingstijden, social
 │   ├── services.json          # 27 behandelingen + "extras" (toeslagen)
 │   ├── gallery.json           # 6 Impressie-tegels + albums ("folder", "photos")
+│   ├── translations.json      # Engelse vertalingen van Nederlandse teksten
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
@@ -135,6 +171,7 @@ EmStudio/
 |---|---|---|
 | Prijzen, behandelingen, toeslagen | `data/services.json` | [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) |
 | Contact, WhatsApp, openingstijden, social | `data/settings.json` | hieronder |
+| Engelse teksten | `data/translations.json` | Zie "Vertalingen beheren" hierboven |
 | Impressie-tegels en albums | `data/gallery.json` + `images/gallery/` | [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
 | Teksten hero/over ons, SEO | `index.html` | |
 | Kleuren en opmaak | `css/style.css` | |
@@ -211,7 +248,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=7`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=8`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
