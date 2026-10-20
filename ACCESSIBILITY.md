@@ -42,7 +42,7 @@ Rechtsboven staan de knoppen **A– · A · A+ · A++**.
 - Zoekveld onder "Categorieën" met label voor schermlezers; zoekt live, Enter sluit het toetsenbord
 - Geen resultaten → melding "Geen behandelingen gevonden" (wordt voorgelezen, `role="status"`)
 - Zoekveld heeft minimaal 16 px tekst, zodat iPhone niet inzoomt bij het typen
-- Knop *+ In mandje* geeft met `aria-pressed` aan of de behandeling gekozen is
+- Knop *+ dit wil ik* geeft met `aria-pressed` aan of de behandeling gekozen is
 - Mandje opent als paneel; **Esc** of × sluit het, de focus gaat terug naar de mandjeknop
 
 ---
@@ -50,6 +50,8 @@ Rechtsboven staan de knoppen **A– · A · A+ · A++**.
 ## 🖼️ Foto's tonen/verbergen
 
 De knop **🖼️** rechtsboven zet alle foto's op de kaarten en onder Impressie aan of uit.
+Een tip bovenaan en bij Impressie wijst op deze knop zolang foto's verborgen zijn.
+De knop geeft met `aria-pressed` aan of foto's zichtbaar zijn.
 - **Nieuwe bezoekers zien standaard géén foto's**: de pagina is rustiger en laadt sneller
 - Bij verborgen foto's tonen de Impressie-tegels de titel en omschrijving van de stijl
 - De keuze wordt onthouden (localStorage `imagesHidden`)

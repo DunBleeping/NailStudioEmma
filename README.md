@@ -45,11 +45,12 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Behandelingen, Prijzen, Galerij, Contact,
    **Afspraak maken**), en de knoppen 👁️ grijswaarden, **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
    Op mobiel (≤ 768 px) wordt het menu een ☰ hamburger.
-2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen* en *📱 WhatsApp*, groot logo.
+2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
+   *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
 3. **Onze Behandelingen** – onder "Categorieën" een **zoekbalk** (zoekt live in naam, categorie en
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
    en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
-   knop **+ In mandje**).
+   knop **+ dit wil ik**, onderaan de kaart en op gelijke hoogte binnen elke rij).
 4. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Optionele toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set).
 5. **Impressie** – 6 tegels met een stijl (Klassieke Rode Nagels, BIAB Nude, Floral Nail Art,
@@ -63,13 +64,14 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 
 **Standaardinstellingen voor nieuwe bezoekers:**
 - **Foto's verborgen** – rustiger en sneller; tegels onder Impressie tonen dan titel + omschrijving.
-  De bezoeker kan ze met 🖼️ aanzetten; de keuze wordt onthouden.
+  Een tip bovenaan en bij Impressie verwijst naar het foto-icoontje 🖼️ rechtsboven om foto's te tonen.
+  De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
 - Lettergrootte **A**, kleur aan (geen grijswaarden).
 
 **Afspraken gaan via WhatsApp** (+31 6 4571 5179). Er is geen e-mail of online agenda: *Afspraak maken*,
 de hero-knop, de contactknop en de zwevende knop openen allemaal WhatsApp met een voorbereid bericht.
 
-**Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ In mandje* in het mandje. In het
+**Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ dit wil ik* in het mandje. In het
 mandje staan de gekozen behandelingen met duur en prijs, het totaal en (alleen bij een nieuwe set) het
 vinkje *Verwijderen oude lak/gellak +€5*. *Afspraak aanvragen via WhatsApp* opent WhatsApp met een
 ingevuld bericht, bijvoorbeeld:
@@ -151,10 +153,13 @@ EmStudio/
   }
 },
 "hours": { "monday": "10:00 - 18:00", "...": "...", "sunday": "Gesloten" },
-"social": { "instagram": "...", "facebook": "...", "whatsappBusiness": "https://wa.me/31645715179" }
+"social": { "instagram": "", "facebook": "https://EmmaNagelStudio.vip/", "googleSearch": "https://www.google.com/search?q=Emma+NailStudio+Purmerend", "whatsappBusiness": "https://wa.me/31645715179" }
 ```
 
 WhatsApp-nummer altijd internationaal en zonder spaties (`+31645715179`).
+De extra hero-knoppen gebruiken `social.instagram`, `social.facebook` en `social.googleSearch`.
+Vul later de Instagram-profiel-URL in om die knop te activeren. De Facebook-knop verwijst voorlopig
+naar de opgegeven eigen website; vervang deze URL door de Facebook-pagina zodra die beschikbaar is.
 
 ## 📸 Foto's beheren
 
@@ -206,7 +211,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=6`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=7`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

@@ -179,7 +179,7 @@ function announceToScreenReader(message) {
 function initializeHero() {
   if (!appData.settings) return;
 
-  const heroSection = document.getElementById('hero');
+  const heroSection = document.getElementById('home');
   if (!heroSection) return;
 
   // Update hero title and tagline
@@ -198,6 +198,17 @@ function initializeHero() {
   if (heroDesc) {
     heroDesc.textContent = appData.settings.salon.description;
   }
+
+  heroSection.querySelectorAll('[data-social]').forEach((link) => {
+    const url = appData.settings.social[link.dataset.social];
+    if (url) {
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.removeAttribute('aria-disabled');
+      if (link.dataset.social === 'instagram') link.textContent = 'Instagram';
+    }
+  });
 
   // Setup WhatsApp button in hero
   setupWhatsAppButton(
@@ -257,7 +268,7 @@ function createServiceCard(service) {
           ${noteHtml}
         </div>
       </div>
-      <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">+ In mandje</button>
+      <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">+ dit wil ik</button>
     </div>
   `;
 
@@ -870,12 +881,14 @@ function initializeToggleImages() {
   document.body.classList.toggle('images-hidden', savedImageState);
   if (toggleImagesBtn) {
     toggleImagesBtn.classList.toggle('images-hidden', savedImageState);
+    toggleImagesBtn.setAttribute('aria-pressed', String(!savedImageState));
   }
 
   if (toggleImagesBtn) {
     toggleImagesBtn.addEventListener('click', () => {
       const isHidden = document.body.classList.toggle('images-hidden');
       toggleImagesBtn.classList.toggle('images-hidden');
+      toggleImagesBtn.setAttribute('aria-pressed', String(!isHidden));
       localStorage.setItem('imagesHidden', isHidden);
     });
   }
@@ -1114,7 +1127,7 @@ function renderCart() {
     const inCart = appData.cart.includes(btn.getAttribute('data-id'));
     btn.classList.toggle('in-cart', inCart);
     btn.setAttribute('aria-pressed', String(inCart));
-    btn.textContent = inCart ? '✓ In mandje' : '+ In mandje';
+    btn.textContent = inCart ? '✓ In mandje' : '+ dit wil ik';
   });
 
   const cartBtn = document.getElementById('cart-btn');

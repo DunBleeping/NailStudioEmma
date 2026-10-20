@@ -393,22 +393,48 @@ body.grayscale .accessibility-toggle {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: stretch;
 }
 
-.hero-buttons .cta-button {
+.hero-buttons .cta-button,
+.hero-buttons .secondary-button {
   padding: 1rem 2rem;
   font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .hero-buttons .secondary-button {
   background: transparent;
   color: var(--text);
   border: 2px solid var(--primary);
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.hero-buttons .secondary-button:hover {
+.hero-buttons .secondary-button[href]:hover {
   background: var(--primary);
   color: var(--white);
+}
+
+.hero-buttons .secondary-button[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.photo-tip {
+  padding: 1rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 5px;
+  background: var(--secondary);
+  color: var(--text);
+}
+
+body:not(.images-hidden) .photo-tip {
+  display: none;
 }
 
 .hero-image {
@@ -496,6 +522,8 @@ body.grayscale .accessibility-toggle {
 }
 
 .service-card {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border-radius: 10px;
   overflow: hidden;
@@ -511,6 +539,7 @@ body.grayscale .accessibility-toggle {
 }
 
 .service-image {
+  flex-shrink: 0;
   width: 100%;
   height: 200px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -530,7 +559,15 @@ body.grayscale .accessibility-toggle {
 }
 
 .service-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
   padding: 1.5rem;
+}
+
+.service-content .add-to-cart-btn {
+  margin-top: auto;
 }
 
 .service-category {
@@ -559,7 +596,7 @@ body.grayscale .accessibility-toggle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 0 0 0;
+  margin: 1rem 0;
   font-size: 0.9rem;
   color: var(--light-text);
 }
