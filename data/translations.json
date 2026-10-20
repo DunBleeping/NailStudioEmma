@@ -81,6 +81,8 @@
     "Mijn behandelingen": "My treatments",
     "Mandje sluiten": "Close basket",
     "Totaal:": "Total:",
+    "Totale behandeltijd: {minutes} minuten (indicatie)": "Total treatment time: {minutes} minutes (estimate)",
+    "Dit is een indicatie van de tijd voor alle gekozen behandelingen samen. De werkelijke duur kan afwijken.": "This is an estimate of the combined time for all selected treatments. The actual duration may vary.",
     "Dit is een afspraakverzoek, geen betaling. Emma bevestigt datum en tijd via WhatsApp of SMS.": "This is an appointment request, not a payment. Emma will confirm the date and time via WhatsApp or SMS.",
     "💬 Afspraak aanvragen via WhatsApp": "💬 Request an appointment via WhatsApp",
     "Afspraak aanvragen via SMS": "Request an appointment via SMS",

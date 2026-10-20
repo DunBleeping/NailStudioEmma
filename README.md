@@ -81,6 +81,11 @@ De extra SMS-optie staat uitsluitend in het mandje en gebruikt hetzelfde nummer 
 **Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ dit wil ik* in het mandje. In het
 mandje staan de gekozen behandelingen met duur en prijs, het totaal en (alleen bij een nieuwe set) het
 vinkje *Verwijderen oude lak/gellak +€5*.
+Het mandje toont ook de **opgetelde behandeltijd in minuten**, met uitleg dat dit een indicatie
+voor alle gekozen behandelingen samen is en de werkelijke duur kan afwijken. Bij een behandeling
+met `60+ minuten` blijft het plusteken in de totaaltijd staan (bijvoorbeeld `90+ minuten`).
+De tijd wordt bij elke keuze en taalwissel bijgewerkt. Toeslagen zonder opgegeven duur tellen niet
+mee in deze tijdindicatie; de bestaande individuele tijden in WhatsApp/SMS blijven ongewijzigd.
 
 Bij een nieuwe set is deze optie **standaard aangevinkt**. Als er nog oude lak/gellak op de nagels zit,
 is verwijderen verplicht. Klanten mogen uitvinken als verwijderen niet nodig is. Die keuze blijft
@@ -268,7 +273,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=12`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=13`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

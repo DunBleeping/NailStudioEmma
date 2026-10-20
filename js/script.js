@@ -1167,6 +1167,19 @@ function getCartTotal() {
   return services + extras;
 }
 
+function getCartDuration() {
+  return getCartServices().reduce((total, service) => {
+    const duration = /^(\d+)(\+)? minuten$/.exec(service.duration);
+    if (!duration) {
+      throw new Error(`Invalid treatment duration for ${service.id}: ${service.duration}`);
+    }
+    return {
+      minutes: total.minutes + Number(duration[1]),
+      hasMinimum: total.hasMinimum || Boolean(duration[2])
+    };
+  }, { minutes: 0, hasMinimum: false });
+}
+
 function saveCart() {
   try {
     localStorage.setItem('cart', JSON.stringify(appData.cart));
@@ -1308,6 +1321,14 @@ function renderCart() {
 
   const total = document.getElementById('cart-total');
   if (total) total.textContent = formatPrice(getCartTotal());
+
+  const durationTotal = document.getElementById('cart-duration');
+  if (durationTotal) {
+    const duration = getCartDuration();
+    durationTotal.textContent = t('Totale behandeltijd: {minutes} minuten (indicatie)', {
+      minutes: `${duration.minutes}${duration.hasMinimum ? '+' : ''}`
+    });
+  }
 
   const panel = document.getElementById('cart-panel');
   if (panel && count === 0) setCartPanelOpen(false);
