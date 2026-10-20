@@ -1,277 +1,118 @@
-# Quick Reference Guide - Emma NailStudio Website
+# Quick Reference - Emma NailStudio Website
 
-## ⚠️ BELANGRIJK: GEEN INSTALLATIE NODIG!
+**Live:** https://emmanagelstudio.vip · **GitHub:** DunBleeping/NailStudioEmma (`main`) · **Hosting:** Cloudflare Pages
 
-Deze website is **100% statisch**. Er hoeft niets op uw computer geïnstalleerd te worden.
-
-**Hoe wordt het gehoost?**
-- Cloudflare Pages (gratis) - GEEN installatie
-- Strato.nl - GEEN installatie
-- Google - GEEN installatie
-- Alle hosts hosten deze bestanden gewoon van de schijf!
+Volledige uitleg: [README.md](README.md)
 
 ---
 
-## 🚀 Quick Start
+## 🔁 Werkwijze bij elke wijziging
 
-### Lokaal Testen (OPTIONEEL - voor development)
-```bash
-cd C:\MyDocs\DEVOPS\EmStudio
-python -m http.server 8000
-# Open: http://localhost:8000
-```
-
-**MAAR:** Dit is ALLEEN voor testen terwijl u aanpassingen maakt.
-Voor normaal hosten (Cloudflare/Strato/Google) is GEEN HTTP server nodig!
-
-### Configuratie Wijzigen
-- `data/settings.json` → Salon info, contact, WhatsApp, social media
-- `data/services.json` → Behandelingen & prijzen  
-- `data/gallery.json` → Galerij foto's
-
-💡 **Alle wijzigingen verschijnen automatisch op de website!**
+1. Bestand aanpassen en opslaan
+2. Lokaal testen (optioneel):
+   ```bash
+   cd C:\MyDocs\DEVOPS\EmStudio
+   python -m http.server 8000      # open http://localhost:8000, Ctrl+F5
+   ```
+3. Commit + push (terminal of GitKraken):
+   ```bash
+   git add -A
+   git commit -m "Wat er gewijzigd is"
+   git push
+   ```
+4. Na ±1 minuut live op https://emmanagelstudio.vip
 
 ---
 
-## 📝 Veelgestelde Wijzigingen
+## 📝 Waar pas ik wat aan?
 
-### 1. WhatsApp Nummer Updaten
-**Bestand:** `data/settings.json`
-```json
-"whatsapp": {
-  "number": "+31612345678",  // ← WIJZIG HIER
-  "message": "Hallo Emma..."
-}
-```
-
-### 2. Openingstijden Wijzigen
-**Bestand:** `data/settings.json`
-```json
-"hours": {
-  "monday": "10:00 - 18:00",  // ← WIJZIG HIER
-  "tuesday": "10:00 - 18:00",
-  // ... etc
-}
-```
-
-### 3. Prijs Wijzigen
-**Bestand:** `data/services.json`
-```json
-{
-  "name": "Gellak",
-  "price": 35,  // ← WIJZIG HIER (in EUR)
-  "duration": "45 minuten"
-}
-```
-
-### 4. Behandeling Toevoegen
-**Bestand:** `data/services.json`
-```json
-{
-  "id": "unique-id",
-  "name": "Behandeling Naam",
-  "category": "Nagels",
-  "description": "Beschrijving",
-  "price": 50,
-  "duration": "60 minuten",
-  "image": "./images/gallery/naam.jpg"
-}
-```
-
-### 5. Foto's Toevoegen Galerij
-**Bestand:** `data/gallery.json`
-```json
-{
-  "id": "gallery-7",
-  "title": "Foto Titel",
-  "description": "Beschrijving",
-  "src": "./images/gallery/jouw-foto.jpg",  // ← WIJZIG HIER
-  "alt": "Beschrijvende alt-tekst",
-  "category": "gellak"
-}
-```
+| Wat | Bestand | Let op |
+|---|---|---|
+| Prijs / behandeling / duur | `data/services.json` | ook `data/Prijzenlijst.csv` bijwerken – zie [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) |
+| Toeslag (bijv. verwijderen oude lak +€5) | `data/services.json` → `extras` | |
+| WhatsApp-nummer / bericht | `data/settings.json` → `contact.whatsapp` | `+31645715179`, geen spaties |
+| Telefoon, adres, Maps | `data/settings.json` → `contact` | nu nog voorbeeldwaarden |
+| Openingstijden | `data/settings.json` → `hours` | |
+| Instagram / Facebook | `data/settings.json` → `social` | |
+| Behandelingsfoto | `images/services/` + `"image"` in `services.json` | zie [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
+| Impressie-tegel | `images/gallery/nails-N.jpg` | daarna `?v=` verhogen in `gallery.json` |
+| Klantfoto's in album | `images/gallery/<album>/` | daarna `python tools/update_galerij.py` |
+| Teksten hero / over ons | `index.html` | |
+| Kleuren / opmaak | `css/style.css` (`:root`) | daarna `?v=` verhogen in `index.html` |
+| Functionaliteit | `js/script.js` | daarna `?v=` verhogen in `index.html` |
 
 ---
 
-## 📂 Bestanden Overzicht
+## 🖼️ Klantfoto's toevoegen (Impressie-albums)
 
-| Bestand | Doel | Wijzig Wanneer |
-|---------|------|---|
-| `index.html` | Website pagina | Inhoud/layout wijzigen |
-| `css/style.css` | Styling/kleuren | Design wijzigen |
-| `js/script.js` | Functionaliteit | Gedrag wijzigen |
-| `data/settings.json` | Salon info | Contact/info wijzigen |
-| `data/services.json` | Behandelingen | Prijzen/services wijzigen |
-| `data/gallery.json` | Galerij items | Foto's wijzigen |
-| `images/gallery/` | Foto's | Afbeeldingen vervangen |
+| Album | Map |
+|---|---|
+| Klassieke Rode Nagels | `images/gallery/rode-nagels/` |
+| BIAB Nude | `images/gallery/biab-nude/` |
+| Floral Nail Art | `images/gallery/floral/` |
+| Ombre Effect | `images/gallery/ombre/` |
+| Glitter Glamour | `images/gallery/glitter/` |
+| Minimalistisch Design | `images/gallery/minimalistisch/` |
+
+1. Foto's erin als `<map>-01.jpg`, `<map>-02.jpg`, ... (kleine letters, geen spaties, < 500 KB)
+2. Optioneel onderschriften in `descript.ion` in die map: `rode-nagels-01.jpg Klassiek rood op BIAB`
+3. `python tools/update_galerij.py`
+4. Commit + push
 
 ---
 
-## 🎯 Deployment Stappen (LATER!)
+## 🎛️ Standaardgedrag van de site
 
-### 1. GitHub Push (als u klaar bent)
-```bash
-cd C:\MyDocs\DEVOPS\EmStudio
-git init
-git add .
-git commit -m "Emma NailStudio website"
-git remote add origin https://github.com/username/emma-nailstudio
-git push -u origin main
-```
+- Nieuwe bezoekers: **foto's verborgen** (knop 🖼️ zet ze aan, keuze wordt onthouden)
+- **Afspraak maken** en alle WhatsApp-knoppen → WhatsApp +31 6 4571 5179 met voorbereid bericht
+- Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · 🖼️ foto's
 
-### 2. Cloudflare Pages (als u klaar bent)
-1. Login op https://dash.cloudflare.com/
-2. Pages → Create a project
-3. Connect uw GitHub repository
-4. Build command: (leeg)
-5. Output directory: /
-6. Deploy!
+---
 
-**Website URL:** https://emma-nailstudio.pages.dev
+## 🗄️ Cache & versienummers
 
-### 3. Custom Domain (optioneel)
-Update DNS nameservers naar Cloudflare
-Add custom domain in Cloudflare: `nailsalonemma.nl`
+| Gewijzigd | Actie |
+|---|---|
+| `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=5`) |
+| Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
+| Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
+
+Verwijs nooit naar een foto die nog niet bestaat (Cloudflare cachet dan 30 dagen een kapotte foto).
 
 ---
 
 ## ❓ Troubleshooting
 
-### "Foto's laden niet"
-- Check pad in JSON (bijv: `./images/gallery/foto.jpg`)
-- Zorg dat bestand bestaat in `images/gallery/`
-- Controleer bestandsnaam (case-sensitive op Linux/Cloudflare!)
-
-### "WhatsApp link werkt niet"
-- Zorg nummer begint met `+` en landcode (bijv: +31)
-- Verwijder spaties/hyphens: `+31612345678` ✓ / `+31 6 12345678` ✗
-- Test link: `https://wa.me/31612345678?text=Hallo`
-
-### "Server start niet"
-```bash
-# Controleer Python
-python --version
-
-# Als fout, probeer:
-py -3 -m http.server 8000
-
-# Of use Node:
-npx http-server -p 8000
-```
-
-### "JSON validatiefouten"
-- Controleer JSON op https://jsonlint.com/
-- Zorg geen komma's missen/overtollig
-- Quotes moeten zijn: `"string"` (niet `'string'`)
+| Probleem | Oplossing |
+|---|---|
+| Wijziging niet live | Gepusht? 1 min wachten, Ctrl+F5, `?v=` verhoogd bij CSS/JS? |
+| Foto laadt niet | Bestandsnaam exact gelijk (kleine letters!), bestand gecommit? |
+| Oude foto blijft staan | `?v=` verhogen in de JSON |
+| Prijzen/behandelingen leeg | JSON-fout → https://jsonlint.com of F12 → Console |
+| WhatsApp werkt niet | Nummer met `+31`, zonder spaties |
+| Lokaal leeg scherm | HTTP-server gebruiken, niet dubbelklikken op `index.html` |
+| Nieuwe-bezoekerweergave testen | F12 → Application → Local Storage → wissen |
 
 ---
 
-## 🔍 Testen Checklist
+## 🎨 Kleuren (`css/style.css`)
 
-Voor elke wijziging:
-- [ ] Wijziging in JSON/HTML gedaan
-- [ ] Server draait (`python -m http.server 8000`)
-- [ ] Browser vernieuwt (Ctrl+F5)
-- [ ] Wijziging zichtbaar
-- [ ] Geen console errors (F12)
-- [ ] Werkt op mobiel (DevTools)
-
----
-
-## 📊 Website Kenmerken
-
-✅ **Sectie Overzicht:**
-1. Header & Navigation
-2. Hero (intro)
-3. Services (7 behandelingen)
-4. Pricing (prijstabel)
-5. Gallery (6 foto's)
-6. About (salon info)
-7. Contact (uren, maps, WhatsApp)
-8. Footer
-
-✅ **Functies:**
-- Mobile menu ☰
-- Gallery modal viewer
-- WhatsApp buttons
-- Keyboard navigation
-- Responsive design
-- SEO optimized
-
----
-
-## 💾 Backup Maken
-
-```bash
-# Maak backup van project
-xcopy C:\MyDocs\DEVOPS\EmStudio C:\Backups\EmStudio-backup /E /I /Y
-
-# Of via Git
-git clone https://github.com/username/emma-nailstudio backup-folder
-```
-
----
-
-## 🎨 Kleurencodes (Kan wijzigen)
-
-In `data/settings.json`:
-```json
-"colors": {
-  "primary": "#d4a574",      // Goud
-  "secondary": "#f5f0eb",    // Crème
-  "accent": "#8b7355",       // Bruin
-  "text": "#333333",         // Donkergrijs
-  "lightText": "#666666"     // Grijs
-}
-```
-
-In `css/style.css`:
 ```css
 :root {
-  --primary: #d4a574;        /* Pas hier aan */
-  --secondary: #f5f0eb;
-  /* ... etc */
+  --primary: #d4a574;    /* goud */
+  --secondary: #f5f0eb;  /* crème */
+  --accent: #8b7355;     /* bruin */
+  --text: #333333;
+  --light-text: #666666;
 }
 ```
 
 ---
 
-## 📱 Mobile Testing
+## 📊 Inhoud in cijfers
 
-**In browser DevTools (F12):**
-1. Klik Device Toolbar icon (📱)
-2. Select "iPhone 12" or "Samsung Galaxy"
-3. Controleer layout
-4. Test buttons en menu
-
-**Op echte telefoon:**
-1. Zorg server draait
-2. Vind je IP: `ipconfig`
-3. Bezoek: `http://YOUR-IP:8000`
-
----
-
-## 🔒 Security Checklist
-
-- ✅ Geen wachtwoorden in code
-- ✅ Geen API-keys zichtbaar
-- ✅ Geen privé telefoonnummers (fictief of bedrijf)
-- ✅ Geen Google Analytics zonder toestemming
-- ✅ Geen cookies zonder banner
-
----
-
-## 📞 Ondersteuning
-
-**Problemen?**
-1. Lees README.md (gedetailleerd!)
-2. Check TEST-RAPPORT.txt
-3. Valideer JSON op jsonlint.com
-4. Check browser console (F12)
-5. Probeer ander browser
-
----
-
-**Vragen? Raadpleeg README.md voor volledige documentatie!**
-
-Veel succes! 🎉
+- 27 behandelingen in 7 categorieën, prijzen €10 – €60
+- 1 optionele toeslag (verwijderen oude lak/gellak +€5)
+- 6 Impressie-stijlen met elk een album
+- 10 behandelingsfoto's

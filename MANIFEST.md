@@ -1,255 +1,99 @@
-# Emma NailStudio - Website Project Manifest
-# Generated: 2024-10-18
-# Status: Complete & Ready for Deployment
+# Emma NailStudio - Project Manifest
 
-## Project Information
-- Name: Emma NailStudio Website
-- Type: Static HTML5/CSS3/JavaScript website
-- Purpose: Professional nail salon website
-- Platform: Cloudflare Pages (static hosting)
-- Domain: nailsalonemma.nl
+Laatst bijgewerkt: oktober 2026 · Status: **live**
 
-## Directory Structure
+## Projectinformatie
 
-### Root Files
-- index.html (12.08 KB) - Main webpage
-- robots.txt (0.13 KB) - Search engine directives
-- sitemap.xml (0.94 KB) - XML sitemap for SEO
-- _headers (0.62 KB) - Cloudflare security headers
-- .gitignore (0.53 KB) - Git ignore rules
-- README.md (11.68 KB) - Project documentation
+| | |
+|---|---|
+| Naam | Emma NailStudio website |
+| Type | Statische site (HTML5 / CSS3 / JavaScript / JSON) |
+| Hosting | Cloudflare Pages, auto-deploy vanaf GitHub `main` |
+| Domein | https://emmanagelstudio.vip (ook https://nailstudioemma.pages.dev) |
+| Repository | https://github.com/DunBleeping/NailStudioEmma |
+| Lokale map | `C:\MyDocs\DEVOPS\EmStudio` |
 
-### CSS
-- css/style.css (17.7 KB) - Complete stylesheet with:
-  - CSS variables for theming
-  - Mobile-first responsive design
-  - Luxury color palette (gold/cream/white)
-  - Flexbox & Grid layouts
-  - Animations and transitions
-  - Print stylesheet
+## Bestanden
 
-### JavaScript
-- js/script.js (16.76 KB) - Application logic including:
-  - JSON data loading (async/await)
-  - Service cards generation
-  - Gallery modal with keyboard navigation
-  - Mobile menu toggle
-  - WhatsApp integration
-  - Error handling
+### Root
+- `index.html` – de pagina; CSS/JS geladen met `?v=5`
+- `_headers` – Cloudflare beveiligings- en cache-headers
+- `sitemap.xml`, `robots.txt` – SEO
+- `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
+- `start-server.py` – lokale testserver
+- Documentatie: `README.md`, `QUICK-REFERENCE.md`, `PRIJZEN-BEHEER.md`, `FOTO-UPLOADEN.md`,
+  `ACCESSIBILITY.md`, `MANIFEST.md`
 
-### Data (Configuration)
-- data/settings.json (1.57 KB)
-  - Salon name and branding
-  - Contact information (phone, email, address)
-  - WhatsApp Business configuration
-  - Opening hours (Monday-Sunday)
-  - Social media links
-  - Color palette
+### css/style.css
+- CSS-variabelen voor het kleurenpalet (goud `#d4a574`, crème `#f5f0eb`, bruin `#8b7355`)
+- Mobile-first, breekpunten 1024 px en 768 px
+- Grijswaarden-, lettergrootte- en foto's-verborgen-modus
+- Impressie-tegels, album-modal, `prefers-reduced-motion`, print-stylesheet
 
-- data/services.json (2.64 KB)
-  - 7 nail treatment services (BIAB, Gellak, Manicure, etc.)
-  - Pricing in EUR
-  - Service duration
-  - Service categories
-  - 3 optional extras/add-ons
-  - Image references
+### js/script.js
+- Laadt `settings.json`, `services.json`, `gallery.json` (altijd vers: `cache: 'no-cache'`)
+- Bouwt behandelkaarten, categoriemenu, prijstabel en "Optionele toeslagen"
+- Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
+- WhatsApp-links op alle elementen met `data-whatsapp`
+- Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen)
+- HTML-escaping van alle JSON-inhoud
 
-- data/gallery.json (1.65 KB)
-  - 6 gallery images
-  - Image titles and descriptions
-  - Alt text for accessibility
-  - Category tags
+### data/
+- `settings.json` – salon, contact, WhatsApp (+31645715179), openingstijden, social
+- `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
+  `extras`: verwijderen oude lak/gellak +€5
+- `gallery.json` – 6 Impressie-stijlen met voorbeeldfoto (`src`), albummap (`folder`) en klantfoto's (`photos`)
+- `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
 
-### Images
-- images/gallery/ (13 files, SVG placeholders)
-  - nails-1.jpg through nails-6.jpg (gallery photos)
-  - biab.jpg, gellak.jpg, manicure.jpg, nailart.jpg, pedicure.jpg, removal.jpg, nailhealth.jpg (service images)
-  - Ready for replacement with actual photographs
+### images/
+- `logo.jpg`
+- `services/` – 10 behandelingsfoto's
+- `gallery/nails-1..6.jpg` – voorbeeldfoto's (Pexels, vrije licentie; bron in `descript.ion`)
+- `gallery/<album>/` – `rode-nagels`, `biab-nude`, `floral`, `ombre`, `glitter`, `minimalistisch`
+  (elk met `LEESMIJ.txt`, nog zonder klantfoto's)
+- `gallery/biab.jpg`, `gellak.jpg`, `manicure.jpg`, `nailart.jpg`, `nailhealth.jpg`, `pedicure.jpg`,
+  `removal.jpg` – oude placeholders, niet in gebruik
 
-## Features Implemented
+### tools/
+- `update_galerij.py` – scant de albummappen en vult `photos` in `gallery.json`
+  (met versiecode tegen caching en onderschriften uit `descript.ion`)
 
-### Homepage Sections
-✅ Header with responsive navigation
-✅ Mobile hamburger menu
-✅ Hero section with CTA
-✅ Services showcase (7 treatments)
-✅ Dynamic pricing table
-✅ Photo gallery with modal
-✅ About the salon
-✅ Contact information
-✅ Opening hours
-✅ Social media links
-✅ WhatsApp integration (floating button + links)
-✅ Footer with company info
+## Functies
 
-### Design Features
-✅ Luxury aesthetic (gold/cream/white palette)
-✅ Minimalistische layout
-✅ Responsive design (mobile-first)
-✅ Smooth animations & transitions
-✅ Hover effects
-✅ Touch-friendly buttons (48px+)
-✅ WCAG 2.2 AA accessibility
-✅ Semantic HTML5
+- Header met menu, *Afspraak maken* (WhatsApp) en toegankelijkheidsknoppen
+- Hero, behandelingen met categoriefilter, prijslijst + toeslagen, Impressie-albums, over ons, contact
+- Zwevende WhatsApp-knop; alle afspraken via WhatsApp (geen e-mail/agenda)
+- Nieuwe bezoekers zien standaard geen foto's
+- Responsive, toetsenbord- en schermlezer-vriendelijk
+- SEO: meta, Open Graph, Schema.org LocalBusiness, sitemap, robots
 
-### Technical Features
-✅ Fully static (no server/backend)
-✅ JSON-based configuration
-✅ Dynamic content loading
-✅ Error handling
-✅ CORS-safe (file:// compatible workaround)
-✅ Mobile menu toggle
-✅ Gallery keyboard navigation
-✅ Smooth scroll behavior
+## Caching (`_headers`)
 
-### SEO Optimization
-✅ Semantic HTML5 markup
-✅ Meta tags (title, description)
-✅ Open Graph tags (social media)
-✅ Schema.org LocalBusiness structured data
-✅ robots.txt
-✅ sitemap.xml
-✅ Canonical URLs
-✅ Alt text on images
-✅ Proper heading hierarchy
+| Pad | Cache-Control |
+|---|---|
+| `/index.html`, `/data/*`, `/*.js`, `/*.css` | `public, max-age=0, must-revalidate` |
+| `/images/*` | `public, max-age=2592000` (30 dagen) |
+| `/sitemap.xml`, `/robots.txt` | 1 dag |
 
-### Security & Privacy
-✅ No cookies
-✅ No tracking/analytics
-✅ No forms (external WhatsApp)
-✅ HTML entity escaping (XSS prevention)
-✅ Security headers in _headers
-✅ rel="noopener noreferrer" on external links
-✅ No sensitive data in code
+Wijzigingen in CSS/JS → `?v=N` verhogen in `index.html`; vervangen foto's → `?v=N` in de JSON.
 
-### Cloudflare Pages Ready
-✅ Static files only
-✅ No build process required
-✅ Relative paths
-✅ index.html in root
-✅ _headers configuration
-✅ Automatic HTTPS
-✅ Global CDN
-✅ Custom domain support
+## Openstaande punten
 
-## File Statistics
-- Total Size: ~65 KB
-- HTML: 12.08 KB
-- CSS: 17.7 KB
-- JavaScript: 16.76 KB
-- JSON Config: 5.86 KB
-- Static Files: ~13 KB (placeholder images)
-- Documentation: 12.61 KB
+- Telefoon, e-mail, adres en Maps-link in `settings.json` zijn nog voorbeeldwaarden
+- Schema.org, `og:url`, `canonical`, `sitemap.xml` en `robots.txt` verwijzen nog naar `nailsalonemma.nl`
+  met voorbeeldadres/e-mail
+- Social-links verwijzen nog naar de algemene Instagram/Facebook-homepage
+- Impressie-albums nog leeg; tegels gebruiken stockfoto's
 
-## Configuration Management
+## Historie (belangrijkste commits)
 
-All dynamic content is centrally managed via JSON files:
-
-### settings.json controls:
-- Salon name and branding
-- All contact information
-- Opening hours
-- Social media links
-- Color scheme
-- WhatsApp messaging
-
-### services.json controls:
-- Treatment names and descriptions
-- All pricing
-- Service durations
-- Categories
-- Image references
-
-### gallery.json controls:
-- Gallery images
-- Photo descriptions
-- Alt text
-- Categories
-
-Changing JSON values automatically updates entire website.
-
-## Testing Checklist
-✅ HTML structure validated
-✅ JSON files validated
-✅ CSS responsive tested
-✅ JavaScript functionality tested
-✅ Local HTTP server tested (http://localhost:8000)
-✅ Mobile menu working
-✅ Gallery modal working
-✅ WhatsApp links functional
-✅ All links and buttons working
-✅ Images loading correctly
-✅ SEO tags present
-✅ Security headers configured
-
-## Deployment Instructions
-
-### Local Testing
-```bash
-cd C:\MyDocs\DEVOPS\EmStudio
-python -m http.server 8000
-# Open: http://localhost:8000
-```
-
-### GitHub Setup
-1. Create private repository
-2. `git init`
-3. `git add .`
-4. `git commit -m "Initial: Emma NailStudio website"`
-5. `git remote add origin [repo-url]`
-6. `git push -u origin main`
-
-### Cloudflare Pages Deployment
-1. Login to Cloudflare Dashboard
-2. Select Pages
-3. Connect to GitHub repository
-4. Build command: (leave empty)
-5. Build output directory: / (root)
-6. Deploy
-
-Website will be available at: https://emma-nailstudio.pages.dev
-
-### Custom Domain
-1. Add nailsalonemma.nl as custom domain in Cloudflare
-2. Update DNS nameservers at domain registrar
-3. Point to Cloudflare nameservers
-
-## Future Enhancements
-
-Possible additions (without modifying current structure):
-- Google Analytics (add script to <head>)
-- Google Ads conversion tracking
-- Contact form (external service)
-- Online booking system (external API)
-- Newsletter signup (external service)
-- Blog/News section
-- Client testimonials
-- Price calculation tool
-- Appointment calendar
-
-## Notes
-
-- All prices are placeholders and should be verified
-- Placeholder images should be replaced with actual salon photos
-- Contact details should be updated with real information
-- WhatsApp numbers must be in international format (e.g., +31612345678)
-- Domain configuration can be updated in settings.json
-- Color scheme can be modified in settings.json and CSS variables
-
-## Support & Documentation
-
-Full documentation available in README.md including:
-- Local testing instructions
-- Configuration editing guide
-- Image management
-- Cloudflare deployment steps
-- SEO checklist
-- Troubleshooting tips
-- Privacy compliance info
-
----
-
-**Project Status: COMPLETE ✅**
-
-All files created, tested, and ready for deployment.
-No further development needed before launch.
+| Commit | Wijziging |
+|---|---|
+| `7055156` | Eerste commit, Git-repository met branch `main` |
+| `86070bd` | Logo als `images/logo.jpg` (hoofdletterprobleem op Cloudflare opgelost) |
+| `e1ec215` | Behandelingen en prijzen volgens `Prijzenlijst.csv` (27 + BIAB-categorie) |
+| `50313fb` | Toeslag verwijderen oude lak/gellak +€5 voor alle nieuwe sets |
+| `c62df0b` | Caching: data/JS/CSS altijd hervalideren, versienummers |
+| `d857489` | Stockfoto's Impressie, foto's standaard verborgen, afspraak via WhatsApp |
+| `dff1358` | Impressie-albums met klantfoto's |
+| `6cfb572` | Albummappen, `update_galerij.py`, swipen |

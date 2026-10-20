@@ -24,6 +24,25 @@ Voor klanten met kleurweergave beperkingen (kleurblindheid) is er een **grijswaa
 
 ---
 
+## 🔠 Lettergrootte
+
+Rechtsboven staan de knoppen **A– · A · A+ · A++**.
+- **A** = standaard; A– kleiner, A+ en A++ groter
+- De gekozen grootte wordt onthouden (localStorage `fontSize`)
+- Handig voor klanten die slechter zien, zonder in te zoomen
+
+---
+
+## 🖼️ Foto's tonen/verbergen
+
+De knop **🖼️** rechtsboven zet alle foto's op de kaarten en onder Impressie aan of uit.
+- **Nieuwe bezoekers zien standaard géén foto's**: de pagina is rustiger en laadt sneller
+- Bij verborgen foto's tonen de Impressie-tegels de titel en omschrijving van de stijl
+- De keuze wordt onthouden (localStorage `imagesHidden`)
+- Op mobiel zit de knop in de header naast het menu ☰
+
+---
+
 ## 📱 Smartphone & Tablet Features
 
 ### Responsive Design
@@ -57,15 +76,20 @@ Klik op telefoonnummer → iPhone/Android belt automatisch
 - Werkt op alle smartphones
 - Geen app nodig
 
-#### 💬 WhatsApp
+#### 💬 WhatsApp (afspraak maken)
 ```
-Klik op WhatsApp knop → WhatsApp opent met voorbereid bericht
+Klik op "Afspraak maken" of een WhatsApp knop → WhatsApp opent met voorbereid bericht
 ```
 **Features:**
+- Alle afspraakknoppen gaan naar WhatsApp (+31 6 4571 5179); er is geen e-mail of online agenda
 - Zwevende WhatsApp knop (rechtsonder)
 - Altijd zichtbaar op mobiel
 - Pre-filled met standaardbericht
 - Direct naar bedrijfs-WhatsApp
+
+#### 👆 Impressie-albums
+- Tik op een stijl → album met foto's van echte klantresultaten
+- **Vegen** naar links/rechts = volgende/vorige foto
 
 #### 🔗 Google Maps
 ```
@@ -102,10 +126,10 @@ Klik op adres → Google Maps opent automatisch
 - Proper heading hierarchy (H1 → H6)
 
 ### Keyboard Navigation
-- Tab door alle elementen
-- Enter/Space activeren buttons
-- ESC sluit gallery modal
-- Arrow keys in gallery (volgende/vorige)
+- Tab door alle elementen (ook de Impressie-tegels)
+- Enter/Space activeren buttons en openen een Impressie-album
+- ESC sluit het album
+- Pijltjestoetsen in een album (volgende/vorige foto)
 
 ### Color Contrast
 - WCAG 2.2 AA compliant

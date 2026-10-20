@@ -1,133 +1,54 @@
 # 📸 Foto's Uploaden - Emma NailStudio
 
-## 📁 **Waar moeten de foto's heen?**
+De website heeft drie soorten foto's:
 
-```
-C:\MyDocs\DEVOPS\EmStudio\images\services\
-```
+| Soort | Map | Waar op de site |
+|---|---|---|
+| **Behandelingsfoto's** | `images/services/` | Op de kaarten bij *Onze Behandelingen* |
+| **Voorbeeldfoto's Impressie** | `images/gallery/nails-1.jpg` t/m `nails-6.jpg` | De 6 tegels onder *Impressie* |
+| **Klantfoto's (albums)** | `images/gallery/<album>/` | Het album dat opent als je op een tegel klikt |
+| Logo | `images/logo.jpg` | Header en hero |
 
-**Alle 23 behandelingen hebben hun eigen foto-bestand nodig:**
-
-## 📋 **Benodigde Foto's - Bestandsnamen Exact!**
-
-Copy-paste deze bestandsnamen en voeg de foto's toe:
-
-### 👁️ **Wenkbrauwen (3 foto's)**
-```
-wenkbrauw-epileren.jpg
-wenkbrauw-verven.jpg
-lip-epileren.jpg
-```
-
-### 💅 **Nagels - Poeder (7 foto's)**
-```
-new-set-nagels.jpg
-witte-poeder.jpg
-opvullen-witte-poeder.jpg          (kan zelfde zijn als witte-poeder.jpg)
-naturel-roze-poeder-new.jpg
-naturel-opvullen-roze-poeder.jpg   (kan zelfde zijn als naturel-roze-poeder-new.jpg)
-new-set-roze-witte-randje.jpg
-new-set-op-eigen-nagel.jpg
-```
-
-**Opmerking:** "Opvullen" foto's kunnen dezelfde zijn als "New Set" - het zijn dezelfde nagels!
-
-### 💅 **Nagels - Gellak (3 foto's)**
-```
-shellac.jpg
-opvullen-gellak.jpg                (kan zelfde zijn als shellac.jpg)
-nails-design-vanaf.jpg             (design voorbeeld)
-```
-
-### 🖐️ **Hands & Feet (3 foto's)**
-```
-manicure.jpg
-pedicure.jpg
-teennagels.jpg
-```
-
-### ✨ **Nagels - Design (2 foto's)**
-```
-design-nagel-glitter.jpg           (design met glitter)
-opvullen-2-kleuren-glitter.jpg     (kan zelfde zijn)
-```
-
-### 🗑️ **Nagels - Verwijdering (2 foto's)**
-```
-alleen-verwijderen.jpg             (kan zelfde foto zijn)
-verwijderen-inclusief-verzorging.jpg
-```
-
-### 🎨 **Speciale Sets (3 foto's)**
-```
-babyboom-new-set.jpg
-opvullen-babyboom.jpg              (kan zelfde zijn als babyboom-new-set.jpg)
-```
+> **Foto's standaard verborgen:** nieuwe bezoekers zien de site zonder foto's (rustiger, sneller).
+> Met de knop 🖼️ *Foto's tonen/verbergen* rechtsboven zet een bezoeker ze aan; die keuze wordt onthouden.
+> Onder Impressie zie je bij verborgen foto's de titels van de stijlen.
 
 ---
 
-## 🖼️ **Foto Specificaties**
+## 💅 Behandelingsfoto's (`images/services/`)
 
-**Formaat:** JPG (JPEG)
-**Bestandsnaam:** EXACT zoals hierboven!
-**Resolutie:** 
-  - Minimaal: 300x300px
-  - Aanbevolen: 600x400px of 800x600px
-  - Niet groter dan 500KB per foto
+Er zijn **10 foto's**; meerdere behandelingen delen dezelfde foto:
 
-**Tips voor mooie foto's:**
-- Professionele foto's van je eigen nagelwerk
-- Schone achtergrond (wit, crème, neutrale toon)
-- Goed verlicht
-- Scherpgesteld op de nagels/behandeling
-- Dezelfde stijl/kleur tone voor alle foto's
+| Bestand | Gebruikt bij |
+|---|---|
+| `wenkbrauw-epileren.jpg` | Wenkbrauw Epileren met Touw |
+| `wenkbrauw-verven.jpg` | Wenkbrauw Verven en Epileren met Touw |
+| `lip-epileren.jpg` | Boven- en Onderlip Epileren met Touw |
+| `new-set-nagels.jpg` | New Set Nagels, Opvullen Naturel Nagel, Nieuwe Set op Eigen Nagel, BIAB Nieuwe Set, Opvullen BIAB, Alleen Verwijderen |
+| `witte-poeder.jpg` | New Set Witte Poeder, Opvullen Witte Poeder |
+| `roze-poeder.jpg` | Naturel Roze Poeder (Nieuwe Set), Naturel Opvullen Roze Poeder, Nieuwe Set Roze Poeder en Witte Randje, Babyboom Nieuwe Set, Opvullen Babyboom |
+| `shellac.jpg` | Shellac, Opvullen met Gellak, Nieuwe Set met Gellak Inclusief, Nieuwe Set 2 Kleuren (met Glitter), Nails Design vanaf..., BIAB met Gellak Kleuren (nieuw + opvullen) |
+| `manicure.jpg` | Manicure |
+| `pedicure.jpg` | Pedicure, Pedicure met Gellak |
+| `teennagels.jpg` | Teennagels Nieuwe Set met Gellak |
 
----
+**Foto vervangen:** overschrijf het bestand met dezelfde naam. Omdat foto's 30 dagen in de cache
+van bezoekers blijven, zet je in `data/services.json` achter het pad een versie, bijv.
+`"image": "./images/services/shellac.jpg?v=2"` (bij de volgende vervanging `?v=3`, enz.).
 
-## 📤 **Hoe foto's uploaden?**
-
-### **Manier 1: Drag & Drop in File Explorer**
-1. Open: `C:\MyDocs\DEVOPS\EmStudio\images\services\`
-2. Sleep je JPG-bestanden daarin
-3. Refresh browser (Ctrl+F5)
-
-### **Manier 2: Windows Verkenner**
-1. Open: `C:\MyDocs\DEVOPS\EmStudio\images\services\`
-2. Rechtsklik → Plak (`Ctrl+V`)
-3. Refresh browser (Ctrl+F5)
-
-### **Manier 3: VS Code**
-1. Open "Explorer" in VS Code
-2. Navigeer naar `images/services/`
-3. Sleep foto's naar deze folder
-4. Refresh browser (Ctrl+F5)
+**Eigen foto per behandeling:** zet een nieuw bestand in `images/services/` (kleine letters, geen spaties)
+en pas bij die behandeling `"image"` aan in `data/services.json`. Verwijs nooit naar een bestand dat
+(nog) niet bestaat – Cloudflare geeft dan de homepage terug en de bezoeker ziet een kapotte foto.
 
 ---
 
-## ✅ **Verificatie Checklist**
+## 🖼️ **Foto specificaties**
 
-Na het uploaden van foto's:
-
-- [ ] Alle 23 JPG-bestanden in `images/services/` folder
-- [ ] Bestandsnamen EXACT gelijk aan de lijst hierboven
-- [ ] Alle bestanden zijn .jpg (lowercase!)
-- [ ] Geen spaties of rare karakters in bestandsnamen
-- [ ] Browser geopend op `http://localhost:8000`
-- [ ] Ctrl+F5 refresh gedaan
-- [ ] Alle foto's zichtbaar op website ✓
-
----
-
-## 🧪 **Testen**
-
-**Browser:** http://localhost:8000
-
-**Controleer:**
-1. Homepage laadt
-2. Behandelingen tonen JPG foto's (geen rode X-iconen)
-3. Alle prijzen zichtbaar
-4. Foto's hebben goede kwaliteit
-5. Responsive op mobiel (F12)
+- **Formaat:** JPG (ook PNG/WebP mogelijk)
+- **Bestandsnaam:** kleine letters, geen spaties (Cloudflare is hoofdlettergevoelig: `Foto.JPG` ≠ `foto.jpg`)
+- **Afmeting:** 800–1200 px breed is ruim voldoende
+- **Grootte:** liefst < 300 KB, maximaal 500 KB per foto
+- **Tips:** eigen werk, rustige lichte achtergrond, goed licht, scherp op de nagels
 
 ---
 
@@ -179,51 +100,53 @@ Bezoekers bladeren door een album met de pijltjes, de pijltjestoetsen of door te
 
 ## 💡 **Vragen?**
 
-**Q: Kan ik dezelfde foto voor meerdere behandelingen gebruiken?**
-A: Ja! Bijvoorbeeld:
-  - "Opvullen Witte Poeder" kan dezelfde foto zijn als "New Set Witte Poeder"
-  - "Shellac" en "Opvullen Gellak" kunnen dezelfde foto zijn
-  - Dit bespaart je foto's hoeven te nemen!
+**V: Kan ik dezelfde foto voor meerdere behandelingen gebruiken?**
+A: Ja, dat gebeurt nu al (zie tabel hierboven). Een eigen foto per behandeling kan altijd later.
 
-**Q: Hoe veel foto's MINIMAAL?**
-A: Technisch 10 unieke foto's (per categorie 1-2), maar 23 unieke foto's ziet er professioneler uit.
+**V: Ik heb een foto vervangen maar zie nog de oude.**
+A: Foto's blijven 30 dagen in de browsercache. Verhoog de versie (`?v=2` → `?v=3`) in
+`services.json` of `gallery.json`. Voor albumfoto's doet `tools/update_galerij.py` dit automatisch.
 
-**Q: Kan ik foto's later wijzigen?**
-A: Ja! Gewoon nieuwe JPG overschrijven, browser refresh (Ctrl+F5), klaar.
+**V: Mag ik foto's van internet gebruiken?**
+A: Alleen met een vrije licentie (zoals Pexels/Unsplash). De huidige voorbeeldfoto's `nails-1..6.jpg`
+komen van Pexels; de bron staat in `images/gallery/descript.ion`. Vervang ze bij voorkeur door eigen werk.
 
-**Q: Welk formaat is het beste?**
-A: JPG is perfect. PNG ook oké maar wat groter.
-
----
-
-## 📁 **Map structuur ná upload:**
-
-```
-C:\MyDocs\DEVOPS\EmStudio\
-└── images/
-    ├── services/                    ← HIER STAAN DE FOTO'S
-    │   ├── wenkbrauw-epileren.jpg
-    │   ├── wenkbrauw-verven.jpg
-    │   ├── lip-epileren.jpg
-    │   ├── new-set-nagels.jpg
-    │   ├── witte-poeder.jpg
-    │   ├── ... (alle andere)
-    │   └── teennagels.jpg
-    └── gallery/                     ← Gallery foto's (scheiden!)
-        ├── biab.jpg
-        ├── gellak.jpg
-        └── ... (andere gallery foto's)
-```
+**V: Welk formaat is het beste?**
+A: JPG. PNG kan ook, maar is meestal veel groter.
 
 ---
 
-## 🚀 **Next Steps**
+## 📁 **Mappenstructuur**
 
-1. **Verzamel je mooiste nagel-foto's** 📸
-2. **Rename ze exact naar de bestandsnamen bovenaan** ✏️
-3. **Sleep ze naar `images/services/`** 🖱️
-4. **Refresh browser (Ctrl+F5)** 🔄
-5. **Geniet van je mooie website!** ✨
+```
+images/
+├── logo.jpg
+├── services/                  ← behandelingsfoto's (10 stuks)
+│   ├── wenkbrauw-epileren.jpg
+│   ├── ...
+│   └── teennagels.jpg
+└── gallery/
+    ├── nails-1.jpg … nails-6.jpg   ← voorbeeldfoto's op de Impressie-tegels
+    ├── descript.ion               ← omschrijving/bron per foto (verborgen bestand)
+    ├── rode-nagels/               ← album Klassieke Rode Nagels (+ LEESMIJ.txt)
+    ├── biab-nude/
+    ├── floral/
+    ├── ombre/
+    ├── glitter/
+    └── minimalistisch/
+```
+
+`images/gallery/biab.jpg`, `gellak.jpg`, `manicure.jpg`, `nailart.jpg`, `nailhealth.jpg`, `pedicure.jpg`
+en `removal.jpg` zijn oude placeholders en worden niet gebruikt.
+
+---
+
+## 🚀 **Live zetten**
+
+1. Foto's in de juiste map zetten (en eventueel `python tools/update_galerij.py` voor albums)
+2. Lokaal controleren: `python -m http.server 8000` → http://localhost:8000 (Ctrl+F5)
+3. Commit + push naar GitHub (`main`)
+4. Na ±1 minuut staat het live op https://emmanagelstudio.vip ✨
 
 ---
 

@@ -1,416 +1,232 @@
 # Emma NailStudio - Nagelsalon Website
 
-Een moderne, professionele en gebruiksvriendelijke website voor Emma NailStudio, een luxe nagelsalon. Dit is een volledig statische website met HTML5, CSS3, JavaScript en JSON, geschikt voor gratis hosting op Cloudflare Pages.
+Statische website voor Emma NailStudio (HTML5, CSS3, JavaScript en JSON), gehost op **Cloudflare Pages**.
+
+- **Live:** https://emmanagelstudio.vip (ook https://nailstudioemma.pages.dev)
+- **Broncode:** https://github.com/DunBleeping/NailStudioEmma (branch `main`)
+- **Publiceren:** elke push naar `main` wordt binnen ±1 minuut automatisch live gezet
 
 ## 📋 Inhoudsopgave
 
-- [Functies](#functies)
-- [Projectstructuur](#projectstructuur)
-- [Lokaal testen](#lokaal-testen)
-- [Configuratie aanpassen](#configuratie-aanpassen)
-- [Afbeeldingen beheren](#afbeeldingen-beheren)
-- [Naar Cloudflare Pages publiceren](#naar-cloudflare-pages-publiceren)
-- [SEO & Prestaties](#seo--prestaties)
-- [Privacy & Beveiliging](#privacy--beveiliging)
+- [Design & opbouw van de pagina](#-design--opbouw-van-de-pagina)
+- [Functies](#-functies)
+- [Projectstructuur](#-projectstructuur)
+- [Inhoud aanpassen](#-inhoud-aanpassen)
+- [Foto's beheren](#-fotos-beheren)
+- [Lokaal testen](#-lokaal-testen)
+- [Publiceren (Git → Cloudflare)](#-publiceren-git--cloudflare)
+- [Caching & versienummers](#-caching--versienummers)
+- [SEO](#-seo)
+- [Privacy & beveiliging](#-privacy--beveiliging)
+- [Nog te doen](#-nog-te-doen)
+- [Problemen oplossen](#-problemen-oplossen)
+
+Meer documentatie:
+[PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) · [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) ·
+[QUICK-REFERENCE.md](QUICK-REFERENCE.md) · [ACCESSIBILITY.md](ACCESSIBILITY.md) · [MANIFEST.md](MANIFEST.md)
+
+## 🎨 Design & opbouw van de pagina
+
+**Uitstraling:** luxe en minimalistisch, warme goud/crème-tinten, veel witruimte, afgeronde kaarten
+met zachte schaduw. Lettertype: systeemfont *Segoe UI* (geen externe fonts → snel).
+
+| Kleur | Code | Gebruik |
+|---|---|---|
+| Goud (primary) | `#d4a574` | Knoppen, accenten, lijnen, tegels |
+| Crème (secondary) | `#f5f0eb` | Achtergronden |
+| Bruin (accent) | `#8b7355` | Hover/accenten |
+| Tekst | `#333333` / `#666666` | Tekst / subtekst |
+
+De kleuren staan als CSS-variabelen bovenaan `css/style.css` (`:root { --primary: ... }`).
+Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
+
+**Pagina van boven naar beneden:**
+
+1. **Header** – logo (`images/logo.jpg`), menu (Home, Behandelingen, Prijzen, Galerij, Contact,
+   **Afspraak maken**), en de knoppen 👁️ grijswaarden, **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
+   Op mobiel (≤ 768 px) wordt het menu een ☰ hamburger.
+2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen* en *📱 WhatsApp*, groot logo.
+3. **Onze Behandelingen** – categoriemenu (links, op mobiel erboven) met 7 categorieën en
+   27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie).
+4. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Optionele toeslagen**
+   (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set).
+5. **Impressie** – 6 tegels met een stijl (Klassieke Rode Nagels, BIAB Nude, Floral Nail Art,
+   Ombre Effect, Glitter Glamour, Minimalistisch Design). Klik → **album** met foto's van echte
+   klantresultaten (bladeren met pijlen, pijltjestoetsen of vegen).
+6. **Over Emma NailStudio** – introductie.
+7. **Contact & Openingstijden** – telefoon, adres, openingstijden, WhatsApp, Google Maps.
+8. **Footer** – links, social media, copyright.
+9. **Zwevende WhatsApp-knop** rechtsonder.
+
+**Standaardinstellingen voor nieuwe bezoekers:**
+- **Foto's verborgen** – rustiger en sneller; tegels onder Impressie tonen dan titel + omschrijving.
+  De bezoeker kan ze met 🖼️ aanzetten; de keuze wordt onthouden.
+- Lettergrootte **A**, kleur aan (geen grijswaarden).
+
+**Afspraken gaan via WhatsApp** (+31 6 4571 5179). Er is geen e-mail of online agenda: *Afspraak maken*,
+de hero-knop, de contactknop en de zwevende knop openen allemaal WhatsApp met een voorbereid bericht.
 
 ## ✨ Functies
 
-### Kernfunctionaliteiten
-- ✅ **Volledig statisch** - Geen backend nodig
-- ✅ **Responsive ontwerp** - Perfect op desktop, tablet en mobiel
-- ✅ **Mobile-first** - Geoptimaliseerd voor smartphones
-- ✅ **Luxe design** - Professionele, minimalistische uitstraling
-- ✅ **Snelle laadtijd** - Geoptimaliseerd voor Core Web Vitals
-- ✅ **Toegankelijk** - WCAG 2.2 AA standaarden
-
-### Secties
-- 🏠 **Homepage** - Hero-sectie met introductie
-- 💅 **Behandelingen** - Kaarten met services, prijzen en duur
-- 💰 **Prijslijst** - Dynamische prijstabel met optionele toeslagen
-- 🖼️ **Galerij** - Responsieve fototentoonstelling met modale viewer
-- ℹ️ **Over de salon** - Persoonlijke introductie
-- 📞 **Contact** - Contactgegevens, openingstijden, maps, WhatsApp
-
-### Integraties
-- 🔗 **WhatsApp Business** - Zwevende WhatsApp-knop en afspraaklinks
-- 📱 **Social Media** - Instagram, Facebook links
-- 🗺️ **Google Maps** - Directe links naar locatie
-- 🔍 **SEO** - Schema.org structured data, sitemap.xml, robots.txt
-- 📊 **Open Graph** - Optimaal voor sociale media
+- ✅ Volledig statisch, geen backend of build-stap
+- ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
+- ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
+- ✅ Categoriefilter voor behandelingen
+- ✅ Impressie-albums met modal, toetsenbord- en swipe-navigatie
+- ✅ Toegankelijkheid: grijswaarden, lettergrootte, foto's uit, ARIA-labels, `prefers-reduced-motion`
+  (zie [ACCESSIBILITY.md](ACCESSIBILITY.md))
+- ✅ SEO: meta tags, Open Graph, Schema.org (LocalBusiness), sitemap.xml, robots.txt
+- ✅ Beveiligingsheaders en cache-instellingen via `_headers`
 
 ## 📁 Projectstructuur
 
 ```
 EmStudio/
-├── index.html              # Hoofdpagina (startpunt)
-├── css/
-│   └── style.css          # Alle CSS-stijlen
-├── js/
-│   └── script.js          # JavaScript voor interactiviteit
-├── data/                  # Configuratiebestanden
-│   ├── settings.json      # Salon instellingen & contactgegevens
-│   ├── services.json      # Behandelingen en prijzen
-│   └── gallery.json       # Galerij foto's
-├── images/                # Afbeeldingen
-│   └── gallery/           # Galerij foto's
-├── sitemap.xml            # SEO sitemap
-├── robots.txt             # SEO robots instructies
-├── _headers               # Cloudflare beveiligings-headers
-├── .gitignore             # Git ignore regels
-└── README.md              # Dit bestand
+├── index.html                 # De pagina (laadt CSS/JS met ?v=N)
+├── css/style.css              # Alle opmaak (kleuren als CSS-variabelen)
+├── js/script.js               # Laadt de JSON en bouwt de inhoud op
+├── data/
+│   ├── settings.json          # Salon, contact, WhatsApp, openingstijden, social
+│   ├── services.json          # 27 behandelingen + "extras" (toeslagen)
+│   ├── gallery.json           # 6 Impressie-tegels + albums ("folder", "photos")
+│   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
+├── images/
+│   ├── logo.jpg
+│   ├── services/              # 10 behandelingsfoto's
+│   └── gallery/
+│       ├── nails-1..6.jpg     # Voorbeeldfoto's (Pexels) op de tegels
+│       ├── descript.ion       # Omschrijving/bron per foto
+│       └── rode-nagels/, biab-nude/, floral/, ombre/, glitter/, minimalistisch/
+│                              # Albums met klantfoto's (elk met LEESMIJ.txt)
+├── tools/update_galerij.py    # Zet foto's uit de albummappen in gallery.json
+├── _headers                   # Cloudflare: beveiliging + caching
+├── sitemap.xml, robots.txt    # SEO
+├── start-server.py            # Lokale testserver
+└── *.md                       # Documentatie
 ```
 
+## 🔧 Inhoud aanpassen
+
+| Wat | Bestand | Uitleg |
+|---|---|---|
+| Prijzen, behandelingen, toeslagen | `data/services.json` | [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) |
+| Contact, WhatsApp, openingstijden, social | `data/settings.json` | hieronder |
+| Impressie-tegels en albums | `data/gallery.json` + `images/gallery/` | [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
+| Teksten hero/over ons, SEO | `index.html` | |
+| Kleuren en opmaak | `css/style.css` | |
+
+### settings.json (belangrijkste velden)
+
+```json
+"contact": {
+  "phone": "+31 6 12345678",
+  "email": "info@nailsalonemma.nl",
+  "address": "Hoofdstraat 123, 1234 AB Amsterdam",
+  "mapLink": "https://www.google.com/maps/search/...",
+  "whatsapp": {
+    "number": "+31645715179",
+    "message": "Hallo Emma NailStudio, ik wil graag een afspraak maken voor een nagelbehandeling."
+  }
+},
+"hours": { "monday": "10:00 - 18:00", "...": "...", "sunday": "Gesloten" },
+"social": { "instagram": "...", "facebook": "...", "whatsappBusiness": "https://wa.me/31645715179" }
+```
+
+WhatsApp-nummer altijd internationaal en zonder spaties (`+31645715179`).
+
+## 📸 Foto's beheren
+
+Kort (volledige uitleg in [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md)):
+
+- **Behandelingsfoto's:** `images/services/*.jpg`, gekoppeld via `"image"` in `services.json`.
+- **Impressie-tegels:** `images/gallery/nails-1..6.jpg` (nu Pexels-stockfoto's, vrije licentie).
+- **Klantfoto's per stijl:** zet ze in de albummap (bijv. `images/gallery/rode-nagels/rode-nagels-01.jpg`)
+  en voer uit:
+  ```
+  python tools/update_galerij.py
+  ```
+  Onderschriften kunnen in een `descript.ion` in de albummap.
+- Bestandsnamen: **kleine letters, geen spaties** (Cloudflare is hoofdlettergevoelig).
+- Vraag klanten toestemming voor foto's van hun nagels (AVG).
+
 ## 🚀 Lokaal testen
-
-### ⚠️ BELANGRIJK: Geen installatie nodig!
-
-**Deze website is 100% statisch.** Er hoeft NIETS op uw computer geïnstalleerd te worden. Dit zijn puur HTML, CSS en JavaScript bestanden. De optie hieronder is ALLEEN voor lokaal testen - niet nodig voor normaal gebruik!
-
-### Lokaal testen (optioneel - voor development)
-
-Voor testen terwijl u aanpassingen maakt, kunt u een eenvoudige HTTP-server gebruiken:
 
 ```bash
 cd C:\MyDocs\DEVOPS\EmStudio
 python -m http.server 8000
 ```
 
-Open vervolgens in je browser: `http://localhost:8000`
+Open http://localhost:8000 (niet via `file://` – dan kunnen de JSON-bestanden niet laden).
+Tip: wis in DevTools de *Local Storage* om de site te zien zoals een nieuwe bezoeker.
 
-### Methode 2: Node.js HTTP Server
+## 📤 Publiceren (Git → Cloudflare)
 
-```bash
-cd C:\MyDocs\DEVOPS\EmStudio
-npx http-server -p 8000
-```
-
-### Methode 3: VS Code Live Server
-
-1. Installeer extensie: "Live Server"
-2. Rechtsklik op `index.html`
-3. Kies "Open with Live Server"
-
-### Waarom niet `file://`?
-
-JavaScript kan JSON-bestanden niet laden via `file://` URL vanwege browser-veiligheidsbeperkingen (CORS). Gebruik altijd een lokale HTTP-server.
-
-## 🔧 Configuratie aanpassen
-
-### Salon instellingen wijzigen
-
-Bewerk `data/settings.json`:
-
-```json
-{
-  "salon": {
-    "name": "Emma NailStudio",
-    "tagline": "Luxe nagelverzorging voor perfecte nagels",
-    "description": "Uw beschrijving hier..."
-  },
-  "contact": {
-    "phone": "+31 6 12345678",
-    "email": "info@nailsalonemma.nl",
-    "address": "Hoofdstraat 123, 1234 AB Amsterdam",
-    "whatsapp": {
-      "number": "+31612345678",
-      "message": "Hallo Emma NailStudio, ik wil graag een afspraak maken."
-    }
-  },
-  "hours": {
-    "monday": "10:00 - 18:00",
-    "tuesday": "10:00 - 18:00"
-    // ... etc
-  },
-  "social": {
-    "instagram": "https://instagram.com/emmanailstudio",
-    "facebook": "https://facebook.com/emmanailstudio",
-    "whatsappBusiness": "https://wa.me/31612345678"
-  }
-}
-```
-
-### Behandelingen en prijzen wijzigen
-
-Bewerk `data/services.json`:
-
-```json
-{
-  "services": [
-    {
-      "id": "biab",
-      "name": "BIAB",
-      "category": "Nagels",
-      "description": "Builder In A Bottle",
-      "price": 45,
-      "duration": "60 minuten",
-      "image": "./images/gallery/biab.jpg"
-    }
-    // ... meer behandelingen
-  ],
-  "extras": [
-    {
-      "id": "ombre",
-      "name": "Ombre Effect",
-      "price": 10,
-      "description": "Mooi color-fade effect"
-    }
-  ]
-}
-```
-
-**Opmerking:** Alle prijzen in het systeem worden uit deze JSON geladen. Wijzig hier, en alles wordt overal bijgewerkt.
-
-### Galerij foto's toevoegen
-
-Bewerk `data/gallery.json`:
-
-```json
-{
-  "images": [
-    {
-      "id": "gallery-1",
-      "title": "Klassieke Rode Nagels",
-      "description": "Elegante rode gellak",
-      "src": "./images/gallery/nails-1.jpg",
-      "alt": "Rode gellak manicure - klassiek elegant design",
-      "category": "gellak"
-    }
-  ]
-}
-```
-
-## 📸 Afbeeldingen beheren
-
-### Galerij foto's toevoegen
-
-1. **Plaats je foto's** in: `images/gallery/`
-2. **Update `data/gallery.json`** met het pad en beschrijving:
-
-```json
-{
-  "src": "./images/gallery/jouw-foto.jpg",
-  "alt": "Beschrijvende alt-tekst voor toegankelijkheid"
-}
-```
-
-### Salon/Hero afbeeldingen
-
-- **Hero afbeelding**: Update in `index.html` de `hero-image` sectie
-- **About/Salon afbeelding**: Update in `index.html` de `about-image` sectie
-
-### Placeholder afbeeldingen vervangen
-
-Momenteel gebruiken we SVG-placeholders. Vervang deze door echte afbeeldingen:
-
-```html
-<!-- Van: -->
-<img src="data:image/svg+xml,<svg>...</svg>">
-
-<!-- Naar: -->
-<img src="./images/jouw-foto.jpg" alt="Beschrijving">
-```
-
-### Afbeeldingsoptimalisatie tips
-
-- **Formaat**: Gebruik JPG/WebP voor foto's, PNG voor graphics
-- **Grootte**: Comprimeer afbeeldingen (max 2-3 MB per foto)
-- **Resolutie**: Minimaal 600px breedte voor galerij
-- **Alt-tekst**: Altijd beschrijvende alt-teksten voor toegankelijkheid
-
-**Gereedschappen:**
-- [TinyJPG](https://tinyjpg.com/) - Comprimeren
-- [ImageOptim](https://imageoptim.com/) - Optimaliseren
-- [Canva](https://www.canva.com/) - Eenvoudige ontwerpen
-
-## 📤 Naar Cloudflare Pages publiceren
-
-### ⚠️ GEEN installatie - Cloudflare hoost alles!
-
-Dit is het mooie: Cloudflare Pages hoeft NIETS te installeren. De website wordt automatisch gehoost met:
-- ✅ Automatische HTTPS
-- ✅ Globale CDN (super snel)
-- ✅ Gratis hosting
-- ✅ Geen server/database nodig
-
-U kunt ook Strato.nl of Google Domains gebruiken - het principe is hetzelfde!
-
-1. Ga naar [GitHub.com](https://github.com/new)
-2. Maak een **private** repository aan:
-   - Naam: `emma-nailstudio`
-   - Beschrijving: "Emma NailStudio website"
-   - Privacy: Private
-3. Klik "Create repository"
-
-### Stap 2: Code naar GitHub pushen
+De repository is gekoppeld: Cloudflare Pages bouwt automatisch vanaf GitHub `main`
+(geen build command, output directory `/`).
 
 ```bash
-cd C:\MyDocs\DEVOPS\EmStudio
-git init
-git add .
-git commit -m "Initial commit: Emma NailStudio website"
-git branch -M main
-git remote add origin https://github.com/jouwusername/emma-nailstudio.git
-git push -u origin main
+git add -A
+git commit -m "Omschrijving van de wijziging"
+git push
 ```
 
-### Stap 3: Cloudflare Pages verbinden
+Na ±1 minuut staat het live. In GitKraken: *Stage all* → commit → *Push*.
 
-1. Ga naar [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. Klik op "Pages" in de zijbalk
-3. Klik "Create a project" → "Connect to Git"
-4. Autoriseer GitHub en selecteer je repository
-5. Build instellingen:
-   - **Build command**: (leeg laten)
-   - **Build output directory**: `/` (root)
-6. Klik "Save and Deploy"
+## 🗄️ Caching & versienummers
 
-Cloudflare zal automatisch je website publiceren op: `https://emma-nailstudio.pages.dev`
+Ingesteld in `_headers`:
 
-### Stap 4: Eigen domein toevoegen (optioneel)
+| Bestand | Cache |
+|---|---|
+| `index.html`, `data/*`, `*.js`, `*.css` | altijd hervalideren (`max-age=0`) |
+| `images/*` | 30 dagen |
 
-1. Klik op je project
-2. Ga naar "Custom domains"
-3. Voeg `nailsalonemma.nl` toe
-4. Update je domeinregistrar's DNS naar Cloudflare nameservers
+Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
+gecachet worden, gebruiken we **versienummers** in de URL:
 
-## 🔍 SEO & Prestaties
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=5`).
+- **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
+  Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
+- **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
 
-### Ingebouwde SEO-features
+Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
+*Browser Cache TTL* = **Respect Existing Headers**.
 
-- ✅ **Semantic HTML5** - Juiste tags voor alle elementen
-- ✅ **Meta tags** - Title, description, keywords
-- ✅ **Open Graph** - Social media previews
-- ✅ **Schema.org** - Structured data voor zoekmachines
-- ✅ **Mobile optimized** - Responsive design
-- ✅ **Fast loading** - Statische bestanden, minimale scripts
-- ✅ **Sitemap.xml** - Voor Google/Bing indexering
-- ✅ **Robots.txt** - Search engine instructions
+> Verwijs nooit naar een bestand dat niet bestaat: Cloudflare geeft dan de homepage terug
+> (status 200) en bewaart dat 30 dagen, waardoor bezoekers een kapotte foto zien.
 
-### SEO checklist
+## 🔍 SEO
 
-- [ ] Update `<title>` in `index.html` met jouw salon naam
-- [ ] Pas `meta description` aan
-- [ ] Voeg je Google Business email toe in schema.org structured data
-- [ ] Voeg echte foto's toe in plaats van placeholders
-- [ ] Zorg voor unieke, beschrijvende alt-teksten
-- [ ] Test met [Google Mobile-Friendly Test](https://search.google.com/test/mobile-friendly)
-- [ ] Voer SEO audit uit met [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+- Meta title/description en Open Graph in `index.html`
+- Schema.org `LocalBusiness` (JSON-LD) in `index.html`, `priceRange` **€10 - €60**
+- `sitemap.xml` en `robots.txt`
 
-### Google Analytics (toekomstig)
+## 🔐 Privacy & beveiliging
 
-Voor analytics kun je volgende toevoegen:
+- Geen cookies, geen tracking, geen formulieren – contact loopt via WhatsApp
+- Alleen `localStorage` voor weergavevoorkeuren (grijswaarden, lettergrootte, foto's)
+- Beveiligingsheaders in `_headers` (`nosniff`, `X-Frame-Options`, `Referrer-Policy`, ...)
+- HTML-escaping van alle JSON-inhoud in `script.js`
+- HTTPS via Cloudflare
 
-```html
-<!-- Voeg voor </head> toe -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID');
-</script>
-```
+Voeg je later analytics of een formulier toe, dan zijn een cookiebanner en privacyverklaring nodig.
 
-Vervang `GA_MEASUREMENT_ID` met je Google Analytics ID.
+## 📝 Nog te doen
 
-### Google Ads (toekomstig)
+- [ ] Echte **telefoon**, **e-mail**, **adres** en **Maps-link** in `data/settings.json` (nu voorbeeldwaarden)
+- [ ] Dezelfde gegevens + domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
+      en in `sitemap.xml`/`robots.txt` (nu `nailsalonemma.nl`)
+- [ ] Echte Instagram/Facebook-links in `settings.json`
+- [ ] Klantfoto's in de Impressie-albums; eigen foto's i.p.v. stockfoto's op de tegels
+- [ ] Eigen foto's per behandeling (nu 10 gedeelde foto's)
 
-Voor conversie tracking met Google Ads:
+## ❓ Problemen oplossen
 
-```html
-<!-- Event snippet voor conversie pagina/scherm in Google Ads - Conversie label: ... -->
-gtag('event', 'conversion', {
-  'value': 1.0,
-  'currency': 'EUR'
-});
-```
-
-## 🔐 Privacy & Beveiliging
-
-### Huidige veiligheidsmaatregelen
-
-- ✅ **Geen cookies** - Geen tracking cookies
-- ✅ **Geen tracking** - Geen Google Analytics/Facebook Pixel
-- ✅ **Geen formulieren** - Geen gegevensverzameling
-- ✅ **HTTPS** - Cloudflare voegt automatisch HTTPS toe
-- ✅ **Security headers** - Ingesteld in `_headers` bestand
-- ✅ **XSS protection** - HTML escaping in JavaScript
-- ✅ **CORS safe** - Geen externe API-aanroepen
-
-### Privacy statement (optioneel)
-
-Voeg een privacy pagina toe:
-
-1. Maak `privacy.html` aan
-2. Link in footer: `<a href="./privacy.html">Privacy</a>`
-3. Beschrijf je privacy-beleid
-
-### GDPR compliance
-
-Omdat deze site geen gegevens verzamelt:
-- Geen gegevensverwerkingsovereenkomst nodig
-- Geen cookie-banner nodig
-- Geen privacyverklaring verplicht (maar aanbevolen)
-
-**Voor toekomstige toevoegingen:**
-- Als je Google Analytics toevoegt → Cookie consent banner
-- Als je contactformulier toevoegt → Privacy statement
-- Als je newsletters start → Opt-in mailing list
-
-## 🛠️ Onderhoud & Updates
-
-### Regelmatig bijwerken
-
-- **Maandelijks**: Controleer prijzen en openingstijden
-- **Kwartaal**: Voeg nieuw galerij werk toe
-- **Bij seizoen**: Update behandelingen/promoties
-- **Jaarlijks**: Controleer alle contactgegevens
-
-### Backup maken
-
-```bash
-# Maak regelmatig backup via Git
-git push origin main
-
-# Of lokale backup
-xcopy C:\MyDocs\DEVOPS\EmStudio C:\Backups\EmStudio-backup /E /I /Y
-```
-
-### Problemen oplossen
-
-**Q: Foto's laden niet?**
-- Controleer bestandspaden in JSON
-- Zorg dat je een HTTP-server gebruikt (niet `file://`)
-
-**Q: Prijzen worden niet getoond?**
-- Check console voor JSON-fouten (F12 → Console)
-- Valideer `services.json` op [jsonlint.com](https://www.jsonlint.com/)
-
-**Q: WhatsApp link werkt niet?**
-- Zorg dat telefoonnummer correct is met landscode (bijv. +31)
-- Verwijder hyphens/spaties uit nummer
-
-## 📞 Ondersteuning
-
-Voor vragen of problemen:
-1. Check de [README tips](#onderhoud--updates)
-2. Open browser console (F12) voor JavaScript-fouten
-3. Valideer JSON-bestanden
-4. Test met ander browser
-
-## 📄 Licentie
-
-Dit project is gemaakt voor Emma NailStudio. © 2024
-
----
-
-**Klaar om te starten?**
-
-1. ✅ Bewerk `data/settings.json` met jouw salon info
-2. ✅ Bewerk `data/services.json` met jouw behandelingen
-3. ✅ Voeg foto's toe in `images/gallery/`
-4. ✅ Test lokaal: `python -m http.server 8000`
-5. ✅ Push naar GitHub
-6. ✅ Deploy naar Cloudflare Pages
-
-Succes! 🎉
+| Probleem | Oplossing |
+|---|---|
+| Wijziging niet zichtbaar online | Gepusht? Wacht 1 minuut, Ctrl+F5. CSS/JS: `?v=N` verhoogd? |
+| Foto laadt niet | Bestandsnaam exact (kleine letters)? Bestand gecommit? Pad in JSON klopt? |
+| Oude foto blijft zichtbaar | Versie verhogen (`?v=N`) in de JSON |
+| Prijzen/behandelingen leeg | JSON-fout → controleer op https://jsonlint.com of F12 → Console |
+| WhatsApp opent niet goed | Nummer in `settings.json` met landcode, zonder spaties |
+| Lokaal leeg scherm | Gebruik een HTTP-server, niet `file://` |

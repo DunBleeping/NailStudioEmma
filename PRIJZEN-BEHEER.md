@@ -2,15 +2,20 @@
 
 ## 📋 Hoe Prijzen Aanpassen?
 
-**Alles staat in één bestand:** `data/services.json`
+**De website leest alles uit één bestand:** `data/services.json`
 
 Alle wijzigingen daar verschijnen AUTOMATISCH op:
-- ✅ Homepage
-- ✅ Behandelingen kaarten
+- ✅ Behandelingen kaarten (incl. categoriemenu)
 - ✅ Prijslijst tabel
-- ✅ Contact info
+- ✅ Blok "Optionele toeslagen"
 
 **Geen HTML/CSS aanpassingen nodig!**
+
+> **Bronlijst:** `data/Prijzenlijst.csv` is de actuele prijzenlijst van de salon (naam, prijs, duur).
+> De website gebruikt de CSV niet zelf: pas bij een wijziging zowel de CSV als `services.json` aan
+> (of vraag Copilot om `services.json` opnieuw uit de CSV op te bouwen).
+>
+> **Live zetten:** opslaan → commit → push naar GitHub (`main`). Cloudflare Pages publiceert binnen ±1 minuut.
 
 ---
 
@@ -31,21 +36,22 @@ Zoek naar de naam van de behandeling, bijvoorbeeld:
   "name": "New Set Witte Poeder",
   "category": "Nagels - Poeder",
   "description": "Nieuwe set kunstnagels...",
-  "price": 38,  ← WIJZIG HIER!
+  "price": 48,  ← WIJZIG HIER!
   "duration": "60 minuten",
-  "image": "./images/gallery/witte-poeder.jpg"
+  "image": "./images/services/witte-poeder.jpg",
+  "note": "Oude lak/gellak eerst verwijderen? +€5"
 }
 ```
 
 ### Stap 3: Wijzig prijs
-Verander het getal (38 → uw prijs)
+Verander het getal (48 → uw prijs)
 
 ### Stap 4: Opslaan
 Ctrl+S of File → Save
 
-### Stap 5: Website vernieuwen
-Refresh browser (Ctrl+F5)
-Prijs is bijgewerkt! ✅
+### Stap 5: Testen en live zetten
+- Lokaal: refresh browser (Ctrl+F5)
+- Live: commit + push; na ±1 minuut is de prijs bijgewerkt op emmanagelstudio.vip ✅
 
 ---
 
@@ -98,7 +104,7 @@ Prijs is bijgewerkt! ✅
   "description": "Omschrijving",
   "price": 25,
   "duration": "45 minuten",
-  "image": "./images/gallery/foto.jpg"
+  "image": "./images/services/foto.jpg"
 }
 ```
 
@@ -109,9 +115,31 @@ Prijs is bijgewerkt! ✅
 - **description**: Korte omschrijving
 - **price**: Prijs in EUR (getal zonder €)
 - **duration**: Behandelingstijd
-- **image**: Afbeelding pad (optioneel)
+- **image**: Foto op de kaart, uit `images/services/` (zie FOTO-UPLOADEN.md). Het bestand moet bestaan!
+- **note** *(optioneel)*: Extra regel op de kaart, bijv. `"Oude lak/gellak eerst verwijderen? +€5"`.
+  Alle nieuwe sets hebben deze notitie.
 
 **Let op:** Zet komma na vorig item! ✓
+
+---
+
+## ➕ Optionele toeslagen (`extras`)
+
+Onderaan `services.json` staat de lijst `extras`. Die verschijnt onder de prijstabel als
+**"Optionele toeslagen"** met een `+` voor de prijs:
+
+```json
+"extras": [
+  {
+    "id": "verwijderen-oude-lak",
+    "name": "Verwijderen oude lak/gellak",
+    "description": "Toeslag op een nieuwe set als er nog oude lak of gellak op de nagels zit",
+    "price": 5
+  }
+]
+```
+
+Een nieuwe toeslag toevoegen = een blok in `extras` erbij zetten (komma niet vergeten).
 
 ---
 
@@ -135,13 +163,14 @@ Prijs is bijgewerkt! ✅
 
 ## 🏷️ Categorie Aanpassen
 
-Huidge categorieën:
-- Wenkbrauwen
-- Nagels - Poeder
-- Nagels - Gellak
-- Nagels - Design
-- Nagels - Overig
+Huidige categorieën (het categoriemenu wordt automatisch opgebouwd):
 - Hands & Feet
+- Nagels - BIAB
+- Nagels - Design
+- Nagels - Gellak
+- Nagels - Overig
+- Nagels - Poeder
+- Wenkbrauwen
 
 **Zelf maken:**
 Wijzig `"category"` naar uw kategorie:
@@ -261,7 +290,7 @@ python -m http.server 8000
   "description": "Permanente wenkbrauw wave behandeling",
   "price": 45,
   "duration": "45 minuten",
-  "image": "./images/gallery/brows-lam.jpg"
+  "image": "./images/services/wenkbrauw-epileren.jpg"
 }
 ```
 
@@ -347,6 +376,7 @@ A: Waarschijnlijke oorzaken:
 - Quotes om getallen gezet
 - Browser cache (Ctrl+F5)
 - Server niet gestart (python -m http.server 8000)
+- Nog niet gecommit/gepusht (live site verandert pas na een push)
 
 **V: Kan ik nieuwe categorieën maken?**
 A: Ja! Zet gewoon een naam in `"category"`:
