@@ -7,7 +7,7 @@
 Alle wijzigingen daar verschijnen AUTOMATISCH op:
 - ✅ Behandelingen kaarten (incl. categoriemenu)
 - ✅ Prijslijst tabel
-- ✅ Blok "Optionele toeslagen"
+- ✅ Blok "Toeslagen"
 
 **Geen HTML/CSS aanpassingen nodig!**
 
@@ -129,23 +129,28 @@ Ctrl+S of File → Save
 
 ---
 
-## ➕ Optionele toeslagen (`extras`)
+## ➕ Toeslagen (`extras`)
 
 Onderaan `services.json` staat de lijst `extras`. Die verschijnt onder de prijstabel als
-**"Optionele toeslagen"** met een `+` voor de prijs:
+**"Toeslagen"** met een `+` voor de prijs:
 
 ```json
 "extras": [
   {
     "id": "verwijderen-oude-lak",
     "name": "Verwijderen oude lak/gellak",
-    "description": "Toeslag op een nieuwe set als er nog oude lak of gellak op de nagels zit",
+    "description": "Bij een nieuwe set moet aanwezige oude lak/gellak eerst worden verwijderd (+€5). Dit is verplicht als er nog lak op de nagels zit. Deze optie is standaard aangevinkt; vink alleen uit als verwijderen niet nodig is.",
+    "defaultSelected": true,
     "price": 5
   }
 ]
 ```
 
 Een nieuwe toeslag toevoegen = een blok in `extras` erbij zetten (komma niet vergeten).
+`defaultSelected: true` vinkt de toeslag standaard aan bij een nieuwe set. Verwijderen is verplicht
+als er oude lak/gellak aanwezig is; de klant mag uitvinken als verwijderen niet nodig is.
+Een bewuste keuze blijft onthouden zolang er een nieuwe set in het mandje staat. Na het verwijderen
+van alle nieuwe sets of leegmaken van het mandje wordt de standaardkeuze opnieuw toegepast.
 
 ---
 

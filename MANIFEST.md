@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=8`
+- `index.html` – de pagina; CSS/JS geladen met `?v=9`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -33,14 +33,14 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ### js/script.js
 - Laadt `settings.json`, `services.json`, `gallery.json`, `translations.json` (altijd vers: `cache: 'no-cache'`)
-- Bouwt behandelkaarten, categoriemenu, prijstabel en "Optionele toeslagen"
+- Bouwt behandelkaarten, categoriemenu, prijstabel en "Toeslagen"
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
 - Taalkeuze Nederlands/Engels, inclusief behandelingen, galerij en schermlezerlabels
 - Behandelmandje: WhatsApp-bericht met gekozen behandelingen, toeslag en totaal, eerst Engels dan Nederlands
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
 - Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen),
-  `cart`, `cartExtras`, `language` (standaard `nl`)
+  `cart`, `cartExtras`, `cartExtrasDeclined` (bewust uitgevinkte toeslagen), `language` (standaard `nl`)
 - HTML-escaping van alle JSON-inhoud
 
 ### data/

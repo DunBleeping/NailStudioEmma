@@ -70,6 +70,8 @@ Volledige uitleg: [README.md](README.md)
 - Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · 🖼️ foto's
 - Zoekbalk onder "Categorieën"; *+ dit wil ik* onderaan elke behandelkaart → 🛒 Mandje → WhatsApp-bericht met
   behandelingen, toeslag en totaal, **altijd eerst Engels en daarna Nederlands**
+- Nieuwe set: verwijderen oude lak/gellak **+€5 standaard aangevinkt**, verplicht bij aanwezige lak.
+  Alleen uitvinken als verwijderen niet nodig is; die keuze blijft binnen het huidige mandje onthouden.
 
 ---
 
@@ -78,7 +80,7 @@ Volledige uitleg: [README.md](README.md)
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=8`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=9`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
 

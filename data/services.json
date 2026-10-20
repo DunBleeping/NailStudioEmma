@@ -3,7 +3,8 @@
     {
       "id": "verwijderen-oude-lak",
       "name": "Verwijderen oude lak/gellak",
-      "description": "Toeslag op een nieuwe set als er nog oude lak of gellak op de nagels zit",
+      "description": "Bij een nieuwe set moet aanwezige oude lak/gellak eerst worden verwijderd (+€5). Dit is verplicht als er nog lak op de nagels zit. Deze optie is standaard aangevinkt; vink alleen uit als verwijderen niet nodig is.",
+      "defaultSelected": true,
       "price": 5
     }
   ],

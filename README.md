@@ -52,7 +52,7 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
    en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
    knop **+ dit wil ik**, onderaan de kaart en op gelijke hoogte binnen elke rij).
-4. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Optionele toeslagen**
+4. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set).
 5. **Impressie** – 6 tegels met een stijl (Klassieke Rode Nagels, BIAB Nude, Floral Nail Art,
    Ombre Effect, Glitter Glamour, Minimalistisch Design). Klik → **album** met foto's van echte
@@ -76,8 +76,16 @@ de hero-knop, de contactknop en de zwevende knop openen allemaal WhatsApp met ee
 
 **Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ dit wil ik* in het mandje. In het
 mandje staan de gekozen behandelingen met duur en prijs, het totaal en (alleen bij een nieuwe set) het
-vinkje *Verwijderen oude lak/gellak +€5*. *Afspraak aanvragen via WhatsApp* opent WhatsApp met een
-ingevuld bericht, bijvoorbeeld:
+vinkje *Verwijderen oude lak/gellak +€5*.
+
+Bij een nieuwe set is deze optie **standaard aangevinkt**. Als er nog oude lak/gellak op de nagels zit,
+is verwijderen verplicht. Klanten mogen uitvinken als verwijderen niet nodig is. Die keuze blijft
+behouden bij taalwisselen, herladen en toevoegen van behandelingen zolang er een nieuwe set in het
+mandje staat (localStorage `cartExtrasDeclined`). Zodra alle nieuwe sets verwijderd zijn of het mandje
+wordt leeggemaakt, begint een volgende nieuwe set weer met de toeslag aangevinkt.
+De toeslag telt eenmaal mee in het totaal en in beide taalversies van het WhatsApp-bericht.
+
+*Afspraak aanvragen via WhatsApp* opent WhatsApp met een ingevuld bericht, bijvoorbeeld:
 
 ```
 English
@@ -248,7 +256,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=8`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=9`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

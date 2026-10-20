@@ -14,7 +14,8 @@ let appData = {
   activeCategory: 'all',
   searchQuery: '',
   cart: [],
-  cartExtras: []
+  cartExtras: [],
+  cartExtrasDeclined: []
 };
 
 // ============================================
@@ -398,7 +399,7 @@ function initializePricing() {
   if (appData.services.extras && appData.services.extras.length > 0) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `
-      <td colspan="3" style="background: #f5f0eb; font-weight: 600; padding: 1rem;">${escapeHtml(t('Optionele toeslagen'))}</td>
+      <td colspan="3" style="background: #f5f0eb; font-weight: 600; padding: 1rem;">${escapeHtml(t('Toeslagen'))}</td>
     `;
     tableBody.appendChild(headerRow);
 
@@ -1135,6 +1136,20 @@ function getActiveCartExtras() {
   return appData.services.extras.filter((e) => appData.cartExtras.includes(e.id));
 }
 
+function applyDefaultCartExtras() {
+  if (!cartAllowsExtras()) {
+    appData.cartExtras = [];
+    appData.cartExtrasDeclined = [];
+    return;
+  }
+  (appData.services.extras || []).forEach((extra) => {
+    if (extra.defaultSelected && !appData.cartExtrasDeclined.includes(extra.id)
+      && !appData.cartExtras.includes(extra.id)) {
+      appData.cartExtras.push(extra.id);
+    }
+  });
+}
+
 function getCartTotal() {
   const services = getCartServices().reduce((sum, s) => sum + s.price, 0);
   const extras = getActiveCartExtras().reduce((sum, e) => sum + e.price, 0);
@@ -1145,6 +1160,7 @@ function saveCart() {
   try {
     localStorage.setItem('cart', JSON.stringify(appData.cart));
     localStorage.setItem('cartExtras', JSON.stringify(appData.cartExtras));
+    localStorage.setItem('cartExtrasDeclined', JSON.stringify(appData.cartExtrasDeclined));
   } catch (e) {
     // Storage may be unavailable (private mode); the cart still works for this visit
   }
@@ -1156,6 +1172,9 @@ function initializeCart() {
   const validIds = new Set(appData.services.services.map((s) => s.id));
   appData.cart = [...new Set(loadStoredArray('cart'))].filter((id) => validIds.has(id));
   appData.cartExtras = loadStoredArray('cartExtras');
+  appData.cartExtrasDeclined = loadStoredArray('cartExtrasDeclined');
+  applyDefaultCartExtras();
+  saveCart();
 
   const grid = document.getElementById('services-grid');
   if (grid) {
@@ -1191,7 +1210,9 @@ function initializeCart() {
       if (!box) return;
       const id = box.value;
       appData.cartExtras = appData.cartExtras.filter((x) => x !== id);
+      appData.cartExtrasDeclined = appData.cartExtrasDeclined.filter((x) => x !== id);
       if (box.checked) appData.cartExtras.push(id);
+      else appData.cartExtrasDeclined.push(id);
       saveCart();
       renderCart();
     });
@@ -1199,6 +1220,7 @@ function initializeCart() {
     document.getElementById('cart-clear-btn').addEventListener('click', () => {
       appData.cart = [];
       appData.cartExtras = [];
+      appData.cartExtrasDeclined = [];
       saveCart();
       setCartPanelOpen(false);
       renderCart();
@@ -1224,6 +1246,7 @@ function toggleCartItem(id) {
   } else {
     appData.cart.push(id);
   }
+  applyDefaultCartExtras();
   saveCart();
   renderCart();
 }
