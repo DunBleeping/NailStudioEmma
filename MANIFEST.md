@@ -22,7 +22,8 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
 - `start-server.py` – lokale testserver
 - Documentatie: `README.md`, `QUICK-REFERENCE.md`, `PRIJZEN-BEHEER.md`, `FOTO-UPLOADEN.md`,
-  `ACCESSIBILITY.md`, `MANIFEST.md`
+  `ACCESSIBILITY.md`, `MANIFEST.md`, `SETUP-NEW-COMPUTER.md` (installatie op een nieuwe pc)
+- `.github/copilot-instructions.md` – projectcontext die GitHub Copilot automatisch laadt
 
 ### css/style.css
 - CSS-variabelen voor het kleurenpalet (goud `#d4a574`, crème `#f5f0eb`, bruin `#8b7355`)
