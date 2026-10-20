@@ -139,34 +139,41 @@ Elke tegel onder **Impressie** is een album:
 - Zolang een album nog leeg is (`"photos": []`), ziet de bezoeker alleen de voorbeeldfoto met de tekst
   *"Voorbeeldfoto - echte resultaten van onze klanten volgen binnenkort."*
 
-### Klantfoto's toevoegen (voorbeeld: Floral Nail Art)
+### Klantfoto's toevoegen
 
-1. Maak een map per album en zet de foto's erin, bijvoorbeeld:
+Elk album heeft een eigen map met een `LEESMIJ.txt` met de voorgestelde bestandsnamen:
+
+| Album | Map | Bestandsnamen |
+|---|---|---|
+| Klassieke Rode Nagels | `images/gallery/rode-nagels/` | `rode-nagels-01.jpg`, `rode-nagels-02.jpg`, ... |
+| BIAB Nude | `images/gallery/biab-nude/` | `biab-nude-01.jpg`, ... |
+| Floral Nail Art | `images/gallery/floral/` | `floral-01.jpg`, ... |
+| Ombre Effect | `images/gallery/ombre/` | `ombre-01.jpg`, ... |
+| Glitter Glamour | `images/gallery/glitter/` | `glitter-01.jpg`, ... |
+| Minimalistisch Design | `images/gallery/minimalistisch/` | `minimalistisch-01.jpg`, ... |
+
+1. Zet de foto's in de juiste map. Kleine letters, geen spaties, `.jpg` (of `.jpeg/.png/.webp`),
+   liefst max. 1200 px breed en kleiner dan 500 KB. De volgorde op de site is de volgorde van de namen.
+2. *(Optioneel)* Onderschriften: maak in die map een `descript.ion` met per regel
+   `bestandsnaam onderschrift`, bijvoorbeeld `rode-nagels-01.jpg Klassiek rood op BIAB`.
+3. Voer in de projectmap uit:
    ```
-   images/gallery/floral/floral-01.jpg
-   images/gallery/floral/floral-02.jpg
+   python tools/update_galerij.py
    ```
-   Gebruik kleine letters, geen spaties, `.jpg`, liefst max. 1200px breed en < 300 KB.
-2. Zet de foto's in `data/gallery.json` bij het juiste album onder `photos`:
-   ```json
-   {
-     "id": "gallery-3",
-     "title": "Floral Nail Art",
-     "src": "./images/gallery/nails-3.jpg?v=2",
-     ...
-     "photos": [
-       { "src": "./images/gallery/floral/floral-01.jpg", "caption": "Bloemetjes op nude BIAB" },
-       { "src": "./images/gallery/floral/floral-02.jpg", "caption": "Lentebloemen op gellak" }
-     ]
-   }
-   ```
-   `caption` (onderschrift) en `alt` (omschrijving voor schermlezers) zijn optioneel.
-3. Commit en push; Cloudflare zet het binnen een minuut live.
+   Het script zet alle gevonden foto's in `data/gallery.json` (veld `photos`), met een versiecode
+   zodat een vervangen foto meteen zichtbaar is.
+4. Commit en push; Cloudflare zet het binnen een minuut live.
+
+Bezoekers bladeren door een album met de pijltjes, de pijltjestoetsen of door te vegen op mobiel.
+
+> **Let op:** zet nooit zelf bestandsnamen in `gallery.json` van foto's die nog niet bestaan.
+> Cloudflare geeft voor een ontbrekend bestand de homepage terug (en bewaart dat 30 dagen),
+> waardoor bezoekers een kapotte foto zien. Het script neemt alleen bestaande foto's op.
 
 **Tips:**
 - Wil je een eigen foto als voorbeeld op de tegel? Vervang `nails-N.jpg` en verhoog `?v=2` naar `?v=3` in `gallery.json`.
 - Vraag klanten toestemming voordat je een foto van hun handen/nagels online zet (AVG).
-- Nieuwe stijl toevoegen? Kopieer een blok in `gallery.json`, geef een uniek `id` en eigen titel/foto's.
+- Nieuwe stijl toevoegen? Kopieer een blok in `gallery.json`, geef een uniek `id`, titel en `folder`, en draai het script.
 
 ---
 

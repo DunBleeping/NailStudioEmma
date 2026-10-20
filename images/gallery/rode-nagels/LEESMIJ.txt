@@ -1,0 +1,26 @@
+Album: Klassieke Rode Nagels
+=====================================
+
+Zet hier de foto's van echte klantresultaten voor "Klassieke Rode Nagels".
+Voorgestelde bestandsnamen (verder nummeren mag, bv. -09, -10, ...):
+
+  rode-nagels-01.jpg
+  rode-nagels-02.jpg
+  rode-nagels-03.jpg
+  rode-nagels-04.jpg
+  rode-nagels-05.jpg
+  rode-nagels-06.jpg
+  rode-nagels-07.jpg
+  rode-nagels-08.jpg
+
+Regels:
+- kleine letters, geen spaties, .jpg (ook .jpeg/.png/.webp mag)
+- liefst max. 1200 px breed en kleiner dan 500 KB
+- volgorde op de site = volgorde van de bestandsnamen
+- vraag de klant toestemming voordat je de foto online zet
+
+Onderschrift per foto (optioneel): maak in deze map een descript.ion met regels als
+  rode-nagels-01.jpg Onderschrift bij deze foto
+
+Daarna in de projectmap:  python tools/update_galerij.py
+en committen + pushen. Zie FOTO-UPLOADEN.md voor de uitleg.

@@ -381,6 +381,22 @@ function initializeGalleryModal() {
         closeGalleryModal();
       }
     };
+
+    let touchStartX = null;
+    let touchStartY = null;
+    modal.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+      touchStartY = event.changedTouches[0].clientY;
+    }, { passive: true });
+    modal.addEventListener('touchend', (event) => {
+      if (touchStartX === null) return;
+      const dx = event.changedTouches[0].clientX - touchStartX;
+      const dy = event.changedTouches[0].clientY - touchStartY;
+      touchStartX = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        navigateGallery(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
   }
 
   // Keyboard navigation

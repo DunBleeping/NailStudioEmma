@@ -1,0 +1,26 @@
+Album: Minimalistisch Design
+=====================================
+
+Zet hier de foto's van echte klantresultaten voor "Minimalistisch Design".
+Voorgestelde bestandsnamen (verder nummeren mag, bv. -09, -10, ...):
+
+  minimalistisch-01.jpg
+  minimalistisch-02.jpg
+  minimalistisch-03.jpg
+  minimalistisch-04.jpg
+  minimalistisch-05.jpg
+  minimalistisch-06.jpg
+  minimalistisch-07.jpg
+  minimalistisch-08.jpg
+
+Regels:
+- kleine letters, geen spaties, .jpg (ook .jpeg/.png/.webp mag)
+- liefst max. 1200 px breed en kleiner dan 500 KB
+- volgorde op de site = volgorde van de bestandsnamen
+- vraag de klant toestemming voordat je de foto online zet
+
+Onderschrift per foto (optioneel): maak in deze map een descript.ion met regels als
+  minimalistisch-01.jpg Onderschrift bij deze foto
+
+Daarna in de projectmap:  python tools/update_galerij.py
+en committen + pushen. Zie FOTO-UPLOADEN.md voor de uitleg.

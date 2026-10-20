@@ -1,0 +1,26 @@
+Album: BIAB Nude
+=====================================
+
+Zet hier de foto's van echte klantresultaten voor "BIAB Nude".
+Voorgestelde bestandsnamen (verder nummeren mag, bv. -09, -10, ...):
+
+  biab-nude-01.jpg
+  biab-nude-02.jpg
+  biab-nude-03.jpg
+  biab-nude-04.jpg
+  biab-nude-05.jpg
+  biab-nude-06.jpg
+  biab-nude-07.jpg
+  biab-nude-08.jpg
+
+Regels:
+- kleine letters, geen spaties, .jpg (ook .jpeg/.png/.webp mag)
+- liefst max. 1200 px breed en kleiner dan 500 KB
+- volgorde op de site = volgorde van de bestandsnamen
+- vraag de klant toestemming voordat je de foto online zet
+
+Onderschrift per foto (optioneel): maak in deze map een descript.ion met regels als
+  biab-nude-01.jpg Onderschrift bij deze foto
+
+Daarna in de projectmap:  python tools/update_galerij.py
+en committen + pushen. Zie FOTO-UPLOADEN.md voor de uitleg.

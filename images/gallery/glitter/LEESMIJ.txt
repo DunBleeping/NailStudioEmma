@@ -1,0 +1,26 @@
+Album: Glitter Glamour
+=====================================
+
+Zet hier de foto's van echte klantresultaten voor "Glitter Glamour".
+Voorgestelde bestandsnamen (verder nummeren mag, bv. -09, -10, ...):
+
+  glitter-01.jpg
+  glitter-02.jpg
+  glitter-03.jpg
+  glitter-04.jpg
+  glitter-05.jpg
+  glitter-06.jpg
+  glitter-07.jpg
+  glitter-08.jpg
+
+Regels:
+- kleine letters, geen spaties, .jpg (ook .jpeg/.png/.webp mag)
+- liefst max. 1200 px breed en kleiner dan 500 KB
+- volgorde op de site = volgorde van de bestandsnamen
+- vraag de klant toestemming voordat je de foto online zet
+
+Onderschrift per foto (optioneel): maak in deze map een descript.ion met regels als
+  glitter-01.jpg Onderschrift bij deze foto
+
+Daarna in de projectmap:  python tools/update_galerij.py
+en committen + pushen. Zie FOTO-UPLOADEN.md voor de uitleg.

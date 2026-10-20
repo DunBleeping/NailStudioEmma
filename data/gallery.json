@@ -7,6 +7,7 @@
       "src": "./images/gallery/nails-1.jpg?v=2",
       "alt": "Rode gellak manicure - klassiek elegant design",
       "category": "gellak",
+      "folder": "rode-nagels",
       "photos": []
     },
     {
@@ -16,6 +17,7 @@
       "src": "./images/gallery/nails-2.jpg?v=2",
       "alt": "BIAB Builder nagels in nude kleur met natuurlijke look",
       "category": "biab",
+      "folder": "biab-nude",
       "photos": []
     },
     {
@@ -25,6 +27,7 @@
       "src": "./images/gallery/nails-3.jpg?v=2",
       "alt": "Nail art met bloemendesigns in verschillende kleuren",
       "category": "nailart",
+      "folder": "floral",
       "photos": []
     },
     {
@@ -34,6 +37,7 @@
       "src": "./images/gallery/nails-4.jpg?v=2",
       "alt": "Ombre gellak met mooi color-fade effect",
       "category": "gellak",
+      "folder": "ombre",
       "photos": []
     },
     {
@@ -43,6 +47,7 @@
       "src": "./images/gallery/nails-5.jpg?v=2",
       "alt": "Gellak met glittertopping en glamoureus effect",
       "category": "gellak",
+      "folder": "glitter",
       "photos": []
     },
     {
@@ -52,6 +57,7 @@
       "src": "./images/gallery/nails-6.jpg?v=2",
       "alt": "Minimalistische nail art met geometrische vormen",
       "category": "nailart",
+      "folder": "minimalistisch",
       "photos": []
     }
   ]

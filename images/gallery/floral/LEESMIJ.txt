@@ -1,0 +1,26 @@
+Album: Floral Nail Art
+=====================================
+
+Zet hier de foto's van echte klantresultaten voor "Floral Nail Art".
+Voorgestelde bestandsnamen (verder nummeren mag, bv. -09, -10, ...):
+
+  floral-01.jpg
+  floral-02.jpg
+  floral-03.jpg
+  floral-04.jpg
+  floral-05.jpg
+  floral-06.jpg
+  floral-07.jpg
+  floral-08.jpg
+
+Regels:
+- kleine letters, geen spaties, .jpg (ook .jpeg/.png/.webp mag)
+- liefst max. 1200 px breed en kleiner dan 500 KB
+- volgorde op de site = volgorde van de bestandsnamen
+- vraag de klant toestemming voordat je de foto online zet
+
+Onderschrift per foto (optioneel): maak in deze map een descript.ion met regels als
+  floral-01.jpg Onderschrift bij deze foto
+
+Daarna in de projectmap:  python tools/update_galerij.py
+en committen + pushen. Zie FOTO-UPLOADEN.md voor de uitleg.
