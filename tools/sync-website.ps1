@@ -1,4 +1,7 @@
-# Voorbeeld (uitvoeren vanuit de projectmap):
+# Zonder parameters verschijnt een keuzemenu:
+# .\tools\sync-website.ps1
+#
+# Rechtstreeks uitvoeren zonder menu (blijft mogelijk):
 # .\tools\sync-website.ps1 -Bericht "Werk openingstijden bij"
 #
 # Meerdere bestanden bewust selecteren:
@@ -11,7 +14,7 @@
 # Het downloadt geen wijzigingen naar je werkbestanden en gebruikt nooit force push.
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
 param(
-    [string[]]$Bestanden = @('data\settings.json'),
+    [string[]]$Bestanden,
     [string]$Bericht = 'Werk website-instellingen bij'
 )
 
@@ -37,6 +40,77 @@ function Invoke-Git {
 
 Push-Location (Split-Path -Parent $PSScriptRoot)
 try {
+    if (-not $PSBoundParameters.ContainsKey('Bestanden')) {
+        Write-Host "`n=== Emma NailStudio: wijzigingen publiceren ==="
+        Write-Host 'Dit script bewerkt geen instellingen en kopieert geen foto''s.'
+        Write-Host 'Pas bestanden eerst aan en sla ze op in VS Code.'
+        Write-Host '1. Instellingen en openingstijden'
+        Write-Host '2. Prijzen en behandelingen (inclusief vertalingen)'
+        Write-Host '3. Nieuwe of vervangen foto''s publiceren'
+        Write-Host '4. Websitetekst en opmaak (HTML, CSS, JavaScript, vertalingen)'
+        Write-Host '5. Zelf kiezen uit alle gewijzigde bestanden'
+        Write-Host '0. Stoppen'
+        do {
+            $choice = Read-Host 'Kies 0 t/m 5'
+        } until ($choice -match '^[0-5]$')
+        if ($choice -eq '0') { return }
+
+        # Toon alleen werkelijk gewijzigde of nieuwe bestanden; selecteer nooit blind een hele map.
+        $changed = @(Invoke-Git @('-c', 'core.quotepath=false', 'ls-files', '--modified', '--others', '--exclude-standard') |
+            Sort-Object -Unique)
+        $candidates = @($changed | Where-Object {
+            switch ($choice) {
+                '1' { $_ -eq 'data/settings.json' }
+                '2' { $_ -in @('data/services.json', 'data/Prijzenlijst.csv', 'data/translations.json') }
+                '3' { $_ -match '^images/.+\.(jpg|jpeg|png|webp|svg|avif)$|^images/.+/descript\.ion$|^data/(gallery|services|translations)\.json$|^index\.html$' }
+                '4' { $_ -match '^index\.html$|^(css|js)/|^data/translations\.json$' }
+                '5' { $true }
+            }
+        })
+        if ($candidates.Count -eq 0) {
+            Write-Host 'Geen opgeslagen wijzigingen gevonden voor deze keuze. Er wordt niets gepubliceerd.'
+            return
+        }
+        if ($choice -eq '3') {
+            Write-Host "`nZet foto's vooraf in images\gallery\<album> of images\services."
+            Write-Host 'Nieuwe albumfoto''s? Werk eerst de albumlijst bij met: python tools\update_galerij.py'
+            Write-Host 'Python ontbreekt? Werk photos in data\gallery.json zorgvuldig zelf bij, of vraag hulp.'
+            Write-Host 'Behandelingsfoto''s: controleer image in data\services.json.'
+            Write-Host 'Foto vervangen? Verhoog de afbeeldingsversie (?v=) in JSON/HTML.'
+            Write-Host 'Kies straks zowel de foto''s als de gewijzigde verwijzingen; alleen uploaden toont geen nieuw album.'
+        }
+        Write-Host "`nBeschikbare bestanden:"
+        for ($i = 0; $i -lt $candidates.Count; $i++) {
+            Write-Host ("{0}. {1}" -f ($i + 1), $candidates[$i])
+        }
+        do {
+            $answer = Read-Host 'Kies bestandsnummers gescheiden door komma, A voor alle getoonde bestanden, of 0 om te stoppen'
+            if ($answer -eq '0') { return }
+            $valid = $false
+            if ($answer -eq 'A') {
+                $Bestanden = $candidates
+                $valid = $true
+            } elseif ($answer -match '^\s*\d+(\s*,\s*\d+)*\s*$') {
+                $numbers = @($answer -split ',' | ForEach-Object { [int]$_.Trim() })
+                if (@($numbers | Where-Object { $_ -lt 1 -or $_ -gt $candidates.Count }).Count -eq 0) {
+                    $Bestanden = @($numbers | ForEach-Object { $candidates[$_ - 1] })
+                    $valid = $true
+                }
+            }
+            if (-not $valid) { Write-Host 'Ongeldige keuze. Gebruik de getoonde nummers.' }
+        } until ($valid)
+
+        if (-not $WhatIfPreference) {
+            do {
+                $action = Read-Host '1 = alleen controleren, 2 = commit en publiceren, 0 = stoppen'
+            } until ($action -match '^[0-2]$')
+            if ($action -eq '0') { return }
+            if ($action -eq '1') { $WhatIfPreference = $true }
+        }
+        if (-not $PSBoundParameters.ContainsKey('Bericht') -and -not $WhatIfPreference) {
+            $Bericht = Read-Host 'Korte omschrijving van je wijziging (bijvoorbeeld: Voeg klantfoto toe)'
+        }
+    }
     if ([string]::IsNullOrWhiteSpace($Bericht)) { throw 'Geef een duidelijke commitomschrijving op.' }
     if ($Bestanden.Count -eq 0) { throw 'Selecteer minstens een bestand.' }
     $branch = Invoke-Git @('branch', '--show-current')
@@ -56,9 +130,19 @@ try {
             -not (Test-Path -LiteralPath $full -PathType Leaf)) {
             throw "Geen bestaand bestand binnen de projectmap: $file"
         }
+        if ($full -match '\\images\\') {
+            $image = Get-Item -LiteralPath $full
+            if ($image.Name -cne $image.Name.ToLowerInvariant() -or $image.Name -match '\s' -or $image.Length -eq 0) {
+                throw "Foto/onderschrift heeft hoofdletters, spaties of is leeg: $file. Pas dit eerst aan."
+            }
+        }
         [IO.Path]::GetRelativePath($root, $full).Replace('\', '/')
     }
     $selected = @($selected | Select-Object -Unique)
+    foreach ($file in $selected | Where-Object { $_ -match '\.json$' }) {
+        # Ongeldige JSON niet publiceren: daardoor kunnen prijzen of de hele site leeg blijven.
+        Get-Content -LiteralPath $file -Raw | ConvertFrom-Json | Out-Null
+    }
 
     Invoke-Git @('status', '--short')
     Invoke-Git (@('diff', '--') + $selected)

@@ -85,6 +85,12 @@ Elk album heeft een eigen map met een `LEESMIJ.txt` met de voorgestelde bestands
    zodat een vervangen foto meteen zichtbaar is.
 4. Commit en push; Cloudflare zet het binnen een minuut live.
 
+**Met keuzemenu publiceren:** start `.\tools\sync-website.ps1` in PowerShell 7 en kies
+**3. Nieuwe of vervangen foto's publiceren**. Selecteer zowel de foto's als de gewijzigde
+`data/gallery.json` (of `data/services.json` bij behandelkaarten).
+Het menu publiceert reeds klaargezette bestanden: stap 3 hierboven wordt niet automatisch uitgevoerd.
+Je kunt eerst alleen controleren en daarna opnieuw starten om te publiceren.
+
 Bezoekers bladeren door een album met de pijltjes, de pijltjestoetsen of door te vegen op mobiel.
 
 **Engelse versie:** voeg voor nieuwe of gewijzigde titels, omschrijvingen, alt-teksten en

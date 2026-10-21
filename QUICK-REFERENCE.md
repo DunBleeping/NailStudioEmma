@@ -28,10 +28,17 @@ Volledige uitleg: [README.md](README.md)
 ```powershell
 cd C:\MyDocs\DevOps\EmStudio
 .\tools\sync-website.ps1 -WhatIf
-.\tools\sync-website.ps1 -Bericht "Werk website-instellingen bij"
+.\tools\sync-website.ps1
 ```
 
-Standaard alleen `data/settings.json`; het script vraagt bevestiging voordat het commit en pusht.
+Zonder `-Bestanden` verschijnt een menu: instellingen, prijzen/behandelingen, foto's,
+websitetekst/opmaak of zelf kiezen. Kies daarna de gewenste gewijzigde bestanden en
+**alleen controleren** of **publiceren**. Het script vraagt nog bevestiging voor commit/push.
+Voor foto's: zet bestanden vooraf in de juiste map en werk album-/behandelverwijzingen bij;
+het menu kopieert geen foto's en werkt de albumlijst niet automatisch bij.
+Hoofdletters, spaties en lege afbeeldingen worden geweigerd; geselecteerde JSON wordt gecontroleerd.
+Rechtstreeks alleen instellingen publiceren zonder menu:
+`.\tools\sync-website.ps1 -Bestanden "data\settings.json" -Bericht "Werk openingstijden bij"`.
 Andere bestanden expliciet selecteren met `-Bestanden "index.html","js\script.js","css\style.css"`.
 Sla alles eerst op via **Bestand → Alles opslaan**. Het script stopt bij fouten of nieuwere
 GitHub-commits en verandert geen werkbestanden via een automatische pull.
