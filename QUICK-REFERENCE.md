@@ -10,6 +10,9 @@ Volledige uitleg: [README.md](README.md)
 - **Hosting en secrets:** **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
 - **Domein:** `emmanagelstudio.vip` is volgens de eigenaar bij Cloudflare geregistreerd.
   Registratie/verlenging staat los van hosting: **Domains → Registrations**.
+- **Extra domein:** `emmanailsalon.nl`, volgens de eigenaar geregistreerd bij **STRATO**.
+  `.vip` blijft de voorkeur. Voorgesteld: een HTTPS-geschikte 301-doorverwijzing van .nl naar .vip;
+  nog niet ingesteld. Geen tweede website of domeinverhuizing nodig als de registrar goed kan doorsturen.
 - **Turnstile:** actieve widget in het hostingaccount; eerdere widget in **`emm....8@gm`** niet gebruiken.
   Secrets `TURNSTILE_SECRET_KEY` en `CONTACT_PHONE` uitsluitend bij Cloudflare.
 - **Status 21 oktober 2026:** eigenaar bevestigt live publicatie en werkende Turnstile.

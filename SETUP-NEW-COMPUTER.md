@@ -37,12 +37,32 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
 | Onderdeel | Website / route | Account en werkwijze |
 |---|---|---|
 | Domeinregistratie `emmanagelstudio.vip` | https://dash.cloudflare.com → Domains → Registrations | Volgens bevestiging van de eigenaar gekocht bij Cloudflare. Controleer hier de registratie, verlengdatum, automatische verlenging en betaalmethode. De registratie-accountkoppeling is nog niet afzonderlijk gecontroleerd. |
+| Extra domein `emmanailsalon.nl` | https://www.strato.nl → Klantenlogin | Volgens de eigenaar geregistreerd bij STRATO. Beheeraccount en huidige DNS-/doorstuurinstellingen nog niet vastgelegd of gecontroleerd. |
 | Live hosting | https://dash.cloudflare.com → **Compute → Workers & Pages → nailstudioemma** | Account **`ogdd....g@gm`**, aanmelden met identity provider **GitHub**. Alleen e-mail/wachtwoord of Google kiezen is niet dezelfde aanmeldroute. |
 | Websitecode | https://github.com/DunBleeping/NailStudioEmma | GitHub-gebruiker **DunBleeping**, productietak `main`. Cloudflare publiceert na een push. |
 | Actieve Turnstile-widget | Cloudflare, in hetzelfde account als de hosting → Turnstile | De nieuwe widget in **`ogdd....g@gm`** wordt door de website gebruikt. Modus Managed; productiehost `emmanagelstudio.vip`. |
 | Eerdere Turnstile-widget | Cloudflare → Turnstile | In **`emm....8@gm`** is eerder een widget gemaakt. Dit is niet de widget van de huidige integratie; niet de bijbehorende sleutels overnemen. |
 
 **Hostingproject openen:** https://dash.cloudflare.com/?to=/643ca8b53defdd1dcbed9d10415b2549/pages/view/nailstudioemma
+
+**Domeinkeuze en nuttig gebruik van de .nl-variant:**
+- De eigenaar geeft de voorkeur aan **EmmaNagelStudio.vip**; dit blijft het hoofddomein.
+  Hoofdletters in domeinnamen maken technisch geen verschil.
+- **EmmaNailSalon.nl** is een extra domein bij STRATO. Voorgesteld, nog niet ingesteld:
+  een permanente **301-doorverwijzing** naar `https://emmanagelstudio.vip`.
+  Geen tweede kopie van de website maken en geen frame-/maskeringsdoorsturing gebruiken.
+- Dit biedt een extra ingang voor bezoekers die een .nl-adres verwachten en beschermt de extra naam.
+  Het bezit van een extra domein geeft op zichzelf geen hogere Google-positie.
+  Gebruik in Google-profielen, sociale profielen en gewone advertenties bij voorkeur consequent het hoofddomein.
+- Bij latere uitvoering eerst de mogelijkheden van STRATO controleren: HTTP en HTTPS,
+  zowel met als zonder `www`, geldig certificaat op de .nl-variant, behoud van pad en queryparameters
+  en geen redirectlus. Ook het oude domein heeft HTTPS nodig voordat een HTTPS-doorverwijzing werkt.
+- Als STRATO dit niet passend ondersteunt, kan doorsturen via Cloudflare worden onderzocht.
+  Daarvoor eerst toestemming en DNS-/mailinstellingen controleren; een domeinverhuizing is niet automatisch nodig.
+- Voor deze extra ingang is geen Turnstile-widget op .nl nodig zolang alles eerst naar het hoofddomein
+  wordt doorgestuurd. Eventuele zakelijke e-mail via .nl is een aparte toekomstige keuze,
+  geen nieuw boekingskanaal; controleer dan mailhosting, SPF, DKIM en DMARC.
+- Deze notitie wijzigt geen DNS, nameservers, hosting, mail of doorsturing.
 
 **Status:** de eigenaar heeft op 21 oktober 2026 bevestigd dat de nieuwste website live is
 en de echte Turnstile-controle werkt. In het hostingproject staan de secrets
