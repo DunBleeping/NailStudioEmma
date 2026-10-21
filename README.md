@@ -330,6 +330,12 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 
 ### Turnstile instellen en testen
 
+- **Status 21 oktober 2026:** eigenaar bevestigt dat de deployment live is en Turnstile werkt.
+- Beheeraccount **`ogdd....g@gm`**, inloggen via **GitHub**. De oude widget in **`emm....8@gm`**
+  wordt niet gebruikt. Bewaar volledige accountgegevens alleen in de eigen wachtwoordmanager.
+- Domein `emmanagelstudio.vip` is volgens de eigenaar bij Cloudflare geregistreerd;
+  registratie/verlenging en Pages-hosting zijn aparte onderdelen.
+  Zie [de account- en domeinhandleiding](SETUP-NEW-COMPUTER.md#domein-hosting-en-accounts-bevestigd-op-21-oktober-2026).
 - Cloudflare-account voor hosting: aanmelden via GitHub; **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
 - Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret) en `CONTACT_PHONE` als **Secret** voor productie.
   Controleer de geselecteerde omgeving op de pagina; er hoeft geen pop-up te verschijnen.
@@ -349,6 +355,9 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 
 ## 📝 Nog te doen
 
+- [ ] Volgende fase: Google Search Console / Business Profile, officiële Instagram-/Facebook-links
+      en WhatsApp Business-profiel; daarna eventueel Google Ads met vooraf afgesproken budget.
+      Zie [de stappenlijst](SETUP-NEW-COMPUTER.md#volgende-fase-vindbaarheid-en-sociale-kanalen).
 - [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; telefoon is ingesteld, adres en Maps-link blijven bewust privé
 - [ ] Domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
       en in `sitemap.xml`/`robots.txt` (nu `nailsalonemma.nl`)

@@ -4,6 +4,18 @@
 
 Volledige uitleg: [README.md](README.md)
 
+## Beheer en aanmelding
+
+- **Cloudflare:** https://dash.cloudflare.com, account **`ogdd....g@gm`**, inloggen via **GitHub**.
+- **Hosting en secrets:** **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
+- **Domein:** `emmanagelstudio.vip` is volgens de eigenaar bij Cloudflare geregistreerd.
+  Registratie/verlenging staat los van hosting: **Domains → Registrations**.
+- **Turnstile:** actieve widget in het hostingaccount; eerdere widget in **`emm....8@gm`** niet gebruiken.
+  Secrets `TURNSTILE_SECRET_KEY` en `CONTACT_PHONE` uitsluitend bij Cloudflare.
+- **Status 21 oktober 2026:** eigenaar bevestigt live publicatie en werkende Turnstile.
+- Volledige accountuitleg en volgende stappen voor Google/social:
+  [SETUP-NEW-COMPUTER.md](SETUP-NEW-COMPUTER.md#domein-hosting-en-accounts-bevestigd-op-21-oktober-2026).
+
 ---
 
 ## 🔁 Werkwijze bij elke wijziging
@@ -97,11 +109,11 @@ Verwijs nooit naar een foto die nog niet bestaat (Cloudflare cachet dan 30 dagen
 
 | Probleem | Oplossing |
 |---|---|
-| Wijziging niet live | Gepusht? 1 min wachten, Ctrl+F5, `?v=` verhoogd bij CSS/JS? |
+| Wijziging niet live | Controleer Pages → Deployments en commit; bij vertraging ook GitHub/Cloudflare-status. Niet direct instellingen wijzigen. |
 | Foto laadt niet | Bestandsnaam exact gelijk (kleine letters!), bestand gecommit? |
 | Oude foto blijft staan | `?v=` verhogen in de JSON |
 | Prijzen/behandelingen leeg | JSON-fout → https://jsonlint.com of F12 → Console |
-| WhatsApp werkt niet | Nummer met `+31`, zonder spaties |
+| WhatsApp werkt niet | Live testen; controleer Turnstile-hostnaam en beide Pages-secrets. Live Server voert de contact-API niet uit. |
 | Lokaal leeg scherm | HTTP-server gebruiken, niet dubbelklikken op `index.html` |
 | Nieuwe-bezoekerweergave testen | F12 → Application → Local Storage → wissen |
 

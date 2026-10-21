@@ -29,6 +29,46 @@ More detail: [README.md](README.md), [QUICK-REFERENCE.md](QUICK-REFERENCE.md),
 [MANIFEST.md](MANIFEST.md), [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md),
 [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md), [ACCESSIBILITY.md](ACCESSIBILITY.md).
 
+### Domein, hosting en accounts (bevestigd op 21 oktober 2026)
+
+Accountnamen zijn hieronder bewust gemaskeerd. Bewaar volledige aanmeldgegevens en
+herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
+
+| Onderdeel | Website / route | Account en werkwijze |
+|---|---|---|
+| Domeinregistratie `emmanagelstudio.vip` | https://dash.cloudflare.com → Domains → Registrations | Volgens bevestiging van de eigenaar gekocht bij Cloudflare. Controleer hier de registratie, verlengdatum, automatische verlenging en betaalmethode. De registratie-accountkoppeling is nog niet afzonderlijk gecontroleerd. |
+| Live hosting | https://dash.cloudflare.com → **Compute → Workers & Pages → nailstudioemma** | Account **`ogdd....g@gm`**, aanmelden met identity provider **GitHub**. Alleen e-mail/wachtwoord of Google kiezen is niet dezelfde aanmeldroute. |
+| Websitecode | https://github.com/DunBleeping/NailStudioEmma | GitHub-gebruiker **DunBleeping**, productietak `main`. Cloudflare publiceert na een push. |
+| Actieve Turnstile-widget | Cloudflare, in hetzelfde account als de hosting → Turnstile | De nieuwe widget in **`ogdd....g@gm`** wordt door de website gebruikt. Modus Managed; productiehost `emmanagelstudio.vip`. |
+| Eerdere Turnstile-widget | Cloudflare → Turnstile | In **`emm....8@gm`** is eerder een widget gemaakt. Dit is niet de widget van de huidige integratie; niet de bijbehorende sleutels overnemen. |
+
+**Hostingproject openen:** https://dash.cloudflare.com/?to=/643ca8b53defdd1dcbed9d10415b2549/pages/view/nailstudioemma
+
+**Status:** de eigenaar heeft op 21 oktober 2026 bevestigd dat de nieuwste website live is
+en de echte Turnstile-controle werkt. In het hostingproject staan de secrets
+`TURNSTILE_SECRET_KEY` en `CONTACT_PHONE`, beide van type **Secret** (Value encrypted).
+De waarden horen nooit in code, screenshots of chat. De openbare site key staat in
+`requestContactAccess()` in `js/script.js`.
+
+**Secrets beheren, stap voor stap:**
+1. Meld aan bij Cloudflare via **GitHub**, onder **`ogdd....g@gm`**.
+2. Open **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
+3. Controleer de omgeving als die op de pagina wordt getoond; er hoeft geen pop-up te verschijnen.
+4. Wijzig de waarde van de bestaande secret, of kies **Add → Secret** als deze ontbreekt.
+   `TURNSTILE_SECRET_KEY` hoort bij de actieve widget; `CONTACT_PHONE` is internationaal met +, zonder spaties.
+5. Sla op en publiceer opnieuw. Test vervolgens op het echte domein, niet alleen via Live Server.
+
+**Belangrijk onderscheid:** Turnstile, Pages-hosting en domeinregistratie hebben aparte
+overzichten. Een lege lijst bij Domains → Registrations bewijst niet dat er geen Pages-project is.
+Een zichtbare Turnstile-widget bewijst evenmin dat de hosting in dat account staat.
+Bij "No projects found": controleer eerst loginmethode en account; maak niet zomaar een
+nieuwe applicatie aan en verander geen nameservers of domeintransfers.
+
+**Vertraging bij publiceren:** op 21 oktober 2026 vertraagde een GitHub-storing de
+push-webhooks naar Cloudflare. De code stond al op GitHub, terwijl Pages nog de oude versie
+serveerde. Controleer **Deployments**, de commit en https://www.githubstatus.com / https://www.cloudflarestatus.com
+voordat je instellingen verandert of opnieuw probeert te publiceren.
+
 ---
 
 ## 2. Install the tools
@@ -116,6 +156,11 @@ write a message → **Commit** → **Sync Changes**.
 
 ## 6. Test locally before pushing
 
+Zonder Python: installeer **Live Server** van Ritwick Dey in VS Code, open `index.html`
+en kies **Go Live** of **Open with Live Server**. Gebruik het getoonde adres, meestal
+http://127.0.0.1:5500. Laat VS Code en de server open; opslaan vernieuwt de pagina.
+Dit test de statische website, niet de Pages Function of echte contactvrijgave.
+
 ```powershell
 cd C:\MyDocs\DEVOPS\EmStudio
 python -m http.server 8765
@@ -158,6 +203,34 @@ visitor.
 - Social media links are generic (instagram.com / facebook.com).
 - Impressie albums are still empty (tiles use free Pexels stock photos).
 - `TEST-RAPPORT.txt` is outdated.
+
+### Volgende fase: vindbaarheid en sociale kanalen
+
+Nog niet uitgevoerd; eerst profielen en inhoud controleren, daarna pas betaald adverteren.
+
+1. **SEO voorbereiden:** oude domeinverwijzingen in canonical, Open Graph, Schema.org,
+   sitemap en robots vervangen door het echte domein; geen privéadres of telefoonnummer toevoegen.
+   Een Google Search-knop op de site is geen registratie bij Google en geen advertentie.
+2. **Google Search Console:** https://search.google.com/search-console →
+   website-eigendom verifiëren, de bijgewerkte sitemap indienen en indexering controleren.
+   Noteer later alleen een gemaskeerde beheeraccountnaam.
+3. **Google Business Profile:** https://business.google.com →
+   controleren of al een profiel bestaat, dan claimen/inrichten volgens Google's voorwaarden.
+   Het adres moet privé blijven; kies niet zomaar een servicegebiedprofiel als klanten uitsluitend
+   naar de salon komen. Controleer eerst welke profielvorm hiervoor is toegestaan.
+   Google kan verificatiegegevens vragen; adrespublicatie niet zonder expliciet besluit wijzigen.
+4. **Instagram en Facebook:** officiële profiel-/pagina-URL's verzamelen, beheer en
+   tweestapsverificatie controleren. Daarna `social.instagram` en `social.facebook`
+   in `data/settings.json` bijwerken en hero/footer op mobiel en desktop testen.
+   Instagram is nu uitgeschakeld zonder URL; Facebook verwijst voorlopig naar de eigen website.
+5. **WhatsApp Business:** bedrijfsprofiel, openingstijden, begroeting en eventuele catalogus
+   controleren. `social.whatsappBusiness` blijft een boolean; geen openbare `wa.me`-nummerlink
+   toevoegen die de Turnstile-toegang op de website omzeilt.
+   Een nummer dat op externe bedrijfsprofielen wordt gepubliceerd is daar wel openbaar.
+6. **Google Ads:** https://ads.google.com → pas na bovenstaande controles een campagne
+   voorbereiden. Voor activeren eerst expliciet budget, doelgroep/regio, looptijd,
+   bestemmingspagina en eventuele metingen/privacytoestemming afspreken.
+   Geen betaalde campagne automatisch starten.
 
 ---
 
