@@ -715,32 +715,12 @@ function initializeContact() {
   const contactSection = document.getElementById('contact');
   if (!contactSection) return;
 
-  // Phone
-  const phoneItem = contactSection.querySelector('[data-type="phone"]');
-  if (phoneItem && appData.settings.contact.phone) {
-    const link = phoneItem.querySelector('a');
-    if (link) {
-      link.href = `tel:${appData.settings.contact.phone}`;
-      link.textContent = appData.settings.contact.phone;
-    }
-  }
+  document.getElementById('show-phone').onclick = revealContactPhone;
 
   // Email - VERWIJDERD
   const emailItem = contactSection.querySelector('[data-type="email"]');
   if (emailItem) {
     emailItem.remove();
-  }
-
-  // Address
-  const addressItem = contactSection.querySelector('[data-type="address"]');
-  if (addressItem && appData.settings.contact.address) {
-    const link = addressItem.querySelector('a');
-    if (link) {
-      link.href = appData.settings.contact.mapLink || '#';
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.textContent = appData.settings.contact.address;
-    }
   }
 
   // WhatsApp button
@@ -787,12 +767,25 @@ function initializeContact() {
   }
 }
 
+function revealContactPhone() {
+  const phone = appData.settings.contact.phone;
+  const container = document.getElementById('contact-phone');
+  const link = container.querySelector('a');
+  link.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
+  link.textContent = phone;
+  container.hidden = false;
+  const button = document.getElementById('show-phone');
+  button.setAttribute('aria-expanded', 'true');
+  button.hidden = true;
+}
+
 function setupWhatsAppButton(element) {
   if (!element || !appData.settings) return;
 
   element.href = buildWhatsAppUrl();
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
+  element.onclick = revealContactPhone;
 }
 
 function buildWhatsAppUrl() {

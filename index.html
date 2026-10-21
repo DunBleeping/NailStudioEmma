@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=19">
+  <link rel="stylesheet" href="./css/style.css?v=20">
   <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
@@ -47,16 +47,8 @@
     "name": "Emma NailStudio",
     "image": "https://nailsalonemma.nl/images/salon.jpg",
     "description": "Emma NailStudio biedt professionele nagelbehandelingen van topkwaliteit.",
-    "telephone": "+31612345678",
     "email": "info@nailsalonemma.nl",
     "url": "https://nailsalonemma.nl/",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Hoofdstraat 123",
-      "addressLocality": "Amsterdam",
-      "postalCode": "1234 AB",
-      "addressCountry": "NL"
-    },
     "priceRange": "€10 - €60",
     "areaServed": "Amsterdam",
     "sameAs": [
@@ -251,10 +243,10 @@
               Bij Emma NailStudio maak ik prachtige nagels met professionele zorg en aandacht voor detail.
               Ontdek mijn behandelingen en laat je nagels door mij verzorgen.
             </p>
-            <p data-i18n>Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.</p>
+            <p data-i18n>Ik geloof in kwaliteit en persoonlijke aandacht. Elke cliënt verdient een unieke ervaring
+              die aansluit op hun wensen en stijl.</p>
             <p data-i18n>
-              Ik geloof in kwaliteit en persoonlijke aandacht. Elke cliënt verdient een unieke ervaring
-              die aansluit op hun wensen en stijl.
+              Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.
             </p>
           </div>
 
@@ -275,14 +267,18 @@
           <div class="contact-item" data-type="phone">
             <div class="contact-icon">📞</div>
             <h3 data-i18n>Bel mij</h3>
-            <a href="tel:">Laden...</a>
+            <button type="button" id="show-phone" aria-controls="contact-phone" aria-expanded="false" data-i18n>Toon telefoonnummer</button>
+            <div id="contact-phone" hidden aria-live="polite"><a></a></div>
           </div>
 
           <!-- Adres -->
           <div class="contact-item" data-type="address">
             <div class="contact-icon">📍</div>
             <h3 data-i18n>Bezoek mij</h3>
-            <a href="#" target="_blank" rel="noopener noreferrer">Laden...</a>
+            <details>
+              <summary data-i18n>Hoe ontvang ik het adres?</summary>
+              <p data-i18n>Ik werk uitsluitend op afspraak. Je ontvangt het adres na bevestiging van je afspraak.</p>
+            </details>
           </div>
 
           <!-- Openingstijden -->
@@ -302,13 +298,6 @@
             <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button" id="contact-booking" data-whatsapp>WhatsApp</a>
           </div>
 
-          <!-- Kaart -->
-          <div class="contact-item" data-type="map">
-            <div class="contact-icon">🗺️</div>
-            <h3>Google Maps</h3>
-            <p data-i18n>Bekijk mijn locatie en routebeschrijving</p>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button" data-i18n>Kaart openen</a>
-          </div>
         </div>
       </div>
     </section>
@@ -394,6 +383,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=19" defer></script>
+  <script src="./js/script.js?v=20" defer></script>
 </body>
 </html>

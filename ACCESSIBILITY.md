@@ -96,10 +96,11 @@ De website ziet er perfect uit op:
 
 #### 📞 Bellen
 ```
-Klik op telefoonnummer → iPhone/Android belt automatisch
+Klik op Toon telefoonnummer → klik op het nummer → de telefoonapp opent
 ```
 **Hoe het werkt:**
 - Alle telefoonnummers zijn klikbaar
+- Het nummer en de bellink verschijnen pas na **Toon telefoonnummer** of een klik op een WhatsApp-knop
 - Klik = Phone app opent
 - Direct bellen zonder typen
 
@@ -118,6 +119,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 - Altijd zichtbaar op mobiel
 - Pre-filled met standaardbericht, of met de gekozen behandelingen uit het mandje
 - Direct naar bedrijfs-WhatsApp
+- Maakt tegelijk het telefoonnummer zichtbaar bij **Bel mij**, zonder de pagina daarheen te verplaatsen
 
 #### SMS vanuit het mandje
 - Naast WhatsApp staat in het mandje **Afspraak aanvragen via SMS**.
@@ -130,14 +132,10 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 - Tik op een stijl → album met foto's van echte klantresultaten
 - **Vegen** naar links/rechts = volgende/vorige foto
 
-#### 🔗 Google Maps
-```
-Klik op adres → Google Maps opent automatisch
-```
-**Features:**
-- Toont routebeschrijving
-- Navigatie naar salon
-- Werkt offline (Google Maps cache)
+#### 📍 Bezoek mij
+- **Hoe ontvang ik het adres?** is een uitklapbare uitleg, bedienbaar met toetsenbord en aanraking.
+- De uitleg vermeldt dat het adres pas na bevestiging van de afspraak wordt gedeeld.
+- Er staat geen exact adres of kaartlink op de website.
 
 ---
 

@@ -1102,6 +1102,21 @@ body:not(.images-hidden) .photo-tip {
   font-weight: 600;
 }
 
+.contact-item button {
+  background: var(--white);
+  color: var(--text);
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.contact-item summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
 .hours-list {
   text-align: left;
   display: inline-block;

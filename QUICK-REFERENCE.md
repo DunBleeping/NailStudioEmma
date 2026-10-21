@@ -31,7 +31,7 @@ Volledige uitleg: [README.md](README.md)
 | Prijs / behandeling / duur | `data/services.json` | ook `data/Prijzenlijst.csv` bijwerken – zie [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) |
 | Toeslag (bijv. verwijderen oude lak +€5) | `data/services.json` → `extras` | |
 | WhatsApp-nummer / bericht | `data/settings.json` → `contact.whatsapp` | `+31645715179`, geen spaties |
-| Telefoon, adres, Maps | `data/settings.json` → `contact` | nu nog voorbeeldwaarden |
+| Telefoon | `data/settings.json` → `contact.phone` | zichtbaar na klikken; adres en Maps niet publiceren |
 | Openingstijden | `data/settings.json` → `hours` | |
 | Instagram / Facebook | `data/settings.json` → `social` | |
 | Behandelingsfoto | `images/services/` + `"image"` in `services.json` | zie [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
@@ -85,7 +85,7 @@ Volledige uitleg: [README.md](README.md)
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=19`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=20`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
 

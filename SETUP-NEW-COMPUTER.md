@@ -133,7 +133,7 @@ visitor.
 ## 7. Important rules (things that broke before)
 
 1. **Changed `css/style.css` or `js/script.js`?** Raise the version number `?v=N` on **both**
-   lines in `index.html` (currently `?v=19` → next is `?v=20`). Otherwise visitors may keep the
+   lines in `index.html` (currently `?v=20` → next is `?v=21`). Otherwise visitors may keep the
    old version for hours.
 2. **File names are case-sensitive on Cloudflare.** `Logo.JPG` ≠ `logo.jpg`. Use lowercase,
    no spaces.
@@ -151,7 +151,8 @@ visitor.
 
 ## 8. Open items (not done yet)
 
-- `data/settings.json`: phone, e-mail, address and Google Maps link are still **placeholders**.
+- `data/settings.json`: e-mail is still a placeholder. Phone is configured; address and Maps link
+  are intentionally not published. The address is shared privately after appointment confirmation.
 - `index.html` (Schema.org, `og:url`, `canonical`), `sitemap.xml` and `robots.txt` still point
   to `nailsalonemma.nl` instead of `emmanagelstudio.vip`.
 - Social media links are generic (instagram.com / facebook.com).

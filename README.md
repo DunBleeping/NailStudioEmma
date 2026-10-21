@@ -76,7 +76,12 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Ombre Effect, Glitter Glamour, Minimalistisch Design). Klik → **album** met foto's van echte
    klantresultaten (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
-7. **Contact & Openingstijden** – telefoon, adres, openingstijden, WhatsApp, Google Maps.
+7. **Contact & Openingstijden** – telefoon na klikken, adresuitleg, openingstijden en WhatsApp.
+   **Toon telefoonnummer** maakt het nummer en de bellink zichtbaar. Elke WhatsApp-knop doet dit ook,
+   maar opent daarnaast direct WhatsApp met het bestaande bericht en eventuele mandje-inhoud.
+   **Bezoek mij** toont na uitklappen alleen dat het adres na afspraakbevestiging wordt gedeeld.
+   Het adres en de kaartlink staan niet in de openbare configuratie of gestructureerde paginagegevens.
+   Dit is slechts een drempel voor eenvoudige crawlers: het telefoonnummer blijft openbaar in JSON en WhatsApp-links.
 8. **Footer** – links, social media, copyright.
 9. **Zwevende WhatsApp-knop** rechtsonder, met daarboven de knop **🛒 Mandje** zodra er behandelingen
    gekozen zijn.
@@ -226,8 +231,6 @@ EmStudio/
 "contact": {
   "phone": "+31 6 12345678",
   "email": "info@nailsalonemma.nl",
-  "address": "Hoofdstraat 123, 1234 AB Amsterdam",
-  "mapLink": "https://www.google.com/maps/search/...",
   "whatsapp": {
     "number": "+31645715179",
     "message": "Hallo Emma NailStudio, ik wil graag een afspraak maken voor een nagelbehandeling."
@@ -292,7 +295,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=19`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=20`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
@@ -322,8 +325,8 @@ Voeg je later analytics of een formulier toe, dan zijn een cookiebanner en priva
 
 ## 📝 Nog te doen
 
-- [ ] Echte **telefoon**, **e-mail**, **adres** en **Maps-link** in `data/settings.json` (nu voorbeeldwaarden)
-- [ ] Dezelfde gegevens + domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
+- [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; telefoon is ingesteld, adres en Maps-link blijven bewust privé
+- [ ] Domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
       en in `sitemap.xml`/`robots.txt` (nu `nailsalonemma.nl`)
 - [ ] Echte Instagram/Facebook-links in `settings.json`
 - [ ] Klantfoto's in de Impressie-albums; eigen foto's i.p.v. stockfoto's op de tegels
