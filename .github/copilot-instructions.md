@@ -1,6 +1,6 @@
 # Emma NailStudio – project guidelines
 
-Static website for a Dutch nail salon. No build step, no backend, no npm. Site text and docs are
+Static website for a Dutch nail salon, with one Pages Function for Turnstile contact verification. No build step or npm dependencies. Site text and docs are
 Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write in another language.
 
 ## Architecture
@@ -13,7 +13,9 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
 - Hosting: Cloudflare Pages auto-deploys on every push to `main` of `DunBleeping/NailStudioEmma`.
   - Live site: https://emmanagelstudio.vip
   - Cache and security headers live in `_headers`.
-- All booking goes through WhatsApp +31645715179, via elements marked `data-whatsapp` and `buildWhatsAppMessage()`.
+- Booking uses WhatsApp/SMS via `buildBookingMessage()` after Turnstile verification at `/api/contact`.
+  The number is only in the Cloudflare `CONTACT_PHONE` secret; never publish it in code, JSON, or docs.
+  `TURNSTILE_SECRET_KEY` is server-only. Production validates exact hostname and action `contact`.
   When the treatment cart is filled, the message contains the cart contents.
   There is no e-mail or online agenda; don't add booking forms.
 - See `README.md`, `MANIFEST.md`, `PRIJZEN-BEHEER.md`, `FOTO-UPLOADEN.md` and `ACCESSIBILITY.md` for details.
@@ -22,7 +24,7 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
 ## Build and test
 - Local test: `python -m http.server 8765`, then open http://127.0.0.1:8765. `file://` does not work because the page uses `fetch`.
 - Check mobile at 390 px width (iPhone) and desktop at 1280 px. Make sure there is no horizontal overflow at every font size (A– to A++).
-- There is no automated test suite.
+- Contact API regression tests: `node --test tools/contact.test.mjs`. Live Server cannot run Pages Functions.
 
 ## Conventions and pitfalls
 - **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** It is currently `?v=6`.

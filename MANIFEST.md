@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=20`
+- `index.html` – de pagina; CSS/JS geladen met `?v=21`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -45,7 +45,9 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - HTML-escaping van alle JSON-inhoud
 
 ### data/
-- `settings.json` – salon, contact, WhatsApp (+31645715179), openingstijden, social
+- `settings.json` – salon, standaardbericht, openingstijden, social; geen telefoonnummer
+- `functions/api/contact.js` – Turnstile-servercontrole en contactnummer uit secret
+- `_routes.json` – alleen de contact-API gebruikt Pages Functions
 - `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
   `extras`: verwijderen oude lak/gellak +€5
 - `gallery.json` – 6 Impressie-stijlen met voorbeeldfoto (`src`), albummap (`folder`) en klantfoto's (`photos`)

@@ -1117,6 +1117,36 @@ body:not(.images-hidden) .photo-tip {
   font-weight: 600;
 }
 
+#contact-verification {
+  margin: auto;
+  width: min(32rem, calc(100% - 1rem));
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  color: var(--text);
+}
+
+#contact-verification::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#contact-verification h2 {
+  font-size: 1.4rem;
+}
+
+#contact-verification button {
+  font: inherit;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+#verification-continue[hidden] {
+  display: none;
+}
+
 .hours-list {
   text-align: left;
   display: inline-block;

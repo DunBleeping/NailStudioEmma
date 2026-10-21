@@ -1,5 +1,17 @@
 {
   "en": {
+    "Deze controle gebruikt Cloudflare Turnstile.": "This check uses Cloudflare Turnstile.",
+    "Ik ben gevestigd in Purmerend, in de wijk Weidevenne en 200 meter van de stadcentrum.": "I am based in Purmerend, in the Weidevenne neighbourhood, 200 metres from the city centre.",
+    "Veilig contact opnemen": "Contact safely",
+    "Een korte controle helpt mijn contactgegevens tegen automatisch verzamelen te beschermen.": "A quick check helps protect my contact details from automated collection.",
+    "De contactcontrole is niet gelukt. Probeer opnieuw. Lokaal is een Pages-server nodig.": "Contact verification failed. Please try again. Local testing requires a Pages server.",
+    "Opnieuw proberen": "Try again",
+    "Sluiten": "Close",
+    "Open WhatsApp": "Open WhatsApp",
+    "Open SMS": "Open SMS",
+    "Controle geslaagd. Je kunt nu contact opnemen.": "Verification passed. You can now get in touch.",
+    "Beveiligingscontrole laden…": "Loading security check…",
+    "Contactgegevens controleren…": "Verifying contact details…",
     "Menu openen/sluiten": "Open/close menu",
     "Hoofd navigatie": "Main navigation",
     "Behandelingen": "Treatments",

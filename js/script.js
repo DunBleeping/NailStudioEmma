@@ -767,8 +767,17 @@ function initializeContact() {
   }
 }
 
-function revealContactPhone() {
-  const phone = appData.settings.contact.phone;
+const contactAccess = {
+  phone: null,
+  channel: 'phone',
+  widget: null,
+  generation: 0,
+  controller: null,
+  script: null
+};
+
+function displayContactPhone() {
+  const phone = contactAccess.phone;
   const container = document.getElementById('contact-phone');
   const link = container.querySelector('a');
   link.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
@@ -779,22 +788,177 @@ function revealContactPhone() {
   button.hidden = true;
 }
 
+function revealContactPhone() {
+  requestContactAccess('phone');
+}
+
+function contactFailure() {
+  document.getElementById('verification-status').textContent = t('De contactcontrole is niet gelukt. Probeer opnieuw. Lokaal is een Pages-server nodig.');
+  document.getElementById('verification-retry').hidden = false;
+}
+
+function loadTurnstile() {
+  if (window.turnstile) return Promise.resolve();
+  if (contactAccess.script) return contactAccess.script;
+  contactAccess.script = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    const timer = setTimeout(() => {
+      script.remove();
+      reject(new Error('Turnstile loading timed out'));
+    }, 15000);
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.onload = () => {
+      clearTimeout(timer);
+      if (window.turnstile) resolve();
+      else reject(new Error('Turnstile API unavailable'));
+    };
+    script.onerror = () => {
+      clearTimeout(timer);
+      script.remove();
+      reject(new Error('Turnstile loading failed'));
+    };
+    document.head.append(script);
+  }).catch((error) => {
+    contactAccess.script = null;
+    throw error;
+  });
+  return contactAccess.script;
+}
+
+function clearContactChallenge() {
+  contactAccess.generation++;
+  contactAccess.controller?.abort();
+  contactAccess.controller = null;
+  if (contactAccess.widget !== null && window.turnstile) {
+    window.turnstile.remove(contactAccess.widget);
+    contactAccess.widget = null;
+  }
+}
+
+function showContactContinuation() {
+  displayContactPhone();
+  const link = document.getElementById('verification-continue');
+  const channel = contactAccess.channel;
+  link.textContent = t(channel === 'whatsapp' ? 'Open WhatsApp' : channel === 'sms' ? 'Open SMS' : 'Bel mij');
+  link.href = channel === 'whatsapp' ? buildWhatsAppUrl()
+    : channel === 'sms' ? buildSmsUrl() : `tel:${contactAccess.phone}`;
+  link.target = channel === 'whatsapp' ? '_blank' : '_self';
+  link.rel = 'noopener noreferrer';
+  link.hidden = false;
+  link.onclick = () => {
+    link.href = channel === 'whatsapp' ? buildWhatsAppUrl()
+      : channel === 'sms' ? buildSmsUrl() : `tel:${contactAccess.phone}`;
+  };
+  document.getElementById('verification-status').textContent = t('Controle geslaagd. Je kunt nu contact opnemen.');
+  link.focus();
+}
+
+async function requestContactAccess(channel) {
+  const dialog = document.getElementById('contact-verification');
+  clearContactChallenge();
+  contactAccess.channel = channel;
+  document.getElementById('verification-continue').hidden = true;
+  document.getElementById('verification-retry').hidden = true;
+  document.getElementById('verification-close').onclick = () => dialog.close();
+  dialog.onclose = clearContactChallenge;
+  document.getElementById('verification-retry').onclick = () => requestContactAccess(channel);
+  if (!dialog.open) dialog.showModal();
+  if (contactAccess.phone) {
+    showContactContinuation();
+    return;
+  }
+  document.getElementById('verification-status').textContent = t('Beveiligingscontrole laden…');
+  const generation = contactAccess.generation;
+  try {
+    await loadTurnstile();
+    if (!dialog.open || generation !== contactAccess.generation) return;
+    contactAccess.widget = window.turnstile.render('#turnstile-widget', {
+      sitekey: '0x4AAAAAAFfSBMoZL4Cla1OW',
+      action: 'contact',
+      language: appData.language,
+      size: window.innerWidth < 360 ? 'compact' : 'flexible',
+      callback: async (token) => {
+        if (!dialog.open || generation !== contactAccess.generation) return;
+        document.getElementById('verification-status').textContent = t('Contactgegevens controleren…');
+        const controller = new AbortController();
+        contactAccess.controller = controller;
+        const timer = setTimeout(() => controller.abort(), 12000);
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token }),
+            cache: 'no-store',
+            signal: controller.signal
+          });
+          if (!response.ok) throw new Error(`Contact verification HTTP ${response.status}`);
+          const result = await response.json();
+          if (!/^\+[1-9]\d{7,14}$/.test(result.phone || '')) throw new Error('Invalid contact response');
+          if (!dialog.open || generation !== contactAccess.generation) return;
+          contactAccess.phone = result.phone;
+          window.turnstile.remove(contactAccess.widget);
+          contactAccess.widget = null;
+          showContactContinuation();
+        } catch (error) {
+          if (dialog.open && generation === contactAccess.generation) {
+            console.error('Contact verification failed:', error);
+            contactFailure();
+          }
+        } finally {
+          clearTimeout(timer);
+        }
+      },
+      'error-callback': () => {
+        if (dialog.open && generation === contactAccess.generation) contactFailure();
+      },
+      'timeout-callback': () => {
+        if (dialog.open && generation === contactAccess.generation) {
+          clearContactChallenge();
+          contactFailure();
+        }
+      },
+      'expired-callback': () => {
+        if (dialog.open && generation === contactAccess.generation) {
+          clearContactChallenge();
+          contactFailure();
+        }
+      }
+    });
+  } catch (error) {
+    if (dialog.open && generation === contactAccess.generation) {
+      console.error('Could not load contact verification:', error);
+      contactFailure();
+    }
+  }
+}
+
 function setupWhatsAppButton(element) {
   if (!element || !appData.settings) return;
 
-  element.href = buildWhatsAppUrl();
+  element.href = '#';
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
-  element.onclick = revealContactPhone;
+  element.onclick = (event) => {
+    if (contactAccess.phone) {
+      displayContactPhone();
+      element.href = buildWhatsAppUrl();
+    } else {
+      event.preventDefault();
+      requestContactAccess('whatsapp');
+    }
+  };
 }
 
 function buildWhatsAppUrl() {
-  const whatsappNumber = appData.settings.contact.whatsapp.number.replace(/\D/g, '');
+  if (!contactAccess.phone) throw new Error('Contact verification required');
+  const whatsappNumber = contactAccess.phone.replace(/\D/g, '');
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildBookingMessage())}`;
 }
 
 function buildSmsUrl() {
-  const number = `+${appData.settings.contact.whatsapp.number.replace(/\D/g, '')}`;
+  if (!contactAccess.phone) throw new Error('Contact verification required');
+  const number = contactAccess.phone;
   // iOS uses &body; Android and other clients use ?body.
   const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
   return `sms:${number}${isApple ? '&' : '?'}body=${encodeURIComponent(buildBookingMessage())}`;
@@ -856,7 +1020,7 @@ function initializeFooter() {
       },
       {
         name: 'WhatsApp',
-        url: appData.settings.social.whatsappBusiness,
+        url: appData.settings.social.whatsappBusiness ? '#' : '',
         icon: '💬'
       }
     ];
@@ -1415,7 +1579,16 @@ function renderCart() {
     const orderBtn = document.getElementById('cart-order-btn');
     if (orderBtn) setupWhatsAppButton(orderBtn);
     const smsBtn = document.getElementById('cart-sms-btn');
-    if (smsBtn) smsBtn.href = buildSmsUrl();
+    if (smsBtn) {
+      smsBtn.href = '#';
+      smsBtn.onclick = (event) => {
+        if (contactAccess.phone) smsBtn.href = buildSmsUrl();
+        else {
+          event.preventDefault();
+          requestContactAccess('sms');
+        }
+      };
+    }
     initializeWhatsAppButton();
   }
 }

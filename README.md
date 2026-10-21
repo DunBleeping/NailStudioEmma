@@ -77,11 +77,14 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    klantresultaten (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
 7. **Contact & Openingstijden** – telefoon na klikken, adresuitleg, openingstijden en WhatsApp.
-   **Toon telefoonnummer** maakt het nummer en de bellink zichtbaar. Elke WhatsApp-knop doet dit ook,
-   maar opent daarnaast direct WhatsApp met het bestaande bericht en eventuele mandje-inhoud.
+   **Toon telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
+   Na servercontrole verschijnt het nummer en een knop om bellen, WhatsApp of SMS te openen.
+   Deze extra klik voorkomt geblokkeerde pop-ups na asynchrone verificatie.
+   Na een geslaagde controle werken WhatsApp en SMS direct zolang de pagina openblijft.
    **Bezoek mij** toont na uitklappen alleen dat het adres na afspraakbevestiging wordt gedeeld.
    Het adres en de kaartlink staan niet in de openbare configuratie of gestructureerde paginagegevens.
-   Dit is slechts een drempel voor eenvoudige crawlers: het telefoonnummer blijft openbaar in JSON en WhatsApp-links.
+   Het nummer staat uitsluitend in een Cloudflare-secret; alleen de gecontroleerde API geeft het terug.
+   Het wordt niet in localStorage bewaard. Dit voorkomt geen verdere verspreiding door een geverifieerde bezoeker.
 8. **Footer** – links, social media, copyright.
 9. **Zwevende WhatsApp-knop** rechtsonder, met daarboven de knop **🛒 Mandje** zodra er behandelingen
    gekozen zijn.
@@ -98,7 +101,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
 - Taal **Nederlands**; bezoekers kunnen **English** kiezen. De taal wordt onthouden (localStorage `language`).
   Omschakelen behoudt het mandje, toeslagen, zoekopdracht, categoriefilter en toegankelijkheidsvoorkeuren.
 
-**Afspraken gaan via WhatsApp of SMS** (+31 6 4571 5179). Er is geen e-mail of online agenda.
+**Afspraken gaan via WhatsApp of SMS** naar het nummer in de serversecret. Er is geen e-mail of online agenda.
 De hero-knop, de contactknop en de zwevende knop openen WhatsApp met een voorbereid bericht.
 De extra SMS-optie staat uitsluitend in het mandje en gebruikt hetzelfde nummer en dezelfde inhoud.
 
@@ -174,7 +177,7 @@ Zoeken werkt op zowel Nederlandse als Engelse behandelteksten, in beide talen.
 
 ## ✨ Functies
 
-- ✅ Volledig statisch, geen backend of build-stap
+- ✅ Statische website zonder build-stap; een Pages Function controleert contacttoegang
 - ✅ Nederlands/Engels met onthouden taalkeuze; NL- of tweetalige berichten volgens de gekozen taal
 - ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
 - ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
@@ -229,18 +232,17 @@ EmStudio/
 
 ```json
 "contact": {
-  "phone": "+31 6 12345678",
   "email": "info@nailsalonemma.nl",
   "whatsapp": {
-    "number": "+31645715179",
     "message": "Hallo Emma NailStudio, ik wil graag een afspraak maken voor een nagelbehandeling."
   }
 },
 "hours": { "monday": "10:00 - 18:00", "...": "...", "sunday": "Gesloten" },
-"social": { "instagram": "", "facebook": "https://EmmaNagelStudio.vip/", "googleSearch": "https://www.google.com/search?q=Emma+NailStudio+Purmerend", "whatsappBusiness": "https://wa.me/31645715179" }
+"social": { "instagram": "", "facebook": "https://EmmaNagelStudio.vip/", "googleSearch": "https://www.google.com/search?q=Emma+NailStudio+Purmerend", "whatsappBusiness": true }
 ```
 
-WhatsApp-nummer altijd internationaal en zonder spaties (`+31645715179`).
+Telefoonnummer uitsluitend in Cloudflare als secret `CONTACT_PHONE`, internationaal met + en zonder spaties.
+`whatsappBusiness: true` toont de beveiligde WhatsApp-link in de footer; zet hier geen directe nummerlink.
 De extra hero-knoppen gebruiken `social.instagram`, `social.facebook` en `social.googleSearch`.
 Vul later de Instagram-profiel-URL in om die knop te activeren. De Facebook-knop verwijst voorlopig
 naar de opgegeven eigen website; vervang deze URL door de Facebook-pagina zodra die beschikbaar is.
@@ -295,7 +297,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=20`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=21`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
@@ -314,14 +316,36 @@ Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
 
 ## 🔐 Privacy & beveiliging
 
-- Geen cookies, geen tracking, geen formulieren – contact loopt via WhatsApp of SMS
+- Geen analytics of boekingsformulieren; contact loopt via WhatsApp of SMS
 - Alleen `localStorage` voor weergavevoorkeuren (grijswaarden, lettergrootte, foto's) en het mandje;
-  er wordt niets naar een server gestuurd
+  het mandje wordt niet naar de contact-API gestuurd
+- Turnstile wordt pas bij een contactverzoek geladen. Cloudflare verwerkt daarbij verificatiegegevens;
+  de browser stuurt alleen het tijdelijke controletoken naar `/api/contact`.
 - Beveiligingsheaders in `_headers` (`nosniff`, `X-Frame-Options`, `Referrer-Policy`, ...)
 - HTML-escaping van alle JSON-inhoud in `script.js`
 - HTTPS via Cloudflare
 
-Voeg je later analytics of een formulier toe, dan zijn een cookiebanner en privacyverklaring nodig.
+Vermeld Cloudflare Turnstile en het doel van botbescherming in de privacyinformatie.
+Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
+
+### Turnstile instellen en testen
+
+- Cloudflare-account voor hosting: aanmelden via GitHub; **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
+- Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret) en `CONTACT_PHONE` als **Secret** voor productie.
+  Controleer de geselecteerde omgeving op de pagina; er hoeft geen pop-up te verschijnen.
+- De openbare site key staat in `requestContactAccess()` in `js/script.js`.
+  De widget moet `emmanagelstudio.vip` toelaten (en `www.emmanagelstudio.vip` als die host wordt gebruikt).
+- `functions/api/contact.js` controleert POST, Origin, token, exacte hostnaam en actie `contact`.
+  Alleen `/api/contact` draait via een Function (`_routes.json`); antwoorden worden niet gecachet.
+  Bij ontbrekende secrets of verificatiefouten blijft het nummer afgeschermd en krijgt de bezoeker een foutmelding.
+- Publiceer opnieuw na het wijzigen van secrets. Live Server/Python testen alleen de statische pagina,
+  niet de contactfunctie. Daar verschijnt dus geen telefoonnummer zonder werkende API.
+- Lokale Function-tests: `node --test tools/contact.test.mjs` (geen npm-pakketten nodig).
+  Voor volledige lokale integratie is Wrangler Pages nodig. De productiehandler weigert bewust localhost
+  en previews; gebruik daarvoor een apart testproject met testsleutels en uitsluitend lokale hostvalidatie.
+  Verruim nooit de productie-allowlist met localhost en zet secrets nooit in Git.
+- Controleer live: contactdialoog in NL/EN, echte challenge, nummer na succes, mandje in WhatsApp/SMS,
+  annuleren/opnieuw proberen en weigering van een ongeldig token. De API ontvangt geen mandje of bericht.
 
 ## 📝 Nog te doen
 

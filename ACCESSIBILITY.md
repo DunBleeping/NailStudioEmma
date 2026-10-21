@@ -100,7 +100,9 @@ Klik op Toon telefoonnummer → klik op het nummer → de telefoonapp opent
 ```
 **Hoe het werkt:**
 - Alle telefoonnummers zijn klikbaar
-- Het nummer en de bellink verschijnen pas na **Toon telefoonnummer** of een klik op een WhatsApp-knop
+- Het nummer en de bellink verschijnen pas na een geslaagde Turnstile-servercontrole.
+- De contactdialoog heeft een titel, statusmeldingen en sluitknop; Escape sluit en herstelt de toetsenbordfocus.
+- Verificatie mislukt? Er verschijnt een foutmelding en **Opnieuw proberen**; er wordt geen nummer onthuld.
 - Klik = Phone app opent
 - Direct bellen zonder typen
 
@@ -114,11 +116,11 @@ Klik op Toon telefoonnummer → klik op het nummer → de telefoonapp opent
 Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 ```
 **Features:**
-- Afspraakverzoeken gaan naar WhatsApp of via de SMS-optie in het mandje (+31 6 4571 5179); geen e-mail/agenda
+- Afspraakverzoeken gaan naar het server-side ingestelde nummer via WhatsApp of SMS; geen e-mail/agenda
 - Zwevende WhatsApp knop (rechtsonder)
 - Altijd zichtbaar op mobiel
 - Pre-filled met standaardbericht, of met de gekozen behandelingen uit het mandje
-- Direct naar bedrijfs-WhatsApp
+- Eerste keer: contactcontrole, daarna **Open WhatsApp** (extra klik voorkomt pop-upblokkering)
 - Maakt tegelijk het telefoonnummer zichtbaar bij **Bel mij**, zonder de pagina daarheen te verplaatsen
 
 #### SMS vanuit het mandje
@@ -190,7 +192,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 3. Klikt op "Prijzen"
 4. Pagina scroll automatisch
 5. Ziet WhatsApp knop rechtonder
-6. Klikt WhatsApp → opent direct WhatsApp
+6. Klikt WhatsApp → eerste keer contactcontrole → Open WhatsApp
 7. Klikt telefoonnummer → opent phone app
 ```
 
@@ -306,7 +308,7 @@ button, a {
 5. **Labels** - duidelijk bij alle inputs
 
 ### Voor Snelheid
-1. **Statische bestanden** - geen backend
+1. **Statische bestanden** - alleen contacttoegang heeft een Pages Function met Turnstile-servercontrole
 2. **Geen JavaScript frameworks** - minimaal JS
 3. **Compressed images** - SVG placeholders
 4. **Cloudflare CDN** - global distribution

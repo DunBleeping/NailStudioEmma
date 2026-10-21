@@ -30,8 +30,8 @@ Volledige uitleg: [README.md](README.md)
 |---|---|---|
 | Prijs / behandeling / duur | `data/services.json` | ook `data/Prijzenlijst.csv` bijwerken – zie [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) |
 | Toeslag (bijv. verwijderen oude lak +€5) | `data/services.json` → `extras` | |
-| WhatsApp-nummer / bericht | `data/settings.json` → `contact.whatsapp` | `+31645715179`, geen spaties |
-| Telefoon | `data/settings.json` → `contact.phone` | zichtbaar na klikken; adres en Maps niet publiceren |
+| WhatsApp-/telefoonnummer | Cloudflare-secret `CONTACT_PHONE` | internationaal met +, geen spaties; nooit in openbare bestanden |
+| Standaardbericht | `data/settings.json` → `contact.whatsapp.message` | nummer komt pas na Turnstile-servercontrole |
 | Openingstijden | `data/settings.json` → `hours` | |
 | Instagram / Facebook | `data/settings.json` → `social` | |
 | Behandelingsfoto | `images/services/` + `"image"` in `services.json` | zie [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
@@ -69,7 +69,7 @@ Volledige uitleg: [README.md](README.md)
 - Prijslijst staat boven Mijn Behandelingen; toeslagtekst gebruikt de volledige tabelbreedte.
 - Taalkeuze **Nederlands / English** in de header; keuze wordt onthouden.
   Vertalingen bijhouden in `data/translations.json` (exacte Nederlandse tekst → Engelse vertaling).
-- WhatsApp-knoppen → WhatsApp +31 6 4571 5179 met voorbereid bericht; geen afspraakknop in het hoofdmenu
+- WhatsApp-knoppen → eerst Turnstile-servercontrole, daarna voorbereid bericht; geen afspraakknop in het hoofdmenu
 - Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · 🖼️ foto's
 - Zoekbalk onder "Categorieën"; *+ dit wil ik* onderaan elke behandelkaart → 🛒 Mandje → WhatsApp-bericht met
   behandelingen, toeslag en totaal. In het mandje kan dit ook via **SMS** naar hetzelfde nummer.
@@ -85,7 +85,7 @@ Volledige uitleg: [README.md](README.md)
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=20`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=21`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
 

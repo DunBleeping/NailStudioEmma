@@ -12,10 +12,8 @@
     "description": "Welkom bij Emma NailStudio, waar professionele nagelverzorging en luxe ervaring samenkomen. Met jarenlange ervaring en passie voor perfecte nagels, creëer ik prachtige resultaten die je zelfvertrouwen geven."
   },
   "contact": {
-    "phone": "+316 45 71 51 79",
     "email": "info@nailsalonemma.nl",
     "whatsapp": {
-      "number": "+31645715179",
       "message": "Hallo Emma NailStudio, ik wil graag een afspraak maken voor een nagelbehandeling."
     }
   },
@@ -32,7 +30,7 @@
     "instagram": "",
     "facebook": "https://EmmaNagelStudio.vip/",
     "googleSearch": "https://www.google.com/search?q=Emma+NailStudio+Purmerend",
-    "whatsappBusiness": "https://wa.me/31645715179"
+    "whatsappBusiness": true
   },
   "colors": {
     "primary": "#d4a574",

@@ -14,8 +14,8 @@ GitHub Desktop).
 | GitHub repo | https://github.com/DunBleeping/NailStudioEmma (branch `main`) |
 | Hosting | Cloudflare Pages – auto-deploys every push to `main` (≈ 1 minute) |
 | Live site | https://emmanagelstudio.vip (also https://nailstudioemma.pages.dev) |
-| Backend / build step | None. No Node, no npm. Python is only used for a local test server and a helper script |
-| Booking | Everything goes via WhatsApp +31 6 4571 5179 (no e-mail, no online agenda) |
+| Backend / build step | No build or npm dependencies. A Pages Function verifies Turnstile for contact access; Live Server cannot run it |
+| Booking | WhatsApp/SMS via CONTACT_PHONE server secret after Turnstile; no e-mail or online agenda |
 | Language of site & docs | Dutch |
 
 Main features (status at commit `964311d`):
@@ -133,7 +133,7 @@ visitor.
 ## 7. Important rules (things that broke before)
 
 1. **Changed `css/style.css` or `js/script.js`?** Raise the version number `?v=N` on **both**
-   lines in `index.html` (currently `?v=20` → next is `?v=21`). Otherwise visitors may keep the
+   lines in `index.html` (currently `?v=21` → next is `?v=22`). Otherwise visitors may keep the
    old version for hours.
 2. **File names are case-sensitive on Cloudflare.** `Logo.JPG` ≠ `logo.jpg`. Use lowercase,
    no spaces.
