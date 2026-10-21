@@ -23,6 +23,21 @@ Volledige uitleg: [README.md](README.md)
 
 ## 🔁 Werkwijze bij elke wijziging
 
+**PowerShell-hulpscript (PowerShell 7):**
+
+```powershell
+cd C:\MyDocs\DevOps\EmStudio
+.\tools\sync-website.ps1 -WhatIf
+.\tools\sync-website.ps1 -Bericht "Werk website-instellingen bij"
+```
+
+Standaard alleen `data/settings.json`; het script vraagt bevestiging voordat het commit en pusht.
+Andere bestanden expliciet selecteren met `-Bestanden "index.html","js\script.js","css\style.css"`.
+Sla alles eerst op via **Bestand → Alles opslaan**. Het script stopt bij fouten of nieuwere
+GitHub-commits en verandert geen werkbestanden via een automatische pull.
+De bevestiging omvat ook eerdere lokale commits die nog niet gepusht zijn.
+Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](tools/sync-website.ps1).
+
 1. Bestand aanpassen en opslaan
 2. Lokaal testen (optioneel):
    ```bash
