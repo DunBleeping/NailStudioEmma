@@ -79,11 +79,15 @@
       "id": "gallery-babyboom",
       "title": "Babyboom",
       "description": "Nagels met een zachte kleurovergang",
-      "src": "",
+      "src": "./images/gallery/babyboom/babyboom.jpg.png?v=c67b6ffa",
       "alt": "Nagels met een zachte kleurovergang",
       "category": "nailart",
       "folder": "babyboom",
-      "photos": []
+      "photos": [
+        {
+          "src": "./images/gallery/babyboom/babyboom.jpg.png?v=c67b6ffa"
+        }
+      ]
     }
   ]
 }
