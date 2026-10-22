@@ -1,0 +1,4 @@
+Plaats hier een echte foto van het saloninterieur als interieur.jpg.
+Pad: images/about/interieur.jpg
+Aanbevolen: JPG, liggend of vierkant, liefst kleiner dan 500 KB.
+Zonder deze foto toont de website automatisch de bestaande neutrale illustratie.

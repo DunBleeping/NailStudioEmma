@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=24`
+- `index.html` – de pagina; CSS/JS geladen met `?v=25`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -27,7 +27,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ### css/style.css
 - CSS-variabelen voor het kleurenpalet (goud `#d4a574`, crème `#f5f0eb`, bruin `#8b7355`)
-- Mobile-first, breekpunten 1024 px en 768 px
+- Mobile-first, breekpunten 1024 px en 768 px; subtiele navigatie-iconen
 - Grijswaarden-, lettergrootte- en foto's-verborgen-modus
 - Impressie-tegels, album-modal, `prefers-reduced-motion`, print-stylesheet
 
@@ -35,6 +35,8 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Laadt `settings.json`, `services.json`, `gallery.json`, `translations.json` (altijd vers: `cache: 'no-cache'`)
 - Bouwt behandelkaarten, categoriemenu, prijstabel en "Toeslagen"
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
+- Interieurfoto uit `images/about/interieur.jpg` met neutrale SVG-fallback
+- Contactkaarten compact; op mobiel één kolom, op desktop naast openingstijden
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
 - Taalkeuze Nederlands/Engels, inclusief behandelingen, Impressie en schermlezerlabels
 - Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
@@ -57,6 +59,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ### images/
 - `logo.jpg`
+- `about/interieur.jpg` – optionele interieurfoto; neutrale illustratie als fallback
 - `services/` – 10 behandelingsfoto's
 - `gallery/<album>/` – `cateye`, `chrome`, `customdesigns`, `gellak`, `biab`, `babyboom`
   (eerste foto op naam is de cover; ook gebruikt voor de smalle hero-foto)

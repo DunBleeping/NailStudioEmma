@@ -211,6 +211,28 @@ nav a {
   font-weight: 500;
   transition: var(--transition);
   position: relative;
+  isolation: isolate;
+  display: inline-block;
+  padding: 0.4rem 0.65rem;
+}
+
+nav a[data-nav-icon]::before {
+  content: attr(data-nav-icon);
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(212, 165, 116, 0.12);
+  color: var(--accent);
+  font-size: 1.6rem;
+  font-weight: 600;
+  pointer-events: none;
 }
 
 nav a::after {
@@ -1068,18 +1090,79 @@ body:not(.images-hidden) .photo-tip {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    "phone hours"
+    "address hours"
+    "whatsapp hours";
+  gap: 0.75rem 1.25rem;
   margin-top: 2rem;
 }
 
+.contact-item[data-type="phone"] { grid-area: phone; }
+.contact-item[data-type="address"] { grid-area: address; }
+.contact-item[data-type="hours"] { grid-area: hours; }
+.contact-item[data-type="whatsapp"] { grid-area: whatsapp; }
+
 .contact-item {
   background: var(--light-bg);
-  padding: 1.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
   border: 1px solid #e8e1d9;
   transition: var(--transition);
+}
+
+.contact-item:not([data-type="hours"]) {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 0.65rem;
+  align-content: center;
+  align-items: center;
+}
+
+.contact-item:not([data-type="hours"]) .contact-icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.contact-item:not([data-type="hours"]) h3 {
+  grid-column: 2;
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.contact-item[data-type="phone"] > button,
+.contact-item[data-type="phone"] > div,
+.contact-item[data-type="address"] > details,
+.contact-item[data-type="whatsapp"] > p,
+.contact-item[data-type="whatsapp"] > a {
+  grid-column: 2;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.contact-item[data-type="phone"] > div:not([hidden]) {
+  overflow-wrap: anywhere;
+}
+
+.contact-item[data-type="address"] details p {
+  margin: 0.5rem 0 0;
+}
+
+.contact-item[data-type="whatsapp"] > a {
+  justify-self: start;
+  padding: 0.3rem 0.75rem;
+}
+
+.contact-item[data-type="hours"] {
+  padding: 1rem;
+  text-align: center;
 }
 
 .contact-item:hover {
@@ -1176,6 +1259,27 @@ body:not(.images-hidden) .photo-tip {
 
 .hours-list .time {
   color: var(--light-text);
+}
+
+@media (max-width: 767px) {
+  .contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "hours"
+      "phone"
+      "whatsapp"
+      "address";
+    gap: 0.65rem;
+  }
+
+  .contact-item[data-type="hours"] {
+    grid-row: auto;
+  }
+
+  .hours-list div {
+    gap: 0.75rem;
+  }
 }
 
 /* ============================================

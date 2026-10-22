@@ -75,6 +75,7 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 | Behandelingsfoto | `images/services/` + `"image"` in `services.json` | zie [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
 | Impressie-tegel | eerste foto op naam in de albummap | automatisch bij optie 3 |
 | Klantfoto's in album | `images/gallery/<album>/` | `.\tools\sync-website.ps1`, optie 3 |
+| Foto saloninterieur | `images/about/interieur.jpg` | optioneel; fallbackillustratie blijft zichtbaar zolang die ontbreekt |
 | Teksten hero / over ons | `index.html` | |
 | Kleuren / opmaak | `css/style.css` (`:root`) | daarna `?v=` verhogen in `index.html` |
 | Functionaliteit | `js/script.js` | daarna `?v=` verhogen in `index.html` |
@@ -127,7 +128,7 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=24`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=25`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch bij optie 3 van `tools/sync-website.ps1` |
 

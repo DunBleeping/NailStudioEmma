@@ -153,7 +153,12 @@ function translatePage() {
   updatePhotoToggleButton();
   const interior = document.querySelector('.about-image img');
   const label = t('Salon Interieur');
-  interior.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`)}`;
+  interior.alt = t('Emma NailStudio salon');
+  interior.onerror = () => {
+    interior.onerror = null;
+    interior.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`)}`;
+  };
+  interior.src = './images/about/interieur.jpg';
 }
 
 async function fetchJSON(url) {

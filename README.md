@@ -47,7 +47,8 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Impressie, Contact),
    taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
    **A– A A+ A++** lettergrootte en een afbeeldingspictogram met **Foto's tonen / Foto's verbergen**.
-   Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Vanaf 768 px staan de zes links op één regel;
+   Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Subtiele achtergrondiconen helpen de zes links herkennen.
+   Vanaf 768 px staan de links op één regel;
    de bedieningsknoppen mogen naar een volgende rij. Er staat geen afspraakknop in het menu.
    Op mobiel staat ☰ links direct onder het logo; de taalkeuze is direct zichtbaar rechts naast het logo.
    Alleen de lettergrootte staat in het uitklapmenu.
@@ -55,6 +56,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    **Zoeken** gaat naar de zoekbalk voor behandelingen en geeft deze direct toetsenbordfocus.
    Op lage, liggende schermen zoals smartphones (hoogte maximaal 500 px, breedte maximaal 1024 px)
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
+   Subtiele achtergrondiconen helpen de zes menulinks herkennen.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
    Direct onder de welkomsttitel staat een horizontale nagelfoto van 8rem hoog; deze schakelt mee met foto's tonen/verbergen.
@@ -78,8 +80,12 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    De eerste foto op naam is de tegel. Klik → **album** met foto's per stijl
    (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
+   Een eigen interieurfoto kan in `images/about/interieur.jpg`; zolang die ontbreekt blijft de neutrale illustratie zichtbaar.
 7. **Contact & Openingstijden** – telefoon na klikken, adresuitleg, openingstijden en WhatsApp.
    WhatsApp heeft de voorkeur en is de snelste contactroute; de tekst verwijst naar de groene knop rechtsonder.
+   Op mobiel staan Bel mij, WhatsApp en Bezoek mij compact onder elkaar naast de openingstijden; op kleine schermen
+   staan ze onder elkaar, met openingstijden eerst. Op desktop beslaan de drie compacte kaarten ongeveer de hoogte
+   van de openingstijdenkaart. De kaartcombinatie gebruikt twee kolommen op desktop en één kolom op mobiel.
    In het weekend: gesloten, behalve op speciaal verzoek. Openingstijden worden ook naar Engels vertaald.
    **Toon telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
    Na servercontrole verschijnt het nummer en een knop om bellen, WhatsApp of SMS te openen.
@@ -209,6 +215,7 @@ EmStudio/
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
+│   ├── about/interieur.jpg     # Optionele echte interieurfoto; illustratie als fallback
 │   ├── services/              # 10 behandelingsfoto's
 │   └── gallery/
 │       └── cateye/, chrome/, customdesigns/, gellak/, biab/, babyboom/
@@ -229,6 +236,7 @@ EmStudio/
 | Contact, WhatsApp, openingstijden, social | `data/settings.json` | hieronder |
 | Engelse teksten | `data/translations.json` | Zie "Vertalingen beheren" hierboven |
 | Impressie-tegels en albums | `data/gallery.json` + `images/gallery/` | [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
+| Interieurfoto | `images/about/interieur.jpg` | Optioneel; neutrale illustratie blijft zichtbaar zolang de foto ontbreekt |
 | Teksten hero/over ons, SEO | `index.html` | |
 | Kleuren en opmaak | `css/style.css` | |
 
@@ -242,14 +250,14 @@ EmStudio/
   }
 },
 "hours": { "monday": "10:00 - 18:00", "...": "...", "sunday": "Gesloten" },
-"social": { "instagram": "", "facebook": "https://EmmaNagelStudio.vip/", "googleSearch": "https://www.google.com/search?q=Emma+NailStudio+Purmerend", "whatsappBusiness": true }
+"social": { "instagram": "https://www.instagram.com/EmmaPurmerend/", "facebook": "https://www.facebook.com/EmmaPurmerend", "whatsappBusiness": true }
 ```
 
 Telefoonnummer uitsluitend in Cloudflare als secret `CONTACT_PHONE`, internationaal met + en zonder spaties.
 `whatsappBusiness: true` toont de beveiligde WhatsApp-link in de footer; zet hier geen directe nummerlink.
-De extra hero-knoppen gebruiken `social.instagram`, `social.facebook` en `social.googleSearch`.
-Vul later de Instagram-profiel-URL in om die knop te activeren. De Facebook-knop verwijst voorlopig
-naar de opgegeven eigen website; vervang deze URL door de Facebook-pagina zodra die beschikbaar is.
+De extra hero-knoppen gebruiken `social.instagram` en `social.facebook`. De Google Search-knop is verwijderd.
+Instagram en Facebook verwijzen momenteel naar de opgegeven profielen; Facebook is het persoonlijke profiel
+met de gebruikersnaam EmmaPurmerend, niet een aparte bedrijfspagina.
 
 ## 📸 Foto's beheren
 
@@ -304,7 +312,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=24`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=25`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via optie 3 van `tools/sync-website.ps1`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
@@ -368,7 +376,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 - [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; telefoon is ingesteld, adres en Maps-link blijven bewust privé
 - [ ] Domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
       en in `sitemap.xml`/`robots.txt` (nu `nailsalonemma.nl`)
-- [ ] Echte Instagram/Facebook-links in `settings.json`
+- [x] Instagram- en Facebook-profielen ingesteld in `settings.json` (Facebook is een persoonlijk profiel)
 - [x] Eigen foto's in de Impressie-albums; lege albums blijven verborgen
 - [ ] Eigen foto's per behandeling (nu 10 gedeelde foto's)
 
