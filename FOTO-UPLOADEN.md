@@ -10,7 +10,8 @@ De website gebruikt deze foto's:
 | Logo | `images/logo.jpg` | Header en hero |
 
 > **Foto's standaard verborgen:** nieuwe bezoekers zien de site zonder foto's (rustiger, sneller).
-> Met de knop 🖼️ *Foto's tonen/verbergen* rechtsboven zet een bezoeker ze aan; die keuze wordt onthouden.
+> Met de knop **Foto's tonen** met afbeeldingspictogram rechtsboven zet een bezoeker ze aan;
+> daarna heet de knop **Foto's verbergen**. Die keuze wordt onthouden.
 > Onder Impressie zie je bij verborgen foto's de titels van de stijlen.
 
 ---

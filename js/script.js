@@ -150,6 +150,7 @@ function translatePage() {
     if (attribute) element.setAttribute(attribute, t(text));
     else element.textContent = t(text);
   });
+  updatePhotoToggleButton();
   const interior = document.querySelector('.about-image img');
   const label = t('Salon Interieur');
   interior.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`)}`;
@@ -1225,16 +1226,25 @@ function applyFontSize(size) {
 }
 
 // 3. Toggle Images
+function updatePhotoToggleButton() {
+  const button = document.getElementById('toggle-images-btn');
+  if (!button) return;
+  const hidden = document.body.classList.contains('images-hidden');
+  const label = t(hidden ? "Foto's tonen" : "Foto's verbergen");
+  button.querySelector('.photo-toggle-label').textContent = label;
+  button.classList.toggle('images-hidden', hidden);
+  button.setAttribute('aria-pressed', String(!hidden));
+  button.setAttribute('aria-label', label);
+  button.title = label;
+}
+
 function initializeToggleImages() {
   const toggleImagesBtn = document.getElementById('toggle-images-btn');
   // New visitors (no saved choice) start with images hidden
   const savedImageState = localStorage.getItem('imagesHidden') !== 'false';
 
   document.body.classList.toggle('images-hidden', savedImageState);
-  if (toggleImagesBtn) {
-    toggleImagesBtn.classList.toggle('images-hidden', savedImageState);
-    toggleImagesBtn.setAttribute('aria-pressed', String(!savedImageState));
-  }
+  updatePhotoToggleButton();
 
   if (toggleImagesBtn) {
     toggleImagesBtn.addEventListener('click', () => {
@@ -1250,8 +1260,7 @@ function initializeToggleImages() {
       const anchorTop = anchor ? anchor.getBoundingClientRect().top : 0;
       const scrollTop = window.scrollY;
       const isHidden = document.body.classList.toggle('images-hidden');
-      toggleImagesBtn.classList.toggle('images-hidden');
-      toggleImagesBtn.setAttribute('aria-pressed', String(!isHidden));
+      updatePhotoToggleButton();
       localStorage.setItem('imagesHidden', isHidden);
       // Keep the same visible text in place, rather than the old document scroll offset.
       if (anchor && scrollTop > 0) {

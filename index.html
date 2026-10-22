@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=22">
+  <link rel="stylesheet" href="./css/style.css?v=23">
   <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
@@ -102,7 +102,14 @@
         </div>
 
         <!-- Toggle Images -->
-        <button id="toggle-images-btn" class="toggle-images-btn images-hidden" data-i18n-attrs="aria-label,title" aria-label="Foto's tonen/verbergen" title="Foto's tonen/verbergen">🖼️</button>
+        <button id="toggle-images-btn" class="toggle-images-btn images-hidden" type="button" aria-label="Foto's tonen" title="Foto's tonen" aria-pressed="false">
+          <svg class="photo-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <circle cx="8" cy="8" r="1"></circle>
+            <path d="m3 17 6-6 4 4 3-3 5 5"></path>
+          </svg>
+          <span class="photo-toggle-label">Foto's tonen</span>
+        </button>
       </div>
     </div>
   </header>
@@ -126,9 +133,8 @@
               <a href="#" class="secondary-button" data-whatsapp>📱 WhatsApp</a>
               <a class="secondary-button" data-social="instagram" data-i18n aria-disabled="true">Instagram (binnenkort)</a>
               <a class="secondary-button" data-social="facebook" aria-disabled="true">Facebook</a>
-              <a class="secondary-button" data-social="googleSearch" aria-disabled="true">Google Search</a>
             </div>
-            <p class="photo-tip" data-i18n>Tip: foto's zijn standaard verborgen. Klik op het foto-icoontje 🖼️ rechtsboven op de site om de foto's op deze pagina te tonen.</p>
+            <p class="photo-tip" data-i18n>Tip: foto's zijn standaard verborgen. Klik rechtsboven op 'Foto's tonen' om de foto's op deze pagina te bekijken.</p>
           </div>
 
           <div class="hero-image">
@@ -211,7 +217,7 @@
         <p class="text-center" data-i18n style="margin-bottom: 2rem; color: #666;">
           Klik op een stijl om foto's van echte resultaten bij mijn klanten te bekijken.
         </p>
-        <p class="photo-tip" data-i18n>Tip: foto's zijn standaard verborgen. Klik op het foto-icoontje 🖼️ rechtsboven op de site om de foto's op deze pagina te tonen.</p>
+        <p class="photo-tip" data-i18n>Tip: foto's zijn standaard verborgen. Klik rechtsboven op 'Foto's tonen' om de foto's op deze pagina te bekijken.</p>
         <div id="gallery-grid" class="gallery-grid">
           <!-- Impressie-albums worden dynamisch geladen -->
         </div>
@@ -395,6 +401,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=22" defer></script>
+  <script src="./js/script.js?v=23" defer></script>
 </body>
 </html>

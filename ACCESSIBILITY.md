@@ -64,7 +64,9 @@ In de header staan de knoppen **A– · A · A+ · A++**, op mobiel (< 768 px) i
 
 ## 🖼️ Foto's tonen/verbergen
 
-De knop **🖼️** rechtsboven zet alle foto's op de kaarten en onder Impressie aan of uit.
+De knop met afbeeldingspictogram en **Foto's tonen / Foto's verbergen** rechtsboven zet alle foto's
+op de kaarten en onder Impressie aan of uit. De tekst, toegankelijke naam en tooltip volgen de
+huidige toestand en taal; `aria-pressed` geeft aan of foto's zichtbaar zijn.
 Ook het grote logo in het welkomstblok schakelt mee; het kleine logo linksboven blijft altijd zichtbaar.
 Een tip bovenaan en bij Impressie wijst op deze knop zolang foto's verborgen zijn.
 De knop geeft met `aria-pressed` aan of foto's zichtbaar zijn.

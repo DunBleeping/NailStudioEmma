@@ -198,7 +198,7 @@ visitor.
 ## 7. Important rules (things that broke before)
 
 1. **Changed `css/style.css` or `js/script.js`?** Raise the version number `?v=N` on **both**
-   lines in `index.html` (currently `?v=22` → next is `?v=23`). Otherwise visitors may keep the
+   lines in `index.html` (currently `?v=23` → next is `?v=24`). Otherwise visitors may keep the
    old version for hours.
 2. **File names are case-sensitive on Cloudflare.** `Logo.JPG` ≠ `logo.jpg`. Use lowercase,
    no spaces.
@@ -235,7 +235,7 @@ Nog niet uitgevoerd; eerst profielen en inhoud controleren, daarna pas betaald a
 
 1. **SEO voorbereiden:** oude domeinverwijzingen in canonical, Open Graph, Schema.org,
    sitemap en robots vervangen door het echte domein; geen privéadres of telefoonnummer toevoegen.
-   Een Google Search-knop op de site is geen registratie bij Google en geen advertentie.
+   De Google Search-knop is van de site verwijderd; zo'n knop is geen registratie bij Google en geen advertentie.
 2. **Google Search Console:** https://search.google.com/search-console →
    website-eigendom verifiëren, de bijgewerkte sitemap indienen en indexering controleren.
    Noteer later alleen een gemaskeerde beheeraccountnaam.

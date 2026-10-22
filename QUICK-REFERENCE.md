@@ -105,14 +105,14 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 
 ## 🎛️ Standaardgedrag van de site
 
-- Nieuwe bezoekers: **foto's verborgen** (knop 🖼️ zet ze aan, keuze wordt onthouden)
+- Nieuwe bezoekers: **foto's verborgen** (knop **Foto's tonen** zet ze aan, keuze wordt onthouden)
 - Nieuwe bezoekers: lettergrootte **A–**; bestaande letterkeuze blijft behouden.
 - Op mobiel: menu links onder logo; taal direct zichtbaar naast logo, lettergrootte in het uitklapmenu.
 - Prijslijst staat boven Mijn Behandelingen; toeslagtekst gebruikt de volledige tabelbreedte.
 - Taalkeuze **Nederlands / English** in de header; keuze wordt onthouden.
   Vertalingen bijhouden in `data/translations.json` (exacte Nederlandse tekst → Engelse vertaling).
 - WhatsApp-knoppen → eerst Turnstile-servercontrole, daarna voorbereid bericht; geen afspraakknop in het hoofdmenu
-- Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · 🖼️ foto's
+- Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · **Foto's tonen / Foto's verbergen**
 - Zoekbalk onder "Categorieën"; *+ dit wil ik* onderaan elke behandelkaart → 🛒 Mandje → WhatsApp-bericht met
   behandelingen, toeslag en totaal. In het mandje kan dit ook via **SMS** naar hetzelfde nummer.
 - Berichttaal voor beide kanalen: **Nederlands = alleen Nederlands; English = eerst Engels, daarna Nederlands**.
@@ -127,7 +127,7 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=22`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=23`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch bij optie 3 van `tools/sync-website.ps1` |
 

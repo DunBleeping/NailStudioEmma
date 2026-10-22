@@ -46,7 +46,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
 
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Impressie, Contact),
    taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
-   **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
+   **A– A A+ A++** lettergrootte en een afbeeldingspictogram met **Foto's tonen / Foto's verbergen**.
    Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Vanaf 768 px staan de zes links op één regel;
    de bedieningsknoppen mogen naar een volgende rij. Er staat geen afspraakknop in het menu.
    Op mobiel staat ☰ links direct onder het logo; de taalkeuze is direct zichtbaar rechts naast het logo.
@@ -56,7 +56,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Op lage, liggende schermen zoals smartphones (hoogte maximaal 500 px, breedte maximaal 1024 px)
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
-   *Facebook* en *Google Search*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
+   *Facebook*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
    Direct onder de welkomsttitel staat een smalle horizontale nagelfoto; deze schakelt mee met foto's tonen/verbergen.
 3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
@@ -92,7 +92,8 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
 **Standaardinstellingen voor nieuwe bezoekers:**
 - **Foto's verborgen** – rustiger en sneller; tegels onder Impressie tonen dan titel + omschrijving.
   Ook het grote logo in het welkomstblok wordt verborgen; het kleine headerlogo blijft altijd zichtbaar.
-  Een tip bovenaan en bij Impressie verwijst naar het foto-icoontje 🖼️ rechtsboven om foto's te tonen.
+  Een tip bovenaan en bij Impressie verwijst naar **Foto's tonen** rechtsboven.
+  De knop wisselt met de fotoweergave en taal tussen tonen/verbergen en Show/Hide photos.
   De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
   Bij omschakelen blijft de zichtbare tekst zo veel mogelijk op dezelfde schermhoogte staan.
   Helemaal bovenaan blijft de pagina bovenaan; bij de paginaranden kan de beschikbare scrollruimte dit beperken.
@@ -299,7 +300,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=22`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=23`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via optie 3 van `tools/sync-website.ps1`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
