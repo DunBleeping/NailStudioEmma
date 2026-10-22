@@ -35,7 +35,6 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Laadt `settings.json`, `services.json`, `gallery.json`, `translations.json` (altijd vers: `cache: 'no-cache'`)
 - Bouwt behandelkaarten, categoriemenu, prijstabel en "Toeslagen"
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
-- Interieurfoto uit `images/about/interieur.jpg` met neutrale SVG-fallback
 - Contactkaarten compact; op mobiel één kolom, op desktop naast openingstijden
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
 - Acht talen (NL/EN/FR/ES/TR/AR/UK/PL), inclusief behandelingen en Impressie; Arabisch RTL
@@ -63,7 +62,6 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ### images/
 - `logo.jpg`
-- `about/interieur.jpg` – optionele interieurfoto; neutrale illustratie als fallback
 - `services/` – 10 behandelingsfoto's
 - `gallery/<album>/` – `cateye`, `chrome`, `customdesigns`, `gellak`, `biab`, `babyboom`
   (eerste foto op naam is de cover; ook gebruikt voor de smalle hero-foto)

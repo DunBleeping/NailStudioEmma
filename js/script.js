@@ -164,25 +164,6 @@ function translatePage() {
     else element.textContent = t(text);
   });
   updatePhotoToggleButton();
-  const interior = document.querySelector('.about-image img');
-  const label = t('Salon Interieur');
-  interior.alt = t('Emma NailStudio salon');
-  const fallbackImage = () => {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`;
-    return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-  };
-  if (interior.dataset.imageFallback === 'true') {
-    interior.src = fallbackImage();
-  } else {
-    interior.onerror = () => {
-      interior.onerror = null;
-      interior.dataset.imageFallback = 'true';
-      interior.src = fallbackImage();
-    };
-    if (interior.getAttribute('src') !== './images/about/interieur.jpg') {
-      interior.src = './images/about/interieur.jpg';
-    }
-  }
 }
 
 async function fetchJSON(url) {

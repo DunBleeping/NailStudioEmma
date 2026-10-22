@@ -81,7 +81,6 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    De eerste foto op naam is de tegel. Klik → **album** met foto's per stijl
    (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
-   Een eigen interieurfoto kan in `images/about/interieur.jpg`; zolang die ontbreekt blijft de neutrale illustratie zichtbaar.
 7. **Contact & Openingstijden** – telefoon na klikken, adresuitleg, openingstijden en WhatsApp.
    WhatsApp heeft de voorkeur en is de snelste contactroute; de tekst verwijst naar de groene knop rechtsonder.
    Op mobiel staan Bel mij, WhatsApp en Bezoek mij compact onder elkaar naast de openingstijden; op kleine schermen
@@ -223,7 +222,6 @@ EmStudio/
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
-│   ├── about/interieur.jpg     # Optionele echte interieurfoto; illustratie als fallback
 │   ├── services/              # 10 behandelingsfoto's
 │   └── gallery/
 │       └── cateye/, chrome/, customdesigns/, gellak/, biab/, babyboom/
@@ -245,7 +243,6 @@ EmStudio/
 | Contact, WhatsApp, openingstijden, social | `data/settings.json` | hieronder |
 | Engelse teksten | `data/translations.json` | Zie "Vertalingen beheren" hierboven |
 | Impressie-tegels en albums | `data/gallery.json` + `images/gallery/` | [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
-| Interieurfoto | `images/about/interieur.jpg` | Optioneel; neutrale illustratie blijft zichtbaar zolang de foto ontbreekt |
 | Teksten hero/over ons, SEO | `index.html` | |
 | Kleuren en opmaak | `css/style.css` | |
 

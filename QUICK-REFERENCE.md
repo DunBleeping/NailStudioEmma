@@ -75,7 +75,6 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 | Behandelingsfoto | `images/services/` + `"image"` in `services.json` | zie [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
 | Impressie-tegel | eerste foto op naam in de albummap | automatisch bij optie 3 |
 | Klantfoto's in album | `images/gallery/<album>/` | `.\tools\sync-website.ps1`, optie 3 |
-| Foto saloninterieur | `images/about/interieur.jpg` | optioneel; fallbackillustratie blijft zichtbaar zolang die ontbreekt |
 | Teksten hero / over ons | `index.html` | |
 | Kleuren / opmaak | `css/style.css` (`:root`) | daarna `?v=` verhogen in `index.html` |
 | Functionaliteit | `js/script.js` | daarna `?v=` verhogen in `index.html` |

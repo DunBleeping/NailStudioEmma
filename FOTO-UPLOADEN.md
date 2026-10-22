@@ -7,24 +7,16 @@ De website gebruikt deze foto's:
 | **Behandelingsfoto's** | `images/services/` | Op de kaarten bij *Onze Behandelingen* |
 | **Impressie-albums** | `images/gallery/<album>/` | De eerste foto op naam is de tegel; klikken opent de hele serie |
 | **Smalle foto bovenaan** | `images/gallery/customdesigns/design-1.jpg` | Onder de welkomsttitel |
-| **Interieurfoto** | `images/about/interieur.jpg` | Bij *Over Emma NailStudio*; de illustratie blijft de fallback |
 | Logo | `images/logo.jpg` | Header en hero |
 
 > **Foto's standaard verborgen:** nieuwe bezoekers zien de site zonder foto's (rustiger, sneller).
 > Met de knop **Foto's tonen** met afbeeldingspictogram rechtsboven zet een bezoeker ze aan;
 > daarna heet de knop **Foto's verbergen**. Die keuze wordt onthouden.
-> Onder Impressie zie je bij verborgen foto's de titels van de stijlen.
+> Onder Impressie blijven de titels, beschrijvingen en het aantal foto's ook zichtbaar wanneer foto's worden getoond.
 
 ---
 
 ## 💅 Behandelingsfoto's (`images/services/`)
-
-## 🏠 Foto van het interieur
-
-Plaats je eigen salonfoto als **`images/about/interieur.jpg`**. Gebruik een JPG of JPEG,
-bij voorkeur liggend of vierkant en kleiner dan 500 KB. De website toont deze foto automatisch.
-Zolang het bestand ontbreekt, blijft de neutrale interieurillustratie zichtbaar.
-Voor de locatie hoeft verder geen JSON-bestand aangepast te worden.
 
 Er zijn **10 foto's**; meerdere behandelingen delen dezelfde foto:
 
