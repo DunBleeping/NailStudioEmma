@@ -38,9 +38,9 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Interieurfoto uit `images/about/interieur.jpg` met neutrale SVG-fallback
 - Contactkaarten compact; op mobiel één kolom, op desktop naast openingstijden
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
-- Taalkeuze Nederlands/Engels, inclusief behandelingen, Impressie en schermlezerlabels
+- Acht talen (NL/EN/FR/ES/TR/AR/UK/PL), inclusief behandelingen en Impressie; Arabisch RTL
 - Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
-  Nederlands = alleen NL, English = eerst EN dan NL
+  Nederlands = alleen NL; andere talen = gekozen taal eerst, daarna NL
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
 - Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen),
   `cart`, `cartExtras`, `cartExtrasDeclined` (bewust uitgevinkte toeslagen), `language` (standaard `nl`)
@@ -55,7 +55,10 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - `gallery.json` – 6 Impressie-albums met gegenereerde cover (`src`), albummap (`folder`) en foto's (`photos`);
   lege albums worden niet getoond
 - De welkomstbanner gebruikt `customdesigns/design-1.jpg`
-- `translations.json` – Engelse vertalingen onder `en`, met de exacte Nederlandse tekst als sleutel
+- `translations.json` – Engelse vertalingen; `data/translations/<taal>.json` bevat FR/ES/TR/AR/UK/PL.
+  Alle vertaalbestanden gebruiken de exacte Nederlandse tekst als sleutel.
+- `tools/translations.test.mjs` – controleert volledige sleuteldekking, placeholders en taalopties
+  (uitvoeren met `node --test tools/translations.test.mjs`)
 - `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
 
 ### images/

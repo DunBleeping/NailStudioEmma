@@ -1,13 +1,15 @@
 # Accessibility & Mobile Features - Emma NailStudio
 
-## Taalkeuze Nederlands / English
+## Taalkeuze
 
 - De taalkeuze is direct zichtbaar in de header, ook op mobiel naast het logo, en is met het toetsenbord te bedienen.
+- Beschikbaar: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools.
 - De gekozen taal wordt onthouden (localStorage `language`); standaard is de site Nederlands.
+- Arabisch schakelt de pagina naar rechts-naar-links (RTL); andere talen blijven links-naar-rechts.
 - Ook knoppen, schermlezerlabels, fototeksten, behandelingen en het mandje worden vertaald.
 - Het `lang`-attribuut op `<html>` verandert mee, zodat schermlezers de juiste uitspraak gebruiken.
 - Omschakelen wordt aangekondigd en behoudt mandje, zoekopdracht en overige voorkeuren.
-- WhatsApp- en SMS-berichten zijn alleen Nederlands bij **Nederlands**; bij **English** eerst Engels en daarna Nederlands.
+- WhatsApp- en SMS-berichten zijn alleen Nederlands bij **Nederlands**; bij een andere taal eerst de gekozen taal en daarna Nederlands.
 
 ---
 

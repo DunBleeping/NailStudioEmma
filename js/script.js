@@ -34,7 +34,16 @@ async function loadAppData() {
     appData.settings = await fetchJSON('./data/settings.json');
     appData.services = await fetchJSON('./data/services.json');
     appData.gallery = await fetchJSON('./data/gallery.json');
-    appData.translations = await fetchJSON('./data/translations.json');
+    const baseTranslations = await fetchJSON('./data/translations.json');
+    const additionalLanguages = ['fr', 'es', 'tr', 'ar', 'uk', 'pl'];
+    const additionalTranslations = await Promise.all(additionalLanguages.map(async (language) => [
+      language,
+      await fetchJSON(`./data/translations/${language}.json`)
+    ]));
+    appData.translations = {
+      ...baseTranslations,
+      ...Object.fromEntries(additionalTranslations)
+    };
     translatePage();
 
     // Initialize components
@@ -78,11 +87,12 @@ const missingTranslations = new Set();
 
 function t(text, values = {}, language = appData.language) {
   let translated = text;
-  if (language === 'en' && text && appData.translations) {
-    if (Object.hasOwn(appData.translations.en, text)) {
-      translated = appData.translations.en[text];
+  const dictionary = appData.translations?.[language];
+  if (language !== 'nl' && text && dictionary) {
+    if (Object.hasOwn(dictionary, text)) {
+      translated = dictionary[text];
     } else if (!missingTranslations.has(text)) {
-      console.warn(`Missing English translation: ${text}`);
+      console.warn(`Missing ${language} translation: ${text}`);
       missingTranslations.add(text);
     }
   }
@@ -100,7 +110,9 @@ function localizeContent(item, language = appData.language) {
 
 function initializeLanguage() {
   try {
-    appData.language = localStorage.getItem('language') === 'en' ? 'en' : 'nl';
+    const savedLanguage = localStorage.getItem('language');
+    appData.language = [...document.querySelectorAll('#language-select option')]
+      .some((option) => option.value === savedLanguage) ? savedLanguage : 'nl';
   } catch (error) {
     console.warn('Could not read language preference:', error);
   }
@@ -146,6 +158,7 @@ function initializeLanguage() {
 
 function translatePage() {
   document.documentElement.lang = appData.language;
+  document.documentElement.dir = appData.language === 'ar' ? 'rtl' : 'ltr';
   pageTranslations.forEach(({ element, attribute, text }) => {
     if (attribute) element.setAttribute(attribute, t(text));
     else element.textContent = t(text);
@@ -154,11 +167,22 @@ function translatePage() {
   const interior = document.querySelector('.about-image img');
   const label = t('Salon Interieur');
   interior.alt = t('Emma NailStudio salon');
-  interior.onerror = () => {
-    interior.onerror = null;
-    interior.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`)}`;
+  const fallbackImage = () => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="#8b7355" width="400" height="400"/><text x="200" y="200" font-size="48" fill="white" text-anchor="middle" dominant-baseline="central">${escapeHtml(label)}</text></svg>`;
+    return `data:image/svg+xml,${encodeURIComponent(svg)}`;
   };
-  interior.src = './images/about/interieur.jpg';
+  if (interior.dataset.imageFallback === 'true') {
+    interior.src = fallbackImage();
+  } else {
+    interior.onerror = () => {
+      interior.onerror = null;
+      interior.dataset.imageFallback = 'true';
+      interior.src = fallbackImage();
+    };
+    if (interior.getAttribute('src') !== './images/about/interieur.jpg') {
+      interior.src = './images/about/interieur.jpg';
+    }
+  }
 }
 
 async function fetchJSON(url) {
@@ -289,10 +313,9 @@ function initializeAccessibility() {
 
 function announceToScreenReader(message) {
   const announcement = document.createElement('div');
+  announcement.className = 'sr-only';
   announcement.setAttribute('role', 'status');
   announcement.setAttribute('aria-live', 'polite');
-  announcement.style.position = 'absolute';
-  announcement.style.left = '-10000px';
   announcement.textContent = message;
   document.body.appendChild(announcement);
   setTimeout(() => announcement.remove(), 1000);
@@ -379,9 +402,12 @@ function createServiceCard(service) {
   card.className = 'service-card';
   card.setAttribute('data-category', service.category);
   card.setAttribute('data-id', service.id);
-  const english = localizeContent(service, 'en');
+  const searchableVersions = Object.keys(appData.translations)
+    .map((language) => localizeContent(service, language));
   card.setAttribute('data-search', normalizeSearchText(
-    `${service.name} ${service.category} ${service.description} ${english.name} ${english.category} ${english.description}`
+    [service, ...searchableVersions]
+      .map(({ name, category, description }) => `${name} ${category} ${description}`)
+      .join(' ')
   ));
   service = localizeContent(service);
 
@@ -407,7 +433,7 @@ function createServiceCard(service) {
       <p>${escapeHtml(service.description)}</p>
       <div class="service-details">
         <div>
-          <span class="service-price">€${service.price.toFixed(2)}</span>
+          <span class="service-price">${formatPrice(service.price)}</span>
           <span class="service-duration">${escapeHtml(service.duration)}</span>
           ${noteHtml}
         </div>
@@ -473,7 +499,7 @@ function initializePricing() {
     row.innerHTML = `
       <td><strong>${escapeHtml(service.name)}</strong></td>
       <td class="duration">${durationClock}</td>
-      <td class="price">€${service.price.toFixed(2)}</td>
+      <td class="price">${formatPrice(service.price)}</td>
       <td class="pricing-action">
         <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>
       </td>
@@ -498,7 +524,7 @@ function initializePricing() {
         <td colspan="4" class="pricing-extra">
           <div class="pricing-extra-heading">
             <strong>${escapeHtml(extra.name)}</strong>
-            <span class="${priceClass}">${priceSign}€${Math.abs(extra.price).toFixed(2)}</span>
+            <span class="${priceClass}">${priceSign}${formatPrice(Math.abs(extra.price))}</span>
           </div>
           <p>${escapeHtml(extra.description)}</p>
         </td>
@@ -980,22 +1006,32 @@ function buildSmsUrl() {
 // Uses the cart contents when the visitor selected treatments, otherwise the default message
 function buildBookingMessage() {
   const items = getCartServices();
-  const languages = appData.language === 'en' ? ['en', 'nl'] : ['nl'];
+  const languages = appData.language === 'nl' ? ['nl'] : [appData.language, 'nl'];
+  const languageNames = {
+    en: 'English',
+    fr: 'Français',
+    es: 'Español',
+    tr: 'Türkçe',
+    ar: 'العربية',
+    uk: 'Українська',
+    pl: 'Polski',
+    nl: 'Nederlands'
+  };
   return languages.map((language) => {
     if (items.length === 0) return t(appData.settings.contact.whatsapp.message, {}, language);
     const lines = [
-      ...(languages.length > 1 ? [language === 'en' ? 'English' : 'Nederlands'] : []),
+      ...(languages.length > 1 ? [languageNames[language]] : []),
       t('Hallo {name}, ik wil graag een afspraak maken voor:', { name: appData.settings.salon.name }, language)
     ];
     items.forEach((item) => {
       const service = localizeContent(item, language);
-      lines.push(`- ${service.name} (${formatPrice(service.price)}, ${service.duration})`);
+      lines.push(`- ${service.name} (${formatPrice(service.price, language)}, ${service.duration})`);
     });
     getActiveCartExtras().forEach((item) => {
       const extra = localizeContent(item, language);
-      lines.push(`- ${t('Toeslag:', {}, language)} ${extra.name} (+${formatPrice(extra.price)})`);
+      lines.push(`- ${t('Toeslag:', {}, language)} ${extra.name} (+${formatPrice(extra.price, language)})`);
     });
-    lines.push(`${t('Totaal:', {}, language)} ${formatPrice(getCartTotal())}`);
+    lines.push(`${t('Totaal:', {}, language)} ${formatPrice(getCartTotal(), language)}`);
     lines.push('');
     lines.push(t('Mijn voorkeur voor datum en tijd:', {}, language));
     return lines.join('\n');
@@ -1393,8 +1429,21 @@ function loadStoredArray(key) {
   }
 }
 
-function formatPrice(amount) {
-  return `€${Number(amount).toFixed(2)}`;
+function formatPrice(amount, language = appData.language) {
+  const locales = {
+    nl: 'nl-NL',
+    en: 'en-GB',
+    fr: 'fr-FR',
+    es: 'es-ES',
+    tr: 'tr-TR',
+    ar: 'ar',
+    uk: 'uk-UA',
+    pl: 'pl-PL'
+  };
+  return new Intl.NumberFormat(locales[language] || 'nl-NL', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(Number(amount));
 }
 
 function getCartServices() {

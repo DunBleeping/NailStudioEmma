@@ -45,7 +45,7 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **I/my**.
 
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Impressie, Contact),
-   taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
+   taalkeuze **Nederlands, English, Français, Español, Türkçe, العربية, Українська, Polski**, en de knoppen 👁️ grijswaarden,
    **A– A A+ A++** lettergrootte en een afbeeldingspictogram met **Foto's tonen / Foto's verbergen**.
    Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Subtiele achtergrondiconen helpen de zes links herkennen.
    Vanaf 768 px staan de links op één regel;
@@ -110,7 +110,8 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
   Helemaal bovenaan blijft de pagina bovenaan; bij de paginaranden kan de beschikbare scrollruimte dit beperken.
 - Lettergrootte **A–** (kleinste, 87,5%), kleur aan (geen grijswaarden).
   Een eerder opgeslagen letterkeuze blijft behouden.
-- Taal **Nederlands**; bezoekers kunnen **English** kiezen. De taal wordt onthouden (localStorage `language`).
+- Taal **Nederlands**; bezoekers kunnen ook English, Français, Español, Türkçe, العربية, Українська en Polski kiezen.
+  De taal wordt onthouden (localStorage `language`). Arabisch gebruikt een volledige rechts-naar-links-weergave.
   Omschakelen behoudt het mandje, toeslagen, zoekopdracht, categoriefilter en toegankelijkheidsvoorkeuren.
 
 **Afspraken gaan via WhatsApp of SMS** naar het nummer in de serversecret. Er is geen e-mail of online agenda.
@@ -159,9 +160,9 @@ Mijn voorkeur voor datum en tijd:
 Zolang er iets in het mandje zit, sturen ook alle andere WhatsApp-knoppen dit bericht. Het is een
 afspraakverzoek, geen betaling; Emma bevestigt via WhatsApp of SMS. Het mandje wordt in de browser onthouden
 (localStorage `cart` en `cartExtras`).
-Bij taalkeuze **Nederlands** is het bericht **alleen Nederlands**; bij **English** is het
-**eerst Engels en daarna Nederlands**. Dit geldt voor WhatsApp én SMS. Zonder behandelingen gebruiken
-WhatsApp-links het korte standaardbericht volgens dezelfde taalregel.
+Bij taalkeuze **Nederlands** is het bericht **alleen Nederlands**; bij iedere andere taal staat eerst het
+bericht in de gekozen taal en daarna de Nederlandse versie. Dit geldt voor WhatsApp én SMS. Zonder
+behandelingen gebruiken WhatsApp-links het korte standaardbericht volgens dezelfde taalregel.
 
 SMS opent een concept via `sms:`; de klant moet zelf op verzenden drukken. Een geschikte berichtenapp
 is vereist; op iPad/Mac is voor gewone SMS doorgaans een gekoppelde iPhone nodig.
@@ -172,25 +173,30 @@ Linkopbouw en inhoud zijn getest, maar daadwerkelijk afleveren moet op een echte
 ### Vertalingen beheren
 
 De Nederlandse teksten blijven in `index.html` en de bestaande JSON-bestanden staan.
-`data/translations.json` bevat onder `en` de Engelse vertalingen, met de **exacte Nederlandse tekst**
-als sleutel. Bij nieuwe of gewijzigde teksten voeg je daar ook de Engelse vertaling toe:
+`data/translations.json` bevat de Engelse vertalingen. De bestanden `data/translations/fr.json`,
+`es.json`, `tr.json`, `ar.json`, `uk.json` en `pl.json` bevatten de overige talen. In elk bestand is de
+**exacte Nederlandse tekst** de sleutel. Bij nieuwe of gewijzigde teksten voeg je de vertaling aan
+alle zeven vertaalbestanden toe:
 
+In `data/translations.json` onder `en`:
 ```json
 "Verwijderen oude lak/gellak": "Remove old nail polish/gel polish"
 ```
+In de overige locale JSON-bestanden staat dezelfde Nederlandse sleutel met de tekst in die taal.
 
 Dit geldt ook voor namen, omschrijvingen, duur, categorieën, notities, Impressie-albumtitels, alt-teksten en
 foto-onderschriften. Bij HTML-teksten worden witruimte en regeleinden samengevoegd tot enkele spaties.
 Markeer nieuwe vaste teksten met `data-i18n`; vertaal attributen met bijvoorbeeld
 `data-i18n-attrs="aria-label,title"`. Ontbrekende vertalingen geven een waarschuwing in de browserconsole
-en tonen voorlopig de Nederlandse tekst. Controleer dus altijd beide talen na inhoudswijzigingen.
+en tonen voorlopig de Nederlandse tekst. Controleer daarom alle talen na inhoudswijzigingen.
 Prijzen, foto's en behandel-ID's worden gedeeld en hoeven niet vertaald te worden.
-Zoeken werkt op zowel Nederlandse als Engelse behandelteksten, in beide talen.
+Zoeken werkt met de teksten van de gekozen taal.
 
 ## ✨ Functies
 
 - ✅ Statische website zonder build-stap; een Pages Function controleert contacttoegang
-- ✅ Nederlands/Engels met onthouden taalkeuze; NL- of tweetalige berichten volgens de gekozen taal
+- ✅ Acht talen: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools; Arabisch RTL
+- ✅ WhatsApp/SMS: Nederlands alleen NL; andere talen eerst gekozen taal, daarna Nederlands
 - ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
 - ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
 - ✅ Categoriefilter en zoekbalk voor behandelingen
@@ -213,6 +219,7 @@ EmStudio/
 │   ├── services.json          # 27 behandelingen + "extras" (toeslagen)
 │   ├── gallery.json           # 6 Impressie-albums ("folder", "photos"), automatisch bijgewerkt
 │   ├── translations.json      # Engelse vertalingen van Nederlandse teksten
+│   ├── translations/          # fr.json, es.json, tr.json, ar.json, uk.json, pl.json
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
@@ -223,6 +230,7 @@ EmStudio/
 │                              # Albums met klantfoto's
 ├── tools/update-galerij.ps1   # Foto's, covers en cacheversies genereren (PowerShell 7)
 ├── tools/sync-website.ps1     # Optie 3 genereert de lijst en publiceert de foto's samen
+├── tools/translations.test.mjs # Volledigheid en placeholders van alle taalbestanden
 ├── _headers                   # Cloudflare: beveiliging + caching
 ├── sitemap.xml, robots.txt    # SEO
 ├── start-server.py            # Lokale testserver
@@ -287,6 +295,11 @@ python -m http.server 8000
 
 Open http://localhost:8000 (niet via `file://` – dan kunnen de JSON-bestanden niet laden).
 Tip: wis in DevTools de *Local Storage* om de site te zien zoals een nieuwe bezoeker.
+De vertalingen controleren (volledige sleutels en placeholders, geen npm nodig):
+
+```bash
+node --test tools/translations.test.mjs
+```
 
 ## 📤 Publiceren (Git → Cloudflare)
 

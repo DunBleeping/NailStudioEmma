@@ -110,13 +110,13 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 - Nieuwe bezoekers: lettergrootte **A–**; bestaande letterkeuze blijft behouden.
 - Op mobiel: menu links onder logo; taal direct zichtbaar naast logo, lettergrootte in het uitklapmenu.
 - Prijslijst staat boven Mijn Behandelingen; toeslagtekst gebruikt de volledige tabelbreedte.
-- Taalkeuze **Nederlands / English** in de header; keuze wordt onthouden.
-  Vertalingen bijhouden in `data/translations.json` (exacte Nederlandse tekst → Engelse vertaling).
+- Taalkeuze: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools; keuze wordt onthouden.
+  Arabisch is RTL. Vertalingen staan in `data/translations.json` en `data/translations/<taal>.json`.
 - WhatsApp-knoppen → eerst Turnstile-servercontrole, daarna voorbereid bericht; geen afspraakknop in het hoofdmenu
 - Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · **Foto's tonen / Foto's verbergen**
 - Zoekbalk onder "Categorieën"; *+ dit wil ik* onderaan elke behandelkaart → 🛒 Mandje → WhatsApp-bericht met
   behandelingen, toeslag en totaal. In het mandje kan dit ook via **SMS** naar hetzelfde nummer.
-- Berichttaal voor beide kanalen: **Nederlands = alleen Nederlands; English = eerst Engels, daarna Nederlands**.
+- Berichttaal voor WhatsApp en SMS: **Nederlands = alleen Nederlands; andere talen = eerst gekozen taal, daarna Nederlands**.
   SMS opent een concept in de berichtenapp; zelf verzenden, providerkosten mogelijk.
 - Nieuwe set: verwijderen oude lak/gellak **+€5 standaard aangevinkt**, verplicht bij aanwezige lak.
   Alleen uitvinken als verwijderen niet nodig is; die keuze blijft binnen het huidige mandje onthouden.
@@ -128,7 +128,7 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=27`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=28`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch bij optie 3 van `tools/sync-website.ps1` |
 
