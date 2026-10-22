@@ -127,7 +127,7 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=23`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=24`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
 | Albumfoto's | gaat automatisch bij optie 3 van `tools/sync-website.ps1` |
 

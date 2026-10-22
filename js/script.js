@@ -765,7 +765,7 @@ function initializeContact() {
         const div = document.createElement('div');
         div.innerHTML = `
           <span class="day">${escapeHtml(t(dayNames[index]))}</span>
-          <span class="time">${escapeHtml(hours === 'Gesloten' ? t(hours) : hours)}</span>
+          <span class="time">${escapeHtml(t(hours))}</span>
         `;
         hoursContainer.appendChild(div);
       }
@@ -1173,6 +1173,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeLogoLink() {
   const logoLink = document.getElementById('logo-link');
   const headerLogoLink = document.getElementById('header-logo-link');
+  // A limited download deterrent, not protection against screenshots or direct image access.
+  [logoLink, headerLogoLink].filter(Boolean).forEach((link) => {
+    link.addEventListener('contextmenu', (event) => event.preventDefault());
+    link.addEventListener('dragstart', (event) => event.preventDefault());
+  });
   
   const handleLogoClick = (e) => {
     e.preventDefault();

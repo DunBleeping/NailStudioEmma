@@ -450,7 +450,7 @@ body.grayscale .accessibility-toggle {
 
 .hero-nail-banner {
   width: 100%;
-  height: 4rem;
+  height: 8rem;
   object-fit: cover;
   object-position: center 60%;
   border-radius: 8px;
@@ -1062,6 +1062,10 @@ body:not(.images-hidden) .photo-tip {
    Contact Section
    ============================================ */
 
+.contact-preference {
+  margin-bottom: 2rem;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1367,6 +1371,12 @@ footer a:hover {
    ============================================ */
 
 /* Logo Link - Make clickable */
+#logo-link,
+#header-logo-link {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
 .logo-link {
   display: flex;
   align-items: center;

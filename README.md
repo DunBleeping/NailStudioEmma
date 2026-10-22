@@ -57,7 +57,9 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
-   Direct onder de welkomsttitel staat een smalle horizontale nagelfoto; deze schakelt mee met foto's tonen/verbergen.
+   Direct onder de welkomsttitel staat een horizontale nagelfoto van 8rem hoog; deze schakelt mee met foto's tonen/verbergen.
+   Rechtsklikken en slepen zijn alleen op beide bedrijfslogo's geblokkeerd als beperkte drempel.
+   Dit verhindert geen screenshots of het rechtstreeks downloaden van de afbeelding.
 3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
@@ -77,6 +79,8 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
 7. **Contact & Openingstijden** – telefoon na klikken, adresuitleg, openingstijden en WhatsApp.
+   WhatsApp heeft de voorkeur en is de snelste contactroute; de tekst verwijst naar de groene knop rechtsonder.
+   In het weekend: gesloten, behalve op speciaal verzoek. Openingstijden worden ook naar Engels vertaald.
    **Toon telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
    Na servercontrole verschijnt het nummer en een knop om bellen, WhatsApp of SMS te openen.
    Deze extra klik voorkomt geblokkeerde pop-ups na asynchrone verificatie.
@@ -300,7 +304,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=23`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=24`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via optie 3 van `tools/sync-website.ps1`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
