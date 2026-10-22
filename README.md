@@ -59,7 +59,8 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Subtiele achtergrondiconen helpen de zes menulinks herkennen.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
    *Facebook*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
-   Direct onder de welkomsttitel staat een horizontale nagelfoto van 8rem hoog; deze schakelt mee met foto's tonen/verbergen.
+   Direct onder de welkomsttitel staat `design-1.jpg` uit het album Custom Designs, horizontaal op 8rem hoog;
+   deze schakelt mee met foto's tonen/verbergen.
    Rechtsklikken en slepen zijn alleen op beide bedrijfslogo's geblokkeerd als beperkte drempel.
    Dit verhindert geen screenshots of het rechtstreeks downloaden van de afbeelding.
 3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
@@ -312,7 +313,7 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=26`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=27`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
   Albumfoto's krijgen automatisch een versie via optie 3 van `tools/sync-website.ps1`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).

@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=26`
+- `index.html` – de pagina; CSS/JS geladen met `?v=27`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -54,6 +54,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
   `extras`: verwijderen oude lak/gellak +€5
 - `gallery.json` – 6 Impressie-albums met gegenereerde cover (`src`), albummap (`folder`) en foto's (`photos`);
   lege albums worden niet getoond
+- De welkomstbanner gebruikt `customdesigns/design-1.jpg`
 - `translations.json` – Engelse vertalingen onder `en`, met de exacte Nederlandse tekst als sleutel
 - `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
 

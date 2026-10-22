@@ -6,7 +6,7 @@ De website gebruikt deze foto's:
 |---|---|---|
 | **Behandelingsfoto's** | `images/services/` | Op de kaarten bij *Onze Behandelingen* |
 | **Impressie-albums** | `images/gallery/<album>/` | De eerste foto op naam is de tegel; klikken opent de hele serie |
-| **Smalle foto bovenaan** | automatisch uit het eerste gevulde Impressie-album | Onder de welkomsttitel |
+| **Smalle foto bovenaan** | `images/gallery/customdesigns/design-1.jpg` | Onder de welkomsttitel |
 | **Interieurfoto** | `images/about/interieur.jpg` | Bij *Over Emma NailStudio*; de illustratie blijft de fallback |
 | Logo | `images/logo.jpg` | Header en hero |
 
@@ -67,7 +67,7 @@ Elke tegel onder **Impressie** is een album:
 - De tegel toont de eerste foto op bestandsnaam.
 - Klikken opent alle foto's in de map; bezoekers bladeren met pijlen, pijltjestoetsen of vegen.
 - Een lege map wordt niet getoond. BIAB verschijnt dus vanzelf zodra je daar foto's toevoegt en publiceert.
-- De smalle foto onder de welkomsttitel komt automatisch uit het eerste gevulde album.
+- De smalle foto onder de welkomsttitel is `design-1.jpg` uit `customdesigns`.
 - De albumfoto's zijn eigen foto's van de eigenaar; de oude, onjuiste bronvermeldingen zijn verwijderd.
 
 ### Klantfoto's toevoegen

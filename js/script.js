@@ -326,12 +326,14 @@ function initializeHero() {
   }
 
   const banner = heroSection.querySelector('.hero-nail-banner');
-  const cover = appData.gallery?.images.find((album) => album.photos?.length > 0);
+  const cover = appData.gallery?.images
+    .find((album) => album.folder === 'customdesigns')
+    ?.photos?.find((photo) => /\/design-1\.jpg(?:\?|$)/i.test(photo.src));
   if (banner) {
     banner.hidden = !cover;
     if (cover) {
-      banner.src = cover.photos[0].src;
-      banner.alt = t(cover.alt);
+      banner.src = cover.src;
+      banner.alt = t('Eigen nageldesign van Emma NailStudio');
     } else {
       banner.removeAttribute('src');
     }
