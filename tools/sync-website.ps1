@@ -38,6 +38,11 @@ function Invoke-Git {
     }
 }
 
+function Update-Gallery {
+    # Ook bij alleen controleren wordt de lokale lijst vernieuwd, maar niets gepubliceerd.
+    & (Join-Path $PSScriptRoot 'update-galerij.ps1')
+}
+
 Push-Location (Split-Path -Parent $PSScriptRoot)
 try {
     if (-not $PSBoundParameters.ContainsKey('Bestanden')) {
@@ -55,15 +60,20 @@ try {
         } until ($choice -match '^[0-5]$')
         if ($choice -eq '0') { return }
 
+        if ($choice -eq '3') {
+            Write-Host "`nAlbumlijst en fotoversies worden lokaal automatisch bijgewerkt."
+            Update-Gallery
+        }
         # Toon alleen werkelijk gewijzigde of nieuwe bestanden; selecteer nooit blind een hele map.
         $changed = @(Invoke-Git @('-c', 'core.quotepath=false', 'ls-files', '--modified', '--others', '--exclude-standard') |
             Sort-Object -Unique)
         $candidates = @($changed | Where-Object {
+            $path = $_
             switch ($choice) {
-                '1' { $_ -eq 'data/settings.json' }
-                '2' { $_ -in @('data/services.json', 'data/Prijzenlijst.csv', 'data/translations.json') }
-                '3' { $_ -match '^images/.+\.(jpg|jpeg|png|webp|svg|avif)$|^images/.+/descript\.ion$|^data/(gallery|services|translations)\.json$|^index\.html$' }
-                '4' { $_ -match '^index\.html$|^(css|js)/|^data/translations\.json$' }
+                '1' { $path -eq 'data/settings.json' }
+                '2' { $path -in @('data/services.json', 'data/Prijzenlijst.csv', 'data/translations.json') }
+                '3' { $path -match '^images/.+\.(jpg|jpeg|png|webp|svg|avif)$|^images/.+/descript\.ion$|^data/(gallery|services|translations)\.json$|^index\.html$' }
+                '4' { $path -match '^index\.html$|^(css|js)/|^data/translations\.json$' }
                 '5' { $true }
             }
         })
@@ -73,11 +83,10 @@ try {
         }
         if ($choice -eq '3') {
             Write-Host "`nZet foto's vooraf in images\gallery\<album> of images\services."
-            Write-Host 'Nieuwe albumfoto''s? Werk eerst de albumlijst bij met: python tools\update_galerij.py'
-            Write-Host 'Python ontbreekt? Werk photos in data\gallery.json zorgvuldig zelf bij, of vraag hulp.'
+            Write-Host 'Albumfoto''s en de albumlijst worden samen gepubliceerd, ook bij verwijderen.'
+            Write-Host 'De eerste foto op naam is de tegel; lege albums worden niet getoond.'
             Write-Host 'Behandelingsfoto''s: controleer image in data\services.json.'
-            Write-Host 'Foto vervangen? Verhoog de afbeeldingsversie (?v=) in JSON/HTML.'
-            Write-Host 'Kies straks zowel de foto''s als de gewijzigde verwijzingen; alleen uploaden toont geen nieuw album.'
+            Write-Host 'Alleen bij behandelingsfoto''s moet je zelf de versie (?v=) verhogen in JSON.'
         }
         Write-Host "`nBeschikbare bestanden:"
         for ($i = 0; $i -lt $candidates.Count; $i++) {
@@ -113,6 +122,13 @@ try {
     }
     if ([string]::IsNullOrWhiteSpace($Bericht)) { throw 'Geef een duidelijke commitomschrijving op.' }
     if ($Bestanden.Count -eq 0) { throw 'Selecteer minstens een bestand.' }
+    if (@($Bestanden | Where-Object { $_.Replace('\', '/') -match '^(images/gallery/|data/gallery\.json$)' }).Count) {
+        Update-Gallery
+        $albumChanges = @(Invoke-Git @('-c', 'core.quotepath=false', 'ls-files', '--modified', '--others', '--exclude-standard') |
+            Where-Object { $_ -match '^images/gallery/|^data/gallery\.json$' })
+        $Bestanden = @($Bestanden) + $albumChanges + @('data/gallery.json')
+        Write-Host 'Alle gewijzigde albumbestanden zijn toegevoegd om verwijzingen en foto''s gelijk te houden.'
+    }
     $branch = Invoke-Git @('branch', '--show-current')
     if ($branch -ne 'main') { throw 'Dit script werkt alleen op main. Wissel niet zonder controle van branch.' }
 
@@ -126,12 +142,15 @@ try {
     $root = (Get-Location).Path
     $selected = foreach ($file in $Bestanden) {
         $full = [IO.Path]::GetFullPath((Join-Path $root $file))
-        if (-not $full.StartsWith($root + '\', [StringComparison]::OrdinalIgnoreCase) -or
-            -not (Test-Path -LiteralPath $full -PathType Leaf)) {
-            throw "Geen bestaand bestand binnen de projectmap: $file"
+        if (-not $full.StartsWith($root + '\', [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Geen bestand binnen de projectmap: $file"
         }
-        if ($full -match '\\images\\') {
-            $image = Get-Item -LiteralPath $full
+        if (-not (Test-Path -LiteralPath $full -PathType Leaf)) {
+            if (Test-Path -LiteralPath $full) { throw "Selecteer een bestand, geen map: $file" }
+            # Alleen een door Git gevolgd bestand kan bewust als verwijdering worden gepubliceerd.
+            Invoke-Git @('ls-files', '--error-unmatch', '--', $file) | Out-Null
+        } elseif ($full -match '\\images\\') {
+            $image = Get-Item -LiteralPath $full -Force
             if ($image.Name -cne $image.Name.ToLowerInvariant() -or $image.Name -match '\s' -or $image.Length -eq 0) {
                 throw "Foto/onderschrift heeft hoofdletters, spaties of is leeg: $file. Pas dit eerst aan."
             }
@@ -139,9 +158,9 @@ try {
         [IO.Path]::GetRelativePath($root, $full).Replace('\', '/')
     }
     $selected = @($selected | Select-Object -Unique)
-    foreach ($file in $selected | Where-Object { $_ -match '\.json$' }) {
+    foreach ($file in $selected | Where-Object { $_ -match '\.json$' -and (Test-Path -LiteralPath $_ -PathType Leaf) }) {
         # Ongeldige JSON niet publiceren: daardoor kunnen prijzen of de hele site leeg blijven.
-        Get-Content -LiteralPath $file -Raw | ConvertFrom-Json | Out-Null
+        Get-Content -LiteralPath $file -Raw | ConvertFrom-Json -AsHashtable | Out-Null
     }
 
     Invoke-Git @('status', '--short')

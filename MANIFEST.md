@@ -16,7 +16,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Bestanden
 
 ### Root
-- `index.html` – de pagina; CSS/JS geladen met `?v=21`
+- `index.html` – de pagina; CSS/JS geladen met `?v=22`
 - `_headers` – Cloudflare beveiligings- en cache-headers
 - `sitemap.xml`, `robots.txt` – SEO
 - `.gitignore`, `.gitattributes` – Git (afbeeldingen als binair)
@@ -50,22 +50,26 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - `_routes.json` – alleen de contact-API gebruikt Pages Functions
 - `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
   `extras`: verwijderen oude lak/gellak +€5
-- `gallery.json` – 6 Impressie-stijlen met voorbeeldfoto (`src`), albummap (`folder`) en klantfoto's (`photos`)
+- `gallery.json` – 5 Impressie-albums met gegenereerde cover (`src`), albummap (`folder`) en foto's (`photos`);
+  lege albums worden niet getoond
 - `translations.json` – Engelse vertalingen onder `en`, met de exacte Nederlandse tekst als sleutel
 - `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
 
 ### images/
 - `logo.jpg`
 - `services/` – 10 behandelingsfoto's
-- `gallery/nails-1..6.jpg` – voorbeeldfoto's (Pexels, vrije licentie; bron in `descript.ion`)
-- `gallery/<album>/` – `rode-nagels`, `biab-nude`, `floral`, `ombre`, `glitter`, `minimalistisch`
-  (elk met `LEESMIJ.txt`, nog zonder klantfoto's)
+- `gallery/<album>/` – `cateye`, `chrome`, `customdesigns`, `gellak`, `biab`
+  (eerste foto op naam is de cover; ook gebruikt voor de smalle hero-foto)
 - `gallery/biab.jpg`, `gellak.jpg`, `manicure.jpg`, `nailart.jpg`, `nailhealth.jpg`, `pedicure.jpg`,
   `removal.jpg` – oude placeholders, niet in gebruik
 
 ### tools/
-- `update_galerij.py` – scant de albummappen en vult `photos` in `gallery.json`
+- `sync-website.ps1` – publicatiemenu; optie 3 genereert albums en publiceert gewijzigde albumbestanden samen
+- `update-galerij.ps1` – scant de albummappen en vult `photos` en de cover in `gallery.json`
   (met versiecode tegen caching en onderschriften uit `descript.ion`)
+- `update_galerij.py` – compatibele ingang naar dezelfde PowerShell-generator
+- `gallery.test.ps1` – generator en publicatiemenu testen met een tijdelijke Git-repository;
+  uitvoeren met `.\tools\gallery.test.ps1` in PowerShell 7
 
 ## Functies
 

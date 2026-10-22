@@ -1,12 +1,12 @@
 # 📸 Foto's Uploaden - Emma NailStudio
 
-De website heeft drie soorten foto's:
+De website gebruikt deze foto's:
 
 | Soort | Map | Waar op de site |
 |---|---|---|
 | **Behandelingsfoto's** | `images/services/` | Op de kaarten bij *Onze Behandelingen* |
-| **Voorbeeldfoto's Impressie** | `images/gallery/nails-1.jpg` t/m `nails-6.jpg` | De 6 tegels onder *Impressie* |
-| **Klantfoto's (albums)** | `images/gallery/<album>/` | Het album dat opent als je op een tegel klikt |
+| **Impressie-albums** | `images/gallery/<album>/` | De eerste foto op naam is de tegel; klikken opent de hele serie |
+| **Smalle foto bovenaan** | automatisch uit het eerste gevulde Impressie-album | Onder de welkomsttitel |
 | Logo | `images/logo.jpg` | Header en hero |
 
 > **Foto's standaard verborgen:** nieuwe bezoekers zien de site zonder foto's (rustiger, sneller).
@@ -55,55 +55,61 @@ en pas bij die behandeling `"image"` aan in `data/services.json`. Verwijs nooit 
 ## 🖼️ **Impressie: albums met klantfoto's**
 
 Elke tegel onder **Impressie** is een album:
-- De tegel toont één **voorbeeldfoto** (`src` in `data/gallery.json`).
-- Klikt een bezoeker op de tegel, dan opent het album met de **echte resultaten** van klanten (`photos`).
-- Zolang een album nog leeg is (`"photos": []`), ziet de bezoeker alleen de voorbeeldfoto met de tekst
-  *"Voorbeeldfoto - echte resultaten van onze klanten volgen binnenkort."*
+- De tegel toont de eerste foto op bestandsnaam.
+- Klikken opent alle foto's in de map; bezoekers bladeren met pijlen, pijltjestoetsen of vegen.
+- Een lege map wordt niet getoond. BIAB verschijnt dus vanzelf zodra je daar foto's toevoegt en publiceert.
+- De smalle foto onder de welkomsttitel komt automatisch uit het eerste gevulde album.
+- Bestaande bronvermeldingen in `descript.ion` blijven behouden. De mee verhuisde stockfoto's
+  zijn voorbeelden, geen bewijs van eigen klantwerk.
 
 ### Klantfoto's toevoegen
 
-Elk album heeft een eigen map met een `LEESMIJ.txt` met de voorgestelde bestandsnamen:
+Elk album heeft een vaste map. Je hoeft geen JSON of websitecode te veranderen:
 
 | Album | Map | Bestandsnamen |
 |---|---|---|
-| Klassieke Rode Nagels | `images/gallery/rode-nagels/` | `rode-nagels-01.jpg`, `rode-nagels-02.jpg`, ... |
-| BIAB Nude | `images/gallery/biab-nude/` | `biab-nude-01.jpg`, ... |
-| Floral Nail Art | `images/gallery/floral/` | `floral-01.jpg`, ... |
-| Ombre Effect | `images/gallery/ombre/` | `ombre-01.jpg`, ... |
-| Glitter Glamour | `images/gallery/glitter/` | `glitter-01.jpg`, ... |
-| Minimalistisch Design | `images/gallery/minimalistisch/` | `minimalistisch-01.jpg`, ... |
+| Cat Eye | `images/gallery/cateye/` | `cateye-01.jpg`, `cateye-02.jpg`, ... |
+| Chrome | `images/gallery/chrome/` | `chrome-01.jpg`, `chrome-02.jpg`, ... |
+| Custom Designs | `images/gallery/customdesigns/` | `design-01.jpg`, `design-02.jpg`, ... |
+| Gellak | `images/gallery/gellak/` | `gellak-01.jpg`, ... |
+| BIAB | `images/gallery/biab/` | `biab-01.jpg`, ... |
 
 1. Zet de foto's in de juiste map. Kleine letters, geen spaties, `.jpg` (of `.jpeg/.png/.webp`),
-   liefst max. 1200 px breed en kleiner dan 500 KB. De volgorde op de site is de volgorde van de namen.
+   liefst max. 1200 px breed en kleiner dan 500 KB. Andere namen mogen ook; de volgorde is alfabetisch.
+   Gebruik bij meer dan negen foto's bij voorkeur `01`, `02`, ... `10` voor de gewenste volgorde.
+   Alleen foto's direct in de albummap worden opgenomen, niet in submappen.
 2. *(Optioneel)* Onderschriften: maak in die map een `descript.ion` met per regel
-   `bestandsnaam onderschrift`, bijvoorbeeld `rode-nagels-01.jpg Klassiek rood op BIAB`.
-3. Voer in de projectmap uit:
+   `bestandsnaam onderschrift`, bijvoorbeeld `cateye-01.jpg Cat Eye in groen`.
+3. Open PowerShell 7 in `C:\MyDocs\DevOps\EmStudio` en start:
+   ```powershell
+   .\tools\sync-website.ps1
    ```
-   python tools/update_galerij.py
-   ```
-   Het script zet alle gevonden foto's in `data/gallery.json` (veld `photos`), met een versiecode
-   zodat een vervangen foto meteen zichtbaar is.
-4. Commit en push; Cloudflare zet het binnen een minuut live.
+4. Kies **3. Nieuwe of vervangen foto's publiceren**, daarna **A** voor alle getoonde bestanden.
+   De albumlijst en fotoversies worden automatisch bijgewerkt. Alle gewijzigde albumbestanden
+   gaan samen mee, ook als je maar één albumfoto selecteert; zo ontbreken er geen foto's op GitHub.
+5. Kies controleren of publiceren. Bij publiceren geef je een omschrijving en bevestig je.
+   Controleer daarna de Cloudflare-deployment en de website.
 
-**Met keuzemenu publiceren:** start `.\tools\sync-website.ps1` in PowerShell 7 en kies
-**3. Nieuwe of vervangen foto's publiceren**. Selecteer zowel de foto's als de gewijzigde
-`data/gallery.json` (of `data/services.json` bij behandelkaarten).
-Het menu publiceert reeds klaargezette bestanden: stap 3 hierboven wordt niet automatisch uitgevoerd.
-Je kunt eerst alleen controleren en daarna opnieuw starten om te publiceren.
+**Vervangen of verwijderen:** overschrijf een foto met dezelfde naam, of verwijder hem uit de map.
+Voer daarna dezelfde stappen uit. Het script past de lijst en de cacheversies automatisch aan.
+Verwijder je de laatste foto, dan verdwijnt ook de tegel.
 
-Bezoekers bladeren door een album met de pijltjes, de pijltjestoetsen of door te vegen op mobiel.
+**Alleen lokaal bekijken:** voer `.\tools\update-galerij.ps1` uit en vernieuw Live Server.
+Er is geen Python nodig. Ook bij alleen controleren in het publicatiemenu wordt de lokale lijst
+vernieuwd; er volgt dan geen commit of push.
+De statische website kan zelf geen mappen uitlezen: alleen lokaal neerzetten maakt foto's nog niet live.
 
 **Engelse versie:** voeg voor nieuwe of gewijzigde titels, omschrijvingen, alt-teksten en
 foto-onderschriften de Engelse vertaling toe onder `en` in `data/translations.json`.
 De sleutel is de exacte Nederlandse tekst uit `gallery.json` (ook voor automatisch gegenereerde
-foto-onderschriften na `update_galerij.py`). Bestandsnamen en fotopaden blijven voor beide talen gelijk.
+foto-onderschriften na `update-galerij.ps1`). Bestandsnamen en fotopaden blijven voor beide talen gelijk.
 
 > **Let op:** zet nooit zelf bestandsnamen in `gallery.json` van foto's die nog niet bestaan.
 > Cloudflare geeft voor een ontbrekend bestand de homepage terug (en bewaart dat 30 dagen),
 > waardoor bezoekers een kapotte foto zien. Het script neemt alleen bestaande foto's op.
 
 **Tips:**
-- Wil je een eigen foto als voorbeeld op de tegel? Vervang `nails-N.jpg` en verhoog `?v=2` naar `?v=3` in `gallery.json`.
+- Wil je een andere foto op de tegel? Geef die een naam die als eerste sorteert, bijvoorbeeld `00-cover.jpg`.
 - Vraag klanten toestemming voordat je een foto van hun handen/nagels online zet (AVG).
 - Nieuwe stijl toevoegen? Kopieer een blok in `gallery.json`, geef een uniek `id`, titel en `folder`, en draai het script.
 
@@ -116,11 +122,10 @@ A: Ja, dat gebeurt nu al (zie tabel hierboven). Een eigen foto per behandeling k
 
 **V: Ik heb een foto vervangen maar zie nog de oude.**
 A: Foto's blijven 30 dagen in de browsercache. Verhoog de versie (`?v=2` → `?v=3`) in
-`services.json` of `gallery.json`. Voor albumfoto's doet `tools/update_galerij.py` dit automatisch.
+`services.json`. Voor albumfoto's doet optie 3 van het publicatiemenu dit automatisch.
 
 **V: Mag ik foto's van internet gebruiken?**
-A: Alleen met een vrije licentie (zoals Pexels/Unsplash). De huidige voorbeeldfoto's `nails-1..6.jpg`
-komen van Pexels; de bron staat in `images/gallery/descript.ion`. Vervang ze bij voorkeur door eigen werk.
+A: Alleen als je de benodigde gebruiksrechten hebt. Gebruik bij voorkeur foto's van je eigen werk.
 
 **V: Welk formaat is het beste?**
 A: JPG. PNG kan ook, maar is meestal veel groter.
@@ -137,27 +142,26 @@ images/
 │   ├── ...
 │   └── teennagels.jpg
 └── gallery/
-    ├── nails-1.jpg … nails-6.jpg   ← voorbeeldfoto's op de Impressie-tegels
-    ├── descript.ion               ← omschrijving/bron per foto (verborgen bestand)
-    ├── rode-nagels/               ← album Klassieke Rode Nagels (+ LEESMIJ.txt)
-    ├── biab-nude/
-    ├── floral/
-    ├── ombre/
-    ├── glitter/
-    └── minimalistisch/
+    ├── cateye/
+    ├── chrome/
+    ├── customdesigns/
+    ├── gellak/
+    └── biab/                     ← verborgen zolang er geen foto's in staan
 ```
 
 `images/gallery/biab.jpg`, `gellak.jpg`, `manicure.jpg`, `nailart.jpg`, `nailhealth.jpg`, `pedicure.jpg`
 en `removal.jpg` zijn oude placeholders en worden niet gebruikt.
+Ook de oude albummappen `rode-nagels`, `biab-nude`, `floral`, `ombre`, `glitter` en
+`minimalistisch` worden niet meer ingelezen.
 
 ---
 
 ## 🚀 **Live zetten**
 
-1. Foto's in de juiste map zetten (en eventueel `python tools/update_galerij.py` voor albums)
-2. Lokaal controleren: `python -m http.server 8000` → http://localhost:8000 (Ctrl+F5)
-3. Commit + push naar GitHub (`main`)
-4. Na ±1 minuut staat het live op https://emmanagelstudio.vip ✨
+1. Foto's in de juiste map zetten
+2. `.\tools\sync-website.ps1` starten in PowerShell 7, optie 3
+3. Eerst controleren en lokaal bekijken via Live Server; daarna opnieuw optie 3 en publiceren
+4. Na een geslaagde Cloudflare-deployment controleren op https://emmanagelstudio.vip ✨
 
 ---
 

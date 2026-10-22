@@ -99,7 +99,7 @@ Open **PowerShell** (normal user is fine, winget asks for admin when needed):
 # Git for Windows (includes Git Credential Manager for GitHub login)
 winget install --id Git.Git -e --source winget
 
-# Python (local test server + tools/update_galerij.py)
+# Python (optional local test server; album updates use PowerShell 7)
 winget install --id Python.Python.3.12 -e --source winget
 
 # Optional: GitHub Desktop, a simple graphical alternative to GitKraken
@@ -198,18 +198,23 @@ visitor.
 ## 7. Important rules (things that broke before)
 
 1. **Changed `css/style.css` or `js/script.js`?** Raise the version number `?v=N` on **both**
-   lines in `index.html` (currently `?v=21` → next is `?v=22`). Otherwise visitors may keep the
+   lines in `index.html` (currently `?v=22` → next is `?v=23`). Otherwise visitors may keep the
    old version for hours.
 2. **File names are case-sensitive on Cloudflare.** `Logo.JPG` ≠ `logo.jpg`. Use lowercase,
    no spaces.
 3. **Never commit empty or placeholder image files.** Cloudflare serves the homepage
    (status 200) for a missing file and caches that for 30 days.
-4. **Replaced a photo with the same name?** Raise `?v=N` behind that photo in the JSON.
+4. **Replaced a treatment photo with the same name?** Raise `?v=N` behind that photo in the JSON.
+   Album photo versions are generated automatically.
 5. **Prices/treatments** → edit `data/services.json` (see [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md)).
    `data/Prijzenlijst.csv` is the salon's source list, not read by the site.
-6. **Customer photos for albums** → put them in `images/gallery/<album>/` as
-   `<album>-01.jpg`, `-02.jpg` … then run `python tools/update_galerij.py`
-   (see [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md)).
+6. **Album photos** → put them in `images/gallery/<album>/`
+   (`cateye`, `chrome`, `customdesigns`, `gellak`, `biab`), then run
+   `.\tools\sync-website.ps1` in PowerShell 7 and choose **3**.
+   This updates the list, cover and cache versions automatically, including removals.
+   Empty albums are hidden; changed album files are published together.
+   For a local preview only, run `.\tools\update-galerij.ps1` and refresh Live Server
+   (see [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md)). Python is not needed for albums.
 7. Line-ending warnings (`LF will be replaced by CRLF`) are harmless.
 
 ---

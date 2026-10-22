@@ -1,63 +1,84 @@
 {
   "images": [
     {
-      "id": "gallery-1",
-      "title": "Klassieke Rode Nagels",
-      "description": "Elegante rode gellak met glanzende afwerking",
-      "src": "./images/gallery/nails-1.jpg?v=2",
-      "alt": "Rode gellak manicure - klassiek elegant design",
-      "category": "gellak",
-      "folder": "rode-nagels",
-      "photos": []
+      "id": "gallery-cateye",
+      "title": "Cat Eye",
+      "description": "Nagels met een Cat Eye-effect",
+      "src": "./images/gallery/cateye/cateye-1.jpg?v=1f0bcbd8",
+      "alt": "Nagels met een Cat Eye-effect",
+      "category": "nailart",
+      "folder": "cateye",
+      "photos": [
+        {
+          "src": "./images/gallery/cateye/cateye-1.jpg?v=1f0bcbd8",
+          "caption": "Ombre Effect - stockfoto Pexels 13038494 door Roman Titov (Pexels-licentie)"
+        }
+      ]
     },
     {
-      "id": "gallery-2",
-      "title": "BIAB Nude",
-      "description": "Natuurlijke BIAB met nude tint",
-      "src": "./images/gallery/nails-2.jpg?v=2",
-      "alt": "BIAB Builder nagels in nude kleur met natuurlijke look",
+      "id": "gallery-chrome",
+      "title": "Chrome",
+      "description": "Nagels met een chrome-afwerking",
+      "src": "./images/gallery/chrome/chrome-1.jpg?v=0a2c5d15",
+      "alt": "Nagels met een chrome-afwerking",
+      "category": "nailart",
+      "folder": "chrome",
+      "photos": [
+        {
+          "src": "./images/gallery/chrome/chrome-1.jpg?v=0a2c5d15",
+          "caption": "BIAB Nude - stockfoto Pexels 35031987 door Salim Da (Pexels-licentie)"
+        },
+        {
+          "src": "./images/gallery/chrome/chrome-2.jpg?v=0567df08",
+          "caption": "Minimalistisch Design - stockfoto Pexels 34871711 door Salim Da (Pexels-licentie)"
+        }
+      ]
+    },
+    {
+      "id": "gallery-customdesigns",
+      "title": "Custom Designs",
+      "description": "Persoonlijke nageldesigns",
+      "src": "./images/gallery/customdesigns/design-1.jpg?v=17be8aa6",
+      "alt": "Persoonlijke nageldesigns",
+      "category": "nailart",
+      "folder": "customdesigns",
+      "photos": [
+        {
+          "src": "./images/gallery/customdesigns/design-1.jpg?v=17be8aa6",
+          "caption": "Floral Nail Art - stockfoto Pexels 17471377 door abolfazl zarghami (Pexels-licentie)"
+        },
+        {
+          "src": "./images/gallery/customdesigns/design-2.jpg?v=880904f1",
+          "caption": "Glitter Glamour - stockfoto Pexels 10632142 door Pexels User (Pexels-licentie)"
+        },
+        {
+          "src": "./images/gallery/customdesigns/design-4.jpg?v=e5d504ad"
+        }
+      ]
+    },
+    {
+      "id": "gallery-gellak",
+      "title": "Gellak",
+      "description": "Nagels met gellak",
+      "src": "./images/gallery/gellak/gellak-1.jpg?v=0e40a9f5",
+      "alt": "Nagels met gellak",
+      "category": "gellak",
+      "folder": "gellak",
+      "photos": [
+        {
+          "src": "./images/gallery/gellak/gellak-1.jpg?v=0e40a9f5",
+          "caption": "Klassieke Rode Nagels - stockfoto Pexels 3997384 door cottonbro studio (Pexels-licentie)"
+        }
+      ]
+    },
+    {
+      "id": "gallery-biab",
+      "title": "BIAB",
+      "description": "Natuurlijke nagelversteviging met BIAB",
+      "src": "",
+      "alt": "Natuurlijke nagelversteviging met BIAB",
       "category": "biab",
-      "folder": "biab-nude",
-      "photos": []
-    },
-    {
-      "id": "gallery-3",
-      "title": "Floral Nail Art",
-      "description": "Handgeschilderde bloemendesigns",
-      "src": "./images/gallery/nails-3.jpg?v=2",
-      "alt": "Nail art met bloemendesigns in verschillende kleuren",
-      "category": "nailart",
-      "folder": "floral",
-      "photos": []
-    },
-    {
-      "id": "gallery-4",
-      "title": "Ombre Effect",
-      "description": "Trendy ombre gradient op gellak",
-      "src": "./images/gallery/nails-4.jpg?v=2",
-      "alt": "Ombre gellak met mooi color-fade effect",
-      "category": "gellak",
-      "folder": "ombre",
-      "photos": []
-    },
-    {
-      "id": "gallery-5",
-      "title": "Glitter Glamour",
-      "description": "Glitter gellak voor feestelijke gelegenheden",
-      "src": "./images/gallery/nails-5.jpg?v=2",
-      "alt": "Gellak met glittertopping en glamoureus effect",
-      "category": "gellak",
-      "folder": "glitter",
-      "photos": []
-    },
-    {
-      "id": "gallery-6",
-      "title": "Minimalistisch Design",
-      "description": "Moderne minimalistische nagels",
-      "src": "./images/gallery/nails-6.jpg?v=2",
-      "alt": "Minimalistische nail art met geometrische vormen",
-      "category": "nailart",
-      "folder": "minimalistisch",
+      "folder": "biab",
       "photos": []
     }
   ]

@@ -34,8 +34,9 @@ cd C:\MyDocs\DevOps\EmStudio
 Zonder `-Bestanden` verschijnt een menu: instellingen, prijzen/behandelingen, foto's,
 websitetekst/opmaak of zelf kiezen. Kies daarna de gewenste gewijzigde bestanden en
 **alleen controleren** of **publiceren**. Het script vraagt nog bevestiging voor commit/push.
-Voor foto's: zet bestanden vooraf in de juiste map en werk album-/behandelverwijzingen bij;
-het menu kopieert geen foto's en werkt de albumlijst niet automatisch bij.
+Voor foto's: zet bestanden vooraf in de juiste map. Optie 3 werkt de albumlijst automatisch bij
+en neemt gewijzigde albumbestanden samen mee; het menu kopieert geen foto's van buiten de projectmap.
+Behandelverwijzingen in `services.json` werk je nog wel zelf bij.
 Hoofdletters, spaties en lege afbeeldingen worden geweigerd; geselecteerde JSON wordt gecontroleerd.
 Rechtstreeks alleen instellingen publiceren zonder menu:
 `.\tools\sync-website.ps1 -Bestanden "data\settings.json" -Bericht "Werk openingstijden bij"`.
@@ -72,8 +73,8 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 | Openingstijden | `data/settings.json` → `hours` | |
 | Instagram / Facebook | `data/settings.json` → `social` | |
 | Behandelingsfoto | `images/services/` + `"image"` in `services.json` | zie [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) |
-| Impressie-tegel | `images/gallery/nails-N.jpg` | daarna `?v=` verhogen in `gallery.json` |
-| Klantfoto's in album | `images/gallery/<album>/` | daarna `python tools/update_galerij.py` |
+| Impressie-tegel | eerste foto op naam in de albummap | automatisch bij optie 3 |
+| Klantfoto's in album | `images/gallery/<album>/` | `.\tools\sync-website.ps1`, optie 3 |
 | Teksten hero / over ons | `index.html` | |
 | Kleuren / opmaak | `css/style.css` (`:root`) | daarna `?v=` verhogen in `index.html` |
 | Functionaliteit | `js/script.js` | daarna `?v=` verhogen in `index.html` |
@@ -84,17 +85,20 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 
 | Album | Map |
 |---|---|
-| Klassieke Rode Nagels | `images/gallery/rode-nagels/` |
-| BIAB Nude | `images/gallery/biab-nude/` |
-| Floral Nail Art | `images/gallery/floral/` |
-| Ombre Effect | `images/gallery/ombre/` |
-| Glitter Glamour | `images/gallery/glitter/` |
-| Minimalistisch Design | `images/gallery/minimalistisch/` |
+| Cat Eye | `images/gallery/cateye/` |
+| Chrome | `images/gallery/chrome/` |
+| Custom Designs | `images/gallery/customdesigns/` |
+| Gellak | `images/gallery/gellak/` |
+| BIAB | `images/gallery/biab/` |
 
 1. Foto's erin als `<map>-01.jpg`, `<map>-02.jpg`, ... (kleine letters, geen spaties, < 500 KB)
-2. Optioneel onderschriften in `descript.ion` in die map: `rode-nagels-01.jpg Klassiek rood op BIAB`
-3. `python tools/update_galerij.py`
-4. Commit + push
+2. Optioneel onderschriften in `descript.ion` in die map: `cateye-01.jpg Cat Eye in groen`
+3. `.\tools\sync-website.ps1`, optie **3** en **A** (alle getoonde bestanden)
+4. Eerst controleren, daarna publiceren en bevestigen
+
+Toevoegen, vervangen en verwijderen werkt zonder JSON te bewerken. Lege albums blijven verborgen.
+Gewijzigde albumbestanden gaan altijd samen mee. De eerste foto op naam is de tegel.
+Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, geen Python).
 
 ---
 
@@ -122,9 +126,9 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 | Gewijzigd | Actie |
 |---|---|
 | `data/*.json` (prijzen, teksten) | niets – direct zichtbaar |
-| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=21`) |
+| `css/style.css` of `js/script.js` | `?v=N` +1 op beide regels in `index.html` (nu `?v=22`) |
 | Foto vervangen met dezelfde naam | `?v=N` +1 achter het pad in de JSON |
-| Albumfoto's | gaat automatisch via `tools/update_galerij.py` |
+| Albumfoto's | gaat automatisch bij optie 3 van `tools/sync-website.ps1` |
 
 Verwijs nooit naar een foto die nog niet bestaat (Cloudflare cachet dan 30 dagen een kapotte foto).
 
@@ -136,7 +140,7 @@ Verwijs nooit naar een foto die nog niet bestaat (Cloudflare cachet dan 30 dagen
 |---|---|
 | Wijziging niet live | Controleer Pages → Deployments en commit; bij vertraging ook GitHub/Cloudflare-status. Niet direct instellingen wijzigen. |
 | Foto laadt niet | Bestandsnaam exact gelijk (kleine letters!), bestand gecommit? |
-| Oude foto blijft staan | `?v=` verhogen in de JSON |
+| Oude foto blijft staan | Album: optie 3 opnieuw uitvoeren; behandeling: `?v=` verhogen in de JSON |
 | Prijzen/behandelingen leeg | JSON-fout → https://jsonlint.com of F12 → Console |
 | WhatsApp werkt niet | Live testen; controleer Turnstile-hostnaam en beide Pages-secrets. Live Server voert de contact-API niet uit. |
 | Lokaal leeg scherm | HTTP-server gebruiken, niet dubbelklikken op `index.html` |
@@ -162,5 +166,5 @@ Verwijs nooit naar een foto die nog niet bestaat (Cloudflare cachet dan 30 dagen
 
 - 27 behandelingen in 7 categorieën, prijzen €10 – €60
 - 1 optionele toeslag (verwijderen oude lak/gellak +€5)
-- 6 Impressie-stijlen met elk een album
+- 5 Impressie-albums; lege albums blijven verborgen
 - 10 behandelingsfoto's

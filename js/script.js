@@ -319,6 +319,18 @@ function initializeHero() {
     heroDesc.textContent = t(appData.settings.salon.description);
   }
 
+  const banner = heroSection.querySelector('.hero-nail-banner');
+  const cover = appData.gallery?.images.find((album) => album.photos?.length > 0);
+  if (banner) {
+    banner.hidden = !cover;
+    if (cover) {
+      banner.src = cover.photos[0].src;
+      banner.alt = t(cover.alt);
+    } else {
+      banner.removeAttribute('src');
+    }
+  }
+
   heroSection.querySelectorAll('[data-social]').forEach((link) => {
     const url = appData.settings.social[link.dataset.social];
     if (url) {
@@ -501,7 +513,8 @@ function initializeGallery() {
   galleryGrid.innerHTML = '';
 
   appData.gallery.images.forEach((image, index) => {
-    const photoCount = getAlbumPhotos(image).filter((p) => !p.isExample).length;
+    if (!Array.isArray(image.photos) || image.photos.length === 0) return;
+    const photoCount = getAlbumPhotos(image).length;
     image = localizeContent(image);
 
     const item = document.createElement('div');
@@ -525,9 +538,7 @@ function initializeGallery() {
     img.alt = image.alt;
     img.loading = 'lazy';
 
-    const badgeText = photoCount > 0
-      ? t(photoCount === 1 ? '📷 {count} klantfoto' : "📷 {count} klantfoto's", { count: photoCount })
-      : t('📷 Voorbeeldfoto');
+    const badgeText = t(photoCount === 1 ? '📷 {count} foto' : "📷 {count} foto's", { count: photoCount });
 
     const overlay = document.createElement('div');
     overlay.className = 'gallery-overlay';
@@ -602,23 +613,16 @@ function initializeGalleryModal() {
   });
 }
 
-// Each gallery item is an album: the tile shows the example photo (src),
-// the album shows the customer photos listed in "photos".
+// The generated cover (src) is the first photo in the album.
 function getAlbumPhotos(item) {
-  const photos = Array.isArray(item.photos) ? item.photos.filter((p) => p && p.src) : [];
-  if (photos.length > 0) return photos;
-  return [{
-    src: item.src,
-    alt: item.alt,
-    caption: 'Voorbeeldfoto - echte resultaten van mijn klanten volgen binnenkort.',
-    isExample: true
-  }];
+  return Array.isArray(item.photos) ? item.photos.filter((p) => p && p.src) : [];
 }
 
 function openGalleryModal(index) {
   if (!appData.gallery || index < 0 || index >= appData.gallery.images.length) {
     return;
   }
+  if (getAlbumPhotos(appData.gallery.images[index]).length === 0) return;
 
   appData.currentGalleryIndex = index;
   appData.currentPhotoIndex = 0;
@@ -653,6 +657,7 @@ function updateGalleryModal() {
   if (!appData.gallery) return;
 
   const original = appData.gallery.images[appData.currentGalleryIndex];
+  if (!original || getAlbumPhotos(original).length === 0) return;
   const item = localizeContent(original);
   const album = getAlbumPhotos(original);
   const photo = localizeContent(album[appData.currentPhotoIndex] || album[0]);

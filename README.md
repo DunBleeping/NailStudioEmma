@@ -72,9 +72,9 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
    en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
    knop **+ dit wil ik**, onderaan de kaart en op gelijke hoogte binnen elke rij).
-5. **Impressie** – 6 tegels met een stijl (Klassieke Rode Nagels, BIAB Nude, Floral Nail Art,
-   Ombre Effect, Glitter Glamour, Minimalistisch Design). Klik → **album** met foto's van echte
-   klantresultaten (bladeren met pijlen, pijltjestoetsen of vegen).
+5. **Impressie** – albums Cat Eye, Chrome, Custom Designs, Gellak en BIAB; lege albums zijn verborgen.
+   De eerste foto op naam is de tegel. Klik → **album** met foto's per stijl
+   (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
 7. **Contact & Openingstijden** – telefoon na klikken, adresuitleg, openingstijden en WhatsApp.
    **Toon telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
@@ -199,18 +199,17 @@ EmStudio/
 ├── data/
 │   ├── settings.json          # Salon, contact, WhatsApp, openingstijden, social
 │   ├── services.json          # 27 behandelingen + "extras" (toeslagen)
-│   ├── gallery.json           # 6 Impressie-tegels + albums ("folder", "photos")
+│   ├── gallery.json           # 5 Impressie-albums ("folder", "photos"), automatisch bijgewerkt
 │   ├── translations.json      # Engelse vertalingen van Nederlandse teksten
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
 │   ├── services/              # 10 behandelingsfoto's
 │   └── gallery/
-│       ├── nails-1..6.jpg     # Voorbeeldfoto's (Pexels) op de tegels
-│       ├── descript.ion       # Omschrijving/bron per foto
-│       └── rode-nagels/, biab-nude/, floral/, ombre/, glitter/, minimalistisch/
-│                              # Albums met klantfoto's (elk met LEESMIJ.txt)
-├── tools/update_galerij.py    # Zet foto's uit de albummappen in gallery.json
+│       └── cateye/, chrome/, customdesigns/, gellak/, biab/
+│                              # Albums met klantfoto's
+├── tools/update-galerij.ps1   # Foto's, covers en cacheversies genereren (PowerShell 7)
+├── tools/sync-website.ps1     # Optie 3 genereert de lijst en publiceert de foto's samen
 ├── _headers                   # Cloudflare: beveiliging + caching
 ├── sitemap.xml, robots.txt    # SEO
 ├── start-server.py            # Lokale testserver
@@ -252,12 +251,15 @@ naar de opgegeven eigen website; vervang deze URL door de Facebook-pagina zodra 
 Kort (volledige uitleg in [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md)):
 
 - **Behandelingsfoto's:** `images/services/*.jpg`, gekoppeld via `"image"` in `services.json`.
-- **Impressie-tegels:** `images/gallery/nails-1..6.jpg` (nu Pexels-stockfoto's, vrije licentie).
-- **Klantfoto's per stijl:** zet ze in de albummap (bijv. `images/gallery/rode-nagels/rode-nagels-01.jpg`)
-  en voer uit:
+- **Impressie-tegels:** automatisch de eerste foto op naam van elk gevuld album.
+- **Klantfoto's per stijl:** zet ze in de albummap (bijv. `images/gallery/cateye/cateye-01.jpg`)
+  en voer in PowerShell 7 uit:
+  ```powershell
+  .\tools\sync-website.ps1
   ```
-  python tools/update_galerij.py
-  ```
+  Kies optie 3: de lijst wordt automatisch bijgewerkt, inclusief verwijderingen en fotoversies.
+  Alle gewijzigde albumbestanden gaan samen mee. Lege albums worden niet getoond.
+  Alleen lokaal bijwerken kan met `.\tools\update-galerij.ps1`; Python is niet nodig.
   Onderschriften kunnen in een `descript.ion` in de albummap.
 - Bestandsnamen: **kleine letters, geen spaties** (Cloudflare is hoofdlettergevoelig).
 - Vraag klanten toestemming voor foto's van hun nagels (AVG).
@@ -297,9 +299,9 @@ Ingesteld in `_headers`:
 Omdat Cloudflare op het eigen domein CSS/JS toch enkele uren kan bewaren, en foto's 30 dagen
 gecachet worden, gebruiken we **versienummers** in de URL:
 
-- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=21`).
+- **CSS/JS gewijzigd?** Verhoog `?v=N` op beide regels in `index.html` (nu `?v=22`).
 - **Foto vervangen met dezelfde naam?** Verhoog `?v=N` achter het pad in `services.json`/`gallery.json`.
-  Albumfoto's krijgen automatisch een versie via `tools/update_galerij.py`.
+  Albumfoto's krijgen automatisch een versie via optie 3 van `tools/sync-website.ps1`.
 - **Prijzen/teksten in `data/`** zijn direct zichtbaar (geen versienummer nodig).
 
 Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
