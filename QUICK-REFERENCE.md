@@ -90,6 +90,7 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 | Custom Designs | `images/gallery/customdesigns/` |
 | Gellak | `images/gallery/gellak/` |
 | BIAB | `images/gallery/biab/` |
+| Babyboom | `images/gallery/babyboom/` |
 
 1. Foto's erin als `<map>-01.jpg`, `<map>-02.jpg`, ... (kleine letters, geen spaties, < 500 KB)
 2. Optioneel onderschriften in `descript.ion` in die map: `cateye-01.jpg Cat Eye in groen`
@@ -166,5 +167,5 @@ Verwijs nooit naar een foto die nog niet bestaat (Cloudflare cachet dan 30 dagen
 
 - 27 behandelingen in 7 categorieën, prijzen €10 – €60
 - 1 optionele toeslag (verwijderen oude lak/gellak +€5)
-- 5 Impressie-albums; lege albums blijven verborgen
+- 6 Impressie-albums; lege albums blijven verborgen
 - 10 behandelingsfoto's

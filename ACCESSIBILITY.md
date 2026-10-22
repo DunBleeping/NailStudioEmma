@@ -88,7 +88,7 @@ De website ziet er perfect uit op:
 ### Automatische Aanpassingen
 - Menu wordt hamburger ☰ op mobiel
 - Service kaarten stapelen zich
-- Galerij adapteert aan schermgrootte
+- Impressie past zich aan de schermgrootte aan
 - Contact items worden responsive
 - Buttons zijn touch-friendly (groot!)
 
@@ -213,7 +213,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 1. Website adapteert aan schermgrootte
 2. 2-column layout beschikbaar
 3. Volledige navigatie
-4. Galerij als grote grid
+4. Impressie als grote grid
 5. Alle functies werken
 ```
 

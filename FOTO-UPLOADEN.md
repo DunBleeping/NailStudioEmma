@@ -59,8 +59,7 @@ Elke tegel onder **Impressie** is een album:
 - Klikken opent alle foto's in de map; bezoekers bladeren met pijlen, pijltjestoetsen of vegen.
 - Een lege map wordt niet getoond. BIAB verschijnt dus vanzelf zodra je daar foto's toevoegt en publiceert.
 - De smalle foto onder de welkomsttitel komt automatisch uit het eerste gevulde album.
-- Bestaande bronvermeldingen in `descript.ion` blijven behouden. De mee verhuisde stockfoto's
-  zijn voorbeelden, geen bewijs van eigen klantwerk.
+- De albumfoto's zijn eigen foto's van de eigenaar; de oude, onjuiste bronvermeldingen zijn verwijderd.
 
 ### Klantfoto's toevoegen
 
@@ -73,6 +72,7 @@ Elk album heeft een vaste map. Je hoeft geen JSON of websitecode te veranderen:
 | Custom Designs | `images/gallery/customdesigns/` | `design-01.jpg`, `design-02.jpg`, ... |
 | Gellak | `images/gallery/gellak/` | `gellak-01.jpg`, ... |
 | BIAB | `images/gallery/biab/` | `biab-01.jpg`, ... |
+| Babyboom | `images/gallery/babyboom/` | `babyboom-01.jpg`, ... |
 
 1. Zet de foto's in de juiste map. Kleine letters, geen spaties, `.jpg` (of `.jpeg/.png/.webp`),
    liefst max. 1200 px breed en kleiner dan 500 KB. Andere namen mogen ook; de volgorde is alfabetisch.
@@ -146,7 +146,8 @@ images/
     ├── chrome/
     ├── customdesigns/
     ├── gellak/
-    └── biab/                     ← verborgen zolang er geen foto's in staan
+    ├── biab/                     ← verborgen zolang er geen foto's in staan
+    └── babyboom/                 ← verborgen zolang er geen foto's in staan
 ```
 
 `images/gallery/biab.jpg`, `gellak.jpg`, `manicure.jpg`, `nailart.jpg`, `nailhealth.jpg`, `pedicure.jpg`

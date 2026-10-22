@@ -36,7 +36,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Bouwt behandelkaarten, categoriemenu, prijstabel en "Toeslagen"
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
-- Taalkeuze Nederlands/Engels, inclusief behandelingen, galerij en schermlezerlabels
+- Taalkeuze Nederlands/Engels, inclusief behandelingen, Impressie en schermlezerlabels
 - Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
   Nederlands = alleen NL, English = eerst EN dan NL
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
@@ -50,7 +50,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - `_routes.json` – alleen de contact-API gebruikt Pages Functions
 - `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
   `extras`: verwijderen oude lak/gellak +€5
-- `gallery.json` – 5 Impressie-albums met gegenereerde cover (`src`), albummap (`folder`) en foto's (`photos`);
+- `gallery.json` – 6 Impressie-albums met gegenereerde cover (`src`), albummap (`folder`) en foto's (`photos`);
   lege albums worden niet getoond
 - `translations.json` – Engelse vertalingen onder `en`, met de exacte Nederlandse tekst als sleutel
 - `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
@@ -58,7 +58,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ### images/
 - `logo.jpg`
 - `services/` – 10 behandelingsfoto's
-- `gallery/<album>/` – `cateye`, `chrome`, `customdesigns`, `gellak`, `biab`
+- `gallery/<album>/` – `cateye`, `chrome`, `customdesigns`, `gellak`, `biab`, `babyboom`
   (eerste foto op naam is de cover; ook gebruikt voor de smalle hero-foto)
 - `gallery/biab.jpg`, `gellak.jpg`, `manicure.jpg`, `nailart.jpg`, `nailhealth.jpg`, `pedicure.jpg`,
   `removal.jpg` – oude placeholders, niet in gebruik
@@ -99,7 +99,7 @@ Wijzigingen in CSS/JS → `?v=N` verhogen in `index.html`; vervangen foto's → 
 - Schema.org, `og:url`, `canonical`, `sitemap.xml` en `robots.txt` verwijzen nog naar `nailsalonemma.nl`
   met voorbeeldadres/e-mail
 - Social-links verwijzen nog naar de algemene Instagram/Facebook-homepage
-- Impressie-albums nog leeg; tegels gebruiken stockfoto's
+- BIAB en Babyboom verschijnen zodra er foto's zijn toegevoegd en gepubliceerd
 
 ## Historie (belangrijkste commits)
 

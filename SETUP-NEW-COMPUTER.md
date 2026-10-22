@@ -209,7 +209,7 @@ visitor.
 5. **Prices/treatments** → edit `data/services.json` (see [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md)).
    `data/Prijzenlijst.csv` is the salon's source list, not read by the site.
 6. **Album photos** → put them in `images/gallery/<album>/`
-   (`cateye`, `chrome`, `customdesigns`, `gellak`, `biab`), then run
+   (`cateye`, `chrome`, `customdesigns`, `gellak`, `biab`, `babyboom`), then run
    `.\tools\sync-website.ps1` in PowerShell 7 and choose **3**.
    This updates the list, cover and cache versions automatically, including removals.
    Empty albums are hidden; changed album files are published together.
@@ -226,7 +226,7 @@ visitor.
 - `index.html` (Schema.org, `og:url`, `canonical`), `sitemap.xml` and `robots.txt` still point
   to `nailsalonemma.nl` instead of `emmanagelstudio.vip`.
 - Social media links are generic (instagram.com / facebook.com).
-- Impressie albums are still empty (tiles use free Pexels stock photos).
+- BIAB and Babyboom albums remain hidden until photos are added and published.
 - `TEST-RAPPORT.txt` is outdated.
 
 ### Volgende fase: vindbaarheid en sociale kanalen

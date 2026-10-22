@@ -44,7 +44,7 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 
 De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **I/my**.
 
-1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Galerij, Contact),
+1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Impressie, Contact),
    taalkeuze **Nederlands / English**, en de knoppen 👁️ grijswaarden,
    **A– A A+ A++** lettergrootte en 🖼️ foto's tonen/verbergen.
    Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Vanaf 768 px staan de zes links op één regel;
@@ -72,7 +72,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
    en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
    knop **+ dit wil ik**, onderaan de kaart en op gelijke hoogte binnen elke rij).
-5. **Impressie** – albums Cat Eye, Chrome, Custom Designs, Gellak en BIAB; lege albums zijn verborgen.
+5. **Impressie** – albums Cat Eye, Chrome, Custom Designs, Gellak, BIAB en Babyboom; lege albums zijn verborgen.
    De eerste foto op naam is de tegel. Klik → **album** met foto's per stijl
    (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
@@ -167,7 +167,7 @@ als sleutel. Bij nieuwe of gewijzigde teksten voeg je daar ook de Engelse vertal
 "Verwijderen oude lak/gellak": "Remove old nail polish/gel polish"
 ```
 
-Dit geldt ook voor namen, omschrijvingen, duur, categorieën, notities, galerijtitels, alt-teksten en
+Dit geldt ook voor namen, omschrijvingen, duur, categorieën, notities, Impressie-albumtitels, alt-teksten en
 foto-onderschriften. Bij HTML-teksten worden witruimte en regeleinden samengevoegd tot enkele spaties.
 Markeer nieuwe vaste teksten met `data-i18n`; vertaal attributen met bijvoorbeeld
 `data-i18n-attrs="aria-label,title"`. Ontbrekende vertalingen geven een waarschuwing in de browserconsole
@@ -199,14 +199,14 @@ EmStudio/
 ├── data/
 │   ├── settings.json          # Salon, contact, WhatsApp, openingstijden, social
 │   ├── services.json          # 27 behandelingen + "extras" (toeslagen)
-│   ├── gallery.json           # 5 Impressie-albums ("folder", "photos"), automatisch bijgewerkt
+│   ├── gallery.json           # 6 Impressie-albums ("folder", "photos"), automatisch bijgewerkt
 │   ├── translations.json      # Engelse vertalingen van Nederlandse teksten
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
 │   ├── services/              # 10 behandelingsfoto's
 │   └── gallery/
-│       └── cateye/, chrome/, customdesigns/, gellak/, biab/
+│       └── cateye/, chrome/, customdesigns/, gellak/, biab/, babyboom/
 │                              # Albums met klantfoto's
 ├── tools/update-galerij.ps1   # Foto's, covers en cacheversies genereren (PowerShell 7)
 ├── tools/sync-website.ps1     # Optie 3 genereert de lijst en publiceert de foto's samen
@@ -364,7 +364,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 - [ ] Domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
       en in `sitemap.xml`/`robots.txt` (nu `nailsalonemma.nl`)
 - [ ] Echte Instagram/Facebook-links in `settings.json`
-- [ ] Klantfoto's in de Impressie-albums; eigen foto's i.p.v. stockfoto's op de tegels
+- [x] Eigen foto's in de Impressie-albums; lege albums blijven verborgen
 - [ ] Eigen foto's per behandeling (nu 10 gedeelde foto's)
 
 ## ❓ Problemen oplossen

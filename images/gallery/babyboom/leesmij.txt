@@ -1,0 +1,5 @@
+Zet hier je eigen Babyboom-foto's: babyboom-01.jpg, babyboom-02.jpg, enzovoort.
+Gebruik kleine letters, geen spaties, JPG/JPEG/PNG/WebP en liefst minder dan 500 KB.
+Open PowerShell 7 in de projectmap, start .\tools\sync-website.ps1 en kies 3.
+Het album wordt pas getoond wanneer er foto's in staan.
+Alleen lokaal de lijst bijwerken: .\tools\update-galerij.ps1

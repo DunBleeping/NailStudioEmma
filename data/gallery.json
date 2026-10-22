@@ -10,8 +10,7 @@
       "folder": "cateye",
       "photos": [
         {
-          "src": "./images/gallery/cateye/cateye-1.jpg?v=1f0bcbd8",
-          "caption": "Ombre Effect - stockfoto Pexels 13038494 door Roman Titov (Pexels-licentie)"
+          "src": "./images/gallery/cateye/cateye-1.jpg?v=1f0bcbd8"
         }
       ]
     },
@@ -25,12 +24,10 @@
       "folder": "chrome",
       "photos": [
         {
-          "src": "./images/gallery/chrome/chrome-1.jpg?v=0a2c5d15",
-          "caption": "BIAB Nude - stockfoto Pexels 35031987 door Salim Da (Pexels-licentie)"
+          "src": "./images/gallery/chrome/chrome-1.jpg?v=0a2c5d15"
         },
         {
-          "src": "./images/gallery/chrome/chrome-2.jpg?v=0567df08",
-          "caption": "Minimalistisch Design - stockfoto Pexels 34871711 door Salim Da (Pexels-licentie)"
+          "src": "./images/gallery/chrome/chrome-2.jpg?v=0567df08"
         }
       ]
     },
@@ -44,12 +41,10 @@
       "folder": "customdesigns",
       "photos": [
         {
-          "src": "./images/gallery/customdesigns/design-1.jpg?v=17be8aa6",
-          "caption": "Floral Nail Art - stockfoto Pexels 17471377 door abolfazl zarghami (Pexels-licentie)"
+          "src": "./images/gallery/customdesigns/design-1.jpg?v=17be8aa6"
         },
         {
-          "src": "./images/gallery/customdesigns/design-2.jpg?v=880904f1",
-          "caption": "Glitter Glamour - stockfoto Pexels 10632142 door Pexels User (Pexels-licentie)"
+          "src": "./images/gallery/customdesigns/design-2.jpg?v=880904f1"
         },
         {
           "src": "./images/gallery/customdesigns/design-4.jpg?v=e5d504ad"
@@ -66,8 +61,7 @@
       "folder": "gellak",
       "photos": [
         {
-          "src": "./images/gallery/gellak/gellak-1.jpg?v=0e40a9f5",
-          "caption": "Klassieke Rode Nagels - stockfoto Pexels 3997384 door cottonbro studio (Pexels-licentie)"
+          "src": "./images/gallery/gellak/gellak-1.jpg?v=0e40a9f5"
         }
       ]
     },
@@ -79,6 +73,16 @@
       "alt": "Natuurlijke nagelversteviging met BIAB",
       "category": "biab",
       "folder": "biab",
+      "photos": []
+    },
+    {
+      "id": "gallery-babyboom",
+      "title": "Babyboom",
+      "description": "Nagels met een zachte kleurovergang",
+      "src": "",
+      "alt": "Nagels met een zachte kleurovergang",
+      "category": "nailart",
+      "folder": "babyboom",
       "photos": []
     }
   ]
