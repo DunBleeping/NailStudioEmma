@@ -77,6 +77,9 @@ test('phone contact follows WhatsApp without removing contact verification', asy
   const address = contact.match(/<div class="contact-item" data-type="address">([\s\S]*?)<\/details>/)[1];
   assert.ok(address.includes('<p>Piraeushaven, Purmerend</p>'));
   assert.ok(address.includes('Je ontvangt het adres na bevestiging van je afspraak.'));
+  const privacy = 'Om ongewenste reclame te beperken en mijn privacy en veiligheid te beschermen, publiceer ik hier niet mijn volledige adres.';
+  assert.ok(address.includes(privacy));
+  assert.ok(Object.hasOwn(english, privacy));
   assert.ok(!/Piraeushaven\s+\d/i.test(address));
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.match(css, /"whatsapp hours"\s*"phone hours"\s*"address hours"/);

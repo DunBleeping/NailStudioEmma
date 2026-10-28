@@ -108,6 +108,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Na een geslaagde controle werken WhatsApp en SMS direct zolang de pagina openblijft.
    **Bezoek mij** toont openbaar alleen de straat en plaats: Piraeushaven, Purmerend.
    Het exacte adres met huisnummer wordt voorlopig na afspraakbevestiging gedeeld en staat niet in de openbare configuratie of gestructureerde paginagegevens.
+   Bij de adresuitleg staat dat dit ongewenste reclame beperkt en de privacy en veiligheid beschermt.
    Beschermde adresweergave via een Cloudflare-secret is nog niet aangesloten.
    Het nummer staat uitsluitend in een Cloudflare-secret; alleen de gecontroleerde API geeft het terug.
    Het wordt niet in localStorage bewaard. Dit voorkomt geen verdere verspreiding door een geverifieerde bezoeker.
