@@ -93,6 +93,7 @@ async function loadAppData() {
     initializeCategoriesScrollSpy();
     initializeServiceSearch();
     initializeCart();
+    openServicesForHash();
     initializeConfetti();
     document.getElementById('language-select').disabled = false;
 
@@ -1125,6 +1126,24 @@ function initializeWhatsAppButton() {
 // Smooth Scroll Behavior
 // ============================================
 
+function openServicesForTarget(target) {
+  const details = document.getElementById('services-details');
+  if (details && (target.id === 'services' || details.contains(target))) {
+    details.open = true;
+  }
+}
+
+function openServicesForHash() {
+  if (!window.location.hash) return;
+  const target = document.getElementById(window.location.hash.slice(1));
+  if (target) {
+    openServicesForTarget(target);
+    if (target.closest('#services')) target.scrollIntoView();
+  }
+}
+
+window.addEventListener('hashchange', openServicesForHash);
+
 document.addEventListener('click', (e) => {
   const link = e.target.closest('a[href^="#"]');
   if (link) {
@@ -1135,6 +1154,7 @@ document.addEventListener('click', (e) => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
+      openServicesForTarget(target);
       if (target.id === 'service-search') {
         target.focus({ preventScroll: true });
       }

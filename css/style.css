@@ -1637,6 +1637,29 @@ body.images-hidden .gallery-overlay {
   gap: 2rem;
 }
 
+.services-summary {
+  cursor: pointer;
+  text-align: center;
+  color: var(--primary);
+}
+
+.services-summary h2 {
+  display: inline;
+}
+
+.services-summary h2::after {
+  display: none;
+}
+
+#services-details[open] > .services-summary {
+  margin-bottom: 2rem;
+}
+
+.services-summary:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 0.4rem;
+}
+
 /* Sidebar Styles - now horizontal */
 .services-sidebar {
   position: sticky;

@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=33">
+  <link rel="stylesheet" href="./css/style.css?v=34">
   <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
@@ -201,7 +201,10 @@
 
     <!-- Services Section with Sidebar -->
     <section id="services" class="section section-light">
-      <div class="container services-container">
+      <div class="container">
+        <details id="services-details">
+          <summary class="services-summary"><h2 data-i18n>Mijn Behandelingen</h2></summary>
+          <div class="services-container">
         <!-- Left Sidebar Navigation -->
         <aside class="services-sidebar" role="navigation" data-i18n-attrs="aria-label" aria-label="Categorieën menu">
           <h3 data-i18n>Categorieën</h3>
@@ -226,12 +229,13 @@
 
         <!-- Main Services Grid -->
         <div class="services-main">
-          <h2 data-i18n>Mijn Behandelingen</h2>
           <p id="services-no-results" class="services-no-results" data-i18n role="status" hidden>Geen behandelingen gevonden. Probeer een ander zoekwoord of kies "Alle behandelingen".</p>
           <div id="services-grid" class="services-grid">
             <!-- Services worden dynamisch geladen via JavaScript -->
           </div>
         </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -421,6 +425,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=33" defer></script>
+  <script src="./js/script.js?v=34" defer></script>
 </body>
 </html>

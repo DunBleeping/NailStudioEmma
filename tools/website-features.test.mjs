@@ -48,7 +48,24 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['33', '33']);
+  assert.deepEqual(versions, ['34', '34']);
+});
+
+test('services are collapsed by default and navigation opens only relevant targets', () => {
+  assert.match(html, /<details id="services-details">/);
+  assert.match(html, /<summary class="services-summary"><h2 data-i18n>Mijn Behandelingen<\/h2><\/summary>/);
+  let details = { open: false, contains: (target) => target.id === 'service-search' };
+  const openTarget = runInNewContext(`(${functionSource('openServicesForTarget')})`, {
+    document: { getElementById: () => details }
+  });
+  openTarget({ id: 'contact' });
+  assert.equal(details.open, false);
+  openTarget({ id: 'services' });
+  assert.equal(details.open, true);
+  details.open = false;
+  openTarget({ id: 'service-search' });
+  assert.equal(details.open, true);
+  assert.ok(script.includes("window.addEventListener('hashchange', openServicesForHash)"));
 });
 
 test('phone contact follows WhatsApp without removing contact verification', async () => {
