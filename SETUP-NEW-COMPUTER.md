@@ -223,8 +223,8 @@ visitor.
 
 - `data/settings.json`: e-mail is still a placeholder. Phone is configured; address and Maps link
   are intentionally not published. The address is shared privately after appointment confirmation.
-- `index.html` (Schema.org, `og:url`, `canonical`), `sitemap.xml` and `robots.txt` still point
-  to `nailsalonemma.nl` instead of `emmanagelstudio.vip`.
+- SEO-domeinverwijzingen in `index.html`, `sitemap.xml`, `robots.txt` en `settings.json`
+  zijn op 28 oktober 2026 bijgewerkt naar `emmanagelstudio.vip`; het werkgebied is Purmerend.
 - Social media links are generic (instagram.com / facebook.com).
 - BIAB and Babyboom albums remain hidden until photos are added and published.
 - `TEST-RAPPORT.txt` is outdated.
@@ -233,8 +233,8 @@ visitor.
 
 Nog niet uitgevoerd; eerst profielen en inhoud controleren, daarna pas betaald adverteren.
 
-1. **SEO voorbereiden:** oude domeinverwijzingen in canonical, Open Graph, Schema.org,
-   sitemap en robots vervangen door het echte domein; geen privéadres of telefoonnummer toevoegen.
+1. **SEO voorbereiden (uitgevoerd):** canonical, Open Graph, Schema.org, sitemap en robots
+   gebruiken het echte domein; privéadres en telefoonnummer blijven afgeschermd.
    De Google Search-knop is van de site verwijderd; zo'n knop is geen registratie bij Google en geen advertentie.
 2. **Google Search Console:** https://search.google.com/search-console →
    website-eigendom verifiëren, de bijgewerkte sitemap indienen en indexering controleren.

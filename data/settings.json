@@ -1,15 +1,15 @@
 {
   "site": {
-    "title": "Emma NailStudio | Luxe Nagelsalon",
-    "description": "Emma NailStudio biedt professionele nagelbehandelingen van topkwaliteit. Ontdek BIAB, gellak, manicure, nail art en meer.",
-    "domain": "nailsalonemma.nl",
+    "title": "Emma NailStudio Purmerend | Custom nail art, BIAB & gellak",
+    "description": "Nagelstudio in Purmerend: BIAB, gellak en handgetekende custom nail art op aanvraag. Bespreek jouw Halloween- of kerstnagels met Emma. Alleen op afspraak.",
+    "domain": "emmanagelstudio.vip",
     "language": "nl"
   },
   "salon": {
     "name": "Emma NailStudio",
     "logo": "./images/logo.jpg",
-    "tagline": "Luxe nagelverzorging voor perfecte nagels",
-    "description": "Welkom bij Emma NailStudio, waar professionele nagelverzorging en luxe ervaring samenkomen. Met jarenlange ervaring en passie voor perfecte nagels, creëer ik prachtige resultaten die je zelfvertrouwen geven."
+    "tagline": "Jouw nagelstudio in Purmerend voor BIAB, gellak en custom nail art",
+    "description": "Bij Emma NailStudio in Purmerend maak ik nagels met persoonlijke aandacht: van BIAB en gellak tot handgetekende nail art op maat. Vertel mij jouw idee of stuur een inspiratiefoto via WhatsApp. Samen bespreken we het ontwerp, de mogelijkheden, de prijs en de benodigde behandeltijd."
   },
   "contact": {
     "email": "info@nailsalonemma.nl",

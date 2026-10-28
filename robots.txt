@@ -5,4 +5,4 @@ Disallow: /data/
 Disallow: /api/
 Disallow: /*.json$
 
-Sitemap: https://nailsalonemma.nl/sitemap.xml
+Sitemap: https://emmanagelstudio.vip/sitemap.xml

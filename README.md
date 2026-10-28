@@ -63,7 +63,11 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    deze schakelt mee met foto's tonen/verbergen.
    Rechtsklikken en slepen zijn alleen op beide bedrijfslogo's geblokkeerd als beperkte drempel.
    Dit verhindert geen screenshots of het rechtstreeks downloaden van de afbeelding.
-3. **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
+3. **Custom nail art** – vaste introductie voor handgetekende designs op aanvraag, inclusief Halloween en
+   kerst/Xmas. De tekst verwijst naar eigen werk bij Impressie en de bestaande contactroute. Ontwerp,
+   mogelijkheden, prijs en behandeltijd worden vooraf besproken; er is geen automatische seizoensactie.
+   Nieuwstraat, Weidevenne en centrum worden als lokale zoekintenties genoemd, niet als extra vestigingen.
+   **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
    bij, in beide talen. Ook mobiel blijven de vier kolommen naast elkaar staan.
@@ -203,7 +207,7 @@ Zoeken werkt met de teksten van de gekozen taal.
 - ✅ Impressie-albums met modal, toetsenbord- en swipe-navigatie
 - ✅ Toegankelijkheid: grijswaarden, lettergrootte, foto's uit, ARIA-labels, `prefers-reduced-motion`
   (zie [ACCESSIBILITY.md](ACCESSIBILITY.md))
-- ✅ SEO: meta tags, Open Graph, Schema.org (LocalBusiness), sitemap.xml, robots.txt
+- ✅ SEO: meta tags, Open Graph, Schema.org (NailSalon), sitemap.xml, robots.txt
 - ✅ Beveiligingsheaders en cache-instellingen via `_headers`
 
 ## 📁 Projectstructuur
@@ -336,9 +340,39 @@ Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
 
 ## 🔍 SEO
 
-- Meta title/description en Open Graph in `index.html`
-- Schema.org `LocalBusiness` (JSON-LD) in `index.html`, `priceRange` **€10 - €60**
-- `sitemap.xml` en `robots.txt`
+- Meta title/description, canonical en sociale deelgegevens in `index.html` verwijzen naar
+  `https://emmanagelstudio.vip/`; de deelafbeelding is het bestaande logo.
+- Schema.org `NailSalon` (JSON-LD) gebruikt Purmerend als werkgebied en de bestaande sociale profielen.
+  Geen verzonnen adres, coördinaten, beoordelingen, kortingsactie of Maps-link toevoegen.
+- `sitemap.xml` bevat alleen de echte pagina-URL, niet de sectieankers. `robots.txt` verwijst naar die sitemap.
+- Houd de titel en omschrijving in `data/settings.json`, de statische HTML en de vertaalcatalogi gelijk.
+  Hero en Over mij gebruiken de salonbeschrijving uit de instellingen.
+- De vaste Halloween- en kersttekst beschrijft designs op aanvraag, geen lopende aanbieding. Publiceer
+  kortingen pas na bevestiging van voordeel, voorwaarden en begin-/einddatum. Actualiseer tijdelijke
+  advertentieteksten na het seizoen; de algemene pagina kan het hele jaar blijven staan.
+
+### Advertenties en Google Maps (handmatig, niet via de website)
+
+De Google Ads MCP-integratie blijft alleen-lezen. Websitepublicatie past geen advertenties, zoekwoorden,
+budgetten of Google Bedrijfsprofielen aan. Voorstel voor advertentiekoppen (maximaal 30 tekens):
+
+- `Custom Nail Art in Purmerend`
+- `Halloween Nagels op Aanvraag` (alleen inzetten rond Halloween)
+- `Kerstnagels op Aanvraag` (alleen inzetten in het kerstseizoen)
+- `Jouw Eigen Nageldesign`
+
+Voorstel voor een beschrijving (maximaal 90 tekens):
+`Handgetekende nail art op maat. Bespreek jouw idee, prijs en afspraak via WhatsApp.`
+
+Behoud lokale zoekintenties zoals Nieuwstraat, Weidevenne en centrum; sluit deze niet zomaar uit.
+Maak geen aparte locatiepagina's of vestigingen voor buurten waar de salon niet gevestigd is.
+Voor Maps: controleer eerst een bestaand Google Bedrijfsprofiel en voorkom duplicaten. Gebruik de echte
+bedrijfsnaam en een passende categorie, actuele openingstijden en eigen foto's van custom designs.
+Laat echte klanten vrijwillig een eerlijke review geven, zonder beloning. Koppel alleen een geverifieerde
+profiellink. Website-SEO of een hoger Ads-budget garandeert geen betere Maps-positie.
+Controleer vóór profielwijzigingen de toelatings- en adresregels van Google: een bedrijf dat klanten op
+locatie ontvangt is niet automatisch een servicegebiedbedrijf. Verberg het salonadres niet door ten
+onrechte te zeggen dat je klanten thuis bezoekt. Het exacte adres blijft op deze website privé.
 
 ## 🔐 Privacy & beveiliging
 
@@ -385,8 +419,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
       en WhatsApp Business-profiel; daarna eventueel Google Ads met vooraf afgesproken budget.
       Zie [de stappenlijst](SETUP-NEW-COMPUTER.md#volgende-fase-vindbaarheid-en-sociale-kanalen).
 - [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; telefoon is ingesteld, adres en Maps-link blijven bewust privé
-- [ ] Domein `emmanagelstudio.vip` in Schema.org, `og:url` en `canonical` in `index.html`,
-      en in `sitemap.xml`/`robots.txt` (nu `nailsalonemma.nl`)
+- [x] Domein `emmanagelstudio.vip` in Schema.org, sociale deelgegevens, canonical, sitemap en robots
 - [x] Instagram- en Facebook-profielen ingesteld in `settings.json` (Facebook is een persoonlijk profiel)
 - [x] Eigen foto's in de Impressie-albums; lege albums blijven verborgen
 - [ ] Eigen foto's per behandeling (nu 10 gedeelde foto's)
