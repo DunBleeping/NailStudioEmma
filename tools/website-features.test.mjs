@@ -33,18 +33,32 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   const offer = html.match(/<section id="vriendinnenactie"[\s\S]*?<\/section>/)?.[0];
   assert.ok(offer);
   const sources = [...offer.matchAll(/data-i18n>([^<]+)</g)].map(([, text]) => text);
-  assert.equal(sources.length, 4);
+  assert.equal(sources.length, 5);
   for (const source of sources) assert.ok(Object.hasOwn(english, source), source);
-  for (const condition of ['20%', '25%', 'bestaande klant', 'hetzelfde moment', 'nieuwe sets', 'toeslagen', 'tot nader bericht', 'niet combineerbaar']) {
+  for (const condition of ['allebei 25%', 'Nieuw bij Emma?', 'Je vriendin mag al klant zijn', 'hetzelfde moment', 'nieuwe set', 'toeslagen', 'tot nader bericht', 'niet combineerbaar']) {
     assert.ok(offer.includes(condition), condition);
   }
-  const disclosure = 'Het mandje toont prijzen vóór actiekorting. Emma controleert de voorwaarden en bevestigt de korting per persoon bij het samen boeken.';
+  assert.ok(!offer.includes('20%'));
+  assert.match(offer, /<details class="offer-details">\s*<summary data-i18n>Goed om te weten<\/summary>/);
+  const introduction = offer.match(/<p data-i18n>([^<]+)<\/p>/)[1];
+  assert.ok(introduction.length < 150, 'main offer stays concise');
+  const disclosure = 'Prijzen vóór actiekorting. Emma bevestigt jullie korting bij het samen boeken.';
   assert.ok(html.includes(disclosure));
   assert.ok(functionSource('buildBookingMessage').includes(disclosure));
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['32', '32']);
+  assert.deepEqual(versions, ['33', '33']);
+});
+
+test('phone contact follows WhatsApp without removing contact verification', async () => {
+  const contact = html.match(/<div class="contact-grid">[\s\S]*?<\/section>/)[0];
+  assert.match(contact, /data-type="whatsapp"[\s\S]*?data-type="phone"/);
+  assert.ok(contact.includes('id="show-phone"'));
+  assert.ok(contact.includes('id="contact-phone" hidden'));
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  assert.match(css, /"whatsapp hours"\s*"phone hours"\s*"address hours"/);
+  assert.match(css, /"hours"\s*"whatsapp"\s*"phone"\s*"address"/);
 });
 
 test('confetti runs once on load, cleans up and respects reduced motion', () => {

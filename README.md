@@ -2,9 +2,10 @@
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
-- Nieuwe klant met vriendin: 20% korting voor de nieuwe klant, 25% voor de vriendin op haar eigen nieuwe set. De vriendin mag al klant zijn.
+- Nieuwe klant met vriendin: allebei 25% korting op de eigen nieuwe set. De vriendin mag al klant zijn.
 - Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.
 - Emma controleert de voorwaarden en bevestigt de prijs per persoon. Mandje en afspraakbericht tonen de gewone prijs met uitleg; er wordt niet automatisch korting berekend.
+- De actie staat kort op de pagina; aanvullende voorwaarden staan onder het uitklapbare 'Goed om te weten'. Bij Contact staat 'Bel mij' direct onder WhatsApp, ook op mobiel.
 - Impressie toont voorlopig een eigen BIAB-illustratie, duidelijk gemarkeerd als geen klantfoto. Echte BIAB-albumfoto's vervangen dit voorbeeld automatisch.
 - Een korte confettiregen speelt eenmaal per laden/herladen en verdwijnt binnen drie seconden; geen herhaling bij taalwissel. Bij minder beweging staat dit uit.
 

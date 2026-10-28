@@ -1045,7 +1045,7 @@ function buildBookingMessage() {
       lines.push(`- ${t('Toeslag:', {}, language)} ${extra.name} (+${formatPrice(extra.price, language)})`);
     });
     lines.push(`${t('Totaal:', {}, language)} ${formatPrice(getCartTotal(), language)}`);
-    lines.push(t('Het mandje toont prijzen vóór actiekorting. Emma controleert de voorwaarden en bevestigt de korting per persoon bij het samen boeken.', {}, language));
+    lines.push(t('Prijzen vóór actiekorting. Emma bevestigt jullie korting bij het samen boeken.', {}, language));
     lines.push('');
     lines.push(t('Mijn voorkeur voor datum en tijd:', {}, language));
     return lines.join('\n');
