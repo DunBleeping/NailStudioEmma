@@ -1422,7 +1422,41 @@ footer a:hover {
    Accessibility
    ============================================ */
 
+.confetti {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1100;
+}
+
+.confetti span {
+  position: absolute;
+  top: -1rem;
+  left: var(--x);
+  width: 0.45rem;
+  height: 0.8rem;
+  border-radius: 0.1rem;
+  animation: confetti-fall 2.4s var(--delay) ease-in forwards;
+}
+
+@media print {
+  .confetti {
+    display: none;
+  }
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translate(var(--drift), calc(100vh + 2rem)) rotate(var(--rotation));
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .confetti {
+    display: none;
+  }
   *,
   *::before,
   *::after {

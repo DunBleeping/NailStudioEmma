@@ -28,6 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeAccessibility();
 });
 
+function initializeConfetti() {
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (motion.matches) return;
+
+  const layer = document.createElement('div');
+  layer.className = 'confetti';
+  layer.setAttribute('aria-hidden', 'true');
+  const colors = ['#d4a574', '#8b7355', '#e6bbb3', '#f5f0eb'];
+  for (let index = 0; index < 36; index++) {
+    const piece = document.createElement('span');
+    piece.style.setProperty('--x', `${Math.random() * 100}%`);
+    piece.style.setProperty('--drift', `${(Math.random() - 0.5) * 12}rem`);
+    piece.style.setProperty('--delay', `${Math.random() * 0.3}s`);
+    piece.style.setProperty('--rotation', `${180 + Math.random() * 540}deg`);
+    piece.style.backgroundColor = colors[index % colors.length];
+    layer.appendChild(piece);
+  }
+  document.body.appendChild(layer);
+  const cleanup = () => {
+    layer.remove();
+    motion.removeEventListener('change', cleanup);
+  };
+  motion.addEventListener('change', cleanup);
+  window.setTimeout(cleanup, 3000);
+}
+
 async function loadAppData() {
   try {
     // Load all JSON data
@@ -67,6 +93,7 @@ async function loadAppData() {
     initializeCategoriesScrollSpy();
     initializeServiceSearch();
     initializeCart();
+    initializeConfetti();
     document.getElementById('language-select').disabled = false;
 
     console.log('✓ EmStudio website loaded successfully');
@@ -528,8 +555,10 @@ function initializeGallery() {
   galleryGrid.innerHTML = '';
 
   appData.gallery.images.forEach((image, index) => {
-    if (!Array.isArray(image.photos) || image.photos.length === 0) return;
-    const photoCount = getAlbumPhotos(image).length;
+    const photos = getAlbumPhotos(image);
+    const photoCount = photos.length;
+    if (photoCount === 0) return;
+    const isExample = photos[0] === image.example;
     image = localizeContent(image);
 
     const item = document.createElement('div');
@@ -549,11 +578,13 @@ function initializeGallery() {
     };
 
     const img = document.createElement('img');
-    img.src = image.src;
-    img.alt = image.alt;
+    img.src = photos[0].src;
+    img.alt = isExample ? t(image.example.alt) : image.alt;
     img.loading = 'lazy';
 
-    const badgeText = t(photoCount === 1 ? '📷 {count} foto' : "📷 {count} foto's", { count: photoCount });
+    const badgeText = isExample
+      ? t(image.example.caption)
+      : t(photoCount === 1 ? '📷 {count} foto' : "📷 {count} foto's", { count: photoCount });
 
     const overlay = document.createElement('div');
     overlay.className = 'gallery-overlay';
@@ -630,7 +661,8 @@ function initializeGalleryModal() {
 
 // The generated cover (src) is the first photo in the album.
 function getAlbumPhotos(item) {
-  return Array.isArray(item.photos) ? item.photos.filter((p) => p && p.src) : [];
+  const photos = Array.isArray(item.photos) ? item.photos.filter((p) => p && p.src) : [];
+  return photos.length ? photos : item.example?.src ? [item.example] : [];
 }
 
 function openGalleryModal(index) {
@@ -1013,6 +1045,7 @@ function buildBookingMessage() {
       lines.push(`- ${t('Toeslag:', {}, language)} ${extra.name} (+${formatPrice(extra.price, language)})`);
     });
     lines.push(`${t('Totaal:', {}, language)} ${formatPrice(getCartTotal(), language)}`);
+    lines.push(t('Het mandje toont prijzen vóór actiekorting. Emma controleert de voorwaarden en bevestigt de korting per persoon bij het samen boeken.', {}, language));
     lines.push('');
     lines.push(t('Mijn voorkeur voor datum en tijd:', {}, language));
     return lines.join('\n');

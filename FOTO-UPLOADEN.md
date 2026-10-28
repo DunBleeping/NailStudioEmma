@@ -58,7 +58,7 @@ en pas bij die behandeling `"image"` aan in `data/services.json`. Verwijs nooit 
 Elke tegel onder **Impressie** is een album:
 - De tegel toont de eerste foto op bestandsnaam.
 - Klikken opent alle foto's in de map; bezoekers bladeren met pijlen, pijltjestoetsen of vegen.
-- Een lege map wordt niet getoond. BIAB verschijnt dus vanzelf zodra je daar foto's toevoegt en publiceert.
+- Een lege map wordt niet getoond, behalve BIAB met het tijdelijke illustratievoorbeeld. Eigen BIAB-foto's vervangen dit voorbeeld zodra je ze toevoegt en publiceert.
 - De smalle foto onder de welkomsttitel is `design-1.jpg` uit `customdesigns`.
 - De albumfoto's zijn eigen foto's van de eigenaar; de oude, onjuiste bronvermeldingen zijn verwijderd.
 
@@ -93,7 +93,12 @@ Elk album heeft een vaste map. Je hoeft geen JSON of websitecode te veranderen:
 
 **Vervangen of verwijderen:** overschrijf een foto met dezelfde naam, of verwijder hem uit de map.
 Voer daarna dezelfde stappen uit. Het script past de lijst en de cacheversies automatisch aan.
-Verwijder je de laatste foto, dan verdwijnt ook de tegel.
+Verwijder je de laatste foto, dan verdwijnt ook de tegel, behalve bij BIAB: daar verschijnt de tijdelijke illustratie weer.
+
+**BIAB-voorbeeld vervangen:** plaats een eigen klantfoto (met toestemming) in
+`images/gallery/biab/` en voer het bestaande galerijscript uit. Zodra er echte foto's in
+het album staan, gebruikt de site die in plaats van `images/gallery/biab-illustratie.svg`.
+De illustratie staat bewust buiten de albummap en blijft duidelijk als illustratie gemarkeerd.
 
 **Alleen lokaal bekijken:** voer `.\tools\update-galerij.ps1` uit en vernieuw Live Server.
 Er is geen Python nodig. Ook bij alleen controleren in het publicatiemenu wordt de lokale lijst
@@ -147,7 +152,7 @@ images/
     ├── chrome/
     ├── customdesigns/
     ├── gellak/
-    ├── biab/                     ← verborgen zolang er geen foto's in staan
+    ├── biab/                     ← eigen foto's vervangen het illustratievoorbeeld
     └── babyboom/                 ← verborgen zolang er geen foto's in staan
 ```
 

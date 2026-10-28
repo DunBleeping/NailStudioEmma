@@ -1,6 +1,13 @@
 # Accessibility & Mobile Features - Emma NailStudio
 
-## Taalkeuze
+## Korte confetti bij openen
+
+- Decoratieve confetti verschijnt eenmaal per laden of herladen, maximaal drie seconden.
+- Geen herhaling bij scrollen, taalwissel of bedienen van de site.
+- De laag blokkeert geen klikken en is verborgen voor schermlezers en bij afdrukken.
+- Bij `prefers-reduced-motion: reduce` verschijnt niets; inschakelen van die voorkeur stopt een lopende animatie direct.
+
+## Taalkeuze en vertaling
 
 - De taalkeuze is direct zichtbaar in de header, ook op mobiel naast het logo, en is met het toetsenbord te bedienen.
 - Beschikbaar: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools.

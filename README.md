@@ -1,5 +1,13 @@
 # Emma NailStudio - Nagelsalon Website
 
+## Vriendinnenactie en BIAB-voorbeeld
+
+- Nieuwe klant met vriendin: 20% korting voor de nieuwe klant, 25% voor de vriendin op haar eigen nieuwe set. De vriendin mag al klant zijn.
+- Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.
+- Emma controleert de voorwaarden en bevestigt de prijs per persoon. Mandje en afspraakbericht tonen de gewone prijs met uitleg; er wordt niet automatisch korting berekend.
+- Impressie toont voorlopig een eigen BIAB-illustratie, duidelijk gemarkeerd als geen klantfoto. Echte BIAB-albumfoto's vervangen dit voorbeeld automatisch.
+- Een korte confettiregen speelt eenmaal per laden/herladen en verdwijnt binnen drie seconden; geen herhaling bij taalwissel. Bij minder beweging staat dit uit.
+
 Statische website voor Emma NailStudio (HTML5, CSS3, JavaScript en JSON), gehost op **Cloudflare Pages**.
 
 - **Live:** https://emmanagelstudio.vip (ook https://nailstudioemma.pages.dev)
@@ -81,7 +89,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    omschrijving; hoofdletters en accenten maken niet uit), daaronder het categoriemenu met 7 categorieën
    en 27 behandelkaarten (foto, categorie, naam, omschrijving, duur, prijs, eventueel notitie en een
    knop **+ dit wil ik**, onderaan de kaart en op gelijke hoogte binnen elke rij).
-5. **Impressie** – albums Cat Eye, Chrome, Custom Designs, Gellak, BIAB en Babyboom; lege albums zijn verborgen.
+5. **Impressie** – albums Cat Eye, Chrome, Custom Designs, Gellak, BIAB en Babyboom; lege albums zijn verborgen, behalve BIAB met het gemarkeerde illustratievoorbeeld.
    De eerste foto op naam is de tegel. Klik → **album** met foto's per stijl
    (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
@@ -421,7 +429,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 - [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; telefoon is ingesteld, adres en Maps-link blijven bewust privé
 - [x] Domein `emmanagelstudio.vip` in Schema.org, sociale deelgegevens, canonical, sitemap en robots
 - [x] Instagram- en Facebook-profielen ingesteld in `settings.json` (Facebook is een persoonlijk profiel)
-- [x] Eigen foto's in de Impressie-albums; lege albums blijven verborgen
+- [x] Eigen foto's in de Impressie-albums; lege albums blijven verborgen, behalve het BIAB-illustratievoorbeeld
 - [ ] Eigen foto's per behandeling (nu 10 gedeelde foto's)
 
 ## ❓ Problemen oplossen

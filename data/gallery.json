@@ -73,6 +73,11 @@
       "alt": "Natuurlijke nagelversteviging met BIAB",
       "category": "biab",
       "folder": "biab",
+      "example": {
+        "src": "./images/gallery/biab-illustratie.svg",
+        "alt": "BIAB-illustratie, geen klantfoto",
+        "caption": "BIAB-illustratie, geen klantfoto"
+      },
       "photos": []
     },
     {
