@@ -48,12 +48,13 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['34', '34']);
+  assert.deepEqual(versions, ['35', '35']);
 });
 
 test('services are collapsed by default and navigation opens only relevant targets', () => {
   assert.match(html, /<details id="services-details">/);
-  assert.match(html, /<summary class="services-summary"><h2 data-i18n>Mijn Behandelingen<\/h2><\/summary>/);
+  assert.match(html, /<summary class="services-summary"><h2 data-i18n>Klik hier voor mijn behandelingen<\/h2><\/summary>/);
+  assert.ok(Object.hasOwn(english, 'Klik hier voor mijn behandelingen'));
   let details = { open: false, contains: (target) => target.id === 'service-search' };
   const openTarget = runInNewContext(`(${functionSource('openServicesForTarget')})`, {
     document: { getElementById: () => details }
@@ -73,6 +74,10 @@ test('phone contact follows WhatsApp without removing contact verification', asy
   assert.match(contact, /data-type="whatsapp"[\s\S]*?data-type="phone"/);
   assert.ok(contact.includes('id="show-phone"'));
   assert.ok(contact.includes('id="contact-phone" hidden'));
+  const address = contact.match(/<div class="contact-item" data-type="address">([\s\S]*?)<\/details>/)[1];
+  assert.ok(address.includes('<p>Piraeushaven, Purmerend</p>'));
+  assert.ok(address.includes('Je ontvangt het adres na bevestiging van je afspraak.'));
+  assert.ok(!/Piraeushaven\s+\d/i.test(address));
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.match(css, /"whatsapp hours"\s*"phone hours"\s*"address hours"/);
   assert.match(css, /"hours"\s*"whatsapp"\s*"phone"\s*"address"/);

@@ -2,7 +2,7 @@
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
-- 'Mijn Behandelingen' is standaard ingeklapt. Klik op de titel om categorieën, zoeken en behandelingen te openen. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`. Prijslijst en mandje blijven apart beschikbaar.
+- 'Klik hier voor mijn behandelingen' is standaard ingeklapt. Klik op de titel om categorieën, zoeken en behandelingen te openen. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`. Prijslijst en mandje blijven apart beschikbaar.
 
 - Nieuwe klant met vriendin: allebei 25% korting op de eigen nieuwe set. De vriendin mag al klant zijn.
 - Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.
@@ -106,8 +106,9 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Na servercontrole verschijnt het nummer en een knop om bellen, WhatsApp of SMS te openen.
    Deze extra klik voorkomt geblokkeerde pop-ups na asynchrone verificatie.
    Na een geslaagde controle werken WhatsApp en SMS direct zolang de pagina openblijft.
-   **Bezoek mij** toont na uitklappen alleen dat het adres na afspraakbevestiging wordt gedeeld.
-   Het adres en de kaartlink staan niet in de openbare configuratie of gestructureerde paginagegevens.
+   **Bezoek mij** toont openbaar alleen de straat en plaats: Piraeushaven, Purmerend.
+   Het exacte adres met huisnummer wordt voorlopig na afspraakbevestiging gedeeld en staat niet in de openbare configuratie of gestructureerde paginagegevens.
+   Beschermde adresweergave via een Cloudflare-secret is nog niet aangesloten.
    Het nummer staat uitsluitend in een Cloudflare-secret; alleen de gecontroleerde API geeft het terug.
    Het wordt niet in localStorage bewaard. Dit voorkomt geen verdere verspreiding door een geverifieerde bezoeker.
 8. **Footer** – links, social media, copyright.

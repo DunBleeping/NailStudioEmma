@@ -1127,6 +1127,7 @@ body:not(.images-hidden) .gallery-overlay {
 
 .contact-item[data-type="phone"] > button,
 .contact-item[data-type="phone"] > div,
+.contact-item[data-type="address"] > p,
 .contact-item[data-type="address"] > details,
 .contact-item[data-type="whatsapp"] > p,
 .contact-item[data-type="whatsapp"] > a {
