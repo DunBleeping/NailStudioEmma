@@ -48,8 +48,9 @@ body {
   z-index: 3;
   width: clamp(20px, calc(50vw - 600px), 88px);
   max-height: 78vh;
+  overflow: visible;
   transform: translateY(-50%);
-  opacity: 0.72;
+  opacity: 0.85;
   pointer-events: none;
 }
 
