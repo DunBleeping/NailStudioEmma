@@ -42,6 +42,26 @@ body {
   overflow-x: hidden;
 }
 
+.blossom-decoration {
+  position: fixed;
+  top: 50%;
+  z-index: 3;
+  width: clamp(20px, calc(50vw - 600px), 88px);
+  max-height: 78vh;
+  transform: translateY(-50%);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.blossom-decoration-left {
+  left: 0;
+}
+
+.blossom-decoration-right {
+  right: 0;
+  transform: translateY(-50%) scaleX(-1);
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
