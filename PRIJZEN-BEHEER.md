@@ -22,6 +22,10 @@ WhatsApp-bericht. Behandel-ID's en prijzen niet vertalen.
 > De website gebruikt de CSV niet zelf: pas bij een wijziging zowel de CSV als `services.json` aan
 > (of vraag Copilot om `services.json` opnieuw uit de CSV op te bouwen).
 >
+> **Custom designs:** de prijstabel heeft een aparte optie "Custom designs (op aanvraag)" zonder vast bedrag
+> of winkelmandknop. De klant kan via Contact een prijs aanvragen; prijs en duur worden vooraf met Emma besproken.
+> Dit is een vaste regel in `js/script.js`, niet een behandeling in `services.json` of de CSV.
+>
 > **Live zetten:** opslaan → commit → push naar GitHub (`main`). Cloudflare Pages publiceert binnen ±1 minuut.
 
 ---

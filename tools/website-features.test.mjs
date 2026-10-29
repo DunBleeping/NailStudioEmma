@@ -54,7 +54,30 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['37', '37']);
+  assert.deepEqual(versions, ['38', '38']);
+});
+
+test('custom nail art links to pricing and has a non-cart quote option', async () => {
+  const section = html.match(/<section id="custom-nail-art"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(section);
+  assert.match(section, /<a href="#pricing" class="cta-button" data-i18n>Afspraak maken<\/a>/);
+  const pricing = functionSource('initializePricing');
+  for (const text of ['Custom designs (op aanvraag)', 'In overleg', 'Op aanvraag', 'Vraag prijs aan']) {
+    assert.ok(pricing.includes(text));
+    assert.ok(Object.hasOwn(english, text));
+  }
+  assert.match(pricing, /customDesignRow\.className = 'pricing-custom-design'/);
+  assert.match(pricing, /<a href="#contact" class="secondary-button">/);
+  const customRow = pricing.slice(
+    pricing.indexOf('customDesignRow.innerHTML'),
+    pricing.indexOf('tableBody.appendChild(customDesignRow)')
+  );
+  assert.ok(!customRow.includes('add-to-cart-btn'));
+  assert.ok(!customRow.includes('formatPrice'));
+  const services = JSON.parse(await readFile(new URL('../data/services.json', import.meta.url), 'utf8'));
+  assert.ok(!services.services.some((service) => service.id === 'custom-designs-op-aanvraag'));
+  const docs = await readFile(new URL('../PRIJZEN-BEHEER.md', import.meta.url), 'utf8');
+  assert.ok(docs.includes('vaste regel in `js/script.js`'));
 });
 
 test('services are collapsed by default and navigation opens only relevant targets', () => {

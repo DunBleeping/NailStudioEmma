@@ -43,7 +43,7 @@ test('local and seasonal landing copy is translated in every language', async ()
   assert.ok(section.includes('kerstnagels (Xmas)'));
   assert.ok(section.includes('Nieuwstraat, Weidevenne'));
   assert.ok(section.includes('href="#gallery"'));
-  assert.ok(section.includes('href="#contact"'));
+  assert.ok(section.includes('href="#pricing"'));
 });
 
 test('SEO uses the live domain and existing assets without exposing the salon address', async () => {

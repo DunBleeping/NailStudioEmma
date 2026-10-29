@@ -516,6 +516,16 @@ function initializePricing() {
     tableBody.appendChild(row);
   });
 
+  const customDesignRow = document.createElement('tr');
+  customDesignRow.className = 'pricing-custom-design';
+  customDesignRow.innerHTML = `
+    <td><strong>${escapeHtml(t('Custom designs (op aanvraag)'))}</strong></td>
+    <td class="duration">${escapeHtml(t('In overleg'))}</td>
+    <td class="price">${escapeHtml(t('Op aanvraag'))}</td>
+    <td class="pricing-action"><a href="#contact" class="secondary-button">${escapeHtml(t('Vraag prijs aan'))}</a></td>
+  `;
+  tableBody.appendChild(customDesignRow);
+
   // Add extras section header if extras exist
   if (appData.services.extras && appData.services.extras.length > 0) {
     const headerRow = document.createElement('tr');
