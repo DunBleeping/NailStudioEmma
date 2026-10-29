@@ -28,7 +28,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ### css/style.css
 - CSS-variabelen voor het kleurenpalet (goud `#d4a574`, crème `#f5f0eb`, bruin `#8b7355`)
 - Mobile-first, breekpunten 1024 px en 768 px; subtiele navigatie-iconen
-- Grijswaarden-, lettergrootte- en foto's-verborgen-modus
+- Donkere-modus- (omgekeerde kleuren, foto's origineel), lettergrootte- en foto's-verborgen-modus
 - Impressie-tegels, album-modal, `prefers-reduced-motion`, print-stylesheet
 
 ### js/script.js
@@ -41,7 +41,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
   Nederlands = alleen NL; andere talen = gekozen taal eerst, daarna NL
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
-- Voorkeuren in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (standaard verborgen),
+- Voorkeuren in localStorage: `emstudio-inverted`, `fontSize`, `imagesHidden` (standaard verborgen),
   `cart`, `cartExtras`, `cartExtrasDeclined` (bewust uitgevinkte toeslagen), `language` (standaard `nl`)
 - HTML-escaping van alle JSON-inhoud
 

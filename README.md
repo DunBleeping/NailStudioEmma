@@ -56,14 +56,14 @@ Het blok `colors` in `settings.json` wordt door de site niet gebruikt.
 De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **I/my**.
 
 1. **Header** – logo (`images/logo.jpg`), menu (Home, Prijzen, Behandelingen, Zoeken, Impressie, Contact),
-   taalkeuze **Nederlands, English, Français, Español, Türkçe, العربية, Українська, Polski**, en de knoppen 👁️ grijswaarden,
+   taalkeuze **Nederlands, English, Français, Español, Türkçe, العربية, Українська, Polski**, en de knoppen 🌓 donkere modus,
    **A– A A+ A++** lettergrootte en een afbeeldingspictogram met **Foto's tonen / Foto's verbergen**.
    Op mobiel (< 768 px) wordt het menu een ☰ hamburger. Subtiele achtergrondiconen helpen de zes links herkennen.
    Vanaf 768 px staan de links op één regel;
    de bedieningsknoppen mogen naar een volgende rij. Er staat geen afspraakknop in het menu.
    Op mobiel staat ☰ links direct onder het logo; de taalkeuze is direct zichtbaar rechts naast het logo.
    Alleen de lettergrootte staat in het uitklapmenu.
-   Grijswaarden en foto's tonen blijven rechts zichtbaar. Het menu sluit met een link of **Esc**.
+   Donkere modus en foto's tonen blijven rechts zichtbaar. Het menu sluit met een link of **Esc**.
    **Zoeken** gaat naar de zoekbalk voor behandelingen en geeft deze direct toetsenbordfocus.
    Op lage, liggende schermen zoals smartphones (hoogte maximaal 500 px, breedte maximaal 1024 px)
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
@@ -124,7 +124,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
   De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
   Bij omschakelen blijft de zichtbare tekst zo veel mogelijk op dezelfde schermhoogte staan.
   Helemaal bovenaan blijft de pagina bovenaan; bij de paginaranden kan de beschikbare scrollruimte dit beperken.
-- Lettergrootte **A–** (kleinste, 87,5%), kleur aan (geen grijswaarden).
+- Lettergrootte **A–** (kleinste, 87,5%), normale kleuren (geen donkere modus).
   Een eerder opgeslagen letterkeuze blijft behouden.
 - Taal **Nederlands**; bezoekers kunnen ook English, Français, Español, Türkçe, العربية, Українська, Polski en Tiếng Việt kiezen.
   De taal wordt onthouden (localStorage `language`). Arabisch gebruikt een volledige rechts-naar-links-weergave.
@@ -218,7 +218,7 @@ Zoeken werkt met de teksten van de gekozen taal.
 - ✅ Categoriefilter en zoekbalk voor behandelingen
 - ✅ Behandelmandje dat een ingevuld WhatsApp- of SMS-afspraakverzoek maakt
 - ✅ Impressie-albums met modal, toetsenbord- en swipe-navigatie
-- ✅ Toegankelijkheid: grijswaarden, lettergrootte, foto's uit, ARIA-labels, `prefers-reduced-motion`
+- ✅ Toegankelijkheid: donkere modus (omgekeerde kleuren, foto's blijven origineel), lettergrootte, foto's uit, ARIA-labels, `prefers-reduced-motion`
   (zie [ACCESSIBILITY.md](ACCESSIBILITY.md))
 - ✅ SEO: meta tags, Open Graph, Schema.org (NailSalon), sitemap.xml, robots.txt
 - ✅ Beveiligingsheaders en cache-instellingen via `_headers`
@@ -395,7 +395,7 @@ onrechte te zeggen dat je klanten thuis bezoekt. Het exacte adres blijft op deze
 ## 🔐 Privacy & beveiliging
 
 - Geen analytics of boekingsformulieren; contact loopt via WhatsApp of SMS
-- Alleen `localStorage` voor weergavevoorkeuren (grijswaarden, lettergrootte, foto's) en het mandje;
+- Alleen `localStorage` voor weergavevoorkeuren (donkere modus, lettergrootte, foto's) en het mandje;
   het mandje wordt niet naar de contact-API gestuurd
 - Turnstile wordt pas bij een contactverzoek geladen. Cloudflare verwerkt daarbij verificatiegegevens;
   de browser stuurt alleen het tijdelijke controletoken naar `/api/contact`.

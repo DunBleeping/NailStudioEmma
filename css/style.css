@@ -330,12 +330,18 @@ nav a:hover::after {
   color: var(--white);
 }
 
-/* Grijswaarden filter wanneer actief */
-body.grayscale {
-  filter: grayscale(100%);
+/* Donkere modus: alle kleuren omgekeerd voor lezen in een donkere omgeving.
+   Foto's krijgen een tweede invert(1) zodat ze hun originele kleuren exact behouden. */
+body.inverted {
+  filter: invert(1);
+  min-height: 100vh;
 }
 
-body.grayscale .accessibility-toggle {
+body.inverted img {
+  filter: invert(1);
+}
+
+body.inverted .accessibility-toggle {
   background: #666;
   border-color: #444;
   color: var(--white);

@@ -20,21 +20,22 @@
 
 ---
 
-## ♿ Grijswaarden (Accessibility) Modus
+## ♿ Donkere modus (kleuren omkeren)
 
 ### Wat is het?
-Voor klanten met kleurweergave beperkingen (kleurblindheid) is er een **grijswaarden knop** in de header.
+Voor klanten die in een donkere omgeving willen lezen is er een **donkere-modus knop** in de header die alle kleuren omkeert.
 
 ### Hoe werkt het?
-1. **Klik op de 👁️ knop** in de header (rechtsboven)
-2. **Website wordt grijs** - alle kleuren verdwijnen
-3. **Opnieuw klikken** - kleuren komen terug
-4. **Voorkeur wordt onthouden** - volgende bezoek dezelfde instelling
+1. **Klik op de 🌓 knop** in de header (rechtsboven)
+2. **Kleuren worden omgekeerd** - lichte achtergrond wordt donker, tekst licht
+3. **Foto's behouden hun originele kleuren** - afbeeldingen worden niet omgekeerd
+4. **Opnieuw klikken** - normale kleuren komen terug
+5. **Voorkeur wordt onthouden** - volgende bezoek dezelfde instelling
 
 ### Voor wie?
-- Klanten met kleurblindheid (protanopie, deuteranopie, tritanopie)
-- Klanten met lage visie
-- Klanten die grijswaarden prefereren
+- Klanten die 's avonds of in een donkere omgeving lezen
+- Klanten die gevoelig zijn voor fel licht
+- Klanten die een donkere weergave prefereren
 
 ### Technische details
 - LocalStorage slaat voorkeur op
@@ -185,7 +186,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 ### Color Contrast
 - WCAG 2.2 AA compliant
 - Leesbaar voor iedereen
-- Speciale grijswaarden modus voor kleurblindheid
+- Donkere modus (omgekeerde kleuren) voor lezen in een donkere omgeving; foto's behouden hun kleur
 
 ### Motion Sensitivity
 - Respecteert `prefers-reduced-motion`
@@ -243,20 +244,24 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 
 ## 🔧 Voor Developers
 
-### Grijswaarden Toggle
+### Donkere modus Toggle
 ```javascript
-// Toggle grayscale
-document.body.classList.toggle('grayscale');
+// Toggle inverted colors
+document.body.classList.toggle('inverted');
 
 // Save preference
-localStorage.setItem('emstudio-grayscale', 'enabled');
+localStorage.setItem('emstudio-inverted', 'enabled');
 ```
 
 ### CSS
 ```css
-/* Grijswaarden filter */
-body.grayscale {
-  filter: grayscale(100%);
+/* Kleuren omkeren; foto's krijgen een tweede invert zodat ze origineel blijven */
+body.inverted {
+  filter: invert(1);
+}
+
+body.inverted img {
+  filter: invert(1);
 }
 ```
 
@@ -298,7 +303,7 @@ button, a {
 - ✅ Screen readers (NVDA, JAWS)
 - ✅ Keyboard navigation
 - ✅ Color contrast (WCAG AA)
-- ✅ Grayscale mode
+- ✅ Donkere modus (omgekeerde kleuren)
 - ✅ Motion sensitivity
 
 ---
@@ -348,11 +353,11 @@ Wilt u direct bellen?
 → Tik groen knop = bellen!
 ```
 
-### Grijswaarden Modus
+### Donkere Modus
 ```
-Kleuren moeilijk te zien?
-→ Klik de 👁️ knop in de header
-→ Website wordt grijs
+Lezen in een donkere omgeving?
+→ Klik de 🌓 knop in de header
+→ Kleuren worden omgekeerd, foto's blijven origineel
 → Volgende keer onthouden wij dit!
 ```
 

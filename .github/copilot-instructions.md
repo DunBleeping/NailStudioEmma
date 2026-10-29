@@ -27,13 +27,13 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
 - Contact API regression tests: `node --test tools/contact.test.mjs`. Live Server cannot run Pages Functions.
 
 ## Conventions and pitfalls
-- **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** It is currently `?v=6`.
+- **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** It is currently `?v=41`.
 - Cloudflare paths are case-sensitive; use lowercase file names without spaces.
 - A missing file returns the homepage with status 200 and is cached for 30 days, so never commit empty or placeholder images.
 - Escape all JSON content with `escapeHtml()` before inserting it into HTML.
 - Font scaling uses classes on `<html>` (`font-size-small|medium|large|xlarge`), so size with `rem`.
   Headings are capped on mobile.
-- Visitor preferences are stored in localStorage: `emstudio-grayscale`, `fontSize`, `imagesHidden` (default: photos hidden), `cart` and `cartExtras`.
+- Visitor preferences are stored in localStorage: `emstudio-inverted` (dark mode: inverted colors, photos keep original color), `fontSize`, `imagesHidden` (default: photos hidden), `cart` and `cartExtras`.
 - Keep changes surgical. Update the related Dutch docs when behaviour changes.
 - Commit to `main` with a clear Dutch message, then push.
   Don't connect new remotes or services without the owner's permission.

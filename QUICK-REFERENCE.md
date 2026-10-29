@@ -112,7 +112,7 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 - Taalkeuze: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools; keuze wordt onthouden.
   Arabisch is RTL. Vertalingen staan in `data/translations.json` en `data/translations/<taal>.json`.
 - WhatsApp-knoppen → eerst Turnstile-servercontrole, daarna voorbereid bericht; geen afspraakknop in het hoofdmenu
-- Knoppen rechtsboven: 👁️ grijswaarden · A– A A+ A++ lettergrootte · **Foto's tonen / Foto's verbergen**
+- Knoppen rechtsboven: 🌓 donkere modus · A– A A+ A++ lettergrootte · **Foto's tonen / Foto's verbergen**
 - Zoekbalk onder "Categorieën"; *+ dit wil ik* onderaan elke behandelkaart → 🛒 Mandje → WhatsApp-bericht met
   behandelingen, toeslag en totaal. In het mandje kan dit ook via **SMS** naar hetzelfde nummer.
 - Berichttaal voor WhatsApp en SMS: **Nederlands = alleen Nederlands; andere talen = eerst gekozen taal, daarna Nederlands**.

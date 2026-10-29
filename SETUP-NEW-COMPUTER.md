@@ -23,7 +23,7 @@ Main features (status at commit `964311d`):
 - Search bar plus category filter.
 - Treatment cart that fills in a WhatsApp booking request.
 - "Impressie" gallery with photo albums per style.
-- Accessibility buttons: grayscale, font size A– A A+ A++, show/hide photos. Photos are hidden by default for new visitors.
+- Accessibility buttons: dark mode (inverted colors, photos keep original color), font size A– A A+ A++, show/hide photos. Photos are hidden by default for new visitors.
 
 More detail: [README.md](README.md), [QUICK-REFERENCE.md](QUICK-REFERENCE.md),
 [MANIFEST.md](MANIFEST.md), [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md),

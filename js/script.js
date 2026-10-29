@@ -295,27 +295,27 @@ function initializeAccessibility() {
   
   if (!accessibilityToggle) return;
 
-  // Check if user has previously enabled grayscale
-  const savedPreference = localStorage.getItem('emstudio-grayscale');
+  // Check if user has previously enabled dark (inverted) mode
+  const savedPreference = localStorage.getItem('emstudio-inverted');
   if (savedPreference === 'enabled') {
-    document.body.classList.add('grayscale');
+    document.body.classList.add('inverted');
     accessibilityToggle.classList.add('active');
   }
 
-  // Toggle grayscale on click
+  // Toggle inverted colors on click
   accessibilityToggle.addEventListener('click', () => {
-    document.body.classList.toggle('grayscale');
+    document.body.classList.toggle('inverted');
     accessibilityToggle.classList.toggle('active');
 
     // Save preference
-    const isEnabled = document.body.classList.contains('grayscale');
-    localStorage.setItem('emstudio-grayscale', isEnabled ? 'enabled' : 'disabled');
+    const isEnabled = document.body.classList.contains('inverted');
+    localStorage.setItem('emstudio-inverted', isEnabled ? 'enabled' : 'disabled');
   });
 
   // Announce to screen readers
   accessibilityToggle.addEventListener('click', function() {
     const isActive = this.classList.contains('active');
-    const message = t(isActive ? 'Grijswaarden modus ingeschakeld' : 'Grijswaarden modus uitgeschakeld');
+    const message = t(isActive ? 'Donkere modus ingeschakeld' : 'Donkere modus uitgeschakeld');
     announceToScreenReader(message);
   });
 }
