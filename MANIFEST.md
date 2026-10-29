@@ -37,7 +37,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Impressie: tegels + album-modal (pijlen, toetsenbord, swipe)
 - Contactkaarten compact; op mobiel één kolom, op desktop naast openingstijden
 - Zoekbalk (live, accent- en hoofdletterongevoelig) gecombineerd met het categoriefilter
-- Acht talen (NL/EN/FR/ES/TR/AR/UK/PL), inclusief behandelingen en Impressie; Arabisch RTL
+- Negen talen (NL/EN/FR/ES/TR/AR/UK/PL/VI), inclusief behandelingen en Impressie; Arabisch RTL
 - Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
   Nederlands = alleen NL; andere talen = gekozen taal eerst, daarna NL
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)

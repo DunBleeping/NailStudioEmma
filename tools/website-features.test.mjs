@@ -53,7 +53,7 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['36', '36']);
+  assert.deepEqual(versions, ['37', '37']);
 });
 
 test('services are collapsed by default and navigation opens only relevant targets', () => {

@@ -4,7 +4,7 @@ import { test } from 'node:test';
 
 const root = new URL('../data/', import.meta.url);
 const english = JSON.parse(await readFile(new URL('translations.json', root), 'utf8')).en;
-const locales = ['fr', 'es', 'tr', 'ar', 'uk', 'pl'];
+const locales = ['fr', 'es', 'tr', 'ar', 'uk', 'pl', 'vi'];
 const placeholders = (value) => [...value.matchAll(/\{[^}]+\}/g)].map(([match]) => match).sort();
 
 for (const locale of locales) {
@@ -22,7 +22,7 @@ for (const locale of locales) {
 test('language selector and locale catalogs stay in sync', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   const configured = [...html.matchAll(/<option value="([a-z]{2})"/g)].map(([, locale]) => locale);
-  assert.deepEqual(configured, ['nl', 'en', ...locales]);
+  assert.deepEqual(configured, ['nl', 'en', 'fr', 'es', 'tr', 'ar', 'uk', 'pl', 'vi']);
 });
 
 test('local and seasonal landing copy is translated in every language', async () => {

@@ -10,7 +10,7 @@
 ## Taalkeuze en vertaling
 
 - De taalkeuze is direct zichtbaar in de header, ook op mobiel naast het logo, en is met het toetsenbord te bedienen.
-- Beschikbaar: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools.
+- Beschikbaar: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens, Pools en Vietnamees.
 - De gekozen taal wordt onthouden (localStorage `language`); standaard is de site Nederlands.
 - Arabisch schakelt de pagina naar rechts-naar-links (RTL); andere talen blijven links-naar-rechts.
 - Ook knoppen, schermlezerlabels, fototeksten, behandelingen en het mandje worden vertaald.

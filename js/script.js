@@ -61,7 +61,7 @@ async function loadAppData() {
     appData.services = await fetchJSON('./data/services.json');
     appData.gallery = await fetchJSON('./data/gallery.json');
     const baseTranslations = await fetchJSON('./data/translations.json');
-    const additionalLanguages = ['fr', 'es', 'tr', 'ar', 'uk', 'pl'];
+    const additionalLanguages = ['fr', 'es', 'tr', 'ar', 'uk', 'pl', 'vi'];
     const additionalTranslations = await Promise.all(additionalLanguages.map(async (language) => [
       language,
       await fetchJSON(`./data/translations/${language}.json`)
@@ -1472,7 +1472,8 @@ function formatPrice(amount, language = appData.language) {
     tr: 'tr-TR',
     ar: 'ar',
     uk: 'uk-UA',
-    pl: 'pl-PL'
+    pl: 'pl-PL',
+    vi: 'vi-VN'
   };
   return new Intl.NumberFormat(locales[language] || 'nl-NL', {
     style: 'currency',

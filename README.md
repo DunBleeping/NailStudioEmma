@@ -126,7 +126,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
   Helemaal bovenaan blijft de pagina bovenaan; bij de paginaranden kan de beschikbare scrollruimte dit beperken.
 - Lettergrootte **A–** (kleinste, 87,5%), kleur aan (geen grijswaarden).
   Een eerder opgeslagen letterkeuze blijft behouden.
-- Taal **Nederlands**; bezoekers kunnen ook English, Français, Español, Türkçe, العربية, Українська en Polski kiezen.
+- Taal **Nederlands**; bezoekers kunnen ook English, Français, Español, Türkçe, العربية, Українська, Polski en Tiếng Việt kiezen.
   De taal wordt onthouden (localStorage `language`). Arabisch gebruikt een volledige rechts-naar-links-weergave.
   Omschakelen behoudt het mandje, toeslagen, zoekopdracht, categoriefilter en toegankelijkheidsvoorkeuren.
 
@@ -190,9 +190,9 @@ Linkopbouw en inhoud zijn getest, maar daadwerkelijk afleveren moet op een echte
 
 De Nederlandse teksten blijven in `index.html` en de bestaande JSON-bestanden staan.
 `data/translations.json` bevat de Engelse vertalingen. De bestanden `data/translations/fr.json`,
-`es.json`, `tr.json`, `ar.json`, `uk.json` en `pl.json` bevatten de overige talen. In elk bestand is de
+`es.json`, `tr.json`, `ar.json`, `uk.json`, `pl.json` en `vi.json` bevatten de overige talen. In elk bestand is de
 **exacte Nederlandse tekst** de sleutel. Bij nieuwe of gewijzigde teksten voeg je de vertaling aan
-alle zeven vertaalbestanden toe:
+alle acht vertaalbestanden toe:
 
 In `data/translations.json` onder `en`:
 ```json
@@ -211,7 +211,7 @@ Zoeken werkt met de teksten van de gekozen taal.
 ## ✨ Functies
 
 - ✅ Statische website zonder build-stap; een Pages Function controleert contacttoegang
-- ✅ Acht talen: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools; Arabisch RTL
+- ✅ Negen talen: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens, Pools en Vietnamees; Arabisch RTL
 - ✅ WhatsApp/SMS: Nederlands alleen NL; andere talen eerst gekozen taal, daarna Nederlands
 - ✅ Responsive / mobile-first (breekpunten 1024 px en 768 px)
 - ✅ Alle inhoud uit JSON (`data/`) – teksten, prijzen, foto's
@@ -235,7 +235,7 @@ EmStudio/
 │   ├── services.json          # 27 behandelingen + "extras" (toeslagen)
 │   ├── gallery.json           # 6 Impressie-albums ("folder", "photos"), automatisch bijgewerkt
 │   ├── translations.json      # Engelse vertalingen van Nederlandse teksten
-│   ├── translations/          # fr.json, es.json, tr.json, ar.json, uk.json, pl.json
+│   ├── translations/          # fr.json, es.json, tr.json, ar.json, uk.json, pl.json, vi.json
 │   └── Prijzenlijst.csv       # Bronlijst prijzen (niet door de site gebruikt)
 ├── images/
 │   ├── logo.jpg
