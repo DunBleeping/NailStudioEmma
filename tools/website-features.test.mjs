@@ -29,26 +29,31 @@ test('BIAB example is an existing labelled illustration; real photos take priori
   assert.equal(getPhotos({ ...biab, photos: [{}] })[0], biab.example);
 });
 
-test('confirmed referral conditions and cart disclosure are translated and no public credit remains', () => {
+test('confirmed referral conditions and cart disclosure are translated and no public credit remains', async () => {
   const offer = html.match(/<section id="vriendinnenactie"[\s\S]*?<\/section>/)?.[0];
   assert.ok(offer);
   const sources = [...offer.matchAll(/data-i18n>([^<]+)</g)].map(([, text]) => text);
   assert.equal(sources.length, 5);
   for (const source of sources) assert.ok(Object.hasOwn(english, source), source);
-  for (const condition of ['allebei 25%', 'Nieuw bij Emma?', 'Je vriendin mag al klant zijn', 'hetzelfde moment', 'nieuwe set', 'toeslagen', 'tot nader bericht', 'niet combineerbaar']) {
+  for (const condition of ['allebei 15%', '15% korting op een nieuwe set', 'hetzelfde moment', 'Je vriendin mag al klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
     assert.ok(offer.includes(condition), condition);
   }
-  assert.ok(!offer.includes('20%'));
+  assert.ok(!offer.includes('25%'));
   assert.match(offer, /<details class="offer-details">\s*<summary data-i18n>Goed om te weten<\/summary>/);
-  const introduction = offer.match(/<p data-i18n>([^<]+)<\/p>/)[1];
-  assert.ok(introduction.length < 150, 'main offer stays concise');
+  assert.ok(offer.includes('friend-offer-card'));
+  assert.ok(offer.includes('friend-offer'));
+  assert.ok(offer.includes('15%'));
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  assert.ok(css.includes('.friend-offer-card::before'));
+  assert.ok(css.includes('.friend-offer-card::after'));
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{\s*\.friend-offer-card::before,[\s\S]*?animation: none;/);
   const disclosure = 'Prijzen vóór actiekorting. Emma bevestigt jullie korting bij het samen boeken.';
   assert.ok(html.includes(disclosure));
   assert.ok(functionSource('buildBookingMessage').includes(disclosure));
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['35', '35']);
+  assert.deepEqual(versions, ['36', '36']);
 });
 
 test('services are collapsed by default and navigation opens only relevant targets', () => {

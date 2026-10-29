@@ -1071,6 +1071,68 @@ body:not(.images-hidden) .gallery-overlay {
   margin-bottom: 1rem;
 }
 
+.friend-offer-card {
+  position: relative;
+  isolation: isolate;
+  max-width: 62rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 2px solid #d4a574;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #fffdfa, #fbf0e9 55%, #fffaf0);
+  box-shadow: 0 0.5rem 1.75rem rgba(139, 115, 85, 0.14);
+  text-align: center;
+}
+
+.friend-offer-card::before,
+.friend-offer-card::after {
+  position: absolute;
+  inset: -0.35rem;
+  border: 1px solid rgba(212, 165, 116, 0.7);
+  border-radius: 1.5rem;
+  content: "";
+  pointer-events: none;
+  z-index: 0;
+}
+
+.friend-offer-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.friend-offer-card::before {
+  box-shadow: 0 0 0.8rem rgba(212, 165, 116, 0.38), inset 0 0 0.8rem rgba(212, 165, 116, 0.14);
+  animation: offer-glow 3s ease-in-out infinite alternate;
+}
+
+.friend-offer-card::after {
+  inset: -0.55rem;
+  border: 0;
+  background:
+    radial-gradient(circle, #fff 0 1.5px, #d4a574 2px, transparent 4px) 2% 12% / 1rem 1rem no-repeat,
+    radial-gradient(circle, #fff 0 1px, #c99b65 2px, transparent 4px) 98% 20% / 1rem 1rem no-repeat,
+    radial-gradient(circle, #fff 0 1.5px, #d4a574 2px, transparent 4px) 8% 98% / 1rem 1rem no-repeat,
+    radial-gradient(circle, #fff 0 1px, #c99b65 2px, transparent 4px) 92% 96% / 1rem 1rem no-repeat;
+  animation: offer-sparkle 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes offer-glow {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
+}
+
+@keyframes offer-sparkle {
+  from { opacity: 0.45; }
+  to { opacity: 1; }
+}
+
+.friend-offer-card h2 {
+  margin-top: 0;
+}
+
+.friend-offer-card .offer-details {
+  text-align: left;
+}
+
 .offer-details summary {
   cursor: pointer;
   font-weight: 600;
@@ -1356,6 +1418,13 @@ footer a:hover {
   .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .friend-offer-card::before,
+  .friend-offer-card::after {
+    animation: none;
   }
 }
 
