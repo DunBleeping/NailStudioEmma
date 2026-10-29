@@ -33,6 +33,7 @@ Statische website voor Emma NailStudio (HTML5, CSS3, JavaScript en JSON), gehost
 - [Problemen oplossen](#-problemen-oplossen)
 
 Meer documentatie:
+[Overdracht, voorkeuren en lessons learned](OVERDRACHT-EN-LESSONS-LEARNED.md) ·
 [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) · [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md) ·
 [QUICK-REFERENCE.md](QUICK-REFERENCE.md) · [ACCESSIBILITY.md](ACCESSIBILITY.md) · [MANIFEST.md](MANIFEST.md)
 
@@ -65,7 +66,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Alleen de lettergrootte staat in het uitklapmenu.
    Donkere modus en foto's tonen blijven rechts zichtbaar. Het menu sluit met een link of **Esc**.
    **Zoeken** gaat naar de zoekbalk voor behandelingen en geeft deze direct toetsenbordfocus.
-   Op lage, liggende schermen zoals smartphones (hoogte maximaal 500 px, breedte maximaal 1024 px)
+   Op telefoon en tablet (breedte maximaal 1024 px), in beide schermstanden,
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
    Subtiele achtergrondiconen helpen de zes menulinks herkennen.
 2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *Prijslijst*, *📱 WhatsApp*, *Instagram*,
