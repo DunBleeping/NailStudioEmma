@@ -74,6 +74,10 @@ In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsb
 
 ## 🖼️ Foto's tonen/verbergen
 
+- Het grote bedrijfslogo blijft gecentreerd en behoudt zijn vierkante verhouding.
+- De ruimte rond het logo volgt de afbeeldingshoogte, ook na draaien naar landschapstand.
+- Op smalle schermen is het logo maximaal 300 px breed; het volgende blok snijdt het logo niet af.
+
 De knop met afbeeldingspictogram en **Foto's tonen / Foto's verbergen** rechtsboven zet alle foto's
 op de kaarten en onder Impressie aan of uit. De tekst, toegankelijke naam en tooltip volgen de
 huidige toestand en taal; `aria-pressed` geeft aan of foto's zichtbaar zijn.

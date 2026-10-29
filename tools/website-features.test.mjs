@@ -55,7 +55,19 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['38', '38']);
+  assert.deepEqual(versions, ['43', '43']);
+});
+
+test('hero logo uses its natural height and stays centered instead of overflowing a fixed-height box', async () => {
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  const imageRules = [...css.matchAll(/\.hero-image\s*\{([^}]+)\}/g)].map(([, rule]) => rule);
+  assert.ok(imageRules.length >= 2);
+  assert.ok(imageRules.every((rule) => !/(?:^|;)\s*(?:max-|min-)?height\s*:/.test(rule)));
+  assert.match(imageRules[0], /justify-self:\s*center/);
+  assert.match(imageRules.at(-1), /max-width:\s*300px/);
+  assert.match(css, /\.hero-logo \.logo-link\s*\{\s*width:\s*100%;\s*\}/);
+  assert.match(css, /\.hero-logo \.logo-image\s*\{[^}]*height:\s*auto;/);
+  assert.doesNotMatch(html, /class="logo-image"[^>]*style=/);
 });
 
 test('custom nail art links to pricing and has a non-cart quote option', async () => {
