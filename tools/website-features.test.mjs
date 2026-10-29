@@ -35,7 +35,7 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   const sources = [...offer.matchAll(/data-i18n>([^<]+)</g)].map(([, text]) => text);
   assert.equal(sources.length, 4);
   for (const source of sources) assert.ok(Object.hasOwn(english, source), source);
-  for (const condition of ['allebei 15%', '15% korting op een nieuwe set', 'hetzelfde moment', 'Je vriendin mag al klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
+  for (const condition of ['allebei 15%', '15% korting op een nieuwe set', 'hetzelfde moment', 'positieve review op Google', '€3 extra korting', 'Je vriendin mag al klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
     assert.ok(offer.includes(condition), condition);
   }
   assert.ok(!offer.includes('25%'));
