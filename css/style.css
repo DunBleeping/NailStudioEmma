@@ -331,17 +331,22 @@ nav a:hover::after {
 }
 
 /* Donkere modus: alle kleuren omgekeerd voor lezen in een donkere omgeving.
-   Foto's krijgen een tweede invert(1) zodat ze hun originele kleuren exact behouden. */
-body.inverted {
+   Het filter staat op html (niet body): een filter op body zou een nieuw
+   containing block maken waardoor position:fixed-elementen zoals de zwevende
+   WhatsApp-knop meescrollen en uit beeld verdwijnen.
+   Foto's en de WhatsApp-knop krijgen een tweede invert(1) zodat ze hun
+   originele kleuren exact behouden. */
+html.inverted {
   filter: invert(1);
   min-height: 100vh;
 }
 
-body.inverted img {
+html.inverted img,
+html.inverted .whatsapp-button {
   filter: invert(1);
 }
 
-body.inverted .accessibility-toggle {
+html.inverted .accessibility-toggle {
   background: #666;
   border-color: #444;
   color: var(--white);
@@ -350,10 +355,6 @@ body.inverted .accessibility-toggle {
 /* ============================================
    Mobile Navigation
    ============================================ */
-
-.menu-preferences {
-  display: none;
-}
 
 @media (min-width: 768px) {
   header nav {
@@ -401,14 +402,6 @@ body.inverted .accessibility-toggle {
   header nav {
     max-height: calc(100dvh - 160px);
     overflow-y: auto;
-  }
-
-  header .menu-preferences {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
   }
 
   nav {
@@ -526,6 +519,7 @@ body.inverted .accessibility-toggle {
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: 0.5rem;
 }
 
 .hero-buttons .secondary-button {
@@ -1380,6 +1374,14 @@ footer a:hover {
   text-decoration: none;
 }
 
+/* Social logo's (SVG-sprite via <use>) */
+.social-icon {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
 .social-links {
   display: flex;
   justify-content: center;
@@ -1403,6 +1405,11 @@ footer a:hover {
 .social-links a:hover {
   background: var(--accent);
   transform: translateY(-3px);
+}
+
+.social-links a .social-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .footer-content {
@@ -1466,6 +1473,7 @@ footer a:hover {
   width: 60px;
   height: 60px;
   background: #25d366;
+  color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1475,6 +1483,11 @@ footer a:hover {
   transition: var(--transition);
   z-index: 999;
   font-size: 1.8rem;
+}
+
+.whatsapp-button .social-icon {
+  width: 32px;
+  height: 32px;
 }
 
 .whatsapp-button:hover {

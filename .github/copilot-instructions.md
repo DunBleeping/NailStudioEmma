@@ -27,7 +27,7 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
 - Contact API regression tests: `node --test tools/contact.test.mjs`. Live Server cannot run Pages Functions.
 
 ## Conventions and pitfalls
-- **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** It is currently `?v=41`.
+- **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** It is currently `?v=42`.
 - Cloudflare paths are case-sensitive; use lowercase file names without spaces.
 - A missing file returns the homepage with status 200 and is cached for 30 days, so never commit empty or placeholder images.
 - Escape all JSON content with `escapeHtml()` before inserting it into HTML.

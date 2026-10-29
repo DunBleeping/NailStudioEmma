@@ -244,9 +244,7 @@ function initializeHeader() {
   const nav = document.getElementById('main-navigation');
   const header = document.querySelector('header');
   const controls = header.querySelector('.header-controls');
-  const preferences = header.querySelector('.menu-preferences');
   const language = header.querySelector('.language-control');
-  const fontSizes = header.querySelector('.font-size-controls');
   const mobile = window.matchMedia('(max-width: 767px)');
   const setMenuOpen = (open) => {
     nav.classList.toggle('active', open);
@@ -255,10 +253,8 @@ function initializeHeader() {
   const updatePreferences = () => {
     if (mobile.matches) {
       header.querySelector('.container').append(language);
-      preferences.append(fontSizes);
     } else {
       controls.prepend(language);
-      controls.insertBefore(fontSizes, document.getElementById('toggle-images-btn'));
       setMenuOpen(false);
     }
   };
@@ -277,6 +273,14 @@ function initializeHeader() {
     link.addEventListener('click', () => {
       setMenuOpen(false);
     });
+  });
+
+  // Close menu when clicking/tapping outside the menu
+  document.addEventListener('click', (event) => {
+    if (!nav.classList.contains('active')) return;
+    if (nav.contains(event.target)) return;
+    if (mobileMenuToggle && mobileMenuToggle.contains(event.target)) return;
+    setMenuOpen(false);
   });
   header.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && nav.classList.contains('active')) {
@@ -298,17 +302,19 @@ function initializeAccessibility() {
   // Check if user has previously enabled dark (inverted) mode
   const savedPreference = localStorage.getItem('emstudio-inverted');
   if (savedPreference === 'enabled') {
-    document.body.classList.add('inverted');
+    document.documentElement.classList.add('inverted');
     accessibilityToggle.classList.add('active');
   }
 
-  // Toggle inverted colors on click
+  // Toggle inverted colors on click.
+  // De class staat op <html>: een filter op <body> zou position:fixed breken
+  // waardoor de zwevende WhatsApp-knop uit beeld verdwijnt.
   accessibilityToggle.addEventListener('click', () => {
-    document.body.classList.toggle('inverted');
+    document.documentElement.classList.toggle('inverted');
     accessibilityToggle.classList.toggle('active');
 
     // Save preference
-    const isEnabled = document.body.classList.contains('inverted');
+    const isEnabled = document.documentElement.classList.contains('inverted');
     localStorage.setItem('emstudio-inverted', isEnabled ? 'enabled' : 'disabled');
   });
 
@@ -378,7 +384,10 @@ function initializeHero() {
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       link.removeAttribute('aria-disabled');
-      if (link.dataset.social === 'instagram') link.textContent = 'Instagram';
+      if (link.dataset.social === 'instagram') {
+        const label = link.querySelector('span[data-i18n]');
+        if (label) label.textContent = 'Instagram';
+      }
     }
   });
 
@@ -1085,17 +1094,17 @@ function initializeFooter() {
       {
         name: 'Instagram',
         url: appData.settings.social.instagram,
-        icon: '📷'
+        icon: 'icon-instagram'
       },
       {
         name: 'Facebook',
         url: appData.settings.social.facebook,
-        icon: 'f'
+        icon: 'icon-facebook'
       },
       {
         name: 'WhatsApp',
         url: appData.settings.social.whatsappBusiness ? '#' : '',
-        icon: '💬'
+        icon: 'icon-whatsapp'
       }
     ];
 
@@ -1106,7 +1115,8 @@ function initializeFooter() {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
         a.title = link.name;
-        a.textContent = link.icon;
+        a.setAttribute('aria-label', link.name);
+        a.innerHTML = `<svg class="social-icon" aria-hidden="true" focusable="false"><use href="#${link.icon}"></use></svg>`;
         if (link.name === 'WhatsApp') {
           a.setAttribute('data-whatsapp', '');
           setupWhatsAppButton(a);

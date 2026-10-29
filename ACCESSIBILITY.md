@@ -47,11 +47,11 @@ Voor klanten die in een donkere omgeving willen lezen is er een **donkere-modus 
 
 ## 🔠 Lettergrootte
 
-In de header staan de knoppen **A– · A · A+ · A++**, op mobiel (< 768 px) in het uitklapmenu.
+In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsboven naast de andere knoppen).
 - Nieuwe bezoekers starten met **A–** (87,5%); een bestaande letterkeuze wordt niet overschreven.
 - **A** = normale grootte (100%); A+ (112,5%) en A++ (125%) groter.
 - Het mobiele menu-icoon staat links onder het logo en geeft de open/dicht-status aan met `aria-expanded`.
-- Het uitklapmenu blijft scrollbaar bij weinig schermhoogte en sluit met een link of **Esc**.
+- Het uitklapmenu blijft scrollbaar bij weinig schermhoogte en sluit met een link, **Esc** of een tik buiten het menu.
 - De hele pagina schaalt gelijkmatig mee (de basisgrootte op `<html>` verandert, alle `rem`-maten volgen)
 - Op mobiel (≤ 768 px) zijn titels begrensd en blijven de bedieningsknoppen even groot, zodat er
   ook bij A++ niets buiten het scherm valt (getest op 390 px, iPhone-formaat)
@@ -159,7 +159,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 ### Hamburger Menu ☰
 - Kleiner scherm? Menu wordt hamburger
 - Klik ☰ om menu uit/in te klappen
-- Sluit automatisch na selectie
+- Sluit automatisch na selectie of bij tikken buiten het menu
 - Volledige navigatie behouden
 
 ### Navigation Links op Mobiel
@@ -246,8 +246,9 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 
 ### Donkere modus Toggle
 ```javascript
-// Toggle inverted colors
-document.body.classList.toggle('inverted');
+// Toggle inverted colors (op <html>, niet <body>: een filter op body breekt
+// position:fixed, waardoor de zwevende WhatsApp-knop uit beeld verdwijnt)
+document.documentElement.classList.toggle('inverted');
 
 // Save preference
 localStorage.setItem('emstudio-inverted', 'enabled');
@@ -255,12 +256,14 @@ localStorage.setItem('emstudio-inverted', 'enabled');
 
 ### CSS
 ```css
-/* Kleuren omkeren; foto's krijgen een tweede invert zodat ze origineel blijven */
-body.inverted {
+/* Kleuren omkeren; foto's en de WhatsApp-knop krijgen een tweede invert
+   zodat ze origineel blijven */
+html.inverted {
   filter: invert(1);
 }
 
-body.inverted img {
+html.inverted img,
+html.inverted .whatsapp-button {
   filter: invert(1);
 }
 ```
