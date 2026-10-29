@@ -44,6 +44,10 @@ body {
   overflow-x: hidden;
 }
 
+svg[hidden] {
+  display: none;
+}
+
 .blossom-decoration {
   position: fixed;
   top: 50%;
@@ -160,7 +164,7 @@ header {
   min-height: 120px;
 }
 
-@media (orientation: landscape) and (max-height: 500px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
   header {
     position: relative;
   }

@@ -55,7 +55,19 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['45', '45']);
+  assert.deepEqual(versions, ['46', '46']);
+});
+
+test('hidden SVG sprite does not reserve a blank box before the header', async () => {
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  assert.match(html, /<svg hidden aria-hidden="true" focusable="false">/);
+  assert.match(css, /svg\[hidden\]\s*\{\s*display:\s*none;\s*\}/);
+});
+
+test('phone and tablet header scrolls with the page in both orientations', async () => {
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  assert.match(css, /@media \(max-width: 1024px\)\s*\{\s*header\s*\{\s*position:\s*relative;\s*\}/);
+  assert.match(css, /(?:^|\n)header\s*\{[^}]*position:\s*sticky;/);
 });
 
 test('header height follows its content and the small logo cannot be squeezed into an oval', async () => {

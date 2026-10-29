@@ -51,6 +51,11 @@ Voor klanten die in een donkere omgeving willen lezen is er een **donkere-modus 
   Een zachte achtergrondkleur voorkomt een fel wit vlak bij terugveren in oudere browsers.
 - De header gebruikt zijn natuurlijke inhoudshoogte, zonder procentuele hoogte die Safari kan uitrekken.
   Het kleine logo heeft vaste vierkante afmetingen en wordt niet samengedrukt door de taalkeuze.
+- Op telefoon en tablet (tot en met 1024 px) scrolt de header met de pagina mee, in beide
+  schermstanden. Dit vermijdt de vastplakkende header tijdens het scrollen in Safari.
+  Op desktop blijft de header bovenaan vaststaan.
+- De verborgen SVG-sprite voor socialmedia-iconen is ook met CSS verborgen, zodat deze
+  geen leeg vlak boven de header inneemt. De zichtbare iconen blijven beschikbaar.
 
 In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsboven naast de andere knoppen).
 - Nieuwe bezoekers starten met **A–** (87,5%); een bestaande letterkeuze wordt niet overschreven.
