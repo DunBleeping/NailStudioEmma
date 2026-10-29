@@ -55,7 +55,15 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['43', '43']);
+  assert.deepEqual(versions, ['44', '44']);
+});
+
+test('page overscroll does not expose a white canvas above the mobile header', async () => {
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  const root = css.match(/(?:^|\n)html\s*\{([^}]+)\}/)?.[1];
+  assert.ok(root);
+  assert.match(root, /background-color:\s*var\(--secondary\)/);
+  assert.match(root, /overscroll-behavior-y:\s*none/);
 });
 
 test('hero logo uses its natural height and stays centered instead of overflowing a fixed-height box', async () => {

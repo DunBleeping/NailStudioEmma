@@ -47,6 +47,9 @@ Voor klanten die in een donkere omgeving willen lezen is er een **donkere-modus 
 
 ## 🔠 Lettergrootte
 
+- De pagina voorkomt doortrekken voorbij de boven- en onderrand waar de browser dit ondersteunt.
+  Een zachte achtergrondkleur voorkomt een fel wit vlak bij terugveren in oudere browsers.
+
 In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsboven naast de andere knoppen).
 - Nieuwe bezoekers starten met **A–** (87,5%); een bestaande letterkeuze wordt niet overschreven.
 - **A** = normale grootte (100%); A+ (112,5%) en A++ (125%) groter.
