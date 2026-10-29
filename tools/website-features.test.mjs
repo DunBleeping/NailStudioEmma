@@ -35,14 +35,15 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   const sources = [...offer.matchAll(/data-i18n>([^<]+)</g)].map(([, text]) => text);
   assert.equal(sources.length, 4);
   for (const source of sources) assert.ok(Object.hasOwn(english, source), source);
-  for (const condition of ['allebei 15%', '15% korting op een nieuwe set', 'hetzelfde moment', 'positieve review op Google', '€3 extra korting', 'Je vriendin mag al klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
+  for (const condition of ['allebei €5', '€5 korting op een nieuwe set', 'hetzelfde moment', 'positieve Google-review van 4 sterren of hoger', '€3 extra korting', 'Je vriendin mag al klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
     assert.ok(offer.includes(condition), condition);
   }
   assert.ok(!offer.includes('25%'));
   assert.match(offer, /<details class="offer-details">\s*<summary data-i18n>Goed om te weten<\/summary>/);
   assert.ok(offer.includes('friend-offer-card'));
   assert.ok(offer.includes('friend-offer'));
-  assert.ok(offer.includes('15%'));
+  assert.ok(offer.includes('€5'));
+  assert.ok(!offer.includes('15%'));
   assert.ok(!/<a\b[^>]*class="cta-button"[^>]*>Afspraak maken<\/a>/.test(offer));
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.ok(css.includes('.friend-offer-card::before'));

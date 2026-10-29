@@ -4,7 +4,7 @@
 
 - 'Klik hier voor mijn behandelingen' is standaard ingeklapt. Klik op de titel om categorieën, zoeken en behandelingen te openen. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`. Prijslijst en mandje blijven apart beschikbaar.
 
-- Als minimaal één van beide vriendinnen nieuw is: allebei 15% korting op een nieuwe set. De vriendin mag al klant zijn. Bij een positieve review op Google: €3 extra korting.
+- Als minimaal één van beide vriendinnen nieuw is: allebei €5 korting op een nieuwe set. De vriendin mag al klant zijn. Bij een positieve Google-review van 4 sterren of hoger: €3 extra korting.
 - Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.
 - Emma controleert de voorwaarden en bevestigt de prijs per persoon. Mandje en afspraakbericht tonen de gewone prijs met uitleg; er wordt niet automatisch korting berekend.
 - De actie staat kort op de pagina; aanvullende voorwaarden staan onder het uitklapbare 'Goed om te weten'. Bij Contact staat 'Bel mij' direct onder WhatsApp, ook op mobiel.
