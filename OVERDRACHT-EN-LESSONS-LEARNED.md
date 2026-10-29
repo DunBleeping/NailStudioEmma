@@ -173,6 +173,10 @@ De website zelf heeft nog steeds geen npm-installatie of build nodig.
 
 ## 6. Google Ads en veilige toegang
 
+Voor opeenvolgende analyses, klantmeldingen en volgende controles is
+[GOOGLE-ADS-LOGBOEK.md](GOOGLE-ADS-LOGBOEK.md) de doorlopende bron.
+Lees dit bij vervolgwerk en voeg nieuwe waarnemingen gedateerd toe.
+
 - Alleen de officiële [Google Ads MCP-server](https://github.com/googleads/google-ads-mcp)
   is ingericht in de persoonlijke VS Code-configuratie
   `%APPDATA%\Code\User\mcp.json`, met sleutel `servers`.

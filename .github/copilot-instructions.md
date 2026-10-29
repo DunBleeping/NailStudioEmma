@@ -37,6 +37,11 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
   Beloof geen chatsynchronisatie. Deel nooit credentials of volledige gevoelige logs.
 - Google Ads: standaard alleen lezen. Echte wijzigingen vereisen expliciete toestemming voor
   die opdracht; bredere OAuth-rechten of eerdere toestemming zijn geen algemene schrijfopdracht.
+- Lees vóór iedere Google Ads-analyse het [Google Ads-logboek](../GOOGLE-ADS-LOGBOEK.md)
+  en voeg na afloop een gedateerde notitie toe met bron, periode, resultaten, onzekerheden
+  en volgende controle. Onderscheid klantmeldingen van API-conversies en advertenties van
+  campagnes. Haal actuele cijfers opnieuw op; logboekcijfers zijn historische momentopnamen.
+  Bewaar geen individuele klantgegevens in het logboek.
 
 ## Architecture
 - `index.html` – single page. `js/script.js` renders everything from JSON in `data/`:
