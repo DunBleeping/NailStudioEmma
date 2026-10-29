@@ -3,6 +3,41 @@
 Static website for a Dutch nail salon, with one Pages Function for Turnstile contact verification. No build step or npm dependencies. Site text and docs are
 Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write in another language.
 
+## Voorkeuren van de eigenaar
+- Antwoord kort, duidelijk en praktisch in het Nederlands. Voer duidelijke opdrachten zelfstandig uit;
+  vraag alleen om noodzakelijke persoonlijke handelingen of beslissingen met wezenlijke gevolgen.
+- Geef korte updates bij belangrijke stappen. Herhaal geen vragen of OAuth-aanmeldingen zonder
+  nieuwe aanwijzing; controleer eerst de status. Meld open punten en mislukkingen eerlijk.
+- Maak beheer gebruiksvriendelijk met begrijpelijke menu's en expliciete TEST/PRODUCTIE-keuzes,
+  niet met verplicht te onthouden technische parameters.
+- Websitecopy spreekt vanuit Emma: ik/mijn. Behoud warme goud/crèmetinten, verzorgde kaders,
+  subtiele glitter en roze bloesems; respecteer minder-bewegingvoorkeuren.
+- De header scrolt op telefoon en tablet (tot en met 1024 px) mee, in beide schermstanden.
+  Maak hem daar niet opnieuw sticky zonder toestemming. Desktop mag sticky blijven.
+- Behoud foto's standaard verborgen, onthouden bezoekersvoorkeuren, lettergroottekeuze en
+  donkere modus met originele fotokleuren. Voeg geen zichtbaar Copilot-credit toe.
+- Publiceer geen volledig privé-adres of telefoonnummer. Houd de bestaande beveiligde contactroute.
+- Lees bij vervolgwerk de relevante onderdelen van
+  [de overdracht en lessons learned](../OVERDRACHT-EN-LESSONS-LEARNED.md).
+  Gebruik de actuele code en expliciete nieuwe keuzes als bron; historische actievoorwaarden,
+  campagnecijfers en installatiestatus zijn geen blijvende voorkeuren.
+
+## Werkwijze en geleerde lessen
+- Controleer vooraf de werkboom. Behoud werk uit andere sessies en publiceer geen ongerelateerde
+  wijzigingen mee; scheid zo nodig hunks in gedeelde bestanden.
+- Reproduceer en meet het echte probleem voor je een oorzaak claimt. Controleer bij lege vlakken
+  ook elementen vóór de header: de verborgen socialmedia-SVG moet expliciet `display: none` houden.
+- Test mobiele layout na op/neer scrollen en rotatie, met alle lettergroottes. Meet headerpositie,
+  logoverhouding en overlap; alleen aanwezigheid van CSS of een assetversie is geen gedragsbewijs.
+- Viewportemulatie is geen echte iPhone/Safari-test. Vermeld beperkingen en vraag zo nodig om
+  een apparaatcontrole; meld een fix niet als definitief bewezen zonder die bevestiging.
+- Onderscheid geslaagde push, Cloudflare-deployment en werkende live versie. Controleer de
+  relevante live inhoud/assets. Sluit tijdelijke previewservers; behoud bewust ingerichte services.
+- Remote Tunnels deelt projectbestanden, niet automatisch dit chatgesprek of desktopvenster.
+  Beloof geen chatsynchronisatie. Deel nooit credentials of volledige gevoelige logs.
+- Google Ads: standaard alleen lezen. Echte wijzigingen vereisen expliciete toestemming voor
+  die opdracht; bredere OAuth-rechten of eerdere toestemming zijn geen algemene schrijfopdracht.
+
 ## Architecture
 - `index.html` – single page. `js/script.js` renders everything from JSON in `data/`:
   - `settings.json` – contact, WhatsApp, opening hours.
@@ -27,7 +62,7 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
 - Contact API regression tests: `node --test tools/contact.test.mjs`. Live Server cannot run Pages Functions.
 
 ## Conventions and pitfalls
-- **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** It is currently `?v=42`.
+- **Changing CSS or JS: always bump `?v=N` on both lines in `index.html`.** Read the current version from that file; keep both numbers equal.
 - Cloudflare paths are case-sensitive; use lowercase file names without spaces.
 - A missing file returns the homepage with status 200 and is cached for 30 days, so never commit empty or placeholder images.
 - Escape all JSON content with `escapeHtml()` before inserting it into HTML.

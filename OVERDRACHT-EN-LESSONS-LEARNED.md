@@ -3,8 +3,10 @@
 Bijgewerkt: 29 oktober 2026.
 
 Dit document bundelt de werkzaamheden en afspraken uit de gesprekken over de website,
-Google Ads en toegang vanaf de iPhone. Het is een overdracht, geen automatische
-agentinstructie. Instellingen en resultaten hieronder zijn momentopnamen; controleer de
+Google Ads en toegang vanaf de iPhone. Het is een overdracht; de blijvende voorkeuren
+en werkafspraken staan ook in de automatisch laadbare
+[Copilot-projectinstructies](.github/copilot-instructions.md), voor lokaal en remote
+werken in deze projectmap. Instellingen en resultaten hieronder zijn momentopnamen; controleer de
 actuele bron voordat je ze later als uitgangspunt gebruikt.
 
 ## 1. Voorkeuren van de eigenaar
