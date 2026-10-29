@@ -68,7 +68,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Op lage, liggende schermen zoals smartphones (hoogte maximaal 500 px, breedte maximaal 1024 px)
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
    Subtiele achtergrondiconen helpen de zes menulinks herkennen.
-2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *📱 WhatsApp*, *Instagram*,
+2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *Prijslijst*, *📱 WhatsApp*, *Instagram*,
    *Facebook*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
    Direct onder de welkomsttitel staat `design-1.jpg` uit het album Custom Designs, horizontaal op 8rem hoog;
    deze schakelt mee met foto's tonen/verbergen.
