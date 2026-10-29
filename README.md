@@ -294,6 +294,11 @@ Kort (volledige uitleg in [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md)):
   .\tools\sync-website.ps1
   ```
   Kies optie 3: de lijst wordt automatisch bijgewerkt, inclusief verwijderingen en fotoversies.
+  Na de bestandskeuze kies je **1 = TEST** (alleen lokaal controleren, geen fetch/commit/push)
+  of **2 = PRODUCTIE** (na bevestiging committen en publiceren). **0** stopt.
+  De modus wordt elke keer opnieuw gevraagd; ook starten met `. '...\sync-website.ps1'`
+  laat geen testmodus achter in de terminal. `-WhatIf:$false` is niet nodig.
+  Expliciet `-WhatIf` blijft beschikbaar om uitsluitend te controleren zonder modusvraag.
   Alle gewijzigde albumbestanden gaan samen mee. Lege albums worden niet getoond.
   Alleen lokaal bijwerken kan met `.\tools\update-galerij.ps1`; Python is niet nodig.
   Onderschriften kunnen in een `descript.ion` in de albummap.

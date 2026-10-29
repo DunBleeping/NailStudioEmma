@@ -90,6 +90,40 @@ try {
     $output = (& $sync -WhatIf 6>&1 | Out-String)
     Assert ($output -match 'Geselecteerd: data/settings\.json\r?\n') 'Instellingenmenu moet alleen instellingen selecteren.'
     Assert ($global:emstudioGalleryTestAnswers.Count -eq 0) 'Instellingenmenu niet volledig doorlopen.'
+
+    $previousWhatIf = $WhatIfPreference
+    @('3', 'A', '1') | ForEach-Object { $global:emstudioGalleryTestAnswers.Enqueue($_) }
+    $output = (. $sync 6>&1 | Out-String)
+    Assert ($output -match 'TESTMODUS') 'Testmodus moet duidelijk zichtbaar zijn.'
+    Assert ($WhatIfPreference -eq $previousWhatIf) 'Dot-sourcen mag de testvoorkeur niet wijzigen.'
+    Assert ($global:emstudioGalleryTestAnswers.Count -eq 0) 'Testmoduskeuze moet gevraagd worden.'
+    Assert (@(& $git -C $root diff --cached --name-only).Count -eq 0) 'Testmodus mag niets stagen.'
+
+    # Een oude terminalvoorkeur mag de interactieve moduskeuze niet overslaan.
+    $WhatIfPreference = $true
+    @('3', 'A', '0') | ForEach-Object { $global:emstudioGalleryTestAnswers.Enqueue($_) }
+    . $sync | Out-Null
+    Assert ($global:emstudioGalleryTestAnswers.Count -eq 0) 'Moduskeuze moet ook bij een oude testvoorkeur verschijnen.'
+    Assert ($WhatIfPreference) 'De bestaande terminalvoorkeur moet behouden blijven.'
+
+    $remote = Join-Path $root 'remote.git'
+    & $git init --bare $remote | Out-Null
+    Assert ($LASTEXITCODE -eq 0) 'Lokale testremote kon niet worden gemaakt.'
+    Test-Git @('remote', 'add', 'origin', $remote)
+    Test-Git @('push', '-u', 'origin', 'main')
+    Test-Git @('config', 'user.name', 'Albumtest')
+    Test-Git @('config', 'user.email', 'test@example.invalid')
+    $beforeCommit = & $git -C $root rev-parse HEAD
+    @('1', 'A', '2', 'Test productie in lokale fixture') |
+        ForEach-Object { $global:emstudioGalleryTestAnswers.Enqueue($_) }
+    $output = (. $sync -Confirm:$false 6>&1 | Out-String)
+    Assert ($output -match 'PRODUCTIEMODUS') 'Productiemodus moet duidelijk zichtbaar zijn.'
+    Assert ($global:emstudioGalleryTestAnswers.Count -eq 0) 'Productiemenu niet volledig doorlopen.'
+    $afterCommit = & $git -C $root rev-parse HEAD
+    Assert ($afterCommit -ne $beforeCommit) 'Productiemodus moet ondanks oude testvoorkeur kunnen committen.'
+    Assert ((& $git --git-dir=$remote rev-parse refs/heads/main) -eq $afterCommit) 'Productiemodus moet naar de lokale testremote pushen.'
+    Assert ($WhatIfPreference) 'Productiemodus mag de terminalvoorkeur niet overschrijven.'
+    $WhatIfPreference = $previousWhatIf
     Remove-Item Function:\Read-Host
     foreach ($name in @('01.jpg', '03.jpg')) {
         Remove-Item -LiteralPath (Join-Path $root "images\gallery\test\$name")

@@ -18,6 +18,10 @@ param(
     [string]$Bericht = 'Werk website-instellingen bij'
 )
 
+# Een eigen scope voorkomt dat dot-sourcen de testmodus in de terminal laat hangen.
+& {
+param($InvocationOptions)
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
@@ -45,7 +49,7 @@ function Update-Gallery {
 
 Push-Location (Split-Path -Parent $PSScriptRoot)
 try {
-    if (-not $PSBoundParameters.ContainsKey('Bestanden')) {
+    if (-not $InvocationOptions.ContainsKey('Bestanden')) {
         Write-Host "`n=== Emma NailStudio: wijzigingen publiceren ==="
         Write-Host 'Dit script bewerkt geen instellingen en kopieert geen foto''s.'
         Write-Host 'Pas bestanden eerst aan en sla ze op in VS Code.'
@@ -109,14 +113,19 @@ try {
             if (-not $valid) { Write-Host 'Ongeldige keuze. Gebruik de getoonde nummers.' }
         } until ($valid)
 
-        if (-not $WhatIfPreference) {
+        if (-not ($InvocationOptions.ContainsKey('WhatIf') -and $InvocationOptions['WhatIf'])) {
             do {
-                $action = Read-Host '1 = alleen controleren, 2 = commit en publiceren, 0 = stoppen'
+                $action = Read-Host 'Kies modus: 1 = TEST (alleen controleren), 2 = PRODUCTIE (commit en publiceren), 0 = stoppen'
             } until ($action -match '^[0-2]$')
             if ($action -eq '0') { return }
-            if ($action -eq '1') { $WhatIfPreference = $true }
+            $WhatIfPreference = $action -eq '1'
         }
-        if (-not $PSBoundParameters.ContainsKey('Bericht') -and -not $WhatIfPreference) {
+        if ($WhatIfPreference) {
+            Write-Host 'TESTMODUS: alleen lokaal controleren, niets naar GitHub versturen.'
+        } else {
+            Write-Host 'PRODUCTIEMODUS: na controle en bevestiging naar GitHub publiceren.'
+        }
+        if (-not $InvocationOptions.ContainsKey('Bericht') -and -not $WhatIfPreference) {
             $Bericht = Read-Host 'Korte omschrijving van je wijziging (bijvoorbeeld: Voeg klantfoto toe)'
         }
     }
@@ -214,3 +223,4 @@ try {
 } finally {
     Pop-Location
 }
+} $PSBoundParameters
