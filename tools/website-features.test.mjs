@@ -43,6 +43,7 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(offer.includes('friend-offer-card'));
   assert.ok(offer.includes('friend-offer'));
   assert.ok(offer.includes('15%'));
+  assert.ok(!/<a\b[^>]*class="cta-button"[^>]*>Afspraak maken<\/a>/.test(offer));
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.ok(css.includes('.friend-offer-card::before'));
   assert.ok(css.includes('.friend-offer-card::after'));
