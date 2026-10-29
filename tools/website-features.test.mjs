@@ -55,7 +55,17 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['44', '44']);
+  assert.deepEqual(versions, ['45', '45']);
+});
+
+test('header height follows its content and the small logo cannot be squeezed into an oval', async () => {
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  const container = css.match(/(?:^|\n)header \.container\s*\{([^}]+)\}/)?.[1];
+  assert.match(container, /height:\s*auto;/);
+  assert.match(css, /\.header-logo-image\s*\{[^}]*height:\s*100px;\s*width:\s*100px;\s*flex-shrink:\s*0;/);
+  assert.match(css, /header \.header-logo-image\s*\{\s*height:\s*72px;\s*width:\s*72px;/);
+  assert.match(css, /grid-auto-rows:\s*max-content;/);
+  assert.match(css, /align-content:\s*start;/);
 });
 
 test('page overscroll does not expose a white canvas above the mobile header', async () => {

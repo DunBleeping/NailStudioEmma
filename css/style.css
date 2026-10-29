@@ -172,7 +172,7 @@ header .container {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  height: 100%;
+  height: auto;
 }
 
 nav {
@@ -206,7 +206,8 @@ nav {
 
 .header-logo-image {
   height: 100px;
-  width: auto;
+  width: 100px;
+  flex-shrink: 0;
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 
@@ -373,7 +374,9 @@ html.inverted .accessibility-toggle {
 @media (max-width: 767px) {
   header .container {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(72px, 1fr) auto;
+    grid-auto-rows: max-content;
+    align-content: start;
     gap: 0.5rem;
   }
 
@@ -394,6 +397,7 @@ html.inverted .accessibility-toggle {
 
   header .header-logo-image {
     height: 72px;
+    width: 72px;
   }
 
   header .header-controls {

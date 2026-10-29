@@ -49,6 +49,8 @@ Voor klanten die in een donkere omgeving willen lezen is er een **donkere-modus 
 
 - De pagina voorkomt doortrekken voorbij de boven- en onderrand waar de browser dit ondersteunt.
   Een zachte achtergrondkleur voorkomt een fel wit vlak bij terugveren in oudere browsers.
+- De header gebruikt zijn natuurlijke inhoudshoogte, zonder procentuele hoogte die Safari kan uitrekken.
+  Het kleine logo heeft vaste vierkante afmetingen en wordt niet samengedrukt door de taalkeuze.
 
 In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsboven naast de andere knoppen).
 - Nieuwe bezoekers starten met **A–** (87,5%); een bestaande letterkeuze wordt niet overschreven.
