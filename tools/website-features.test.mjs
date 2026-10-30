@@ -60,7 +60,7 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['48', '48']);
+  assert.deepEqual(versions, ['49', '49']);
 });
 
 test('hidden SVG sprite does not reserve a blank box before the header', async () => {
@@ -165,11 +165,16 @@ test('service preview remains in the summary and uses the New Set Nagels source 
   assert.ok(css.includes('body.images-hidden .services-preview'));
 });
 
-test('floating menu button is transparent and 25 percent visible without fading its menu', async () => {
+test('floating menu keeps a transparent background and contrasting outlined hamburger', async () => {
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   const button = css.match(/#quick-menu-toggle\s*\{([^}]+)\}/)?.[1];
   assert.match(button, /background:\s*transparent;/);
-  assert.match(button, /opacity:\s*0\.25;/);
+  assert.doesNotMatch(button, /opacity:/);
+  assert.match(button, /color:\s*#222;/);
+  assert.match(button, /border:\s*2px solid rgba\(139, 115, 85, 0\.25\);/);
+  const icon = css.match(/#quick-menu-toggle span\s*\{([^}]+)\}/)?.[1];
+  assert.match(icon, /font-weight:\s*700;/);
+  assert.match(icon, /text-shadow:[^;]+#fff/);
   const container = css.match(/(?:^|\n)\.quick-navigation\s*\{([^}]+)\}/)?.[1];
   assert.doesNotMatch(container, /opacity:/);
 });
