@@ -73,6 +73,14 @@ In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsb
 
 ## 🔍 Zoeken en 🛒 mandje
 
+- Een zwevende ronde menuknop blijft linksboven bereikbaar, ook als de mobiele header wegscrolt.
+  Het uitklapmenu bevat Home, Prijzen, Behandelingen, Zoeken, Impressie en Contact.
+  De knop geeft de open/dicht-status aan; een link, tik erbuiten of Esc sluit het menu.
+  Bij Esc gaat de focus terug naar de knop. Het menu blijft scrollbaar in landschapstand.
+- Onder de titel 'Behandelingen in beeld en uitgelegd' staat de foto van New Set Nagels.
+  Die blijft zichtbaar bij inklappen en volgt wel de bestaande voorkeur Foto's tonen/verbergen.
+  De foto gebruikt dezelfde bron uit `data/services.json` als de behandelkaart.
+
 - Zoekveld onder "Categorieën" met label voor schermlezers; zoekt live, Enter sluit het toetsenbord
 - **Zoeken** in het menu sluit het mobiele menu, scrolt naar de zoekbalk en geeft deze focus.
 - Geen resultaten → melding "Geen behandelingen gevonden" (wordt voorgelezen, `role="status"`)

@@ -240,6 +240,7 @@ function showErrorMessage(message) {
 // ============================================
 
 function initializeHeader() {
+  initializeQuickNavigation();
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.getElementById('main-navigation');
   const header = document.querySelector('header');
@@ -264,6 +265,29 @@ function initializeHeader() {
   if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', () => {
       setMenuOpen(!nav.classList.contains('active'));
+    });
+  }
+
+  function initializeQuickNavigation() {
+    const toggle = document.getElementById('quick-menu-toggle');
+    const nav = document.getElementById('quick-navigation');
+    const container = toggle.closest('.quick-navigation');
+    const setOpen = (open) => {
+      nav.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setOpen(nav.hidden));
+    nav.addEventListener('click', (event) => {
+      if (event.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('click', (event) => {
+      if (!container.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !nav.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
     });
   }
 
@@ -403,6 +427,14 @@ function initializeHero() {
 
 function initializeServices() {
   if (!appData.services) return;
+
+  const preview = document.getElementById('services-preview');
+  const featured = appData.services.services.find((service) => service.id === 'new-set-nagels');
+  if (preview && featured?.image) {
+    preview.src = featured.image;
+    preview.alt = t(featured.name);
+    preview.hidden = false;
+  }
 
   const servicesGrid = document.getElementById('services-grid');
   if (!servicesGrid) return;

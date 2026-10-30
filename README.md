@@ -2,7 +2,8 @@
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
-- 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. Klik op de titel om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijslijst is het compacte overzicht met bedragen; prijslijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
+- 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. De foto van New Set Nagels onder de titel blijft bij inklappen staan; de bron volgt de behandelkaart. Klik op de titel of foto om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijslijst is het compacte overzicht met bedragen; prijslijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
+- Een zwevend hamburgermenu linksboven blijft op iedere scrollpositie bereikbaar, met dezelfde zes bestemmingen als de hoofdnavigatie. De mobiele header blijft gewoon meescrollen.
 
 - Als minimaal één van beide vriendinnen nieuw is: allebei €5 korting op een nieuwe set. Bij een positieve Google-review van 4 sterren of hoger: €3 extra korting.
 - Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.

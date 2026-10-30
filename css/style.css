@@ -177,6 +177,65 @@ header .container {
   flex-wrap: wrap;
   gap: 1rem;
   height: auto;
+  padding-left: max(80px, calc(env(safe-area-inset-left, 0px) + 72px));
+}
+
+.quick-navigation {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  left: max(12px, env(safe-area-inset-left, 0px));
+  z-index: 1100;
+}
+
+#quick-menu-toggle {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#quick-navigation {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: auto;
+  display: block;
+  width: min(18rem, calc(100vw - 32px - env(safe-area-inset-left, 0px)));
+  max-height: calc(100dvh - 88px - env(safe-area-inset-top, 0px));
+  overflow-y: auto;
+  background: var(--white);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-hover);
+}
+
+#quick-navigation[hidden] {
+  display: none;
+}
+
+#quick-navigation ul {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+#quick-navigation a {
+  display: block;
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+}
+
+#quick-navigation a:hover,
+#quick-navigation a:focus-visible {
+  background: var(--secondary);
 }
 
 nav {
@@ -372,6 +431,17 @@ html.inverted .accessibility-toggle {
     flex-wrap: nowrap;
     gap: clamp(0.75rem, 1.8vw, 1.5rem);
     white-space: nowrap;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  header nav {
+    min-width: 0;
+    flex-basis: 100%;
+  }
+
+  header nav ul {
+    flex-wrap: wrap;
   }
 }
 
@@ -1590,6 +1660,7 @@ footer a:hover {
 
 @media print {
   header,
+  .quick-navigation,
   .whatsapp-button,
   .cta-button {
     display: none;
@@ -1719,6 +1790,7 @@ footer a:hover {
 /* Hide Images Class */
 body.images-hidden .hero-image,
 body.images-hidden .hero-nail-banner,
+body.images-hidden .services-preview,
 body.images-hidden .service-card .service-image {
   display: none !important;
 }
@@ -1757,6 +1829,18 @@ body.images-hidden .gallery-overlay {
 }
 
 .services-summary h2::after {
+  display: none;
+}
+
+.services-preview {
+  width: min(100%, 28rem);
+  height: auto;
+  margin: 1.5rem auto 0;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.services-preview[hidden] {
   display: none;
 }
 

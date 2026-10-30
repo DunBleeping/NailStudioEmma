@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=46">
+  <link rel="stylesheet" href="./css/style.css?v=47">
   <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
@@ -113,6 +113,19 @@
     </g>
   </svg>
   <!-- Header / Navigation -->
+  <div class="quick-navigation">
+    <button id="quick-menu-toggle" type="button" aria-controls="quick-navigation" aria-expanded="false" data-i18n-attrs="aria-label" aria-label="Menu openen/sluiten"><span aria-hidden="true">☰</span></button>
+    <nav id="quick-navigation" data-i18n-attrs="aria-label" aria-label="Hoofd navigatie" hidden>
+      <ul>
+        <li><a href="#home" data-i18n>Home</a></li>
+        <li><a href="#pricing" data-i18n>Prijzen</a></li>
+        <li><a href="#services" data-i18n>Behandelingen</a></li>
+        <li><a href="#service-search" data-i18n>Zoeken</a></li>
+        <li><a href="#gallery" data-i18n>Impressie</a></li>
+        <li><a href="#contact" data-i18n>Contact</a></li>
+      </ul>
+    </nav>
+  </div>
   <header>
     <div class="container">
       <!-- Small Logo for Header -->
@@ -259,7 +272,10 @@
     <section id="services" class="section section-light">
       <div class="container">
         <details id="services-details">
-          <summary class="services-summary"><h2 data-i18n>Behandelingen in beeld en uitgelegd</h2></summary>
+          <summary class="services-summary">
+            <h2 data-i18n>Behandelingen in beeld en uitgelegd</h2>
+            <img id="services-preview" class="services-preview" alt="" width="800" height="800" loading="lazy" hidden>
+          </summary>
           <div class="services-container">
         <!-- Left Sidebar Navigation -->
         <aside class="services-sidebar" role="navigation" data-i18n-attrs="aria-label" aria-label="Categorieën menu">
@@ -483,6 +499,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=46" defer></script>
+  <script src="./js/script.js?v=47" defer></script>
 </body>
 </html>

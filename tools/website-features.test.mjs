@@ -60,7 +60,7 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['46', '46']);
+  assert.deepEqual(versions, ['47', '47']);
 });
 
 test('hidden SVG sprite does not reserve a blank box before the header', async () => {
@@ -130,7 +130,7 @@ test('custom nail art links to pricing and has a non-cart quote option', async (
 
 test('services are collapsed by default and navigation opens only relevant targets', () => {
   assert.match(html, /<details id="services-details">/);
-  assert.match(html, /<summary class="services-summary"><h2 data-i18n>Behandelingen in beeld en uitgelegd<\/h2><\/summary>/);
+  assert.match(html, /<summary class="services-summary">\s*<h2 data-i18n>Behandelingen in beeld en uitgelegd<\/h2>/);
   assert.ok(Object.hasOwn(english, 'Behandelingen in beeld en uitgelegd'));
   let details = { open: false, contains: (target) => target.id === 'service-search' };
   const openTarget = runInNewContext(`(${functionSource('openServicesForTarget')})`, {
@@ -144,6 +144,39 @@ test('services are collapsed by default and navigation opens only relevant targe
   openTarget({ id: 'service-search' });
   assert.equal(details.open, true);
   assert.ok(script.includes("window.addEventListener('hashchange', openServicesForHash)"));
+});
+
+test('service preview remains in the summary and uses the New Set Nagels source image', async () => {
+  const summary = html.match(/<summary class="services-summary">([\s\S]*?)<\/summary>/)?.[1];
+  assert.ok(summary?.includes('id="services-preview"'));
+  const services = JSON.parse(await readFile(new URL('../data/services.json', import.meta.url), 'utf8'));
+  const featured = services.services.find((service) => service.id === 'new-set-nagels');
+  await readFile(new URL(`../${featured.image}`, import.meta.url));
+  const preview = {};
+  runInNewContext(`(${functionSource('initializeServices')})()`, {
+    appData: { services },
+    document: { getElementById: (id) => id === 'services-preview' ? preview : null },
+    t: (text) => text
+  });
+  assert.equal(preview.src, featured.image);
+  assert.equal(preview.alt, featured.name);
+  assert.equal(preview.hidden, false);
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  assert.ok(css.includes('body.images-hidden .services-preview'));
+});
+
+test('floating navigation has matching destinations, accessible state and dismissal handlers', () => {
+  const quick = html.match(/<nav id="quick-navigation"[\s\S]*?<\/nav>/)?.[0];
+  const main = html.match(/<nav id="main-navigation"[\s\S]*?<\/nav>/)?.[0];
+  const targets = (markup) => [...markup.matchAll(/href="([^"]+)"/g)].map(([, href]) => href);
+  assert.deepEqual(targets(quick), targets(main));
+  assert.match(quick, /hidden>/);
+  assert.match(html, /id="quick-menu-toggle"[^>]*aria-controls="quick-navigation"[^>]*aria-expanded="false"/);
+  const source = functionSource('initializeQuickNavigation');
+  assert.ok(source.includes("toggle.setAttribute('aria-expanded', String(open))"));
+  assert.ok(source.includes("event.key === 'Escape'"));
+  assert.ok(source.includes('toggle.focus()'));
+  assert.ok(source.includes('container.contains(event.target)'));
 });
 
 test('phone contact follows WhatsApp without removing contact verification', async () => {
