@@ -60,7 +60,7 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['47', '47']);
+  assert.deepEqual(versions, ['48', '48']);
 });
 
 test('hidden SVG sprite does not reserve a blank box before the header', async () => {
@@ -163,6 +163,15 @@ test('service preview remains in the summary and uses the New Set Nagels source 
   assert.equal(preview.hidden, false);
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.ok(css.includes('body.images-hidden .services-preview'));
+});
+
+test('floating menu button is transparent and 25 percent visible without fading its menu', async () => {
+  const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
+  const button = css.match(/#quick-menu-toggle\s*\{([^}]+)\}/)?.[1];
+  assert.match(button, /background:\s*transparent;/);
+  assert.match(button, /opacity:\s*0\.25;/);
+  const container = css.match(/(?:^|\n)\.quick-navigation\s*\{([^}]+)\}/)?.[1];
+  assert.doesNotMatch(container, /opacity:/);
 });
 
 test('floating navigation has matching destinations, accessible state and dismissal handlers', () => {

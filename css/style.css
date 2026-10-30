@@ -194,7 +194,8 @@ header .container {
   place-items: center;
   border: 2px solid var(--accent);
   border-radius: 50%;
-  background: var(--primary);
+  background: transparent;
+  opacity: 0.25;
   color: var(--text);
   box-shadow: var(--shadow);
   font-size: 24px;

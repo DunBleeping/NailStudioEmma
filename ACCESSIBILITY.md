@@ -74,6 +74,8 @@ In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsb
 ## 🔍 Zoeken en 🛒 mandje
 
 - Een zwevende ronde menuknop blijft linksboven bereikbaar, ook als de mobiele header wegscrolt.
+  Op verzoek heeft alleen de knop een transparante achtergrond en 25% zichtbaarheid;
+  het uitgeklapte menu blijft volledig leesbaar. De klikruimte blijft 48 bij 48 px.
   Het uitklapmenu bevat Home, Prijzen, Behandelingen, Zoeken, Impressie en Contact.
   De knop geeft de open/dicht-status aan; een link, tik erbuiten of Esc sluit het menu.
   Bij Esc gaat de focus terug naar de knop. Het menu blijft scrollbaar in landschapstand.
