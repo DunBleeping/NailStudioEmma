@@ -2,13 +2,13 @@
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
-- 'Klik hier voor mijn behandelingen' is standaard ingeklapt. Klik op de titel om categorieën, zoeken en behandelingen te openen. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`. Prijslijst en mandje blijven apart beschikbaar.
+- 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. Klik op de titel om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijslijst is het compacte overzicht met bedragen; prijslijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
 
 - Als minimaal één van beide vriendinnen nieuw is: allebei €5 korting op een nieuwe set. Bij een positieve Google-review van 4 sterren of hoger: €3 extra korting.
 - Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.
 - Emma controleert de voorwaarden en bevestigt de prijs per persoon. Mandje en afspraakbericht tonen de gewone prijs met uitleg; er wordt niet automatisch korting berekend.
 - De actie staat kort op de pagina; aanvullende voorwaarden staan onder het uitklapbare 'Goed om te weten'. Bij Contact staat 'Bel mij' direct onder WhatsApp, ook op mobiel.
-- Impressie toont voorlopig een eigen BIAB-illustratie, duidelijk gemarkeerd als geen klantfoto. Echte BIAB-albumfoto's vervangen dit voorbeeld automatisch.
+- Impressie toont de eigen BIAB-foto uit het BIAB-album. De gemarkeerde illustratie blijft alleen een terugval als dat album leeg wordt. Het lege Babyboom-album wordt niet getoond.
 - Een korte confettiregen speelt eenmaal per laden/herladen en verdwijnt binnen drie seconden; geen herhaling bij taalwissel. Bij minder beweging staat dit uit.
 
 Statische website voor Emma NailStudio (HTML5, CSS3, JavaScript en JSON), gehost op **Cloudflare Pages**.

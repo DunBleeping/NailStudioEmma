@@ -12,11 +12,16 @@ const functionSource = (name) => {
   return script.slice(start, script.indexOf('\n}', start) + 2);
 };
 
-test('BIAB example is an existing labelled illustration; real photos take priority', async () => {
+test('BIAB photos take priority over the labelled illustration example', async () => {
   const gallery = JSON.parse(await readFile(new URL('../data/gallery.json', import.meta.url), 'utf8'));
   const biab = gallery.images.find((album) => album.folder === 'biab');
+  const babyboom = gallery.images.find((album) => album.folder === 'babyboom');
   const getPhotos = runInNewContext(`(${functionSource('getAlbumPhotos')})`);
-  assert.equal(getPhotos(biab)[0], biab.example);
+  assert.equal(biab.photos.length, 1);
+  assert.equal(getPhotos(biab)[0], biab.photos[0]);
+  await readFile(new URL(`../${biab.photos[0].src.split('?')[0]}`, import.meta.url));
+  assert.equal(babyboom.photos.length, 0);
+  assert.equal(getPhotos({ ...biab, photos: [] })[0], biab.example);
   assert.equal(biab.example.caption, 'BIAB-illustratie, geen klantfoto');
   assert.equal(biab.example.alt, biab.example.caption);
   assert.ok(Object.hasOwn(english, biab.example.caption));
@@ -125,8 +130,8 @@ test('custom nail art links to pricing and has a non-cart quote option', async (
 
 test('services are collapsed by default and navigation opens only relevant targets', () => {
   assert.match(html, /<details id="services-details">/);
-  assert.match(html, /<summary class="services-summary"><h2 data-i18n>Klik hier voor mijn behandelingen<\/h2><\/summary>/);
-  assert.ok(Object.hasOwn(english, 'Klik hier voor mijn behandelingen'));
+  assert.match(html, /<summary class="services-summary"><h2 data-i18n>Behandelingen in beeld en uitgelegd<\/h2><\/summary>/);
+  assert.ok(Object.hasOwn(english, 'Behandelingen in beeld en uitgelegd'));
   let details = { open: false, contains: (target) => target.id === 'service-search' };
   const openTarget = runInNewContext(`(${functionSource('openServicesForTarget')})`, {
     document: { getElementById: () => details }

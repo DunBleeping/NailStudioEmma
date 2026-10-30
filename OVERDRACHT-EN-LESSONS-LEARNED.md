@@ -65,7 +65,7 @@ Alleen controleren kan dus wel de lokale albumlijst vernieuwen.
 ### Behandelingen en maatwerk
 
 - Behandelingen zijn standaard ingeklapt met de duidelijke tekst
-  **Klik hier voor mijn behandelingen**. Links naar behandelen/zoeken openen ze.
+  **Behandelingen in beeld en uitgelegd** (keuze van 30 oktober). Links naar behandelen/zoeken openen ze.
 - De knop **Afspraak maken** bij Custom nail art verwijst naar de prijslijst.
 - De prijslijst heeft een aparte regel **Custom designs (op aanvraag)**:
   duur **In overleg**, prijs **Op aanvraag**, link **Vraag prijs aan** naar Contact.
@@ -263,6 +263,10 @@ staat nog open.** Claim daarom geen volledig bewezen Safari-oplossing.
 
 Op het moment van schrijven zijn deze lokale galerijwijzigingen bewust **niet**
 meegenomen in de scrollfixes:
+
+**Vervolg 30 oktober 2026:** de eigenaar heeft toestemming gegeven deze foto bij BIAB
+te publiceren en uit Babyboom te verwijderen, inclusief albumlijst en bijbehorende test.
+Onderstaande lijst beschrijft de eerdere, nog niet gepubliceerde toestand.
 
 - Gewijzigd: [data/gallery.json](data/gallery.json).
 - Verwijderd: `images/gallery/babyboom/babyboom-01.jpg`.
