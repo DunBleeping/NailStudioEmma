@@ -97,10 +97,10 @@ De actie veranderde tijdens het werk meerdere keren: ongelijke percentages, 25%,
 korting op een nieuwe set, samen boeken en tegelijk komen, met minimaal één nieuwe
 klant. Emma bevestigt korting; het mandje rekent deze niet automatisch af.
 
-De huidige copy vermeldt ook EUR 3 extra korting bij een positieve Google-review
-van minimaal vier sterren. **Open aandachtspunt:** laat deze beloonde reviewvoorwaarde
-toetsen aan het actuele Google-beleid; neem niet aan dat zij is toegestaan.
-Tijdens deze documentatietaak zijn de actievoorwaarden niet gewijzigd.
+De website vermeldt geen beloning meer voor Google-reviews. Op 1 november 2026 is de
+extra EUR 3 korting voor een positieve review uit de Nederlandse en vertaalde
+vriendinnenactie-copy verwijderd. De gewone vriendinnenkorting van EUR 5 is behouden.
+Koppel geen korting aan reviews en vraag niet selectief om positieve beoordelingen.
 Controleer voor toekomstige wijzigingen de huidige HTML, vertalingen en tests samen.
 
 ## 4. iPhone-toegang: wat werkt en wat niet hetzelfde is
@@ -283,8 +283,8 @@ Verder open:
 2. Node.js-installatie afronden en in de remote terminal verifiëren.
 3. iPhone-toetsenbordprobleem na reconnect zo nodig apart reproduceren.
 4. Landscape-overloop gericht onderzoeken, zonder te claimen dat die al is opgelost.
-5. Huidige reviewbonus laten toetsen; geen nieuwe campagne- of accountwijzigingen
-   uitvoeren op basis van deze notitie.
+5. Google Search Console-eigendom en indexering controleren; geen budgetverhoging
+   aannemen als oplossing voor organische of Maps-vindbaarheid.
 
 ## 9. Validatie en verwijzingen
 

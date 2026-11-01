@@ -5,7 +5,7 @@
 - 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. De foto van New Set Nagels onder de titel blijft bij inklappen staan; de bron volgt de behandelkaart. Klik op de titel of foto om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijslijst is het compacte overzicht met bedragen; prijslijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
 - Een zwevend hamburgermenu linksboven blijft op iedere scrollpositie bereikbaar, met dezelfde zes bestemmingen als de hoofdnavigatie. De mobiele header blijft gewoon meescrollen.
 
-- Als minimaal één van beide vriendinnen nieuw is: allebei €5 korting op een nieuwe set. Bij een positieve Google-review van 4 sterren of hoger: €3 extra korting.
+- Als minimaal één van beide vriendinnen nieuw is: allebei €5 korting op een nieuwe set. Er is geen korting gekoppeld aan Google-reviews.
 - Samen boeken en op hetzelfde moment komen. Alleen nieuwe sets; gekozen designs en toeslagen bij die set tellen mee. Geldig tot nader bericht, niet combineerbaar met andere kortingen.
 - Emma controleert de voorwaarden en bevestigt de prijs per persoon. Mandje en afspraakbericht tonen de gewone prijs met uitleg; er wordt niet automatisch korting berekend.
 - De actie staat kort op de pagina; aanvullende voorwaarden staan onder het uitklapbare 'Goed om te weten'. Bij Contact staat 'Bel mij' direct onder WhatsApp, ook op mobiel.
@@ -365,6 +365,12 @@ Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
 - Schema.org `NailSalon` (JSON-LD) gebruikt Purmerend als werkgebied en de bestaande sociale profielen.
   Geen verzonnen adres, coördinaten, beoordelingen, kortingsactie of Maps-link toevoegen.
 - `sitemap.xml` bevat alleen de echte pagina-URL, niet de sectieankers. `robots.txt` verwijst naar die sitemap.
+- Voor opname in gewone Google-zoekresultaten: verifieer het domein in [Google Search Console](https://search.google.com/search-console),
+  inspecteer `https://emmanagelstudio.vip/` en dien `https://emmanagelstudio.vip/sitemap.xml` in.
+  Een indexeringsaanvraag kan crawlen versnellen, maar garandeert geen opname of positie; Google kan enkele dagen tot weken nodig hebben.
+  De actuele indexeringsstatus kan alleen in Search Console voor de geverifieerde site worden vastgesteld.
+- Een hoger Google Ads-budget koopt geen positie in gewone zoekresultaten of Google Maps. Betaalde advertenties,
+  organische indexering en lokale bedrijfsresultaten zijn verschillende systemen.
 - Houd de titel en omschrijving in `data/settings.json`, de statische HTML en de vertaalcatalogi gelijk.
   Hero en Over mij gebruiken de salonbeschrijving uit de instellingen.
 - De vaste Halloween- en kersttekst beschrijft designs op aanvraag, geen lopende aanbieding. Publiceer

@@ -40,8 +40,23 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   const sources = [...offer.matchAll(/data-i18n>([^<]+)</g)].map(([, text]) => text);
   assert.equal(sources.length, 4);
   for (const source of sources) assert.ok(Object.hasOwn(english, source), source);
-  for (const condition of ['allebei €5', '€5 korting op een nieuwe set', 'hetzelfde moment', 'positieve Google-review van 4 sterren of hoger', '€3 extra korting', 'Minimaal een van jullie twee moet een nieuwe klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
+  for (const condition of ['allebei €5', '€5 korting op een nieuwe set', 'hetzelfde moment', 'Minimaal een van jullie twee moet een nieuwe klant zijn', 'designs en toeslagen', 'Bijlakken en andere behandelingen zijn uitgesloten', 'tot nader bericht', 'niet combineerbaar']) {
     assert.ok(offer.includes(condition), condition);
+  }
+  assert.ok(!offer.includes('Google'));
+  assert.ok(!offer.includes('€3'));
+  const referralCopy = sources[1];
+  for (const locale of ['en', 'fr', 'es', 'tr', 'ar', 'uk', 'pl', 'vi']) {
+    const catalog = locale === 'en'
+      ? english
+      : JSON.parse(await readFile(new URL(`../data/translations/${locale}.json`, import.meta.url), 'utf8'));
+    assert.ok(Object.hasOwn(catalog, referralCopy), `${locale}: missing referral copy`);
+    assert.doesNotMatch(
+      catalog[referralCopy],
+      /Google|review|reseña|avis|opini|yorum|відгук|đánh giá|تقييم/i,
+      `${locale}: review incentive must not be translated`,
+    );
+    assert.doesNotMatch(catalog[referralCopy], /(?:€\s*3|3\s*€)/, `${locale}: review discount must not be translated`);
   }
   assert.ok(!offer.includes('25%'));
   assert.match(offer, /<details class="offer-details">\s*<summary data-i18n>Goed om te weten<\/summary>/);

@@ -105,24 +105,132 @@ nog geen winstgevendheid.
   Niet optellen, niet als geverifieerde API-conversie presenteren en geen conversieratio,
   acquisitiekosten of rendement uit één niet-geattribueerde afspraak berekenen.
 
-## Volgende analyse: pak hier de draad op
+## 2026-11-01 08:39 - Campagne- en advertentieanalyse
 
-1. Lees nieuwe meldingen en dit logboek; controleer campagnestructuur en instellingen opnieuw.
-2. Lees 29 oktober opnieuw uit zodra de dag volledig is. Noteer latere bijstellingen
-   apart; overschrijf de voorlopige stand niet stilzwijgend.
-3. Vergelijk daarna volledige dagen na de aanpassingen met de beschikbare eerdere
-   actieve dagen. Benoem de beperkte steekproef en wijzig niet meerdere factoren tegelijk.
-4. Controleer of de merkadvertentie inmiddels vertoningen/klikken krijgt.
-5. Volg verkeer en kosten van manicure, BIAB en lokale/merkzoekwoorden afzonderlijk.
-6. Onderzoek read-only welke conversieacties er bestaan en of WhatsApp/contact wordt
-   gemeten. Een contactklik is geen bevestigde afspraak. Meetinrichting wijzigen is
-   een aparte opdracht waarvoor toestemming nodig is.
-7. Vraag alleen waar nuttig om geaggregeerde nieuwe klantmeldingen:
-   aantal afspraken waarbij de advertentie genoemd is, aantal uitgevoerde behandelingen
-   en eventueel herhaalbezoek. Geen individuele klantgegevens in dit bestand.
-8. Geef een concreet advies: handhaven, gericht onderzoeken of een wijziging voorstellen,
-   met reden en evaluatieperiode. Voer geen wijziging uit zonder toestemming.
-9. Voeg een nieuwe logboeknotitie toe met resultaten, onzekerheden en volgende controlemoment.
+- **Bron:** officiële Google Ads MCP, alleen-lezen. Accounttijdzone Europe/Amsterdam;
+  valuta EUR. Geen accountwijzigingen uitgevoerd.
+- **Periode:** 21 t/m 31 oktober. De campagne startte op 21 oktober om 19:33;
+  22 t/m 31 zijn volledige kalenderdagen. De dagen 30 en 31 zijn volledig.
+- **Instellingen:** één ingeschakelde, leverende Zoeknetwerk-campagne; status Leren.
+  Gemiddeld dagbudget EUR 7,50; doel 60% bovenaan; CPC-plafond EUR 1,50.
+  Twee ingeschakelde responsieve zoekadvertenties, beide goedgekeurd en met sterkte
+  Gemiddeld. De primaire websiteconversieactie `Contactmoment` is ingeschakeld.
+- **Resultaten 30-31 oktober:** 66 vertoningen, 6 klikken, CTR 9,09%, kosten EUR 8,90,
+  gemiddelde CPC EUR 1,48 en 0 gemeten conversies. Op 30 oktober: 36 vertoningen,
+  2 klikken, EUR 2,99; vertoningsaandeel 37,1%, verlies door rang 62,9% en door
+  budget 0%. Op 31 oktober: 30 vertoningen, 4 klikken, EUR 5,91; vertoningsaandeel
+  44,2%, verlies door rang 55,8% en door budget 0%.
+- **Totaal 21-31 oktober:** 153 vertoningen, 17 klikken, CTR 11,11%, EUR 22,55 kosten,
+  gemiddelde CPC EUR 1,33 en 0 gemeten conversies.
+- **Bijgestelde rapportage:** de API rapporteert voor 29 oktober nu 40 vertoningen,
+  8 klikken en EUR 10,90, tegenover de voorlopige 38, 7 en EUR 9,47 in de notitie van
+  29 oktober. Dit is als latere uitlezing vastgelegd; de eerdere momentopname blijft staan.
+- **Advertenties:** alle 153 vertoningen en 17 klikken in de periode kwamen van de
+  lokale advertentie. De merkgerichte advertentie had geen vertoningen of klikken.
+  De advertenties noemen behandelingen, Purmerend/Weidevenne en WhatsApp, maar hun
+  sterkte is Gemiddeld; beide verwijzen naar de homepage. De merkadvertentie heeft
+  nog geen prestatiebewijs.
+- **Zoektermen 30-31 oktober:** zichtbare klikken kwamen onder meer van `beste
+  nagelstudio purmerend` (2; EUR 2,93), `biab purmerend` (1; EUR 1,50) en
+  `nail salon near me` (1; EUR 1,50). Zoektermen rond press-on/acryl en enkele
+  concurrentnamen kregen vertoningen maar geen klikken. Het zichtbare rapport verklaart
+  4 van de 6 klikken en EUR 5,93 van EUR 8,90; de overige 2 klikken/EUR 2,97 zijn niet
+  aan zichtbare zoektermen toe te wijzen. Dit is geen bewijs van verspilling.
+- **Beoordeling en onzekerheden:** vertoningsaandeel steeg op 31 oktober en gemeld
+  verlies door rang bleef groter dan verlies door budget. Het CPC-plafond wordt vrijwel
+  bereikt; de kleine aantallen en dagvariatie laten nog geen betrouwbare conclusie over
+  rendement of advertentievarianten toe. De API registreert geen conversies, hoewel de
+  eerdere eigenaarmelding een geboekte afspraak noemde na advertentieblootstelling.
+  Die melding is niet aan een klik of advertentie toe te schrijven en blijft gescheiden
+  van de API-cijfers. De 14 klikken op 29-31 oktober tegenover 3 in de eerste
+  campagnedagen wijzen op meer verkeer, maar isoleren het effect van het budget niet:
+  biedinstellingen, zoekwoorden en advertenties zijn ook aangepast. Omdat budgetverlies
+  op 30-31 oktober 0% was en rangverlies 56-63%, is niet aangetoond dat het hogere
+  budget het bereik significant vergrootte. De toevoeging was een tweede advertentie
+  binnen dezelfde campagne, geen tweede campagne; deze merkadvertentie kreeg geen verkeer.
+- **Besluit:** budget en biedinstellingen handhaven; vandaag geen wijzigingen. Meer
+  volledige dagen verzamelen en conversiemeting read-only blijven controleren. Een
+  contactklik is geen bevestigde afspraak; meetinrichting aanpassen vereist aparte
+  expliciete toestemming.
+- **Volgende controle:** na zeven volledige dagen opnieuw vergelijken, controleren of
+  de merkadvertentie vertoningen krijgt en de zichtbare zoektermen/kosten volgen.
+  Gebruik alleen geaggregeerde afspraakmeldingen; geen klantgegevens vastleggen.
+
+## 2026-11-01 11:54 - Diagnose lokale zichtbaarheid en budgetvraag
+
+- **Bron:** officiële Google Ads MCP (alleen-lezen), openbare live website en Google
+  documentatie. Accounttijdzone Europe/Amsterdam. Geen account- of websitewijzigingen.
+- **Google Ads-instellingen:** nog steeds één ingeschakelde Zoeknetwerk-campagne.
+  Locatietarget is de gemeente Purmerend, met aanwezigheid als locatievoorwaarde;
+  Google Search is aan, zoekpartners uit, alle apparaten toegestaan en Nederlands/
+  Engels geselecteerd. Dit is geen target uitsluitend op het stadscentrum.
+- **Exacte zoekterm:** `nagelstudio purmerend centrum` kreeg op 30 oktober één
+  vertoning, nul klikken en nul kosten. Google koppelde die aan het brede zoekwoord
+  `acryl nagels purmerend`, niet aan een exacte/phrase-match voor de zoekterm.
+- **Veiling en budget:** op 29-31 oktober samen 106 vertoningen, 14 klikken, EUR 19,80
+  kosten en gemiddelde CPC EUR 1,41. Verloren vertoningsaandeel door budget was op
+  elk van de drie dagen 0%; door rang was dit circa 56-65%. CPC op 30 en 31 oktober
+  was EUR 1,50 en EUR 1,48, bij een ingesteld maximum van EUR 1,50. Meer budget is
+  daarom geen aantoonbare oplossing voor de huidige betaalde zichtbaarheid; rang,
+  biedplafond, veilingconcurrentie en relevantie zijn betere onderzoekspunten.
+- **Kwaliteitsdiagnose:** actuele kwaliteitsscores zijn 5 voor `nagelstudio purmerend`,
+  6 voor `manicure purmerend` en 7 voor `biab purmerend`; de landingspagina-ervaring
+  staat bij alle drie als onder gemiddeld. De homepage noemt Purmerend en het centrum
+  in de paginatekst, maar titel, beschrijving en NailSalon-gestructureerde data noemen
+  Purmerend; de data vermeldt `areaServed` en geen publiek adres. Dit verklaart geen
+  Maps-rang zelfstandig en is geen reden om een privé-adres openbaar te maken.
+- **Maps/organisch:** Ads-rapporten geven geen toegang tot de status of verificatie van
+  het Google Bedrijfsprofiel en bewijzen geen persoonlijke Google/Maps-ranking.
+  Daardoor is niet vastgesteld of het profiel ontbreekt, onvolledig is, of alleen op
+  deze zoeklocatie lager staat. Google noemt relevantie, afstand en prominentie als
+  lokale factoren en zegt dat een betere lokale positie niet gekocht kan worden:
+  https://support.google.com/business/answer/7091?hl=nl
+- **Relevante beleidscontrole:** de live website biedt EUR 3 korting bij een positieve
+  Google-review van minimaal vier sterren. Google verbiedt beloningen voor reviews en
+  het selectief vragen om positieve reviews:
+  https://support.google.com/contributionpolicy/answer/7400114?hl=nl
+  Dit was een beleidsrisico, geen bewezen oorzaak van de vindbaarheid; de beloning is
+  volgens de opdracht van de eigenaar op 1 november 2026 uit de websitecopy verwijderd.
+- **Besluit:** niet passief een week wachten om te hopen dat budget de Maps-positie
+  verandert. Eerst direct het Bedrijfsprofiel controleren; voor betaalde zichtbaarheid
+  eerst zoekwoord-/advertentierelevantie en landingspagina onderzoeken. Geen budget-,
+  bied-, profiel- of websitewijziging uitgevoerd of goedgekeurd.
+
+## 2026-11-01 12:10 - Reviewbeloning verwijderd en indexering
+
+- **Bron:** expliciete opdracht van de eigenaar. De EUR 3-beloning voor een positieve
+  Google-review is uit de Nederlandse actiecopy en alle vertaalde actiecopy verwijderd.
+  De bestaande EUR 5-vriendinnenkorting blijft ongewijzigd.
+- De bijbehorende README, overdracht en regressietest zijn bijgewerkt; de test controleert
+  ook dat vertalingen geen reviewbeloning bevatten.
+- `sitemap.xml` is bijgewerkt naar de datum van de HTML-wijziging. De live sitemap werd
+  vóór deze wijziging publiek opgehaald; er is geen Search Console-toegang gebruikt en
+  dus geen indexeringsstatus bevestigd of aanvraag ingediend.
+- Het Ads-budget is niet verhoogd: het budgetverlies was in de laatst gemeten dagen 0%,
+  terwijl rangverlies circa 56-65% was. Bovendien vergroot Ads-budget geen zekerheid
+  op organische Google-indexering of Maps-vermelding.
+- De Nederlandse actiecopy, acht vertaalcatalogi en sitemap zijn lokaal gecontroleerd
+  met PowerShell. De Node-tests konden niet draaien omdat Node.js niet beschikbaar is.
+  Een vooraf bestaande, ongerelateerde HTML-wijziging blijft buiten deze wijziging.
+
+## Volgende analyse: lokale zichtbaarheid gericht controleren
+
+1. Controleer in het account van de eigenaar of het Google Bedrijfsprofiel bestaat,
+   is geverifieerd en geen duplicaat of beperking heeft. Controleer naam, categorie,
+   adres-/servicegebiedsinstelling, openingstijden en website; publiceer geen privé-adres
+   als Google-beleid een verborgen adres vereist.
+2. Beoordeel lokale resultaten vanaf de daadwerkelijke zoeklocatie; één algemene
+   zoekopdracht bewijst geen vaste ranking. Gebruik Search Console voor indexering en
+   zoekopdrachten als toegang beschikbaar is.
+3. Bevestig na publicatie dat de reviewbeloning uit alle live taalversies is verdwenen;
+   geen beloning koppelen aan reviews of specifieke positieve beoordelingen.
+4. Voor Ads: onderzoek een expliciete lokale keyword-/advertentieroute en verbeter de
+   relevante landingspagina voordat een hoger CPC-plafond wordt overwogen. Verhoog het
+   budget alleen wanneer verlies door budget aantoonbaar wordt.
+5. Controleer conversiemeting en geaggregeerde afspraakmeldingen vóór conclusies over
+   rendement. Een afspraakmelding is geen aan Google Ads toegeschreven conversie.
+6. Documenteer elke latere analyse of expliciet toegestane wijziging met datum,
+   periode, bron, onzekerheden en teruggelezen resultaat.
 
 ### Sjabloon voor volgende notities
 
