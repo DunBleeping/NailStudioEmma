@@ -214,6 +214,7 @@ test('protected contact details follow WhatsApp without removing contact verific
   assert.ok(contact.includes('id="show-contact-details"'));
   assert.ok(contact.includes('id="contact-phone" hidden'));
   assert.ok(contact.includes('id="contact-address" hidden'));
+  assert.ok(contact.includes('id="contact-address-unavailable" data-i18n hidden'));
   const address = contact.match(/<div class="contact-item" data-type="address">([\s\S]*?)<\/div>\s*<!-- Openingstijden/)[1];
   assert.ok(address.includes('<p>Piraeushaven, Purmerend</p>'));
   const disclosure = 'Ik werk uitsluitend op afspraak. Na de beveiligingscontrole kun je mijn volledige adres en telefoonnummer bekijken.';

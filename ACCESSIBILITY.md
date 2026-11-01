@@ -175,6 +175,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 #### 📍 Bezoek mij
 - Het volledige adres en de Maps-link verschijnen pas na een geslaagde Turnstile-servercontrole.
 - Voor verificatie staat alleen de openbare buurt-/plaatsaanduiding op de website.
+- Als het adres tijdelijk niet beschikbaar is, verschijnt na de controle een duidelijke melding; het telefoonnummer blijft beschikbaar.
 
 ---
 

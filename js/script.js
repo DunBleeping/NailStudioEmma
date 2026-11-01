@@ -892,8 +892,14 @@ function displayContactDetails() {
   const address = contactAccess.address;
   const addressContainer = document.getElementById('contact-address');
   const addressLink = addressContainer.querySelector('a');
-  addressLink.href = `https://www.google.com/maps/search/?${new URLSearchParams({ api: '1', query: address })}`;
-  addressLink.textContent = address;
+  const unavailable = document.getElementById('contact-address-unavailable');
+  if (address) {
+    addressLink.href = `https://www.google.com/maps/search/?${new URLSearchParams({ api: '1', query: address })}`;
+    addressLink.textContent = address;
+    addressLink.hidden = false;
+  } else {
+    unavailable.hidden = false;
+  }
   addressContainer.hidden = false;
 
   const button = document.getElementById('show-contact-details');
@@ -977,7 +983,7 @@ async function requestContactAccess(channel) {
   dialog.onclose = clearContactChallenge;
   document.getElementById('verification-retry').onclick = () => requestContactAccess(channel);
   if (!dialog.open) dialog.showModal();
-  if (contactAccess.phone && contactAccess.address) {
+  if (contactAccess.phone) {
     showContactContinuation();
     return;
   }
@@ -1007,11 +1013,11 @@ async function requestContactAccess(channel) {
           });
           if (!response.ok) throw new Error(`Contact verification HTTP ${response.status}`);
           const result = await response.json();
-          const address = typeof result.address === 'string' ? result.address.trim() : '';
+          const address = result.address === null
+            ? null
+            : typeof result.address === 'string' ? result.address.trim() : '';
           if (!/^\+[1-9]\d{7,14}$/.test(result.phone || '')
-            || !address
-            || address.length > 300
-            || /[\u0000-\u001f\u007f]/.test(address)) {
+            || (address !== null && (!address || address.length > 300 || /[\u0000-\u001f\u007f]/.test(address)))) {
             throw new Error('Invalid contact response');
           }
           if (!dialog.open || generation !== contactAccess.generation) return;

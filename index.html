@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=50">
+  <link rel="stylesheet" href="./css/style.css?v=51">
   <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
@@ -389,7 +389,10 @@
             <h3 data-i18n>Bezoek mij</h3>
             <p>Piraeushaven, Purmerend</p>
             <p data-i18n>Ik werk uitsluitend op afspraak. Na de beveiligingscontrole kun je mijn volledige adres en telefoonnummer bekijken.</p>
-            <div id="contact-address" hidden aria-live="polite"><a target="_blank" rel="noopener noreferrer"></a></div>
+            <div id="contact-address" hidden aria-live="polite">
+              <a target="_blank" rel="noopener noreferrer" hidden></a>
+              <p id="contact-address-unavailable" data-i18n hidden>Het volledige adres is tijdelijk niet beschikbaar. Neem telefonisch contact met mij op.</p>
+            </div>
           </div>
 
           <!-- Openingstijden -->
@@ -495,6 +498,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=50" defer></script>
+  <script src="./js/script.js?v=51" defer></script>
 </body>
 </html>

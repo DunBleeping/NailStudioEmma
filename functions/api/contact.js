@@ -16,12 +16,14 @@ export async function onRequest({ request, env }) {
   if (!HOSTNAMES.has(url.hostname) || request.headers.get('Origin') !== url.origin) {
     return reply(403, { error: 'origin_not_allowed' });
   }
-  const address = typeof env.CONTACT_ADDRESS === 'string' ? env.CONTACT_ADDRESS.trim() : '';
+  const configuredAddress = typeof env.CONTACT_ADDRESS === 'string' ? env.CONTACT_ADDRESS.trim() : '';
+  const address = configuredAddress
+    && configuredAddress.length <= 300
+    && !/[\u0000-\u001f\u007f]/.test(configuredAddress)
+    ? configuredAddress
+    : null;
   if (!env.TURNSTILE_SECRET_KEY
-    || !/^\+[1-9]\d{7,14}$/.test(env.CONTACT_PHONE || '')
-    || !address
-    || address.length > 300
-    || /[\u0000-\u001f\u007f]/.test(address)) {
+    || !/^\+[1-9]\d{7,14}$/.test(env.CONTACT_PHONE || '')) {
     console.error('Contact endpoint: missing or invalid server configuration');
     return reply(503, { error: 'contact_unavailable' });
   }
@@ -78,5 +80,6 @@ export async function onRequest({ request, env }) {
   if (result?.success !== true || result.hostname !== url.hostname || result.action !== 'contact') {
     return reply(403, { error: 'verification_failed' });
   }
+  if (!address) console.error('Contact endpoint: address secret missing or invalid; address withheld');
   return reply(200, { phone: env.CONTACT_PHONE, address });
 }

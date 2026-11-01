@@ -76,7 +76,7 @@ De waarden horen nooit in code, screenshots of chat. De openbare site key staat 
 3. Controleer de omgeving als die op de pagina wordt getoond; er hoeft geen pop-up te verschijnen.
 4. Wijzig de waarde van de bestaande secret, of kies **Add → Secret** als deze ontbreekt.
    `TURNSTILE_SECRET_KEY` hoort bij de actieve widget; `CONTACT_PHONE` is internationaal met +, zonder spaties.
-   `CONTACT_ADDRESS` bevat het volledige salonadres. Vul dit rechtstreeks in Cloudflare in en deel het niet via code, screenshots, documentatie of chat.
+   `CONTACT_ADDRESS` bevat het volledige salonadres op één regel (maximaal 300 tekens). Vul dit rechtstreeks in Cloudflare in en deel het niet via code, screenshots, documentatie of chat. Zonder geldige adressecret blijft alleen het adres verborgen; de telefoonroute blijft werken.
 5. Sla op en publiceer opnieuw. Test vervolgens op het echte domein, niet alleen via Live Server.
 
 **Belangrijk onderscheid:** Turnstile, Pages-hosting en domeinregistratie hebben aparte

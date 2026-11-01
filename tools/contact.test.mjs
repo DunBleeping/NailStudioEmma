@@ -30,9 +30,6 @@ test('contact endpoint denies unverified requests without returning contact data
       [request({}, { headers: { 'Content-Type': 'text/plain' } }), env, 415],
       [request(), {}, 503],
       [request(), { ...env, CONTACT_PHONE: 'invalid' }, 503],
-      [request(), { ...env, CONTACT_ADDRESS: '' }, 503],
-      [request(), { ...env, CONTACT_ADDRESS: 'invalid\naddress' }, 503],
-      [request(), { ...env, CONTACT_ADDRESS: 'x'.repeat(301) }, 503],
       [request({}), env, 400],
       [request({ token: '' }), env, 400],
       [request({ token: 12 }), env, 400],
@@ -54,6 +51,33 @@ test('contact endpoint denies unverified requests without returning contact data
     }
   } finally {
     globalThis.fetch = originalFetch;
+  }
+});
+
+test('verified phone access remains available while an invalid address secret is withheld', async () => {
+  const originalFetch = globalThis.fetch;
+  const originalError = console.error;
+  globalThis.fetch = async () => Response.json({
+    success: true,
+    hostname: 'emmanagelstudio.vip',
+    action: 'contact'
+  });
+  console.error = () => {};
+  try {
+    for (const secrets of [
+      { ...env, CONTACT_ADDRESS: undefined },
+      { ...env, CONTACT_ADDRESS: '' },
+      { ...env, CONTACT_ADDRESS: 'invalid\naddress' },
+      { ...env, CONTACT_ADDRESS: 'x'.repeat(301) }
+    ]) {
+      const response = await onRequest({ request: request(), env: secrets });
+      assert.equal(response.status, 200);
+      assert.deepEqual(await response.json(), { phone: env.CONTACT_PHONE, address: null });
+      assert.match(response.headers.get('Cache-Control'), /no-store/);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+    console.error = originalError;
   }
 });
 

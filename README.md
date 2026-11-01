@@ -423,13 +423,13 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
   Zie [de account- en domeinhandleiding](SETUP-NEW-COMPUTER.md#domein-hosting-en-accounts-bevestigd-op-21-oktober-2026).
 - Cloudflare-account voor hosting: aanmelden via GitHub; **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
 - Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret), `CONTACT_PHONE` en `CONTACT_ADDRESS` als **Secret** voor productie.
-  `CONTACT_ADDRESS` bevat het volledige adres en moet ingesteld zijn voordat een nieuwe versie wordt gepubliceerd.
+  `CONTACT_ADDRESS` bevat het volledige adres op één regel (maximaal 300 tekens). Als deze secret ontbreekt of ongeldig is, blijft het adres verborgen en ziet de bezoeker een melding; het telefoonnummer blijft na Turnstile beschikbaar.
   Controleer de geselecteerde omgeving op de pagina; er hoeft geen pop-up te verschijnen.
 - De openbare site key staat in `requestContactAccess()` in `js/script.js`.
   De widget moet `emmanagelstudio.vip` toelaten (en `www.emmanagelstudio.vip` als die host wordt gebruikt).
 - `functions/api/contact.js` controleert POST, Origin, token, exacte hostnaam en actie `contact`.
   Alleen `/api/contact` draait via een Function (`_routes.json`); antwoorden worden niet gecachet.
-  Bij ontbrekende secrets of verificatiefouten blijven adres en nummer afgeschermd en krijgt de bezoeker een foutmelding.
+  Bij ontbrekende Turnstile-/telefoonconfiguratie of verificatiefouten blijven adres en nummer afgeschermd; bij een ontbrekende adressecret wordt alleen het adres verborgen.
 - Publiceer opnieuw na het wijzigen van secrets. Live Server/Python testen alleen de statische pagina,
   niet de contactfunctie. Daar verschijnen dus geen adres of telefoonnummer zonder werkende API.
 - Lokale Function-tests: `node --test tools/contact.test.mjs` (geen npm-pakketten nodig).
