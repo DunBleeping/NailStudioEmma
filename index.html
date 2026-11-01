@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23d4a574'>✨</text></svg>">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css?v=49">
+  <link rel="stylesheet" href="./css/style.css?v=50">
   <script>var f='small';try{var s=localStorage.getItem('fontSize');if(/^(small|medium|large|xlarge)$/.test(s))f=s;}catch(e){}document.documentElement.classList.add('font-size-'+f);</script>
 
   <!-- Title -->
@@ -379,7 +379,7 @@
           <div class="contact-item" data-type="phone">
             <div class="contact-icon">📞</div>
             <h3 data-i18n>Bel mij</h3>
-            <button type="button" id="show-phone" aria-controls="contact-phone" aria-expanded="false" data-i18n>Toon telefoonnummer</button>
+            <button type="button" id="show-contact-details" aria-controls="contact-address contact-phone" aria-expanded="false" data-i18n>Toon adres en telefoonnummer</button>
             <div id="contact-phone" hidden aria-live="polite"><a></a></div>
           </div>
 
@@ -388,12 +388,8 @@
             <div class="contact-icon">📍</div>
             <h3 data-i18n>Bezoek mij</h3>
             <p>Piraeushaven, Purmerend</p>
-            <details>
-              <summary data-i18n>Hoe ontvang ik het adres?</summary>
-              <p data-i18n>Ik ben gevestigd in Purmerend, in de wijk Weidevenne en 200 meter van de stadcentrum.</p>
-              <p data-i18n>Ik werk uitsluitend op afspraak. Je ontvangt het adres na bevestiging van je afspraak.</p>
-              <p data-i18n>Om ongewenste reclame te beperken en mijn privacy en veiligheid te beschermen, publiceer ik hier niet mijn volledige adres.</p>
-            </details>
+            <p data-i18n>Ik werk uitsluitend op afspraak. Na de beveiligingscontrole kun je mijn volledige adres en telefoonnummer bekijken.</p>
+            <div id="contact-address" hidden aria-live="polite"><a target="_blank" rel="noopener noreferrer"></a></div>
           </div>
 
           <!-- Openingstijden -->
@@ -499,6 +495,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="./js/script.js?v=49" defer></script>
+  <script src="./js/script.js?v=50" defer></script>
 </body>
 </html>

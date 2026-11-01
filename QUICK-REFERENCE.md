@@ -14,7 +14,7 @@ Volledige uitleg: [README.md](README.md)
   `.vip` blijft de voorkeur. Voorgesteld: een HTTPS-geschikte 301-doorverwijzing van .nl naar .vip;
   nog niet ingesteld. Geen tweede website of domeinverhuizing nodig als de registrar goed kan doorsturen.
 - **Turnstile:** actieve widget in het hostingaccount; eerdere widget in **`emm....8@gm`** niet gebruiken.
-  Secrets `TURNSTILE_SECRET_KEY` en `CONTACT_PHONE` uitsluitend bij Cloudflare.
+  Secrets `TURNSTILE_SECRET_KEY`, `CONTACT_PHONE` en `CONTACT_ADDRESS` uitsluitend bij Cloudflare.
 - **Status 21 oktober 2026:** eigenaar bevestigt live publicatie en werkende Turnstile.
 - Volledige accountuitleg en volgende stappen voor Google/social:
   [SETUP-NEW-COMPUTER.md](SETUP-NEW-COMPUTER.md#domein-hosting-en-accounts-bevestigd-op-21-oktober-2026).
@@ -69,6 +69,7 @@ Volledige uitleg en voorbeelden staan als comments in [tools/sync-website.ps1](t
 | Prijs / behandeling / duur | `data/services.json` | ook `data/Prijzenlijst.csv` bijwerken – zie [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md) |
 | Toeslag (bijv. verwijderen oude lak +€5) | `data/services.json` → `extras` | |
 | WhatsApp-/telefoonnummer | Cloudflare-secret `CONTACT_PHONE` | internationaal met +, geen spaties; nooit in openbare bestanden |
+| Volledig adres | Cloudflare-secret `CONTACT_ADDRESS` | alleen na Turnstile-controle tonen; nooit in openbare bestanden |
 | Standaardbericht | `data/settings.json` → `contact.whatsapp.message` | nummer komt pas na Turnstile-servercontrole |
 | Openingstijden | `data/settings.json` → `hours` | |
 | Instagram / Facebook | `data/settings.json` → `social` | |

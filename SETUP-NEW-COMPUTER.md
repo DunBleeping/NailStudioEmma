@@ -15,7 +15,7 @@ GitHub Desktop).
 | Hosting | Cloudflare Pages – auto-deploys every push to `main` (≈ 1 minute) |
 | Live site | https://emmanagelstudio.vip (also https://nailstudioemma.pages.dev) |
 | Backend / build step | No build or npm dependencies. A Pages Function verifies Turnstile for contact access; Live Server cannot run it |
-| Booking | WhatsApp/SMS via CONTACT_PHONE server secret after Turnstile; no e-mail or online agenda |
+| Booking | WhatsApp/SMS via contact secrets after Turnstile; full address and phone appear only after verification |
 | Language of site & docs | Dutch |
 
 Main features (status at commit `964311d`):
@@ -66,7 +66,7 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
 
 **Status:** de eigenaar heeft op 21 oktober 2026 bevestigd dat de nieuwste website live is
 en de echte Turnstile-controle werkt. In het hostingproject staan de secrets
-`TURNSTILE_SECRET_KEY` en `CONTACT_PHONE`, beide van type **Secret** (Value encrypted).
+`TURNSTILE_SECRET_KEY`, `CONTACT_PHONE` en `CONTACT_ADDRESS`, alle van type **Secret** (Value encrypted).
 De waarden horen nooit in code, screenshots of chat. De openbare site key staat in
 `requestContactAccess()` in `js/script.js`.
 
@@ -76,6 +76,7 @@ De waarden horen nooit in code, screenshots of chat. De openbare site key staat 
 3. Controleer de omgeving als die op de pagina wordt getoond; er hoeft geen pop-up te verschijnen.
 4. Wijzig de waarde van de bestaande secret, of kies **Add → Secret** als deze ontbreekt.
    `TURNSTILE_SECRET_KEY` hoort bij de actieve widget; `CONTACT_PHONE` is internationaal met +, zonder spaties.
+   `CONTACT_ADDRESS` bevat het volledige salonadres. Vul dit rechtstreeks in Cloudflare in en deel het niet via code, screenshots, documentatie of chat.
 5. Sla op en publiceer opnieuw. Test vervolgens op het echte domein, niet alleen via Live Server.
 
 **Belangrijk onderscheid:** Turnstile, Pages-hosting en domeinregistratie hebben aparte
@@ -234,7 +235,7 @@ visitor.
 Nog niet uitgevoerd; eerst profielen en inhoud controleren, daarna pas betaald adverteren.
 
 1. **SEO voorbereiden (uitgevoerd):** canonical, Open Graph, Schema.org, sitemap en robots
-   gebruiken het echte domein; privéadres en telefoonnummer blijven afgeschermd.
+   gebruiken het echte domein; het volledige adres en telefoonnummer staan niet in openbare bronbestanden.
    De Google Search-knop is van de site verwijderd; zo'n knop is geen registratie bij Google en geen advertentie.
 2. **Google Search Console:** https://search.google.com/search-console →
    website-eigendom verifiëren, de bijgewerkte sitemap indienen en indexering controleren.

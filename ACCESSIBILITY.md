@@ -134,13 +134,13 @@ De website ziet er perfect uit op:
 
 #### 📞 Bellen
 ```
-Klik op Toon telefoonnummer → klik op het nummer → de telefoonapp opent
+Klik op Toon adres en telefoonnummer → voltooi de controle → klik op het nummer → de telefoonapp opent
 ```
 **Hoe het werkt:**
 - Alle telefoonnummers zijn klikbaar
-- Het nummer en de bellink verschijnen pas na een geslaagde Turnstile-servercontrole.
+- Het volledige adres, het telefoonnummer en de bel-/Maps-links verschijnen pas na een geslaagde Turnstile-servercontrole.
 - De contactdialoog heeft een titel, statusmeldingen en sluitknop; Escape sluit en herstelt de toetsenbordfocus.
-- Verificatie mislukt? Er verschijnt een foutmelding en **Opnieuw proberen**; er wordt geen nummer onthuld.
+- Verificatie mislukt? Er verschijnt een foutmelding en **Opnieuw proberen**; er worden geen contactgegevens onthuld.
 - Klik = Phone app opent
 - Direct bellen zonder typen
 
@@ -159,7 +159,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 - Altijd zichtbaar op mobiel
 - Pre-filled met standaardbericht, of met de gekozen behandelingen uit het mandje
 - Eerste keer: contactcontrole, daarna **Open WhatsApp** (extra klik voorkomt pop-upblokkering)
-- Maakt tegelijk het telefoonnummer zichtbaar bij **Bel mij**, zonder de pagina daarheen te verplaatsen
+- Maakt tegelijk adres en telefoonnummer zichtbaar, zonder de pagina daarheen te verplaatsen
 
 #### SMS vanuit het mandje
 - Naast WhatsApp staat in het mandje **Afspraak aanvragen via SMS**.
@@ -173,9 +173,8 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 - **Vegen** naar links/rechts = volgende/vorige foto
 
 #### 📍 Bezoek mij
-- **Hoe ontvang ik het adres?** is een uitklapbare uitleg, bedienbaar met toetsenbord en aanraking.
-- De uitleg vermeldt dat het adres pas na bevestiging van de afspraak wordt gedeeld.
-- Er staat geen exact adres of kaartlink op de website.
+- Het volledige adres en de Maps-link verschijnen pas na een geslaagde Turnstile-servercontrole.
+- Voor verificatie staat alleen de openbare buurt-/plaatsaanduiding op de website.
 
 ---
 

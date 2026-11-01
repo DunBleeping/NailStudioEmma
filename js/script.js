@@ -819,7 +819,7 @@ function initializeContact() {
   const contactSection = document.getElementById('contact');
   if (!contactSection) return;
 
-  document.getElementById('show-phone').onclick = revealContactPhone;
+  document.getElementById('show-contact-details').onclick = revealContactDetails;
 
   // Email - VERWIJDERD
   const emailItem = contactSection.querySelector('[data-type="email"]');
@@ -873,6 +873,7 @@ function initializeContact() {
 
 const contactAccess = {
   phone: null,
+  address: null,
   channel: 'phone',
   widget: null,
   generation: 0,
@@ -880,19 +881,27 @@ const contactAccess = {
   script: null
 };
 
-function displayContactPhone() {
+function displayContactDetails() {
   const phone = contactAccess.phone;
-  const container = document.getElementById('contact-phone');
-  const link = container.querySelector('a');
-  link.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
-  link.textContent = phone;
-  container.hidden = false;
-  const button = document.getElementById('show-phone');
+  const phoneContainer = document.getElementById('contact-phone');
+  const phoneLink = phoneContainer.querySelector('a');
+  phoneLink.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
+  phoneLink.textContent = phone;
+  phoneContainer.hidden = false;
+
+  const address = contactAccess.address;
+  const addressContainer = document.getElementById('contact-address');
+  const addressLink = addressContainer.querySelector('a');
+  addressLink.href = `https://www.google.com/maps/search/?${new URLSearchParams({ api: '1', query: address })}`;
+  addressLink.textContent = address;
+  addressContainer.hidden = false;
+
+  const button = document.getElementById('show-contact-details');
   button.setAttribute('aria-expanded', 'true');
   button.hidden = true;
 }
 
-function revealContactPhone() {
+function revealContactDetails() {
   requestContactAccess('phone');
 }
 
@@ -941,7 +950,7 @@ function clearContactChallenge() {
 }
 
 function showContactContinuation() {
-  displayContactPhone();
+  displayContactDetails();
   const link = document.getElementById('verification-continue');
   const channel = contactAccess.channel;
   link.textContent = t(channel === 'whatsapp' ? 'Open WhatsApp' : channel === 'sms' ? 'Open SMS' : 'Bel mij');
@@ -968,7 +977,7 @@ async function requestContactAccess(channel) {
   dialog.onclose = clearContactChallenge;
   document.getElementById('verification-retry').onclick = () => requestContactAccess(channel);
   if (!dialog.open) dialog.showModal();
-  if (contactAccess.phone) {
+  if (contactAccess.phone && contactAccess.address) {
     showContactContinuation();
     return;
   }
@@ -998,9 +1007,16 @@ async function requestContactAccess(channel) {
           });
           if (!response.ok) throw new Error(`Contact verification HTTP ${response.status}`);
           const result = await response.json();
-          if (!/^\+[1-9]\d{7,14}$/.test(result.phone || '')) throw new Error('Invalid contact response');
+          const address = typeof result.address === 'string' ? result.address.trim() : '';
+          if (!/^\+[1-9]\d{7,14}$/.test(result.phone || '')
+            || !address
+            || address.length > 300
+            || /[\u0000-\u001f\u007f]/.test(address)) {
+            throw new Error('Invalid contact response');
+          }
           if (!dialog.open || generation !== contactAccess.generation) return;
           contactAccess.phone = result.phone;
+          contactAccess.address = address;
           window.turnstile.remove(contactAccess.widget);
           contactAccess.widget = null;
           showContactContinuation();

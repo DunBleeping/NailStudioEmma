@@ -16,7 +16,7 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
   Maak hem daar niet opnieuw sticky zonder toestemming. Desktop mag sticky blijven.
 - Behoud foto's standaard verborgen, onthouden bezoekersvoorkeuren, lettergroottekeuze en
   donkere modus met originele fotokleuren. Voeg geen zichtbaar Copilot-credit toe.
-- Publiceer geen volledig privé-adres of telefoonnummer. Houd de bestaande beveiligde contactroute.
+- Zet geen volledig adres of telefoonnummer in openbare bronbestanden. Bewaar beide als Cloudflare-secrets en toon ze alleen via de bestaande beveiligde contactroute.
 - Lees bij vervolgwerk de relevante onderdelen van
   [de overdracht en lessons learned](../OVERDRACHT-EN-LESSONS-LEARNED.md).
   Gebruik de actuele code en expliciete nieuwe keuzes als bron; historische actievoorwaarden,
@@ -54,7 +54,7 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
   - Live site: https://emmanagelstudio.vip
   - Cache and security headers live in `_headers`.
 - Booking uses WhatsApp/SMS via `buildBookingMessage()` after Turnstile verification at `/api/contact`.
-  The number is only in the Cloudflare `CONTACT_PHONE` secret; never publish it in code, JSON, or docs.
+  The full address and phone are only in Cloudflare secrets `CONTACT_ADDRESS` and `CONTACT_PHONE`; never publish them in code, JSON, or docs. The existing Turnstile-protected contact route reveals them after successful verification.
   `TURNSTILE_SECRET_KEY` is server-only. Production validates exact hostname and action `contact`.
   When the treatment cart is filled, the message contains the cart contents.
   There is no e-mail or online agenda; don't add booking forms.

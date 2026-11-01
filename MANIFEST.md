@@ -47,7 +47,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 
 ### data/
 - `settings.json` – salon, standaardbericht, openingstijden, social; geen telefoonnummer
-- `functions/api/contact.js` – Turnstile-servercontrole en contactnummer uit secret
+- `functions/api/contact.js` – Turnstile-servercontrole en contactgegevens uit Cloudflare-secrets
 - `_routes.json` – alleen de contact-API gebruikt Pages Functions
 - `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
   `extras`: verwijderen oude lak/gellak +€5

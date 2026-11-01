@@ -208,17 +208,18 @@ test('floating navigation has matching destinations, accessible state and dismis
   assert.ok(source.includes('container.contains(event.target)'));
 });
 
-test('phone contact follows WhatsApp without removing contact verification', async () => {
+test('protected contact details follow WhatsApp without removing contact verification', async () => {
   const contact = html.match(/<div class="contact-grid">[\s\S]*?<\/section>/)[0];
   assert.match(contact, /data-type="whatsapp"[\s\S]*?data-type="phone"/);
-  assert.ok(contact.includes('id="show-phone"'));
+  assert.ok(contact.includes('id="show-contact-details"'));
   assert.ok(contact.includes('id="contact-phone" hidden'));
-  const address = contact.match(/<div class="contact-item" data-type="address">([\s\S]*?)<\/details>/)[1];
+  assert.ok(contact.includes('id="contact-address" hidden'));
+  const address = contact.match(/<div class="contact-item" data-type="address">([\s\S]*?)<\/div>\s*<!-- Openingstijden/)[1];
   assert.ok(address.includes('<p>Piraeushaven, Purmerend</p>'));
-  assert.ok(address.includes('Je ontvangt het adres na bevestiging van je afspraak.'));
-  const privacy = 'Om ongewenste reclame te beperken en mijn privacy en veiligheid te beschermen, publiceer ik hier niet mijn volledige adres.';
-  assert.ok(address.includes(privacy));
-  assert.ok(Object.hasOwn(english, privacy));
+  const disclosure = 'Ik werk uitsluitend op afspraak. Na de beveiligingscontrole kun je mijn volledige adres en telefoonnummer bekijken.';
+  assert.ok(address.includes(disclosure));
+  assert.ok(Object.hasOwn(english, disclosure));
+  assert.ok(!/publiceer ik hier niet mijn volledige adres|Je ontvangt het adres na bevestiging/i.test(address));
   assert.ok(!/Piraeushaven\s+\d/i.test(address));
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.match(css, /"whatsapp hours"\s*"phone hours"\s*"address hours"/);

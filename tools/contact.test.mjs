@@ -4,7 +4,11 @@ import { test } from 'node:test';
 
 const source = await readFile(new URL('../functions/api/contact.js', import.meta.url), 'utf8');
 const { onRequest } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
-const env = { TURNSTILE_SECRET_KEY: 'test-only-secret', CONTACT_PHONE: '+3197000000000' };
+const env = {
+  TURNSTILE_SECRET_KEY: 'test-only-secret',
+  CONTACT_PHONE: '+3197000000000',
+  CONTACT_ADDRESS: 'Teststraat 1, 1441 AA Purmerend'
+};
 const origin = 'https://emmanagelstudio.vip';
 
 function request(body = { token: 'test-token' }, options = {}) {
@@ -26,6 +30,9 @@ test('contact endpoint denies unverified requests without returning contact data
       [request({}, { headers: { 'Content-Type': 'text/plain' } }), env, 415],
       [request(), {}, 503],
       [request(), { ...env, CONTACT_PHONE: 'invalid' }, 503],
+      [request(), { ...env, CONTACT_ADDRESS: '' }, 503],
+      [request(), { ...env, CONTACT_ADDRESS: 'invalid\naddress' }, 503],
+      [request(), { ...env, CONTACT_ADDRESS: 'x'.repeat(301) }, 503],
       [request({}), env, 400],
       [request({ token: '' }), env, 400],
       [request({ token: 12 }), env, 400],
@@ -42,6 +49,7 @@ test('contact endpoint denies unverified requests without returning contact data
       assert.match(result.headers.get('Cache-Control'), /no-store/);
       const body = await result.text();
       assert(!body.includes(env.CONTACT_PHONE));
+      assert(!body.includes(env.CONTACT_ADDRESS));
       assert(!body.includes(env.TURNSTILE_SECRET_KEY));
     }
   } finally {
@@ -49,7 +57,7 @@ test('contact endpoint denies unverified requests without returning contact data
   }
 });
 
-test('only a successful exact-hostname contact-action verification releases the phone', async () => {
+test('only a successful exact-hostname contact-action verification releases contact details', async () => {
   const originalFetch = globalThis.fetch;
   try {
     for (const verification of [
@@ -63,7 +71,9 @@ test('only a successful exact-hostname contact-action verification releases the 
       globalThis.fetch = async () => Response.json(verification);
       const response = await onRequest({ request: request(), env });
       assert.equal(response.status, 403);
-      assert(!(await response.text()).includes(env.CONTACT_PHONE));
+      const body = await response.text();
+      assert(!body.includes(env.CONTACT_PHONE));
+      assert(!body.includes(env.CONTACT_ADDRESS));
     }
     globalThis.fetch = async (url, options) => {
       assert.equal(url, 'https://challenges.cloudflare.com/turnstile/v0/siteverify');
@@ -75,7 +85,7 @@ test('only a successful exact-hostname contact-action verification releases the 
     };
     const result = await onRequest({ request: request(), env });
     assert.equal(result.status, 200);
-    assert.deepEqual(await result.json(), { phone: env.CONTACT_PHONE });
+    assert.deepEqual(await result.json(), { phone: env.CONTACT_PHONE, address: env.CONTACT_ADDRESS });
     assert.match(result.headers.get('Cache-Control'), /no-store/);
   } finally {
     globalThis.fetch = originalFetch;
@@ -93,7 +103,9 @@ test('verification service failures fail closed', async () => {
       globalThis.fetch = implementation;
       const response = await onRequest({ request: request(), env });
       assert.equal(response.status, 503);
-      assert(!(await response.text()).includes(env.CONTACT_PHONE));
+      const body = await response.text();
+      assert(!body.includes(env.CONTACT_PHONE));
+      assert(!body.includes(env.CONTACT_ADDRESS));
     }
   } finally {
     globalThis.fetch = originalFetch;
