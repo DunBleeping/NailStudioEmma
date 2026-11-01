@@ -212,6 +212,9 @@ nog geen winstgevendheid.
 - De Nederlandse actiecopy, acht vertaalcatalogi en sitemap zijn lokaal gecontroleerd
   met PowerShell. De Node-tests konden niet draaien omdat Node.js niet beschikbaar is.
   Een vooraf bestaande, ongerelateerde HTML-wijziging blijft buiten deze wijziging.
+- Commit `4431f95` is naar `main` gepusht. Om 12:19 uur is live teruggelezen dat de
+  reviewbeloning ontbreekt en de sitemap `lastmod` 2026-11-01 bevat. Dit bevestigt de
+  live inhoud, niet de opname in Google Search. Search Console is niet gecontroleerd.
 
 ## Volgende analyse: lokale zichtbaarheid gericht controleren
 
@@ -222,8 +225,8 @@ nog geen winstgevendheid.
 2. Beoordeel lokale resultaten vanaf de daadwerkelijke zoeklocatie; één algemene
    zoekopdracht bewijst geen vaste ranking. Gebruik Search Console voor indexering en
    zoekopdrachten als toegang beschikbaar is.
-3. Bevestig na publicatie dat de reviewbeloning uit alle live taalversies is verdwenen;
-   geen beloning koppelen aan reviews of specifieke positieve beoordelingen.
+3. Houd de reviewbeloning verwijderd; koppel geen beloning aan reviews en vraag niet
+   selectief om positieve beoordelingen.
 4. Voor Ads: onderzoek een expliciete lokale keyword-/advertentieroute en verbeter de
    relevante landingspagina voordat een hoger CPC-plafond wordt overwogen. Verhoog het
    budget alleen wanneer verlies door budget aantoonbaar wordt.
