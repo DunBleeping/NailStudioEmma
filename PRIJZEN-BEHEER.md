@@ -6,8 +6,8 @@
 
 Alle wijzigingen daar verschijnen AUTOMATISCH op:
 - ✅ Behandelingen kaarten (incl. categoriemenu)
-- ✅ Prijslijst tabel
-- ✅ Mandjeknoppen **+ dit wil ik** in de behandelkaarten en de prijslijst (gedeelde keuze)
+- ✅ Prijzenlijsttabel
+- ✅ Mandjeknoppen **+ dit wil ik** in de behandelkaarten en de prijzenlijst (gedeelde keuze)
 - ✅ Blok "Toeslagen"
 
 **Geen HTML/CSS aanpassingen nodig!**

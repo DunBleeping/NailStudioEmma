@@ -25,6 +25,19 @@ test('language selector and locale catalogs stay in sync', async () => {
   assert.deepEqual(configured, ['nl', 'en', 'fr', 'es', 'tr', 'ar', 'uk', 'pl', 'vi']);
 });
 
+test('pricing list label is consistent in the page and every translation catalog', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  assert.equal((html.match(/>Prijzenlijst<\/(?:a|h2)>/g) ?? []).length, 2);
+  assert.doesNotMatch(html, />Prijslijst<\/(?:a|h2)>/);
+  assert.ok(Object.hasOwn(english, 'Prijzenlijst'));
+  assert.ok(!Object.hasOwn(english, 'Prijslijst'));
+  for (const locale of locales) {
+    const catalog = JSON.parse(await readFile(new URL(`translations/${locale}.json`, root), 'utf8'));
+    assert.ok(Object.hasOwn(catalog, 'Prijzenlijst'), `${locale}: missing Prijzenlijst`);
+    assert.ok(!Object.hasOwn(catalog, 'Prijslijst'), `${locale}: old label remains`);
+  }
+});
+
 test('local and seasonal landing copy is translated in every language', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   const settings = JSON.parse(await readFile(new URL('settings.json', root), 'utf8'));

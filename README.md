@@ -2,7 +2,7 @@
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
-- 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. De foto van New Set Nagels onder de titel blijft bij inklappen staan; de bron volgt de behandelkaart. Klik op de titel of foto om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijslijst is het compacte overzicht met bedragen; prijslijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
+- 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. De foto van New Set Nagels onder de titel blijft bij inklappen staan; de bron volgt de behandelkaart. Klik op de titel of foto om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijzenlijst is het compacte overzicht met bedragen; prijzenlijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
 - Een zwevend hamburgermenu linksboven blijft op iedere scrollpositie bereikbaar, met dezelfde zes bestemmingen als de hoofdnavigatie. De mobiele header blijft gewoon meescrollen.
 
 - Als minimaal één van beide vriendinnen nieuw is: allebei €5 korting op een nieuwe set. Er is geen korting gekoppeld aan Google-reviews.
@@ -70,7 +70,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Op telefoon en tablet (breedte maximaal 1024 px), in beide schermstanden,
    scrolt de bovenbalk mee in plaats van bovenaan te blijven staan.
    Subtiele achtergrondiconen helpen de zes menulinks herkennen.
-2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *Prijslijst*, *📱 WhatsApp*, *Instagram*,
+2. **Hero** – welkomsttekst, knoppen *Bekijk behandelingen*, *Prijzenlijst*, *📱 WhatsApp*, *Instagram*,
    *Facebook*, groot logo. Instagram is niet klikbaar zolang de profiellink ontbreekt.
    Direct onder de welkomsttitel staat `design-1.jpg` uit het album Custom Designs, horizontaal op 8rem hoog;
    deze schakelt mee met foto's tonen/verbergen.
@@ -80,7 +80,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    kerst/Xmas. De tekst verwijst naar eigen werk bij Impressie en de bestaande contactroute. Ontwerp,
    mogelijkheden, prijs en behandeltijd worden vooraf besproken; er is geen automatische seizoensactie.
    Nieuwstraat, Weidevenne en centrum worden als lokale zoekintenties genoemd, niet als extra vestigingen.
-   **Prijslijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
+   **Prijzenlijst** – tabel met alle behandelingen, duur en prijs, plus blok **Toeslagen**
    (nu: *Verwijderen oude lak/gellak +€5* bij een nieuwe set). Rechts van **Prijs** staat een aparte
    kolom **Kiezen** met **+ dit wil ik**; deze knop en de behandelkaart houden dezelfde mandjekeuze
    bij, in beide talen. Ook mobiel blijven de vier kolommen naast elkaar staan.

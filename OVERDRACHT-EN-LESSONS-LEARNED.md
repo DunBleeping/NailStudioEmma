@@ -66,8 +66,8 @@ Alleen controleren kan dus wel de lokale albumlijst vernieuwen.
 
 - Behandelingen zijn standaard ingeklapt met de duidelijke tekst
   **Behandelingen in beeld en uitgelegd** (keuze van 30 oktober). Links naar behandelen/zoeken openen ze.
-- De knop **Afspraak maken** bij Custom nail art verwijst naar de prijslijst.
-- De prijslijst heeft een aparte regel **Custom designs (op aanvraag)**:
+- De knop **Afspraak maken** bij Custom nail art verwijst naar de prijzenlijst.
+- De prijzenlijst heeft een aparte regel **Custom designs (op aanvraag)**:
   duur **In overleg**, prijs **Op aanvraag**, link **Vraag prijs aan** naar Contact.
 - Deze maatwerkregel heeft geen fictieve prijs en geen winkelmandknop. De bestaande
   dienst **Nails Design vanaf...** met startprijs EUR 60 is apart behouden.

@@ -58,7 +58,7 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
   Alle vertaalbestanden gebruiken de exacte Nederlandse tekst als sleutel.
 - `tools/translations.test.mjs` – controleert volledige sleuteldekking, placeholders en taalopties
   (uitvoeren met `node --test tools/translations.test.mjs`)
-- `Prijzenlijst.csv` – bronprijslijst van de salon (naam, prijs, duur); niet door de site gebruikt
+- `Prijzenlijst.csv` – bronbestand met salonprijzen (naam, prijs, duur); niet door de site gebruikt
 
 ### images/
 - `logo.jpg`
@@ -79,11 +79,11 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 ## Functies
 
 - Header met zes menulinks (inclusief Zoeken) op één regel vanaf 768 px, zonder afspraakknop, en toegankelijkheidsknoppen
-- Hero, behandelingen met zoekbalk, categoriefilter en mandje, prijslijst + toeslagen,
+- Hero, behandelingen met zoekbalk, categoriefilter en mandje, prijzenlijst + toeslagen,
   Impressie-albums, over ons, contact
 - Zwevende WhatsApp-knop; afspraken via WhatsApp of SMS vanuit het mandje (geen e-mail/agenda)
 - Nieuwe bezoekers zien standaard geen foto's en starten op lettergrootte A–; bestaande keuzes blijven behouden
-- Prijslijst voor behandelkaarten, toeslaguitleg over volledige tabelbreedte
+- Prijzenlijst voor behandelkaarten, toeslaguitleg over volledige tabelbreedte
 - Mobiel: menu links onder logo, taal direct zichtbaar naast logo, lettergrootte in uitklapmenu
 - Responsive, toetsenbord- en schermlezer-vriendelijk
 - SEO: meta, Open Graph, Schema.org LocalBusiness, sitemap, robots

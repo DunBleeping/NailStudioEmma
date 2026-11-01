@@ -108,7 +108,7 @@ Alleen lokaal de lijst verversen: `.\tools\update-galerij.ps1` (PowerShell 7, ge
 - Nieuwe bezoekers: **foto's verborgen** (knop **Foto's tonen** zet ze aan, keuze wordt onthouden)
 - Nieuwe bezoekers: lettergrootte **A–**; bestaande letterkeuze blijft behouden.
 - Op mobiel: menu links onder logo; taal direct zichtbaar naast logo, lettergrootte in het uitklapmenu.
-- Prijslijst staat boven Mijn Behandelingen; toeslagtekst gebruikt de volledige tabelbreedte.
+- Prijzenlijst staat boven Mijn Behandelingen; toeslagtekst gebruikt de volledige tabelbreedte.
 - Taalkeuze: Nederlands, Engels, Frans, Spaans, Turks, Arabisch, Oekraïens en Pools; keuze wordt onthouden.
   Arabisch is RTL. Vertalingen staan in `data/translations.json` en `data/translations/<taal>.json`.
 - WhatsApp-knoppen → eerst Turnstile-servercontrole, daarna voorbereid bericht; geen afspraakknop in het hoofdmenu
