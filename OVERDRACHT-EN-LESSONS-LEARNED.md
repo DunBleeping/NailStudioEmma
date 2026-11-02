@@ -27,11 +27,12 @@ actuele bron voordat je ze later als uitgangspunt gebruikt.
   en roze bloesems. Respecteer de voorkeur voor minder beweging.
 - Op telefoon en tablet moet de header **meescrollen**, niet vastplakken. Deze keuze
   is op 29 oktober expliciet bevestigd.
-- Foto's zijn standaard verborgen voor nieuwe bezoekers; de voorkeur wordt onthouden.
+- Foto's zijn standaard zichtbaar voor nieuwe bezoekers; de voorkeur wordt onthouden.
+  De toon-/verbergknop staat bovenaan en in beide hamburgermenu's.
   Behoud lettergroottekeuze, donkere modus en mobiele bediening.
 - Geen zichtbaar Copilot-credit op de website. Dit staat los van de commitvermelding.
-- Bescherm telefoonnummer en privé-adres in bronbestanden. Zet beide uitsluitend als
-  Cloudflare-secrets en toon ze alleen via de bestaande Turnstile-route. Deel geen
+- Bescherm telefoonnummer en volledig privé-adres in bronbestanden. Telefoon komt uitsluitend
+  uit een Cloudflare-secret via Turnstile; het adres toont alleen straat en plaats. Deel geen
   contactgegevens, tokens, OAuth-clientgeheimen of herstelcodes in chat of logs.
 
 ## 2. Project en publicatie
@@ -87,9 +88,9 @@ Alleen controleren kan dus wel de lokale albumlijst vernieuwen.
   zonder eigen knop **Afspraak maken**.
 - Donkere modus keert kleuren om maar behoudt fotokleuren. Er zijn socialmedia-iconen,
   een Impressie-knop en een mobiel menu dat ook bij een tik erbuiten sluit.
-- Het volledige adres en telefoonnummer verschijnen op de website alleen na succesvolle
-  Turnstile-controle. Het adres staat uitsluitend in Cloudflare-secret `CONTACT_ADDRESS`;
-  herstel geen adres in HTML, JSON of gestructureerde gegevens.
+- **Bezoek mij** toont straat en plaats direct, zonder huisnummer of Cloudflare-controle.
+  De API geeft geen adres meer terug; `CONTACT_ADDRESS` wordt niet gebruikt.
+  Telefoon, WhatsApp en SMS behouden de Turnstile-controle.
 
 ### Actievoorwaarden: geschiedenis is niet de actuele bron
 

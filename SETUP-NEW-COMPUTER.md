@@ -15,7 +15,7 @@ GitHub Desktop).
 | Hosting | Cloudflare Pages – auto-deploys every push to `main` (≈ 1 minute) |
 | Live site | https://emmanagelstudio.vip (also https://nailstudioemma.pages.dev) |
 | Backend / build step | No build or npm dependencies. A Pages Function verifies Turnstile for contact access; Live Server cannot run it |
-| Booking | WhatsApp/SMS via contact secrets after Turnstile; full address and phone appear only after verification |
+| Booking | WhatsApp/SMS and phone via Turnstile; street and city public without house number |
 | Language of site & docs | Dutch |
 
 Main features (status at commit `964311d`):
@@ -23,7 +23,7 @@ Main features (status at commit `964311d`):
 - Search bar plus category filter.
 - Treatment cart that fills in a WhatsApp booking request.
 - "Impressie" gallery with photo albums per style.
-- Accessibility buttons: dark mode (inverted colors, photos keep original color), font size A– A A+ A++, show/hide photos. Photos are hidden by default for new visitors.
+- Accessibility buttons: dark mode (inverted colors, photos keep original color), font size A– A A+ A++, show/hide photos in the header and both menus. Photos are visible by default; saved choices remain respected.
 
 More detail: [README.md](README.md), [QUICK-REFERENCE.md](QUICK-REFERENCE.md),
 [MANIFEST.md](MANIFEST.md), [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md),
@@ -66,7 +66,7 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
 
 **Status:** de eigenaar heeft op 21 oktober 2026 bevestigd dat de nieuwste website live is
 en de echte Turnstile-controle werkt. In het hostingproject staan de secrets
-`TURNSTILE_SECRET_KEY`, `CONTACT_PHONE` en `CONTACT_ADDRESS`, alle van type **Secret** (Value encrypted).
+`TURNSTILE_SECRET_KEY` en `CONTACT_PHONE`, beide van type **Secret** (Value encrypted).
 De waarden horen nooit in code, screenshots of chat. De openbare site key staat in
 `requestContactAccess()` in `js/script.js`.
 
@@ -76,7 +76,7 @@ De waarden horen nooit in code, screenshots of chat. De openbare site key staat 
 3. Controleer de omgeving als die op de pagina wordt getoond; er hoeft geen pop-up te verschijnen.
 4. Wijzig de waarde van de bestaande secret, of kies **Add → Secret** als deze ontbreekt.
    `TURNSTILE_SECRET_KEY` hoort bij de actieve widget; `CONTACT_PHONE` is internationaal met +, zonder spaties.
-   `CONTACT_ADDRESS` bevat het volledige salonadres op één regel (maximaal 300 tekens). Vul dit rechtstreeks in Cloudflare in en deel het niet via code, screenshots, documentatie of chat. Zonder geldige adressecret blijft alleen het adres verborgen; de telefoonroute blijft werken.
+   `CONTACT_ADDRESS` wordt niet meer gebruikt of teruggegeven. De website toont straat en plaats zonder huisnummer of Cloudflare-controle.
 5. Sla op en publiceer opnieuw. Test vervolgens op het echte domein, niet alleen via Live Server.
 
 **Belangrijk onderscheid:** Turnstile, Pages-hosting en domeinregistratie hebben aparte

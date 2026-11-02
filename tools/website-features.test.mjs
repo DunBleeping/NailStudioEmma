@@ -75,7 +75,8 @@ test('confirmed referral conditions and cart disclosure are translated and no pu
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!html.includes('Copilot'));
   const versions = [...html.matchAll(/(?:style\.css|script\.js)\?v=(\d+)/g)].map(([, version]) => version);
-  assert.deepEqual(versions, ['49', '49']);
+  assert.equal(versions.length, 2);
+  assert.equal(versions[0], versions[1]);
 });
 
 test('hidden SVG sprite does not reserve a blank box before the header', async () => {
@@ -208,23 +209,70 @@ test('floating navigation has matching destinations, accessible state and dismis
   assert.ok(source.includes('container.contains(event.target)'));
 });
 
-test('protected contact details follow WhatsApp without removing contact verification', async () => {
+test('public street-only address and protected phone follow WhatsApp', async () => {
   const contact = html.match(/<div class="contact-grid">[\s\S]*?<\/section>/)[0];
   assert.match(contact, /data-type="whatsapp"[\s\S]*?data-type="phone"/);
-  assert.ok(contact.includes('id="show-contact-details"'));
+  assert.ok(contact.includes('id="show-phone"'));
   assert.ok(contact.includes('id="contact-phone" hidden'));
-  assert.ok(contact.includes('id="contact-address" hidden'));
-  assert.ok(contact.includes('id="contact-address-unavailable" data-i18n hidden'));
   const address = contact.match(/<div class="contact-item" data-type="address">([\s\S]*?)<\/div>\s*<!-- Openingstijden/)[1];
   assert.ok(address.includes('<p>Piraeushaven, Purmerend</p>'));
-  const disclosure = 'Ik werk uitsluitend op afspraak. Na de beveiligingscontrole kun je mijn volledige adres en telefoonnummer bekijken.';
+  const disclosure = 'Ik werk uitsluitend op afspraak.';
   assert.ok(address.includes(disclosure));
   assert.ok(Object.hasOwn(english, disclosure));
   assert.ok(!/publiceer ik hier niet mijn volledige adres|Je ontvangt het adres na bevestiging/i.test(address));
   assert.ok(!/Piraeushaven\s+\d/i.test(address));
+  assert.ok(!/contact-address|beveiligingscontrole|<button|hidden/.test(address));
   const css = await readFile(new URL('../css/style.css', import.meta.url), 'utf8');
   assert.match(css, /"whatsapp hours"\s*"phone hours"\s*"address hours"/);
   assert.match(css, /"hours"\s*"whatsapp"\s*"phone"\s*"address"/);
+});
+
+test('photos start visible, preserve saved choices and synchronize all three toggle buttons', () => {
+  assert.ok(!/<body[^>]*class="[^"]*images-hidden/.test(html));
+  for (const id of ['main-navigation', 'quick-navigation']) {
+    const nav = html.match(new RegExp(`<nav id="${id}"[\\s\\S]*?<\\/nav>`))[0];
+    assert.match(nav, /<button[^>]*data-toggle-images/);
+  }
+  assert.equal((html.match(/data-toggle-images/g) || []).length, 3);
+  for (const saved of [null, 'true', 'false']) {
+    let hidden = false;
+    let stored = saved;
+    const buttons = Array.from({ length: 3 }, () => ({
+      label: { textContent: '' },
+      attributes: {},
+      querySelector() { return this.label; },
+      classList: { toggle() {} },
+      setAttribute(name, value) { this.attributes[name] = value; },
+      addEventListener(name, handler) { this.click = handler; }
+    }));
+    const context = {
+      t: (text) => text,
+      localStorage: {
+        getItem: () => stored,
+        setItem: (key, value) => { assert.equal(key, 'imagesHidden'); stored = String(value); }
+      },
+      document: {
+        body: { classList: {
+          contains: () => hidden,
+          toggle: (name, value) => { hidden = value ?? !hidden; return hidden; }
+        } },
+        querySelector: () => ({}),
+        querySelectorAll: (selector) => selector === '[data-toggle-images]' ? buttons : []
+      },
+      getComputedStyle: () => ({ position: 'relative' }),
+      window: { scrollY: 0, innerHeight: 844 }
+    };
+    runInNewContext(`${functionSource('updatePhotoToggleButton')}\n${functionSource('initializeToggleImages')}\ninitializeToggleImages();`, context);
+    assert.equal(hidden, saved === 'true');
+    for (const button of buttons) {
+      button.click();
+      assert.equal(stored, String(hidden));
+      for (const other of buttons) {
+        assert.equal(other.label.textContent, hidden ? "Foto's tonen" : "Foto's verbergen");
+        assert.equal(other.attributes['aria-pressed'], String(!hidden));
+      }
+    }
+  }
 });
 
 test('confetti runs once on load, cleans up and respects reduced motion', () => {

@@ -9,9 +9,9 @@ De website gebruikt deze foto's:
 | **Smalle foto bovenaan** | `images/gallery/customdesigns/design-1.jpg` | Onder de welkomsttitel |
 | Logo | `images/logo.jpg` | Header en hero |
 
-> **Foto's standaard verborgen:** nieuwe bezoekers zien de site zonder foto's (rustiger, sneller).
-> Met de knop **Foto's tonen** met afbeeldingspictogram rechtsboven zet een bezoeker ze aan;
-> daarna heet de knop **Foto's verbergen**. Die keuze wordt onthouden.
+> **Foto's standaard zichtbaar:** nieuwe bezoekers zien de site met foto's.
+> De knop **Foto's verbergen / Foto's tonen** staat bovenaan en in beide hamburgermenu's.
+> Een eerder opgeslagen keuze blijft behouden.
 > Onder Impressie blijven de titels, beschrijvingen en het aantal foto's ook zichtbaar wanneer foto's worden getoond.
 
 ---

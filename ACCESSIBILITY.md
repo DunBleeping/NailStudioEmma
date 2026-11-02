@@ -99,14 +99,14 @@ In de header staan de knoppen **A– · A · A+ · A++** (ook op mobiel, rechtsb
 - De ruimte rond het logo volgt de afbeeldingshoogte, ook na draaien naar landschapstand.
 - Op smalle schermen is het logo maximaal 300 px breed; het volgende blok snijdt het logo niet af.
 
-De knop met afbeeldingspictogram en **Foto's tonen / Foto's verbergen** rechtsboven zet alle foto's
+De knop met afbeeldingspictogram en **Foto's tonen / Foto's verbergen** bovenaan en de gelijknamige knoppen in beide hamburgermenu's zetten alle foto's
 op de kaarten en onder Impressie aan of uit. De tekst, toegankelijke naam en tooltip volgen de
 huidige toestand en taal; `aria-pressed` geeft aan of foto's zichtbaar zijn.
 Navigatielinks hebben decoratieve achtergrondiconen; de linktekst blijft de toegankelijke naam.
 Ook het grote logo in het welkomstblok schakelt mee; het kleine logo linksboven blijft altijd zichtbaar.
 Een tip bovenaan en bij Impressie wijst op deze knop zolang foto's verborgen zijn.
 De knop geeft met `aria-pressed` aan of foto's zichtbaar zijn.
-- **Nieuwe bezoekers zien standaard géén foto's**: de pagina is rustiger en laadt sneller
+- **Nieuwe bezoekers zien standaard foto's**; eerder opgeslagen toon-/verbergkeuzes blijven behouden.
 - Bij verborgen foto's tonen de Impressie-tegels de titel en omschrijving van de stijl
 - De keuze wordt onthouden (localStorage `imagesHidden`)
 - Op mobiel zit de knop in de header naast het menu ☰
@@ -134,11 +134,11 @@ De website ziet er perfect uit op:
 
 #### 📞 Bellen
 ```
-Klik op Toon adres en telefoonnummer → voltooi de controle → klik op het nummer → de telefoonapp opent
+Klik op Toon telefoonnummer → voltooi de controle → klik op het nummer → de telefoonapp opent
 ```
 **Hoe het werkt:**
 - Alle telefoonnummers zijn klikbaar
-- Het volledige adres, het telefoonnummer en de bel-/Maps-links verschijnen pas na een geslaagde Turnstile-servercontrole.
+- Het telefoonnummer en de bellink verschijnen pas na een geslaagde Turnstile-servercontrole.
 - De contactdialoog heeft een titel, statusmeldingen en sluitknop; Escape sluit en herstelt de toetsenbordfocus.
 - Verificatie mislukt? Er verschijnt een foutmelding en **Opnieuw proberen**; er worden geen contactgegevens onthuld.
 - Klik = Phone app opent
@@ -159,7 +159,7 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 - Altijd zichtbaar op mobiel
 - Pre-filled met standaardbericht, of met de gekozen behandelingen uit het mandje
 - Eerste keer: contactcontrole, daarna **Open WhatsApp** (extra klik voorkomt pop-upblokkering)
-- Maakt tegelijk adres en telefoonnummer zichtbaar, zonder de pagina daarheen te verplaatsen
+- Maakt tegelijk het telefoonnummer zichtbaar, zonder de pagina daarheen te verplaatsen
 
 #### SMS vanuit het mandje
 - Naast WhatsApp staat in het mandje **Afspraak aanvragen via SMS**.
@@ -173,9 +173,8 @@ Klik op een WhatsApp-knop → WhatsApp opent met voorbereid bericht
 - **Vegen** naar links/rechts = volgende/vorige foto
 
 #### 📍 Bezoek mij
-- Het volledige adres en de Maps-link verschijnen pas na een geslaagde Turnstile-servercontrole.
-- Voor verificatie staat alleen de openbare buurt-/plaatsaanduiding op de website.
-- Als het adres tijdelijk niet beschikbaar is, verschijnt na de controle een duidelijke melding; het telefoonnummer blijft beschikbaar.
+- Straat en plaats zijn direct zichtbaar, zonder Cloudflare-controle.
+- Het huisnummer en volledige adres worden niet getoond of via de API teruggegeven.
 
 ---
 

@@ -14,9 +14,9 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
   subtiele glitter en roze bloesems; respecteer minder-bewegingvoorkeuren.
 - De header scrolt op telefoon en tablet (tot en met 1024 px) mee, in beide schermstanden.
   Maak hem daar niet opnieuw sticky zonder toestemming. Desktop mag sticky blijven.
-- Behoud foto's standaard verborgen, onthouden bezoekersvoorkeuren, lettergroottekeuze en
+- Behoud foto's standaard zichtbaar, onthouden bezoekersvoorkeuren, lettergroottekeuze en
   donkere modus met originele fotokleuren. Voeg geen zichtbaar Copilot-credit toe.
-- Zet geen volledig adres of telefoonnummer in openbare bronbestanden. Bewaar beide als Cloudflare-secrets en toon ze alleen via de bestaande beveiligde contactroute.
+- Zet geen volledig adres of telefoonnummer in openbare bronbestanden. Bezoek mij toont alleen straat en plaats zonder huisnummer of Cloudflare-controle. Houd telefoon, WhatsApp en SMS achter de bestaande Turnstile-route.
 - Lees bij vervolgwerk de relevante onderdelen van
   [de overdracht en lessons learned](../OVERDRACHT-EN-LESSONS-LEARNED.md).
   Gebruik de actuele code en expliciete nieuwe keuzes als bron; historische actievoorwaarden,
@@ -54,7 +54,7 @@ Dutch; the owner usually writes in Dutch, so answer in Dutch unless they write i
   - Live site: https://emmanagelstudio.vip
   - Cache and security headers live in `_headers`.
 - Booking uses WhatsApp/SMS via `buildBookingMessage()` after Turnstile verification at `/api/contact`.
-  The full address and phone are only in Cloudflare secrets `CONTACT_ADDRESS` and `CONTACT_PHONE`; never publish them in code, JSON, or docs. The existing Turnstile-protected contact route reveals them after successful verification.
+  The phone is only in Cloudflare secret `CONTACT_PHONE`, revealed after Turnstile verification. `CONTACT_ADDRESS` is no longer used or returned. The website shows only street and city without a house number.
   `TURNSTILE_SECRET_KEY` is server-only. Production validates exact hostname and action `contact`.
   When the treatment cart is filled, the message contains the cart contents.
   There is no e-mail or online agenda; don't add booking forms.

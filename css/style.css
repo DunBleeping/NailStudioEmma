@@ -244,6 +244,25 @@ header .container {
   background: var(--secondary);
 }
 
+.menu-photo-toggle {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  text-align: start;
+  cursor: pointer;
+}
+
+.menu-photo-toggle:hover,
+.menu-photo-toggle:focus-visible {
+  background: var(--secondary);
+}
+
 nav {
   display: flex;
   order: 2;

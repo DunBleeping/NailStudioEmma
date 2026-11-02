@@ -819,7 +819,7 @@ function initializeContact() {
   const contactSection = document.getElementById('contact');
   if (!contactSection) return;
 
-  document.getElementById('show-contact-details').onclick = revealContactDetails;
+  document.getElementById('show-phone').onclick = revealContactPhone;
 
   // Email - VERWIJDERD
   const emailItem = contactSection.querySelector('[data-type="email"]');
@@ -873,7 +873,6 @@ function initializeContact() {
 
 const contactAccess = {
   phone: null,
-  address: null,
   channel: 'phone',
   widget: null,
   generation: 0,
@@ -881,7 +880,7 @@ const contactAccess = {
   script: null
 };
 
-function displayContactDetails() {
+function displayContactPhone() {
   const phone = contactAccess.phone;
   const phoneContainer = document.getElementById('contact-phone');
   const phoneLink = phoneContainer.querySelector('a');
@@ -889,25 +888,12 @@ function displayContactDetails() {
   phoneLink.textContent = phone;
   phoneContainer.hidden = false;
 
-  const address = contactAccess.address;
-  const addressContainer = document.getElementById('contact-address');
-  const addressLink = addressContainer.querySelector('a');
-  const unavailable = document.getElementById('contact-address-unavailable');
-  if (address) {
-    addressLink.href = `https://www.google.com/maps/search/?${new URLSearchParams({ api: '1', query: address })}`;
-    addressLink.textContent = address;
-    addressLink.hidden = false;
-  } else {
-    unavailable.hidden = false;
-  }
-  addressContainer.hidden = false;
-
-  const button = document.getElementById('show-contact-details');
+  const button = document.getElementById('show-phone');
   button.setAttribute('aria-expanded', 'true');
   button.hidden = true;
 }
 
-function revealContactDetails() {
+function revealContactPhone() {
   requestContactAccess('phone');
 }
 
@@ -956,7 +942,7 @@ function clearContactChallenge() {
 }
 
 function showContactContinuation() {
-  displayContactDetails();
+  displayContactPhone();
   const link = document.getElementById('verification-continue');
   const channel = contactAccess.channel;
   link.textContent = t(channel === 'whatsapp' ? 'Open WhatsApp' : channel === 'sms' ? 'Open SMS' : 'Bel mij');
@@ -1013,16 +999,11 @@ async function requestContactAccess(channel) {
           });
           if (!response.ok) throw new Error(`Contact verification HTTP ${response.status}`);
           const result = await response.json();
-          const address = result.address === null
-            ? null
-            : typeof result.address === 'string' ? result.address.trim() : '';
-          if (!/^\+[1-9]\d{7,14}$/.test(result.phone || '')
-            || (address !== null && (!address || address.length > 300 || /[\u0000-\u001f\u007f]/.test(address)))) {
+          if (!/^\+[1-9]\d{7,14}$/.test(result.phone || '')) {
             throw new Error('Invalid contact response');
           }
           if (!dialog.open || generation !== contactAccess.generation) return;
           contactAccess.phone = result.phone;
-          contactAccess.address = address;
           window.turnstile.remove(contactAccess.widget);
           contactAccess.widget = null;
           showContactContinuation();
@@ -1383,26 +1364,24 @@ function applyFontSize(size) {
 
 // 3. Toggle Images
 function updatePhotoToggleButton() {
-  const button = document.getElementById('toggle-images-btn');
-  if (!button) return;
   const hidden = document.body.classList.contains('images-hidden');
   const label = t(hidden ? "Foto's tonen" : "Foto's verbergen");
-  button.querySelector('.photo-toggle-label').textContent = label;
-  button.classList.toggle('images-hidden', hidden);
-  button.setAttribute('aria-pressed', String(!hidden));
-  button.setAttribute('aria-label', label);
-  button.title = label;
+  document.querySelectorAll('[data-toggle-images]').forEach((button) => {
+    button.querySelector('.photo-toggle-label').textContent = label;
+    button.classList.toggle('images-hidden', hidden);
+    button.setAttribute('aria-pressed', String(!hidden));
+    button.setAttribute('aria-label', label);
+    button.title = label;
+  });
 }
 
 function initializeToggleImages() {
-  const toggleImagesBtn = document.getElementById('toggle-images-btn');
-  // New visitors (no saved choice) start with images hidden
-  const savedImageState = localStorage.getItem('imagesHidden') !== 'false';
+  const savedImageState = localStorage.getItem('imagesHidden') === 'true';
 
   document.body.classList.toggle('images-hidden', savedImageState);
   updatePhotoToggleButton();
 
-  if (toggleImagesBtn) {
+  document.querySelectorAll('[data-toggle-images]').forEach((toggleImagesBtn) => {
     toggleImagesBtn.addEventListener('click', () => {
       const header = document.querySelector('header');
       const viewportTop = getComputedStyle(header).position === 'sticky'
@@ -1423,7 +1402,7 @@ function initializeToggleImages() {
         window.scrollBy({ top: anchor.getBoundingClientRect().top - anchorTop, behavior: 'instant' });
       }
     });
-  }
+  });
 }
 
 // 4. Categories Sidebar Navigation

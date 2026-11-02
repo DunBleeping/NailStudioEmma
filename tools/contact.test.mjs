@@ -54,17 +54,16 @@ test('contact endpoint denies unverified requests without returning contact data
   }
 });
 
-test('verified phone access remains available while an invalid address secret is withheld', async () => {
+test('address secrets are never returned and phone access does not depend on them', async () => {
   const originalFetch = globalThis.fetch;
-  const originalError = console.error;
   globalThis.fetch = async () => Response.json({
     success: true,
     hostname: 'emmanagelstudio.vip',
     action: 'contact'
   });
-  console.error = () => {};
   try {
     for (const secrets of [
+      env,
       { ...env, CONTACT_ADDRESS: undefined },
       { ...env, CONTACT_ADDRESS: '' },
       { ...env, CONTACT_ADDRESS: 'invalid\naddress' },
@@ -72,12 +71,11 @@ test('verified phone access remains available while an invalid address secret is
     ]) {
       const response = await onRequest({ request: request(), env: secrets });
       assert.equal(response.status, 200);
-      assert.deepEqual(await response.json(), { phone: env.CONTACT_PHONE, address: null });
+      assert.deepEqual(await response.json(), { phone: env.CONTACT_PHONE });
       assert.match(response.headers.get('Cache-Control'), /no-store/);
     }
   } finally {
     globalThis.fetch = originalFetch;
-    console.error = originalError;
   }
 });
 
@@ -109,7 +107,7 @@ test('only a successful exact-hostname contact-action verification releases cont
     };
     const result = await onRequest({ request: request(), env });
     assert.equal(result.status, 200);
-    assert.deepEqual(await result.json(), { phone: env.CONTACT_PHONE, address: env.CONTACT_ADDRESS });
+    assert.deepEqual(await result.json(), { phone: env.CONTACT_PHONE });
     assert.match(result.headers.get('Cache-Control'), /no-store/);
   } finally {
     globalThis.fetch = originalFetch;

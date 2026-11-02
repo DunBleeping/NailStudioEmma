@@ -41,13 +41,13 @@ Laatst bijgewerkt: oktober 2026 · Status: **live**
 - Behandelmandje: WhatsApp en SMS met gedeelde berichtopbouw (behandelingen, toeslag en totaal);
   Nederlands = alleen NL; andere talen = gekozen taal eerst, daarna NL
 - WhatsApp-links op alle elementen met `data-whatsapp` (volgen de mandje-inhoud)
-- Voorkeuren in localStorage: `emstudio-inverted`, `fontSize`, `imagesHidden` (standaard verborgen),
+- Voorkeuren in localStorage: `emstudio-inverted`, `fontSize`, `imagesHidden` (standaard zichtbaar, keuze behouden),
   `cart`, `cartExtras`, `cartExtrasDeclined` (bewust uitgevinkte toeslagen), `language` (standaard `nl`)
 - HTML-escaping van alle JSON-inhoud
 
 ### data/
 - `settings.json` – salon, standaardbericht, openingstijden, social; geen telefoonnummer
-- `functions/api/contact.js` – Turnstile-servercontrole en contactgegevens uit Cloudflare-secrets
+- `functions/api/contact.js` – Turnstile-servercontrole en telefoonnummer uit Cloudflare-secret; geen adresresponse
 - `_routes.json` – alleen de contact-API gebruikt Pages Functions
 - `services.json` – 27 behandelingen in 7 categorieën (€10 – €60), 11 met notitie over de toeslag,
   `extras`: verwijderen oude lak/gellak +€5

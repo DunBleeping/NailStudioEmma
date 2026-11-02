@@ -98,27 +98,29 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    De eerste foto op naam is de tegel. Klik → **album** met foto's per stijl
    (bladeren met pijlen, pijltjestoetsen of vegen).
 6. **Over Emma NailStudio** – introductie en *Ik werk op afspraak, zodat je bij aankomst niet hoeft te wachten.*
-7. **Contact & Openingstijden** – adres en telefoon na beveiligingscontrole, openingstijden en WhatsApp.
+7. **Contact & Openingstijden** – straat en plaats openbaar, telefoon na beveiligingscontrole, openingstijden en WhatsApp.
    WhatsApp heeft de voorkeur en is de snelste contactroute; de tekst verwijst naar de groene knop rechtsonder.
    Op mobiel staan Bel mij, WhatsApp en Bezoek mij compact onder elkaar naast de openingstijden; op kleine schermen
    staan ze onder elkaar, met openingstijden eerst. Op desktop beslaan de drie compacte kaarten ongeveer de hoogte
    van de openingstijdenkaart. De kaartcombinatie gebruikt twee kolommen op desktop en één kolom op mobiel.
    In het weekend: gesloten, behalve op speciaal verzoek. Openingstijden worden ook naar Engels vertaald.
-   **Toon adres en telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
-   Na servercontrole verschijnen adres en nummer en een knop om bellen, WhatsApp of SMS te openen.
+   **Toon telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
+   Na servercontrole verschijnen het nummer en een knop om bellen, WhatsApp of SMS te openen.
    Deze extra klik voorkomt geblokkeerde pop-ups na asynchrone verificatie.
    Na een geslaagde controle werken WhatsApp en SMS direct zolang de pagina openblijft.
    **Bezoek mij** toont openbaar alleen de straat en plaats: Piraeushaven, Purmerend.
-   Het volledige adres en telefoonnummer staan uitsluitend in Cloudflare-secrets en worden alleen na een geslaagde servercontrole getoond. Ze staan niet in HTML, openbare configuratie of gestructureerde paginagegevens en worden niet in localStorage bewaard.
+   **Bezoek mij** heeft geen Cloudflare-controle en toont geen huisnummer. Het volledige adres wordt ook niet via de API teruggegeven.
+   Het telefoonnummer staat uitsluitend in Cloudflare-secret `CONTACT_PHONE` en wordt alleen na een geslaagde servercontrole getoond, niet in localStorage bewaard.
    Turnstile bemoeilijkt automatisch verzamelen, maar verhindert niet dat een bezoeker de gegevens na verificatie kopieert of deelt.
 8. **Footer** – links, social media, copyright.
 9. **Zwevende WhatsApp-knop** rechtsonder, met daarboven de knop **🛒 Mandje** zodra er behandelingen
    gekozen zijn.
 
 **Standaardinstellingen voor nieuwe bezoekers:**
-- **Foto's verborgen** – rustiger en sneller; tegels onder Impressie tonen dan titel + omschrijving.
-  Ook het grote logo in het welkomstblok wordt verborgen; het kleine headerlogo blijft altijd zichtbaar.
-  Een tip bovenaan en bij Impressie verwijst naar **Foto's tonen** rechtsboven.
+- **Foto's zichtbaar** – bezoekers kunnen ze verbergen met de knop bovenaan of in beide hamburgermenu's.
+  Een eerder opgeslagen toon-/verbergkeuze blijft behouden.
+  Bij verborgen foto's verdwijnen ook het grote logo en de foto's op de kaarten; het kleine headerlogo blijft zichtbaar.
+  Een tip bovenaan en bij Impressie verwijst naar **Foto's tonen** bovenaan of in het menu.
   De knop wisselt met de fotoweergave en taal tussen tonen/verbergen en Show/Hide photos.
   De tip verdwijnt zodra foto's zichtbaar zijn; de keuze wordt onthouden.
   Bij omschakelen blijft de zichtbare tekst zo veel mogelijk op dezelfde schermhoogte staan.
@@ -275,8 +277,8 @@ EmStudio/
 "social": { "instagram": "https://www.instagram.com/EmmaPurmerend/", "facebook": "https://www.facebook.com/EmmaPurmerend", "whatsappBusiness": true }
 ```
 
-Telefoonnummer en volledig adres uitsluitend in Cloudflare als secrets `CONTACT_PHONE` en `CONTACT_ADDRESS`.
-Het telefoonnummer gebruikt internationaal formaat met + en zonder spaties; vul het volledige adres alleen rechtstreeks in Cloudflare in, nooit in code, JSON, documentatie of chat.
+Telefoonnummer uitsluitend in Cloudflare als secret `CONTACT_PHONE`, internationaal met + en zonder spaties.
+`CONTACT_ADDRESS` wordt niet meer gebruikt of teruggegeven. Het huisnummer hoort niet in code, JSON, documentatie of chat.
 `whatsappBusiness: true` toont de beveiligde WhatsApp-link in de footer; zet hier geen directe nummerlink.
 De extra hero-knoppen gebruiken `social.instagram` en `social.facebook`. De Google Search-knop is verwijderd.
 Instagram en Facebook verwijzen momenteel naar de opgegeven profielen; Facebook is het persoonlijke profiel
@@ -396,7 +398,7 @@ Laat echte klanten vrijwillig een eerlijke review geven, zonder beloning. Koppel
 profiellink. Website-SEO of een hoger Ads-budget garandeert geen betere Maps-positie.
 Controleer vóór profielwijzigingen de toelatings- en adresregels van Google: een bedrijf dat klanten op
 locatie ontvangt is niet automatisch een servicegebiedbedrijf. Verberg het salonadres niet door ten
-onrechte te zeggen dat je klanten thuis bezoekt. Het volledige adres verschijnt op de website alleen na een geslaagde Turnstile-controle.
+onrechte te zeggen dat je klanten thuis bezoekt. De website toont alleen straat en plaats, zonder huisnummer.
 
 ## 🔐 Privacy & beveiliging
 
@@ -404,7 +406,7 @@ onrechte te zeggen dat je klanten thuis bezoekt. Het volledige adres verschijnt 
 - Alleen `localStorage` voor weergavevoorkeuren (donkere modus, lettergrootte, foto's) en het mandje;
   het mandje wordt niet naar de contact-API gestuurd
 - Turnstile wordt pas bij een contactverzoek geladen. Na succesvolle servercontrole geeft de API
-  het adres en telefoonnummer uit Cloudflare-secrets terug. Cloudflare verwerkt verificatiegegevens;
+  het telefoonnummer uit de Cloudflare-secret terug. Cloudflare verwerkt verificatiegegevens;
   de browser stuurt alleen het tijdelijke controletoken naar `/api/contact`.
 - Beveiligingsheaders in `_headers` (`nosniff`, `X-Frame-Options`, `Referrer-Policy`, ...)
 - HTML-escaping van alle JSON-inhoud in `script.js`
@@ -422,21 +424,21 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
   registratie/verlenging en Pages-hosting zijn aparte onderdelen.
   Zie [de account- en domeinhandleiding](SETUP-NEW-COMPUTER.md#domein-hosting-en-accounts-bevestigd-op-21-oktober-2026).
 - Cloudflare-account voor hosting: aanmelden via GitHub; **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
-- Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret), `CONTACT_PHONE` en `CONTACT_ADDRESS` als **Secret** voor productie.
-  `CONTACT_ADDRESS` bevat het volledige adres op één regel (maximaal 300 tekens). Als deze secret ontbreekt of ongeldig is, blijft het adres verborgen en ziet de bezoeker een melding; het telefoonnummer blijft na Turnstile beschikbaar.
+- Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret) en `CONTACT_PHONE` als **Secret** voor productie.
+  Een bestaande `CONTACT_ADDRESS` heeft geen effect meer op de website of API.
   Controleer de geselecteerde omgeving op de pagina; er hoeft geen pop-up te verschijnen.
 - De openbare site key staat in `requestContactAccess()` in `js/script.js`.
   De widget moet `emmanagelstudio.vip` toelaten (en `www.emmanagelstudio.vip` als die host wordt gebruikt).
 - `functions/api/contact.js` controleert POST, Origin, token, exacte hostnaam en actie `contact`.
   Alleen `/api/contact` draait via een Function (`_routes.json`); antwoorden worden niet gecachet.
-  Bij ontbrekende Turnstile-/telefoonconfiguratie of verificatiefouten blijven adres en nummer afgeschermd; bij een ontbrekende adressecret wordt alleen het adres verborgen.
+  Bij ontbrekende Turnstile-/telefoonconfiguratie of verificatiefouten blijft het nummer afgeschermd.
 - Publiceer opnieuw na het wijzigen van secrets. Live Server/Python testen alleen de statische pagina,
-  niet de contactfunctie. Daar verschijnen dus geen adres of telefoonnummer zonder werkende API.
+  niet de contactfunctie. Daar verschijnt dus geen telefoonnummer zonder werkende API.
 - Lokale Function-tests: `node --test tools/contact.test.mjs` (geen npm-pakketten nodig).
   Voor volledige lokale integratie is Wrangler Pages nodig. De productiehandler weigert bewust localhost
   en previews; gebruik daarvoor een apart testproject met testsleutels en uitsluitend lokale hostvalidatie.
   Verruim nooit de productie-allowlist met localhost en zet secrets nooit in Git.
-- Controleer live: contactdialoog in NL/EN, echte challenge, adres en nummer na succes, mandje in WhatsApp/SMS,
+- Controleer live: straat en plaats zonder huisnummer of controle, contactdialoog in NL/EN, echte challenge, nummer na succes, mandje in WhatsApp/SMS,
   annuleren/opnieuw proberen en weigering van een ongeldig token. De API ontvangt geen mandje of bericht.
 
 ## 📝 Nog te doen
@@ -444,7 +446,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 - [ ] Volgende fase: Google Search Console / Business Profile, officiële Instagram-/Facebook-links
       en WhatsApp Business-profiel; daarna eventueel Google Ads met vooraf afgesproken budget.
       Zie [de stappenlijst](SETUP-NEW-COMPUTER.md#volgende-fase-vindbaarheid-en-sociale-kanalen).
-- [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; volledig adres en telefoon staan alleen als Cloudflare-secrets achter Turnstile
+- [ ] Voorbeeld-e-mailadres in `data/settings.json` beoordelen; telefoon blijft achter Turnstile, adres toont alleen straat en plaats
 - [x] Domein `emmanagelstudio.vip` in Schema.org, sociale deelgegevens, canonical, sitemap en robots
 - [x] Instagram- en Facebook-profielen ingesteld in `settings.json` (Facebook is een persoonlijk profiel)
 - [x] Eigen foto's in de Impressie-albums; lege albums blijven verborgen, behalve het BIAB-illustratievoorbeeld
