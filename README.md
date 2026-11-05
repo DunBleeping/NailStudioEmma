@@ -462,3 +462,15 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
 | Prijzen/behandelingen leeg | JSON-fout → controleer op https://jsonlint.com of F12 → Console |
 | WhatsApp opent niet goed | Nummer in `settings.json` met landcode, zonder spaties |
 | Lokaal leeg scherm | Gebruik een HTTP-server, niet `file://` |
+
+## Klikmeting (anoniem)
+
+Bij "+ dit wil ik", WhatsApp, SMS en "Bel mij" stuurt de site een anonieme melding naar `/api/event`
+(`functions/api/event.js`): tijdstip, soort klik, behandeling, willekeurig sessie-ID (`sessionStorage`) en user-agent.
+Geen IP-adres, telefoonnummer of berichttekst. Bewaartermijn 90 dagen.
+
+Instellen in Cloudflare Pages (eenmalig; zonder dit wordt er niets opgeslagen en werkt de site gewoon):
+1. Workers & Pages → KV → namespace maken (bijv. `emma-klikken`).
+2. Pages-project → Settings → Bindings → KV namespace, variabelenaam `EVENTS_KV`.
+3. Settings → Variables and Secrets → secret `STATS_TOKEN` (minstens 16 willekeurige tekens).
+4. Bekijken: `https://emmanagelstudio.vip/api/event?token=<STATS_TOKEN>` (tabel, nieuwste bovenaan).

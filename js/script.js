@@ -893,7 +893,21 @@ function displayContactPhone() {
   button.hidden = true;
 }
 
+function trackEvent(event, service = '') {
+  try {
+    let session = sessionStorage.getItem('emstudio-sid');
+    if (!session) {
+      session = crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+      sessionStorage.setItem('emstudio-sid', session);
+    }
+    navigator.sendBeacon('/api/event', new Blob([JSON.stringify({ event, service, session })], { type: 'application/json' }));
+  } catch {
+    // Meten mag de website nooit storen.
+  }
+}
+
 function revealContactPhone() {
+  trackEvent('bel');
   requestContactAccess('phone');
 }
 
@@ -1047,6 +1061,7 @@ function setupWhatsAppButton(element) {
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
   element.onclick = (event) => {
+    trackEvent('whatsapp');
     if (contactAccess.phone) {
       displayContactPhone();
       element.href = buildWhatsAppUrl();
@@ -1672,6 +1687,7 @@ function toggleCartItem(id) {
     appData.cart = appData.cart.filter((x) => x !== id);
   } else {
     appData.cart.push(id);
+    trackEvent('dit_wil_ik', id);
   }
   applyDefaultCartExtras();
   saveCart();
@@ -1745,6 +1761,7 @@ function renderCart() {
     if (smsBtn) {
       smsBtn.href = '#';
       smsBtn.onclick = (event) => {
+        trackEvent('sms');
         if (contactAccess.phone) smsBtn.href = buildSmsUrl();
         else {
           event.preventDefault();
