@@ -1221,7 +1221,7 @@ function openServicesForHash() {
   const target = document.getElementById(window.location.hash.slice(1));
   if (target) {
     openServicesForTarget(target);
-    if (target.closest('#services')) target.scrollIntoView();
+    if (target.closest('#services')) target.scrollIntoView({ behavior: 'instant' });
   }
 }
 

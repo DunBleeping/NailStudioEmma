@@ -42,6 +42,16 @@ test('direct treatment links reveal cards without changing the cart', () => {
   assert.equal(selectedCategory, 'all');
   assert.equal(filtered, true);
   assert.deepEqual(state.cart, ['shellac']);
+  let scrollBehavior;
+  target.closest = () => true;
+  target.scrollIntoView = (options) => { scrollBehavior = options.behavior; };
+  const openHash = runInNewContext(`(${functionSource('openServicesForHash')})`, {
+    window: { location: { hash: '#behandeling-biab-new-set' } },
+    document: { getElementById: () => target },
+    openServicesForTarget: open
+  });
+  openHash();
+  assert.equal(scrollBehavior, 'instant');
   assert.match(functionSource('createServiceCard'), /card\.id = `behandeling-\$\{service\.id\}`/);
   assert.match(functionSource('createServiceCard'), /data-whatsapp/);
   assert.ok(html.includes('href="#behandeling-biab-new-set"'));
