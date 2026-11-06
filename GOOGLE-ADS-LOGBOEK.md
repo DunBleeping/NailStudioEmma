@@ -216,6 +216,16 @@ nog geen winstgevendheid.
   reviewbeloning ontbreekt en de sitemap `lastmod` 2026-11-01 bevat. Dit bevestigt de
   live inhoud, niet de opname in Google Search. Search Console is niet gecontroleerd.
 
+## 2026-11-06 23:11 - Aanbeveling budget (schermafbeelding eigenaar)
+- **Bron:** schermafbeelding van de Google Ads-app; geen actuele API-cijfers opgehaald.
+- **Aanbeveling:** Campaign #1 dagbudget EUR 7,50 naar EUR 12,00; geschat +204 vertoningen
+  per week en +EUR 24,65 kosten per week. Dit is een automatische Google-schatting.
+- **Structuur:** er is één campagne (Campaign #1) met twee advertenties, geen tweede campagne.
+- **Advies:** niet toepassen op basis van deze melding alleen. Eerder gemeten verlies door
+  budget was 0% en verlies door rang circa 56-65%. Eerst actuele cijfers controleren.
+- **Besluit:** geen wijziging uitgevoerd; "Apply" niet gebruikt.
+- **Volgende controle:** verlies door budget over de laatste 7 dagen opnieuw ophalen.
+
 ## Volgende analyse: lokale zichtbaarheid gericht controleren
 
 1. Controleer in het account van de eigenaar of het Google Bedrijfsprofiel bestaat,
