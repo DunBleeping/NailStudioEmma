@@ -262,3 +262,66 @@ nog geen winstgevendheid.
 Voor projectvoorkeuren en bredere technische context:
 [Copilot-instructies](.github/copilot-instructions.md) en
 [overdracht en lessons learned](OVERDRACHT-EN-LESSONS-LEARNED.md).
+
+## 2026-11-06 - Uitvoering behandelrelevantie, zoekwoorden en lokale zichtbaarheid
+
+- **Toestemming:** eigenaar vroeg om punten 2, 3 en 5 te verbeteren, zonder
+  Turnstile-handeling. Dit betreft website, lokale advertentietekst, gerichte
+  zoekwoorden en Bedrijfsprofiel; geen budget-, bied- of conversiemeetwijziging.
+- **Bron en uitgangsperiode:** ingelogde Google Ads- en Bedrijfsprofielbrowser,
+  lokale regressietests en live website. De eerder onderzochte Ads-periode
+  blijft 30 oktober t/m 5 november; geen nieuwe prestatiecijfers of afspraken
+  verondersteld. De Ads MCP-autorisatie is niet hersteld; geen OAuth herhaald.
+- **Zoekwoorden, daadwerkelijk opgeslagen:** alleen het brede
+  `acryl nagels purmerend` gepauzeerd. Na herladen teruggelezen als
+  `Onderbroken`; de bestaande woordgroep `"acrylnagels purmerend"` blijft
+  `Geschikt`. Dit is een begrensde targetingtest, geen bewijs dat alle eerdere
+  brede klikken irrelevant waren. Geen blinde concurrent- of plaatsuitsluitingen.
+- **Behandelgerichte landing, daadwerkelijk opgeslagen:** uiteindelijke
+  zoekwoord-URL van `"biab purmerend"` naar
+  `https://emmanagelstudio.vip/#behandeling-biab-new-set`; die van
+  `"gellak purmerend"` naar `https://emmanagelstudio.vip/#behandeling-shellac`.
+  Beide URL's teruggelezen in de zoekwoordrijen met `In behandeling /
+  Wordt beoordeeld`. Opslaan is geen bewijs van afgeronde Google-goedkeuring.
+- **Lokale advertentie:** bestaande responsieve advertentie uitgebreid met
+  `BIAB Nieuwe Set vanaf EUR 45` en `Shellac Gellak vanaf EUR 25`;
+  eerste beschrijving noemt beide vanafprijzen en de WhatsApp-afspraakroute.
+  Het account gebruikt het euroteken; bovenstaande weergave is logboeknotatie.
+  Koppen en beschrijving na opslaan opnieuw in de editor teruggelezen.
+  Prijzen komen uit de actuele behandelingen; eventuele toeslagen blijven op
+  de website uitgelegd. Geen nieuwe campagne/groep, pinning of budgetwijziging.
+  Merkadvertentie en overige bestaande teksten behouden.
+- **Website gepubliceerd:** directe BIAB/Gellak-knoppen en herkenbare
+  behandelankers; iedere kaart gebruikt de bestaande beschermde WhatsApp-route.
+  Een behandellink opent de uitleg en reset alleen zoek-/categoriefilters,
+  niet het mandje of bezoekersvoorkeuren. Basis-BIAB en opvullen tonen de echte
+  BIAB-albumfoto. Desktopscroll houdt rekening met de gemeten headerhoogte;
+  mobiel/tablet blijft de header niet-sticky.
+- **Live controle en vervolgfix:** eerste uitrol versie 54 laadde correct,
+  maar automatisch smooth scrollen bleef live bij de paginatop hangen.
+  Rechtstreeks springen zonder animatie werkte op dezelfde pagina.
+  Directe hash-navigatie daarom aangepast en versie 55 gepubliceerd.
+  Live versie 55 opent de BIAB-kaart op 16 px van de viewportbovenkant;
+  de eigen foto laadt en de WhatsApp-handler is aanwezig. Geen Turnstile
+  opgelost of gewijzigd. Bestaande, apart gepubliceerde klikmeting behouden;
+  geen Google Ads-conversiekoppeling toegevoegd of Cloudflare-binding ingesteld.
+- **Bedrijfsprofiel:** bestaande categorie Nagelstudio en bruikbare
+  behandelbeschrijving behouden. Ontbrekende diensten-/menulink naar
+  `https://emmanagelstudio.vip/#pricing` opgeslagen. Bij laatste teruglezing
+  nog `Je bewerking is in behandeling`; niet als openbaar goedgekeurd gemeld.
+  Geen nieuwe foto's, reviews of reviewbeloningen geplaatst.
+- **Validatie:** 32/32 website-, vertaal- en contactregressietests geslaagd,
+  ook na integratie van de reeds gepubliceerde remote wijzigingen.
+  Browsermetingen bij 390, 844 en 1280 CSS-pixels en 14/16/18/20 px basisfont:
+  geen horizontale overflow of headeroverlap bij de behandelkaart.
+  Zoekfilter reset, mandje blijft behouden en Franse WhatsApp-label/handler
+  werken na taalwissel. Viewportemulatie is geen echte iPhone/Safari-test.
+- **Werkbehoud en publicatie:** remote liep voor op de lokale werkboom.
+  Bestaande remote wijzigingen geïntegreerd, niet overschreven.
+  Lokale eerdere lognotities tijdelijk apart bewaard en daarna exact
+  terugvergeleken; die blijven buiten deze nieuwe publicatienotitie.
+- **Volgende controle:** controleer Google-goedkeuring van de twee URL's,
+  advertentiewijziging en profielprijzenlink. Vergelijk na 7-14 volledige
+  dagen klikken, zoektermen, kosten en apart gemelde afspraken. Herstel
+  Ads-conversiemeting pas als afzonderlijke opdracht; nul gemeten conversies
+  blijft onvoldoende om nieuwe-klantenrendement te beoordelen.
