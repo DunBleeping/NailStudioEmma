@@ -229,7 +229,7 @@
       "name": "BIAB Nieuwe Set",
       "price": 45,
       "description": "Nieuwe set met BIAB (Builder In A Bottle) voor sterke, natuurlijk ogende nagels.",
-      "image": "./images/services/new-set-nagels.jpg",
+      "image": "./images/gallery/biab/biab-01.jpg?v=3f4c5001",
       "id": "biab-new-set",
       "duration": "60 minuten",
       "category": "Nagels - BIAB",
@@ -239,7 +239,7 @@
       "name": "Opvullen BIAB",
       "price": 40,
       "description": "Opvulbeurt voor bestaande BIAB nagels.",
-      "image": "./images/services/new-set-nagels.jpg",
+      "image": "./images/gallery/biab/biab-01.jpg?v=3f4c5001",
       "id": "opvullen-biab",
       "duration": "45 minuten",
       "category": "Nagels - BIAB"

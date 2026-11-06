@@ -450,6 +450,7 @@ function initializeServices() {
 function createServiceCard(service) {
   const card = document.createElement('div');
   card.className = 'service-card';
+  card.id = `behandeling-${service.id}`;
   card.setAttribute('data-category', service.category);
   card.setAttribute('data-id', service.id);
   const searchableVersions = Object.keys(appData.translations)
@@ -489,6 +490,7 @@ function createServiceCard(service) {
         </div>
       </div>
       <button type="button" class="add-to-cart-btn" data-id="${escapeHtml(service.id)}" aria-pressed="false">${escapeHtml(t('+ dit wil ik'))}</button>
+      <a href="#" class="secondary-button" data-whatsapp aria-label="${escapeHtml(t('Neem contact op via WhatsApp'))}: ${escapeHtml(service.name)}">WhatsApp</a>
     </div>
   `;
 
@@ -1185,6 +1187,17 @@ function openServicesForTarget(target) {
   const details = document.getElementById('services-details');
   if (details && (target.id === 'services' || details.contains(target))) {
     details.open = true;
+    if (target.classList.contains('service-card')) {
+      const header = document.querySelector('header');
+      const headerHeight = window.matchMedia('(min-width: 1025px)').matches ? header?.offsetHeight || 0 : 0;
+      target.style.scrollMarginTop = `${headerHeight + 16}px`;
+      appData.activeCategory = 'all';
+      appData.searchQuery = '';
+      const input = document.getElementById('service-search');
+      if (input) input.value = '';
+      setActiveCategory('all');
+      applyServiceFilters();
+    }
   }
 }
 

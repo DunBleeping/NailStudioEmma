@@ -12,6 +12,52 @@ const functionSource = (name) => {
   return script.slice(start, script.indexOf('\n}', start) + 2);
 };
 
+test('direct treatment links reveal cards without changing the cart', () => {
+  const details = { open: false, contains: () => true };
+  const input = { value: 'old search' };
+  const state = { activeCategory: 'Nagels - Design', searchQuery: 'old search', cart: ['shellac'] };
+  let filtered = false;
+  let selectedCategory;
+  let desktop = false;
+  const open = runInNewContext(`(${functionSource('openServicesForTarget')})`, {
+    document: {
+      getElementById: (id) => id === 'services-details' ? details : input,
+      querySelector: () => ({ offsetHeight: 270 })
+    },
+    window: { matchMedia: () => ({ matches: desktop }) },
+    appData: state,
+    setActiveCategory: (category) => { selectedCategory = category; },
+    applyServiceFilters: () => { filtered = true; }
+  });
+  const target = { id: 'behandeling-biab-new-set', classList: { contains: () => true }, style: {} };
+  open(target);
+  assert.equal(target.style.scrollMarginTop, '16px');
+  desktop = true;
+  open(target);
+  assert.equal(target.style.scrollMarginTop, '286px');
+  assert.equal(details.open, true);
+  assert.equal(state.activeCategory, 'all');
+  assert.equal(state.searchQuery, '');
+  assert.equal(input.value, '');
+  assert.equal(selectedCategory, 'all');
+  assert.equal(filtered, true);
+  assert.deepEqual(state.cart, ['shellac']);
+  assert.match(functionSource('createServiceCard'), /card\.id = `behandeling-\$\{service\.id\}`/);
+  assert.match(functionSource('createServiceCard'), /data-whatsapp/);
+  assert.ok(html.includes('href="#behandeling-biab-new-set"'));
+  assert.ok(html.includes('href="#behandeling-shellac"'));
+});
+
+test('BIAB treatment photo comes from the real BIAB album', async () => {
+  const services = JSON.parse(await readFile(new URL('../data/services.json', import.meta.url), 'utf8'));
+  const gallery = JSON.parse(await readFile(new URL('../data/gallery.json', import.meta.url), 'utf8'));
+  const photo = gallery.images.find((album) => album.folder === 'biab').photos[0].src;
+  for (const id of ['biab-new-set', 'opvullen-biab']) {
+    assert.equal(services.services.find((service) => service.id === id).image, photo);
+  }
+  await readFile(new URL(`../${photo.split('?')[0]}`, import.meta.url));
+});
+
 test('BIAB photos take priority over the labelled illustration example', async () => {
   const gallery = JSON.parse(await readFile(new URL('../data/gallery.json', import.meta.url), 'utf8'));
   const biab = gallery.images.find((album) => album.folder === 'biab');
@@ -152,12 +198,13 @@ test('services are collapsed by default and navigation opens only relevant targe
   const openTarget = runInNewContext(`(${functionSource('openServicesForTarget')})`, {
     document: { getElementById: () => details }
   });
-  openTarget({ id: 'contact' });
+  const classList = { contains: () => false };
+  openTarget({ id: 'contact', classList });
   assert.equal(details.open, false);
-  openTarget({ id: 'services' });
+  openTarget({ id: 'services', classList });
   assert.equal(details.open, true);
   details.open = false;
-  openTarget({ id: 'service-search' });
+  openTarget({ id: 'service-search', classList });
   assert.equal(details.open, true);
   assert.ok(script.includes("window.addEventListener('hashchange', openServicesForHash)"));
 });
