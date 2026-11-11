@@ -58,6 +58,39 @@ test('direct treatment links reveal cards without changing the cart', () => {
   assert.ok(html.includes('href="#behandeling-shellac"'));
 });
 
+test('WhatsApp uses the public Business number while SMS uses the verified contact number', async () => {
+  const settings = JSON.parse(await readFile(new URL('../data/settings.json', import.meta.url), 'utf8'));
+  const contactAccess = {
+    phones: { sms: '+31612345678' },
+    channel: 'sms'
+  };
+  const getContactPhone = runInNewContext(`(${functionSource('getContactPhone')})`, { contactAccess });
+  const buildWhatsAppUrl = runInNewContext(`(${functionSource('buildWhatsAppUrl')})`, {
+    appData: { settings },
+    buildBookingMessage: () => ''
+  });
+  const buildSmsUrl = runInNewContext(`(${functionSource('buildSmsUrl')})`, {
+    getContactPhone,
+    buildBookingMessage: () => '',
+    navigator: { userAgent: 'Android' }
+  });
+  assert.equal(new URL(buildWhatsAppUrl()).pathname, `/${settings.contact.whatsapp.phone.replace(/\D/g, '')}`);
+  assert.match(buildSmsUrl(), /^sms:\+31612345678\?/);
+
+  let verificationRequested = false;
+  const button = {};
+  const setupWhatsAppButton = runInNewContext(`(${functionSource('setupWhatsAppButton')})`, {
+    appData: { settings },
+    buildWhatsAppUrl,
+    trackEvent: () => {},
+    requestContactAccess: () => { verificationRequested = true; }
+  });
+  setupWhatsAppButton(button);
+  button.onclick();
+  assert.equal(button.href, buildWhatsAppUrl());
+  assert.equal(verificationRequested, false);
+});
+
 test('BIAB treatment photo comes from the real BIAB album', async () => {
   const services = JSON.parse(await readFile(new URL('../data/services.json', import.meta.url), 'utf8'));
   const gallery = JSON.parse(await readFile(new URL('../data/gallery.json', import.meta.url), 'utf8'));

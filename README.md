@@ -41,7 +41,7 @@ lettergroottes na scrollen en rotatie. Viewportemulatie vervangt geen iPhone/Saf
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
-- De knoppen BIAB en Gellak bovenaan openen direct de bijbehorende behandelkaart met prijs, duur en foto. Advertenties kunnen rechtstreeks linken naar `/#behandeling-biab-new-set` en `/#behandeling-shellac`. Iedere behandelkaart heeft een WhatsApp-link via de bestaande Turnstile-route; voor een bericht met behandelingen kies je eerst `+ dit wil ik`. Een directe behandellink opent de uitleg, springt zonder scrollanimatie naar de kaart en wist alleen het zoek-/categoriefilter, niet het mandje of bezoekersvoorkeuren. Op desktop blijft de kaart onder de sticky header zichtbaar; mobiel blijft de header meescrollen. De basis-BIAB-kaarten gebruiken de eigen BIAB-albumfoto.
+- De knoppen BIAB en Gellak bovenaan openen direct de bijbehorende behandelkaart met prijs, duur en foto. Advertenties kunnen rechtstreeks linken naar `/#behandeling-biab-new-set` en `/#behandeling-shellac`. Iedere behandelkaart heeft een directe link naar WhatsApp Business; voor een bericht met behandelingen kies je eerst `+ dit wil ik`. Een directe behandellink opent de uitleg, springt zonder scrollanimatie naar de kaart en wist alleen het zoek-/categoriefilter, niet het mandje of bezoekersvoorkeuren. Op desktop blijft de kaart onder de sticky header zichtbaar; mobiel blijft de header meescrollen. De basis-BIAB-kaarten gebruiken de eigen BIAB-albumfoto.
 - 'Behandelingen in beeld en uitgelegd' is standaard ingeklapt. De foto van New Set Nagels onder de titel blijft bij inklappen staan; de bron volgt de behandelkaart. Klik op de titel of foto om categorieën, zoeken en behandelkaarten met uitleg te openen. Foto's volgen de knop Foto's tonen/verbergen. De prijzenlijst is het compacte overzicht met bedragen; prijzenlijst en mandje blijven apart beschikbaar. Links naar Behandelingen of Zoeken openen het onderdeel automatisch, ook bij een directe link met `#services` of `#service-search`.
 - Een zwevend hamburgermenu linksboven blijft op iedere scrollpositie bereikbaar, met dezelfde zes bestemmingen als de hoofdnavigatie. De mobiele header blijft gewoon meescrollen.
 
@@ -144,13 +144,14 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    staan ze onder elkaar, met openingstijden eerst. Op desktop beslaan de drie compacte kaarten ongeveer de hoogte
    van de openingstijdenkaart. De kaartcombinatie gebruikt twee kolommen op desktop en één kolom op mobiel.
    In het weekend: gesloten, behalve op speciaal verzoek. Openingstijden worden ook naar Engels vertaald.
-   **Toon telefoonnummer**, WhatsApp en SMS starten bij de eerste klik een Turnstile-controle.
-   Na servercontrole verschijnen het nummer en een knop om bellen, WhatsApp of SMS te openen.
+   **Toon telefoonnummer** en SMS starten bij de eerste klik een Turnstile-controle.
+   Na servercontrole verschijnt het privé-06-nummer en een knop om bellen of SMS te openen.
+   WhatsApp opent direct het openbare Business-nummer uit `data/settings.json`.
    Deze extra klik voorkomt geblokkeerde pop-ups na asynchrone verificatie.
-   Na een geslaagde controle werken WhatsApp en SMS direct zolang de pagina openblijft.
+   Na een geslaagde controle werken bellen en SMS direct zolang de pagina openblijft.
    **Bezoek mij** toont openbaar alleen de straat en plaats: Piraeushaven, Purmerend.
    **Bezoek mij** heeft geen Cloudflare-controle en toont geen huisnummer. Het volledige adres wordt ook niet via de API teruggegeven.
-   Het telefoonnummer staat uitsluitend in Cloudflare-secret `CONTACT_PHONE` en wordt alleen na een geslaagde servercontrole getoond, niet in localStorage bewaard.
+   Het privé-06-nummer staat uitsluitend in Cloudflare-secret `CONTACT_PHONE` en wordt alleen na een geslaagde servercontrole getoond, niet in localStorage bewaard.
    Turnstile bemoeilijkt automatisch verzamelen, maar verhindert niet dat een bezoeker de gegevens na verificatie kopieert of deelt.
 8. **Footer** – links, social media, copyright.
 9. **Zwevende WhatsApp-knop** rechtsonder, met daarboven de knop **🛒 Mandje** zodra er behandelingen
@@ -171,9 +172,9 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
   De taal wordt onthouden (localStorage `language`). Arabisch gebruikt een volledige rechts-naar-links-weergave.
   Omschakelen behoudt het mandje, toeslagen, zoekopdracht, categoriefilter en toegankelijkheidsvoorkeuren.
 
-**Afspraken gaan via WhatsApp of SMS** naar het nummer in de serversecret. Er is geen e-mail of online agenda.
+**Afspraken gaan via WhatsApp of SMS** naar het ingestelde nummer voor die route. Er is geen e-mail of online agenda.
 De hero-knop, de contactknop en de zwevende knop openen WhatsApp met een voorbereid bericht.
-De extra SMS-optie staat uitsluitend in het mandje en gebruikt hetzelfde nummer en dezelfde inhoud.
+WhatsApp gebruikt het openbare Business-nummer in `data/settings.json`; bellen en de extra SMS-optie in het mandje gebruiken `CONTACT_PHONE`.
 
 **Behandelmandje → WhatsApp:** de bezoeker zet behandelingen met *+ dit wil ik* in het mandje. In het
 mandje staan de gekozen behandelingen met duur en prijs, het totaal en (alleen bij een nieuwe set) het
@@ -317,7 +318,7 @@ EmStudio/
 "social": { "instagram": "https://www.instagram.com/EmmaPurmerend/", "facebook": "https://www.facebook.com/EmmaPurmerend", "whatsappBusiness": true }
 ```
 
-Telefoonnummer uitsluitend in Cloudflare als secret `CONTACT_PHONE`, internationaal met + en zonder spaties.
+Het privé-06-nummer uitsluitend in Cloudflare als secret `CONTACT_PHONE`, internationaal met + en zonder spaties. Het openbare WhatsApp Business-nummer staat in `data/settings.json`.
 `CONTACT_ADDRESS` wordt niet meer gebruikt of teruggegeven. Het huisnummer hoort niet in code, JSON, documentatie of chat.
 `whatsappBusiness: true` toont de beveiligde WhatsApp-link in de footer; zet hier geen directe nummerlink.
 De extra hero-knoppen gebruiken `social.instagram` en `social.facebook`. De Google Search-knop is verwijderd.
@@ -464,7 +465,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
   registratie/verlenging en Pages-hosting zijn aparte onderdelen.
   Zie [de account- en domeinhandleiding](SETUP-NEW-COMPUTER.md#domein-hosting-en-accounts-bevestigd-op-21-oktober-2026).
 - Cloudflare-account voor hosting: aanmelden via GitHub; **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
-- Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret) en `CONTACT_PHONE` als **Secret** voor productie.
+- Zet `TURNSTILE_SECRET_KEY` (bijbehorende widgetsecret) en `CONTACT_PHONE` (privé-06 voor bellen en sms) als **Secret** voor productie.
   Een bestaande `CONTACT_ADDRESS` heeft geen effect meer op de website of API.
   Controleer de geselecteerde omgeving op de pagina; er hoeft geen pop-up te verschijnen.
 - De openbare site key staat in `requestContactAccess()` in `js/script.js`.
@@ -478,7 +479,7 @@ Eerder gepubliceerde nummers kunnen nog in Git-historie of bij derden staan.
   Voor volledige lokale integratie is Wrangler Pages nodig. De productiehandler weigert bewust localhost
   en previews; gebruik daarvoor een apart testproject met testsleutels en uitsluitend lokale hostvalidatie.
   Verruim nooit de productie-allowlist met localhost en zet secrets nooit in Git.
-- Controleer live: straat en plaats zonder huisnummer of controle, contactdialoog in NL/EN, echte challenge, nummer na succes, mandje in WhatsApp/SMS,
+- Controleer live: straat en plaats zonder huisnummer of controle, contactdialoog in NL/EN, echte challenge voor bellen/SMS, openbaar WhatsApp Business-nummer, mandje in WhatsApp/SMS,
   annuleren/opnieuw proberen en weigering van een ongeldig token. De API ontvangt geen mandje of bericht.
 
 ## 📝 Nog te doen

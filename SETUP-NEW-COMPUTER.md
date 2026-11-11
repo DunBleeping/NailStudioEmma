@@ -15,7 +15,7 @@ GitHub Desktop).
 | Hosting | Cloudflare Pages – auto-deploys every push to `main` (≈ 1 minute) |
 | Live site | https://emmanagelstudio.vip (also https://nailstudioemma.pages.dev) |
 | Backend / build step | No build or npm dependencies. A Pages Function verifies Turnstile for contact access; Live Server cannot run it |
-| Booking | WhatsApp/SMS and phone via Turnstile; street and city public without house number |
+| Booking | Public WhatsApp Business link; private phone and SMS via Turnstile; street and city public without house number |
 | Language of site & docs | Dutch |
 
 Main features (status at commit `964311d`):
@@ -95,7 +95,8 @@ De waarden horen nooit in code, screenshots of chat. De openbare site key staat 
 2. Open **Compute → Workers & Pages → nailstudioemma → Settings → Variables and secrets**.
 3. Controleer de omgeving als die op de pagina wordt getoond; er hoeft geen pop-up te verschijnen.
 4. Wijzig de waarde van de bestaande secret, of kies **Add → Secret** als deze ontbreekt.
-   `TURNSTILE_SECRET_KEY` hoort bij de actieve widget; `CONTACT_PHONE` is internationaal met +, zonder spaties.
+   `TURNSTILE_SECRET_KEY` hoort bij de actieve widget. `CONTACT_PHONE` is het privé-06-nummer voor bellen en sms, internationaal met + en zonder spaties.
+   Het openbare WhatsApp Business-nummer staat in `data/settings.json`; wijzig dit daar wanneer het Business-nummer verandert.
    `CONTACT_ADDRESS` wordt niet meer gebruikt of teruggegeven. De website toont straat en plaats zonder huisnummer of Cloudflare-controle.
 5. Sla op en publiceer opnieuw. Test vervolgens op het echte domein, niet alleen via Live Server.
 

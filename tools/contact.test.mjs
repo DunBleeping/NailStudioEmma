@@ -6,12 +6,12 @@ const source = await readFile(new URL('../functions/api/contact.js', import.meta
 const { onRequest } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
 const env = {
   TURNSTILE_SECRET_KEY: 'test-only-secret',
-  CONTACT_PHONE: '+3197000000000',
+  CONTACT_PHONE: '+31612345678',
   CONTACT_ADDRESS: 'Teststraat 1, 1441 AA Purmerend'
 };
 const origin = 'https://emmanagelstudio.vip';
 
-function request(body = { token: 'test-token' }, options = {}) {
+function request(body = { token: 'test-token', channel: 'phone' }, options = {}) {
   return new Request(`${origin}/api/contact`, {
     method: 'POST',
     headers: { Origin: origin, 'Content-Type': 'application/json', ...options.headers },
@@ -31,11 +31,13 @@ test('contact endpoint denies unverified requests without returning contact data
       [request(), {}, 503],
       [request(), { ...env, CONTACT_PHONE: 'invalid' }, 503],
       [request({}), env, 400],
-      [request({ token: '' }), env, 400],
+      [request({ token: '', channel: 'phone' }), env, 400],
+      [request({ token: 'test-token' }), env, 400],
       [request({ token: 12 }), env, 400],
       [request({ token: 'x'.repeat(2049) }), env, 400],
       [request({ token: 'x'.repeat(5000) }), env, 413],
       [request(null), env, 400],
+      [request({ token: 'test-token', channel: 'whatsapp' }), env, 400],
       [new Request(`${origin}/api/contact`, { method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' }, body: '{' }), env, 400],
       [new Request('https://preview.pages.dev/api/contact', { method: 'POST', headers: { Origin: 'https://preview.pages.dev' } }), env, 403],
       [new Request('http://localhost/api/contact', { method: 'POST', headers: { Origin: 'http://localhost' } }), env, 403]
@@ -54,7 +56,7 @@ test('contact endpoint denies unverified requests without returning contact data
   }
 });
 
-test('address secrets are never returned and phone access does not depend on them', async () => {
+test('phone and sms use the private contact number after verification', async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () => Response.json({
     success: true,
@@ -62,14 +64,11 @@ test('address secrets are never returned and phone access does not depend on the
     action: 'contact'
   });
   try {
-    for (const secrets of [
-      env,
-      { ...env, CONTACT_ADDRESS: undefined },
-      { ...env, CONTACT_ADDRESS: '' },
-      { ...env, CONTACT_ADDRESS: 'invalid\naddress' },
-      { ...env, CONTACT_ADDRESS: 'x'.repeat(301) }
-    ]) {
-      const response = await onRequest({ request: request(), env: secrets });
+    for (const channel of ['phone', 'sms']) {
+      const response = await onRequest({
+        request: request({ token: 'test-token', channel }),
+        env: { ...env, CONTACT_ADDRESS: 'invalid\naddress' }
+      });
       assert.equal(response.status, 200);
       assert.deepEqual(await response.json(), { phone: env.CONTACT_PHONE });
       assert.match(response.headers.get('Cache-Control'), /no-store/);

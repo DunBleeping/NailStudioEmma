@@ -889,7 +889,7 @@ function initializeContact() {
 }
 
 const contactAccess = {
-  phone: null,
+  phones: {},
   channel: 'phone',
   widget: null,
   generation: 0,
@@ -897,11 +897,18 @@ const contactAccess = {
   script: null
 };
 
+function getContactPhone(channel = contactAccess.channel) {
+  return contactAccess.phones[channel] || null;
+}
+
 function displayContactPhone() {
-  const phone = contactAccess.phone;
+  const phone = getContactPhone();
+  if (!phone) throw new Error('Contact verification required');
   const phoneContainer = document.getElementById('contact-phone');
   const phoneLink = phoneContainer.querySelector('a');
   phoneLink.href = `tel:${phone.replace(/[^\d+]/g, '')}`;
+  phoneLink.target = '_self';
+  phoneLink.rel = 'noopener noreferrer';
   phoneLink.textContent = phone;
   phoneContainer.hidden = false;
 
@@ -976,15 +983,13 @@ function showContactContinuation() {
   displayContactPhone();
   const link = document.getElementById('verification-continue');
   const channel = contactAccess.channel;
-  link.textContent = t(channel === 'whatsapp' ? 'Open WhatsApp' : channel === 'sms' ? 'Open SMS' : 'Bel mij');
-  link.href = channel === 'whatsapp' ? buildWhatsAppUrl()
-    : channel === 'sms' ? buildSmsUrl() : `tel:${contactAccess.phone}`;
-  link.target = channel === 'whatsapp' ? '_blank' : '_self';
+  link.textContent = t(channel === 'sms' ? 'Open SMS' : 'Bel mij');
+  link.href = channel === 'sms' ? buildSmsUrl() : `tel:${getContactPhone(channel)}`;
+  link.target = '_self';
   link.rel = 'noopener noreferrer';
   link.hidden = false;
   link.onclick = () => {
-    link.href = channel === 'whatsapp' ? buildWhatsAppUrl()
-      : channel === 'sms' ? buildSmsUrl() : `tel:${contactAccess.phone}`;
+    link.href = channel === 'sms' ? buildSmsUrl() : `tel:${getContactPhone(channel)}`;
   };
   document.getElementById('verification-status').textContent = t('Controle geslaagd. Je kunt nu contact opnemen.');
   link.focus();
@@ -1000,7 +1005,7 @@ async function requestContactAccess(channel) {
   dialog.onclose = clearContactChallenge;
   document.getElementById('verification-retry').onclick = () => requestContactAccess(channel);
   if (!dialog.open) dialog.showModal();
-  if (contactAccess.phone) {
+  if (getContactPhone(channel)) {
     showContactContinuation();
     return;
   }
@@ -1024,7 +1029,7 @@ async function requestContactAccess(channel) {
           const response = await fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token }),
+            body: JSON.stringify({ token, channel }),
             cache: 'no-store',
             signal: controller.signal
           });
@@ -1034,7 +1039,7 @@ async function requestContactAccess(channel) {
             throw new Error('Invalid contact response');
           }
           if (!dialog.open || generation !== contactAccess.generation) return;
-          contactAccess.phone = result.phone;
+          contactAccess.phones[channel] = result.phone;
           window.turnstile.remove(contactAccess.widget);
           contactAccess.widget = null;
           showContactContinuation();
@@ -1074,30 +1079,24 @@ async function requestContactAccess(channel) {
 function setupWhatsAppButton(element) {
   if (!element || !appData.settings) return;
 
-  element.href = '#';
+  element.href = buildWhatsAppUrl();
   element.target = '_blank';
   element.rel = 'noopener noreferrer';
-  element.onclick = (event) => {
-    trackEvent('whatsapp');
-    if (contactAccess.phone) {
-      displayContactPhone();
-      element.href = buildWhatsAppUrl();
-    } else {
-      event.preventDefault();
-      requestContactAccess('whatsapp');
-    }
-  };
+  element.onclick = () => trackEvent('whatsapp');
 }
 
 function buildWhatsAppUrl() {
-  if (!contactAccess.phone) throw new Error('Contact verification required');
-  const whatsappNumber = contactAccess.phone.replace(/\D/g, '');
+  const phone = appData.settings?.contact?.whatsapp?.phone;
+  if (typeof phone !== 'string' || !/^\+[1-9]\d{7,14}$/.test(phone)) {
+    throw new Error('Public WhatsApp number is not configured');
+  }
+  const whatsappNumber = phone.replace(/\D/g, '');
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildBookingMessage())}`;
 }
 
 function buildSmsUrl() {
-  if (!contactAccess.phone) throw new Error('Contact verification required');
-  const number = contactAccess.phone;
+  const number = getContactPhone('sms');
+  if (!number) throw new Error('Contact verification required');
   // iOS uses &body; Android and other clients use ?body.
   const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
   return `sms:${number}${isApple ? '&' : '?'}body=${encodeURIComponent(buildBookingMessage())}`;
@@ -1790,7 +1789,7 @@ function renderCart() {
       smsBtn.href = '#';
       smsBtn.onclick = (event) => {
         trackEvent('sms');
-        if (contactAccess.phone) smsBtn.href = buildSmsUrl();
+        if (getContactPhone('sms')) smsBtn.href = buildSmsUrl();
         else {
           event.preventDefault();
           requestContactAccess('sms');
