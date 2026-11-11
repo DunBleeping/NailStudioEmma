@@ -70,6 +70,12 @@ async function loadAppData() {
       ...baseTranslations,
       ...Object.fromEntries(additionalTranslations)
     };
+    const treatmentTranslations = await fetchJSON('./data/treatment-translations.json');
+    for (const row of treatmentTranslations) {
+      for (const language of ['en', ...additionalLanguages]) {
+        appData.translations[language][row.nl] = row[language];
+      }
+    }
     translatePage();
 
     // Initialize components
@@ -196,15 +202,24 @@ function translatePage() {
 
 async function fetchJSON(url) {
   try {
-    const response = await fetch(url, { cache: 'no-cache' });
+    const response = await fetch(url.replace(/^\.\//, '/'), { cache: 'no-cache' });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return resolveImagePaths(await response.json());
   } catch (error) {
     console.error(`Error fetching ${url}:`, error);
     throw error;
   }
+}
+
+function resolveImagePaths(value) {
+  if (typeof value === 'string') return value.replace(/^\.\/images\//, '/images/');
+  if (Array.isArray(value)) return value.map(resolveImagePaths);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, resolveImagePaths(item)]));
+  }
+  return value;
 }
 
 function escapeHtml(text) {
@@ -375,7 +390,7 @@ function initializeHero() {
   const heroTagline = heroSection.querySelector('.hero-tagline');
   const heroDesc = heroSection.querySelector('.hero-description');
 
-  if (heroTitle) {
+  if (heroTitle && !document.body.dataset.treatmentPage) {
     heroTitle.textContent = t('Welkom bij {name}', { name: appData.settings.salon.name });
   }
 
@@ -383,7 +398,7 @@ function initializeHero() {
     heroTagline.textContent = t(appData.settings.salon.tagline);
   }
 
-  if (heroDesc) {
+  if (heroDesc && !document.body.dataset.treatmentPage) {
     heroDesc.textContent = t(appData.settings.salon.description);
   }
 

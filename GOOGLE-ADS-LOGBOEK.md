@@ -325,3 +325,70 @@ Voor projectvoorkeuren en bredere technische context:
   dagen klikken, zoektermen, kosten en apart gemelde afspraken. Herstel
   Ads-conversiemeting pas als afzonderlijke opdracht; nul gemeten conversies
   blijft onvoldoende om nieuwe-klantenrendement te beoordelen.
+
+## 2026-11-11 - Advies inzet twee extra .nl-domeinen
+
+- **Bron:** eigenaar noemt STRATO-domeinen `emmanailsalon.nl` en
+  `nailstudiopurmerend.nl`; bestaande domeinkeuze in de installatiehandleiding.
+  Actuele Google-documentatie over redirects, exact-match-domeinen en Ads-URL's:
+  https://developers.google.com/search/docs/crawling-indexing/301-redirects,
+  https://developers.google.com/search/docs/appearance/ranking-systems-guide,
+  https://support.google.com/google-ads/answer/2684490.
+- **Periode:** strategisch advies op 11 november; geen nieuwe Ads- of Search
+  Console-prestatiecijfers opgehaald. Historische cijfers niet hergebruikt als
+  actuele resultaten. Geen account-, DNS-, hosting- of advertentiewijzigingen.
+- **Advies:** behoud `emmanagelstudio.vip` als gekozen hoofddomein en gebruik
+  beide .nl-domeinen als permanente 301-ingang voor herkenning en offline
+  promotie. Geen identieke websites of dunne zoekwoord-doorwaypagina's bouwen.
+  Lokale behandelinhoud concentreren op het hoofddomein; een zoekwoorddomein
+  geeft geen gegarandeerde positieverbetering.
+- **Ads:** blijf rechtstreeks naar relevante pagina's op het hoofddomein
+  linken; geen .nl-final-URL gebruiken die naar .vip doorstuurt wegens
+  mogelijke destination mismatch. Geen extra campagnes uitsluitend voor
+  extra domeinen en geen budgetverhoging voorgesteld.
+- **Onzekerheden en volgende controle:** actuele STRATO-doorsturing, DNS,
+  HTTPS en mailconfiguratie niet gecontroleerd. Voor uitvoering eerst HTTP/
+  HTTPS en www/niet-www, pad-/querybehoud en redirectlussen controleren;
+  nameservers of mailrecords niet blind wijzigen. Bestaande klikmeting
+  registreert geen herkomstdomein; extra instroom niet zonder meting toeschrijven.
+
+## 2026-11-11 - Uitvoering behandelpagina's en domeindoorsturing
+
+- **Bron en toestemming:** bestaande behandelgegevens en foto's, STRATO-
+  domeinbeheer, Cloudflare-dashboard en officiële documentatie over Universal
+  SSL en volledige DNS-setup. De eigenaar koos behoud van het .vip-hoofddomein
+  en gaf expliciet toestemming voor beide gratis Cloudflare-zones en
+  DNS-/nameserverwijzigingen met behoud van mailrecords.
+- **Website:** drie inhoudelijke, statisch indexeerbare pagina's op het
+  hoofddomein: `/biab-purmerend/`, `/gellak-purmerend/` en
+  `/nail-art-purmerend/`. Eigen paginatitels, canonical, beschrijvingen en
+  sitemapverwijzingen; interne links vanaf de homepage. Prijzen uit de
+  bestaande behandellijst, geen verzonnen nail-artprijs. Beheer via de
+  bestaande publicatietool uitgebreid; geen npm-afhankelijkheden.
+- **Domeinen:** STRATO bewaart voor beide .nl-domeinen een permanente externe
+  301 naar `https://emmanagelstudio.vip/`. HTTP voor beide apex- en
+  www-hostnamen gecontroleerd, ook met behandelpad en testquery: pad en query
+  blijven behouden. HTTPS nog niet als werkend bevestigd; geen betaald
+  certificaat besteld en het ene inbegrepen STRATO-certificaat niet toegewezen.
+- **DNS en veilige volgorde:** oorspronkelijke STRATO-web- en mailinstellingen
+  gelezen. Naast apex-MX bestaan ook wildcard-MX, `autoconfig`,
+  `_autodiscover._tcp`, `_dmarc` en `_domainkey`; deze niet verliezen.
+  Deactivering van STRATO-DNSSEC aangevraagd voor beide domeinen. Laatste
+  teruglezing: **Wordt gedeactiveerd**, oude DS-records nog zichtbaar.
+  Nameservers daarom nog niet vervangen; eerst DS-verwijdering en cache-uitloop
+  controleren. Het hoofddomein en de bestaande hosting blijven ongemoeid.
+- **Validatie:** 39/39 website-, vertaal-, contact- en behandeltests geslaagd.
+  Generatiecontrole en diffcontrole akkoord. Chromium: 18 route-/taal-/
+  herlaadchecks, 108 layoutmetingen op drie routes met NL/FR/Arabisch,
+  390/844/1280 CSS-px en 14/16/18/20 px lettergrootte; geen overflow,
+  headeroverlap of vervormd logo. Ook 36 rotatie-/scrollchecks geslaagd.
+  Voorkeuren en mandje blijven behouden. Contact opent Turnstile, lokaal
+  veilig geen telefoonvrijgave. Geen echte iPhone/Safari- of geslaagde
+  productiecontacttest geclaimd.
+- **Resultaten en vervolg:** geen actuele Ads-/Search Console-cijfers
+  opgehaald en nog geen extra klanten of hogere Google-posities aangetoond.
+  Geen Ads-budget, biedingen, conversies of Turnstile-instellingen gewijzigd.
+  Nieuwe behandel-URL's zijn nog niet in Google Ads ingesteld.
+  Publicatie en live inhoud afzonderlijk controleren; HTTPS-migratie pas
+  afronden na veilige DNSSEC-uitloop en geldige certificaten voor alle vier
+  .nl-hostnamen. Daarna indexering en aanvragen beoordelen, niet alleen push.

@@ -1,0 +1,35 @@
+{
+  "biab-purmerend": {
+    "title": "BIAB Purmerend | Emma NailStudio",
+    "description": "BIAB in Purmerend bij Emma NailStudio: een nieuwe set, opvullen of BIAB met gellak. Bekijk mijn prijzen en bespreek jouw wensen. Alleen op afspraak.",
+    "heading": "BIAB in Purmerend",
+    "intro": "Met BIAB (Builder In A Bottle) geef ik jouw nagels een natuurlijk ogende versteviging. In mijn nagelstudio in Purmerend kun je kiezen voor een nieuwe set, opvullen of een afwerking met gellak.",
+    "paragraphs": [
+      "Wil je een natuurlijke uitstraling of juist kleur? Ik bespreek met jou welke BIAB-behandeling past bij jouw nagels en wensen. Voor kleur kies je de aparte BIAB-behandeling met gellak; die heeft een eigen prijs en behandeltijd.",
+      "Heb je al BIAB? Kies dan niet automatisch een nieuwe set: bij opvullen werk ik de bestaande BIAB bij. Vertel mij bij het aanvragen wat er nu op jouw nagels zit, zodat ik kan meedenken over de behandeling."
+    ],
+    "services": ["biab-new-set", "opvullen-biab", "biab-new-set-gellak", "opvullen-biab-gellak"]
+  },
+  "gellak-purmerend": {
+    "title": "Gellak Purmerend | Emma NailStudio",
+    "description": "Gellak in Purmerend bij Emma NailStudio. Bekijk Shellac, een nieuwe set met gellak en opvullen. Prijzen en behandeltijden op één plek, alleen op afspraak.",
+    "heading": "Gellak in Purmerend",
+    "intro": "Wil je kleur op jouw nagels? Bij mij in Purmerend vind je gellak onder de naam Shellac, maar ook een nieuwe set kunstnagels met gellak en opvullen met gellak. Dit zijn verschillende behandelingen.",
+    "paragraphs": [
+      "Een kleurafwerking is niet hetzelfde als een nieuwe set kunstnagels. Bekijk daarom de afzonderlijke opties hieronder. Ik help je kiezen als je twijfelt tussen Shellac, een nieuwe set of het bijwerken van jouw bestaande nagels.",
+      "Wil je gellak combineren met BIAB? Daarvoor staan aparte BIAB-behandelingen met gellak in mijn prijzenlijst. Bespreek vooraf welke basis en kleur je wilt, zodat de prijs en benodigde tijd duidelijk zijn."
+    ],
+    "services": ["shellac", "new-set-gellak", "opvullen-gellak"]
+  },
+  "nail-art-purmerend": {
+    "title": "Nail art Purmerend | Maatwerk bij Emma NailStudio",
+    "description": "Handgetekende nail art in Purmerend, op aanvraag bij Emma NailStudio. Deel jouw idee of inspiratiefoto; ontwerp, prijs en behandeltijd bespreken we vooraf.",
+    "heading": "Nail art in Purmerend",
+    "intro": "Voor nail art op maat teken ik jouw design met de hand. Van een subtiel accent tot een eigen thema: stuur mij jouw idee of inspiratiefoto, dan bespreken we wat mogelijk is.",
+    "paragraphs": [
+      "Denk aan Halloween-nagels, kerstnagels of een ontwerp dat past bij jouw gelegenheid. Bij Impressie zie je mijn werk. Een inspiratiefoto is een startpunt voor overleg, geen belofte dat ieder ontwerp precies kan worden nagemaakt.",
+      "Custom nail art is maatwerk op aanvraag: er is geen vaste prijs of standaardduur. Ik bevestig het ontwerp, de prijs en de tijd vooraf. De aparte behandeling Nails Design vanaf... in de prijzenlijst is een vanafprijs, geen offerte voor jouw maatwerk."
+    ],
+    "services": ["nails-design-vanaf"]
+  }
+}

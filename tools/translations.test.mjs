@@ -77,7 +77,12 @@ test('SEO uses the live domain and existing assets without exposing the salon ad
   assert.deepEqual(structured.sameAs, [settings.social.instagram, settings.social.facebook]);
   await readFile(new URL(`../${new URL(structured.image).pathname.slice(1)}`, import.meta.url));
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
-  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(([, url]) => url), [canonical]);
+  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(([, url]) => url), [
+    canonical,
+    `${canonical}biab-purmerend/`,
+    `${canonical}gellak-purmerend/`,
+    `${canonical}nail-art-purmerend/`,
+  ]);
   const robots = await readFile(new URL('../robots.txt', import.meta.url), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${canonical}sitemap.xml`));
 });

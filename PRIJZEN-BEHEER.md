@@ -12,6 +12,17 @@ Alle wijzigingen daar verschijnen AUTOMATISCH op:
 
 **Geen HTML/CSS aanpassingen nodig!**
 
+**Statische behandelpagina's:** de prijsblokjes op `/biab-purmerend/`,
+`/gellak-purmerend/` en `/nail-art-purmerend/` worden uit hetzelfde
+`services.json` gegenereerd. Na een prijs-, duur- of naamwijziging kies je in
+`tools\sync-website.ps1` eerst **6 – Behandelpagina's lokaal vernieuwen**.
+Publiceer de gewijzigde bron en de drie bijgewerkte HTML-bestanden samen, na
+**TEST** en vervolgens **PRODUCTIE**. De publicatiecontrole blokkeert verouderde
+pagina's; rechtstreeks kan vernieuwen ook met `.\tools\update-behandelpaginas.ps1`.
+Bewerk de gegenereerde pagina's nooit met de hand. Maatwerk nail art heeft geen
+vaste prijs: **Nails Design vanaf...** blijft een aparte behandeling met vanafprijs,
+niet een automatisch berekende maatwerkofferte.
+
 **Engelse versie:** prijzen worden in beide talen uit hetzelfde bestand gebruikt. Wijzig je ook
 een naam, omschrijving, duur, categorie, notitie of toeslagtekst, voeg dan de Engelse vertaling
 van die exacte Nederlandse tekst toe onder `en` in `data/translations.json`.

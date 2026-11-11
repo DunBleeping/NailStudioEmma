@@ -58,11 +58,17 @@ try {
         Write-Host '3. Nieuwe of vervangen foto''s publiceren'
         Write-Host '4. Websitetekst en opmaak (HTML, CSS, JavaScript, vertalingen)'
         Write-Host '5. Zelf kiezen uit alle gewijzigde bestanden'
+        Write-Host '6. Behandelpagina''s lokaal vernieuwen (geen publicatie)'
         Write-Host '0. Stoppen'
         do {
-            $choice = Read-Host 'Kies 0 t/m 5'
-        } until ($choice -match '^[0-5]$')
+            $choice = Read-Host 'Kies 0 t/m 6'
+        } until ($choice -match '^[0-6]$')
         if ($choice -eq '0') { return }
+        if ($choice -eq '6') {
+            & (Join-Path $PSScriptRoot 'update-behandelpaginas.ps1')
+            Write-Host 'Behandelpagina''s bijgewerkt. Start het menu opnieuw en kies prijzen of websitetekst voor TEST/PRODUCTIE.'
+            return
+        }
 
         if ($choice -eq '3') {
             Write-Host "`nAlbumlijst en fotoversies worden lokaal automatisch bijgewerkt."
@@ -75,9 +81,9 @@ try {
             $path = $_
             switch ($choice) {
                 '1' { $path -eq 'data/settings.json' }
-                '2' { $path -in @('data/services.json', 'data/Prijzenlijst.csv', 'data/translations.json') }
+                '2' { $path -match '^data/(services|treatments|treatment-translations|translations)\.json$|^data/Prijzenlijst\.csv$|^(biab|gellak|nail-art)-purmerend/index\.html$|^data/translations/' }
                 '3' { $path -match '^images/.+\.(jpg|jpeg|png|webp|svg|avif)$|^images/.+/descript\.ion$|^data/(gallery|services|translations)\.json$|^index\.html$' }
-                '4' { $path -match '^index\.html$|^(css|js)/|^data/translations\.json$' }
+                '4' { $path -match '^index\.html$|^(css|js)/|^data/(treatments|treatment-translations|translations)\.json$|^data/translations/|^(biab|gellak|nail-art)-purmerend/index\.html$|^tools/update-behandelpaginas\.' }
                 '5' { $true }
             }
         })
@@ -170,6 +176,15 @@ try {
     foreach ($file in $selected | Where-Object { $_ -match '\.json$' -and (Test-Path -LiteralPath $_ -PathType Leaf) }) {
         # Ongeldige JSON niet publiceren: daardoor kunnen prijzen of de hele site leeg blijven.
         Get-Content -LiteralPath $file -Raw | ConvertFrom-Json -AsHashtable | Out-Null
+    }
+    if (@($selected | Where-Object { $_ -match '^index\.html$|^data/(services|treatments)\.json$|^(biab|gellak|nail-art)-purmerend/index\.html$|^tools/update-behandelpaginas\.' }).Count) {
+        & (Join-Path $PSScriptRoot 'update-behandelpaginas.ps1') -Check
+        $changed = @(Invoke-Git @('-c', 'core.quotepath=false', 'ls-files', '--modified', '--others', '--exclude-standard'))
+        $coupled = @($changed | Where-Object { $_ -match '^index\.html$|^data/(services|treatments)\.json$|^(biab|gellak|nail-art)-purmerend/index\.html$|^tools/update-behandelpaginas\.' })
+        $missing = @($coupled | Where-Object { $_ -notin $selected })
+        if ($missing.Count) {
+            throw "Selecteer de gewijzigde behandelpagina's en hun bronnen samen, zonder ander werk ongemerkt mee te nemen: $($missing -join ', ')."
+        }
     }
 
     Invoke-Git @('status', '--short')

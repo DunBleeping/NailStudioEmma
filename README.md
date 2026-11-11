@@ -1,5 +1,44 @@
 # Emma NailStudio - Nagelsalon Website
 
+## Statische behandelpagina's
+
+De drie echte pagina's `/biab-purmerend/`, `/gellak-purmerend/` en
+`/nail-art-purmerend/` bevatten ook zonder JavaScript eigen behandelinhoud, titel,
+omschrijving, canonical, OpenGraph en relevante lijstprijzen. Ze staan in de sitemap
+en zijn vanaf de homepage en onderling bereikbaar. Het hoofddomein blijft
+`emmanagelstudio.vip`; de sitemap is geen garantie op indexering.
+
+- **Bronnen:** `index.html` is de gedeelde UI; `data/treatments.json` bevat de unieke
+  Nederlandse behandelteksten en verwijst met ID's naar `data/services.json`.
+  Prijzen, duur en eventuele toeslagnotities komen alleen uit die bestaande services.
+- **Niet handmatig bewerken:** de drie `<behandeling>-purmerend/index.html`-bestanden
+  zijn gegenereerde, mee te publiceren HTML. Er is geen build op Cloudflare nodig.
+  Na een wijziging in homepage, behandelteksten, prijzen of assetversies: open het
+  publicatiemenu `tools\sync-website.ps1` en kies **6 – Behandelpagina's lokaal vernieuwen**.
+  Kies daarna prijzen/websitetekst en **TEST** of **PRODUCTIE**. De controle blokkeert
+  verouderde pagina's of een onvolledige selectie van gewijzigde bronnen en pagina's;
+  neem nooit ongerelateerd werk ongemerkt mee.
+- Rechtstreeks vernieuwen: `.\tools\update-behandelpaginas.ps1`; alleen controleren:
+  `.\tools\update-behandelpaginas.ps1 -Check`. Gebruikt Node.js of de al geïnstalleerde
+  VS Code-runtime, zonder npm-pakketten.
+- **Negen talen:** de aanvullende teksten staan per Nederlandse bronzin in
+  `data/treatment-translations.json` (`nl/en/fr/es/tr/ar/uk/pl/vi`), naast de bestaande
+  woordenboeken. De bestaande taalkeuze vertaalt ook de nieuwe inhoud, paginatitel
+  en metaomschrijving. Statische HTML en sociale metadata zijn Nederlands; er zijn
+  geen aparte taal-URL's of onterechte hreflang-beloften.
+- **Nail art:** maatwerk blijft op aanvraag, zonder fictieve vaste prijs of
+  mandjeknop. De bestaande behandeling **Nails Design vanaf...** staat afzonderlijk
+  met haar vanafprijs; die is geen offerte voor maatwerk.
+- De volledige bestaande bediening blijft beschikbaar: foto's, donkere modus,
+  lettergroottes, mandje en beveiligde contactroute. JSON en afbeeldingspaden laden
+  vanaf de domeinroot, ook wanneer iemand rechtstreeks een behandelpagina opent.
+  Er zijn geen wijzigingen aan Turnstile of de contact-API.
+
+Regressietests (Node.js): `node --test tools\website-features.test.mjs tools\translations.test.mjs tools\contact.test.mjs tools\treatment-pages.test.mjs`.
+Controleer daarnaast in de browser direct laden/herladen van elk pad, alle talen
+(ook Arabisch/rechts-naar-links), mandje/contact en de mobiele layout bij alle
+lettergroottes na scrollen en rotatie. Viewportemulatie vervangt geen iPhone/Safari-test.
+
 ## Vriendinnenactie en BIAB-voorbeeld
 
 - De knoppen BIAB en Gellak bovenaan openen direct de bijbehorende behandelkaart met prijs, duur en foto. Advertenties kunnen rechtstreeks linken naar `/#behandeling-biab-new-set` en `/#behandeling-shellac`. Iedere behandelkaart heeft een WhatsApp-link via de bestaande Turnstile-route; voor een bericht met behandelingen kies je eerst `+ dit wil ik`. Een directe behandellink opent de uitleg, springt zonder scrollanimatie naar de kaart en wist alleen het zoek-/categoriefilter, niet het mandje of bezoekersvoorkeuren. Op desktop blijft de kaart onder de sticky header zichtbaar; mobiel blijft de header meescrollen. De basis-BIAB-kaarten gebruiken de eigen BIAB-albumfoto.

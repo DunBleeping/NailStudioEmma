@@ -29,7 +29,7 @@ More detail: [README.md](README.md), [QUICK-REFERENCE.md](QUICK-REFERENCE.md),
 [MANIFEST.md](MANIFEST.md), [PRIJZEN-BEHEER.md](PRIJZEN-BEHEER.md),
 [FOTO-UPLOADEN.md](FOTO-UPLOADEN.md), [ACCESSIBILITY.md](ACCESSIBILITY.md).
 
-### Domein, hosting en accounts (bevestigd op 21 oktober 2026)
+### Domein, hosting en accounts (bijgewerkt op 11 november 2026)
 
 Accountnamen zijn hieronder bewust gemaskeerd. Bewaar volledige aanmeldgegevens en
 herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
@@ -37,7 +37,7 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
 | Onderdeel | Website / route | Account en werkwijze |
 |---|---|---|
 | Domeinregistratie `emmanagelstudio.vip` | https://dash.cloudflare.com → Domains → Registrations | Volgens bevestiging van de eigenaar gekocht bij Cloudflare. Controleer hier de registratie, verlengdatum, automatische verlenging en betaalmethode. De registratie-accountkoppeling is nog niet afzonderlijk gecontroleerd. |
-| Extra domein `emmanailsalon.nl` | https://www.strato.nl → Klantenlogin | Volgens de eigenaar geregistreerd bij STRATO. Beheeraccount en huidige DNS-/doorstuurinstellingen nog niet vastgelegd of gecontroleerd. |
+| Extra domeinen `emmanailsalon.nl` en `nailstudiopurmerend.nl` | https://www.strato.nl → Klantenlogin → Domeinbeheer | Beide staan in hetzelfde domeinpakket. Permanente externe 301-doorsturing naar het hoofddomein ingesteld; HTTP met en zonder `www`, inclusief pad en query, gecontroleerd op 11 november. Gratis HTTPS via Cloudflare wordt voorbereid; zie status hieronder. |
 | Live hosting | https://dash.cloudflare.com → **Compute → Workers & Pages → nailstudioemma** | Account **`ogdd....g@gm`**, aanmelden met identity provider **GitHub**. Alleen e-mail/wachtwoord of Google kiezen is niet dezelfde aanmeldroute. |
 | Websitecode | https://github.com/DunBleeping/NailStudioEmma | GitHub-gebruiker **DunBleeping**, productietak `main`. Cloudflare publiceert na een push. |
 | Actieve Turnstile-widget | Cloudflare, in hetzelfde account als de hosting → Turnstile | De nieuwe widget in **`ogdd....g@gm`** wordt door de website gebruikt. Modus Managed; productiehost `emmanagelstudio.vip`. |
@@ -48,21 +48,30 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
 **Domeinkeuze en nuttig gebruik van de .nl-variant:**
 - De eigenaar geeft de voorkeur aan **EmmaNagelStudio.vip**; dit blijft het hoofddomein.
   Hoofdletters in domeinnamen maken technisch geen verschil.
-- **EmmaNailSalon.nl** is een extra domein bij STRATO. Voorgesteld, nog niet ingesteld:
-  een permanente **301-doorverwijzing** naar `https://emmanagelstudio.vip`.
+- **EmmaNailSalon.nl** en **NailStudioPurmerend.nl** zijn extra domeinen bij STRATO.
+  Een permanente externe **301-doorverwijzing** naar `https://emmanagelstudio.vip`
+  is op 11 november ingesteld en via HTTP getest, met en zonder `www`.
   Geen tweede kopie van de website maken en geen frame-/maskeringsdoorsturing gebruiken.
 - Dit biedt een extra ingang voor bezoekers die een .nl-adres verwachten en beschermt de extra naam.
   Het bezit van een extra domein geeft op zichzelf geen hogere Google-positie.
   Gebruik in Google-profielen, sociale profielen en gewone advertenties bij voorkeur consequent het hoofddomein.
-- Bij latere uitvoering eerst de mogelijkheden van STRATO controleren: HTTP en HTTPS,
-  zowel met als zonder `www`, geldig certificaat op de .nl-variant, behoud van pad en queryparameters
-  en geen redirectlus. Ook het oude domein heeft HTTPS nodig voordat een HTTPS-doorverwijzing werkt.
-- Als STRATO dit niet passend ondersteunt, kan doorsturen via Cloudflare worden onderzocht.
-  Daarvoor eerst toestemming en DNS-/mailinstellingen controleren; een domeinverhuizing is niet automatisch nodig.
+- **HTTPS-migratie nog niet afgerond:** STRATO biedt in dit pakket slechts één
+  inbegrepen single-domaincertificaat. Geen betaald SSL-product besteld of
+  certificaat toegewezen. De eigenaar heeft op 11 november expliciet toestemming
+  gegeven voor gratis HTTPS via Cloudflare voor beide domeinen, inclusief
+  DNS-/nameserverwijzigingen met behoud van bestaande mailrecords.
+- Registratie en verlenging blijven bij STRATO; alleen DNS-beheer gaat naar
+  Cloudflare Free. Vooraf de web- en mailrecords vergelijken, ook `autoconfig`,
+  wildcard-MX, `_autodiscover._tcp`, `_dmarc` en `_domainkey`.
+  Mailrecords en `autoconfig` mogen niet door de webproxy lopen.
+- DNSSEC-deactivering bij STRATO is aangevraagd. Zolang STRATO nog
+  **Wordt gedeactiveerd** toont of oude DS-records nog geldig kunnen zijn,
+  nameservers niet omschakelen. Na veilige uitloop beide Cloudflare-nameservers
+  overnemen; pas na activatie en certificaatuitgifte HTTPS als werkend melden.
+  Controleer HTTP/HTTPS, met en zonder `www`, pad-/querybehoud en redirectlussen.
 - Voor deze extra ingang is geen Turnstile-widget op .nl nodig zolang alles eerst naar het hoofddomein
   wordt doorgestuurd. Eventuele zakelijke e-mail via .nl is een aparte toekomstige keuze,
   geen nieuw boekingskanaal; controleer dan mailhosting, SPF, DKIM en DMARC.
-- Deze notitie wijzigt geen DNS, nameservers, hosting, mail of doorsturing.
 
 **Status:** de eigenaar heeft op 21 oktober 2026 bevestigd dat de nieuwste website live is
 en de echte Turnstile-controle werkt. In het hostingproject staan de secrets
