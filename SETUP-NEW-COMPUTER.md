@@ -64,11 +64,22 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
   Cloudflare Free. Vooraf de web- en mailrecords vergelijken, ook `autoconfig`,
   wildcard-MX, `_autodiscover._tcp`, `_dmarc` en `_domainkey`.
   Mailrecords en `autoconfig` mogen niet door de webproxy lopen.
+- Beide Cloudflare Free-zones zijn voorbereid en staan op **Pending**:
+  elk negen gecontroleerde DNS-records en één ingeschakelde 301-regel voor
+  alleen de eigen apex- en www-hostnaam, met pad- en querybehoud.
+  Toegewezen nameservers voor beide: `bristol.ns.cloudflare.com` en
+  `steven.ns.cloudflare.com`. Deze zijn nog niet bij STRATO ingesteld.
 - DNSSEC-deactivering bij STRATO is aangevraagd. Zolang STRATO nog
   **Wordt gedeactiveerd** toont of oude DS-records nog geldig kunnen zijn,
   nameservers niet omschakelen. Na veilige uitloop beide Cloudflare-nameservers
   overnemen; pas na activatie en certificaatuitgifte HTTPS als werkend melden.
   Controleer HTTP/HTTPS, met en zonder `www`, pad-/querybehoud en redirectlussen.
+- Oorspronkelijke nameservers: `docks05.rzone.de` met `shades07.rzone.de`
+  voor `emmanailsalon.nl`, en met `shades09.rzone.de` voor
+  `nailstudiopurmerend.nl`. DNSSEC-verwerking bij STRATO kan volgens de
+  bevestiging tot 24 uur duren. Ook na verwijdering rekening houden met de
+  eerder gemeten DS-TTL van 3600 seconden. Bij vervolgwerk status en DNS
+  opnieuw opvragen; niet blind op deze momentopname voortbouwen.
 - Voor deze extra ingang is geen Turnstile-widget op .nl nodig zolang alles eerst naar het hoofddomein
   wordt doorgestuurd. Eventuele zakelijke e-mail via .nl is een aparte toekomstige keuze,
   geen nieuw boekingskanaal; controleer dan mailhosting, SPF, DKIM en DMARC.

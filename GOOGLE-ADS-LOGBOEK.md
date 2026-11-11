@@ -392,3 +392,27 @@ Voor projectvoorkeuren en bredere technische context:
   Publicatie en live inhoud afzonderlijk controleren; HTTPS-migratie pas
   afronden na veilige DNSSEC-uitloop en geldige certificaten voor alle vier
   .nl-hostnamen. Daarna indexering en aanvragen beoordelen, niet alleen push.
+- **Publicatie bevestigd:** commit `f8133ad` naar `main` gepusht. Na de
+  Cloudflare-publicatie geven alle drie routes hun eigen titel/canonical en
+  assets versie 56. Live homepage, drie behandelpagina's, JavaScript,
+  beide nieuwe JSON-bestanden en sitemap exact vergeleken met lokale bron:
+  acht van acht gelijk. Live BIAB-pagina initialiseert de behandelkaarten,
+  heeft één passende H1 en geen horizontale overflow in de browser.
+  Definitieve regressierun: 39 tests, 39 pass, 0 fail.
+- **Cloudflare voorbereid, nog niet actief:** beide zones op Free Website,
+  status **Pending**, elk negen DNS-records en één opgeslagen/teruggelezen
+  301-regel. Alleen eigen apex/www matchen; doel behoudt pad en query.
+  `autoconfig` en mailrecords blijven DNS-only. De domeinwizard liep voor
+  het tweede domein vast na een registrar-batchcheck met HTTP 422.
+  Eerst gecontroleerd dat de zone niet bestond; daarna via de officiële
+  zone-/DNS-/ruleset-API binnen de bestaande aangemelde browsersessie
+  ingericht en het gratis plan geselecteerd. Geen API-secret uitgelezen
+  of opgeslagen en geen extra aanmelding gevraagd.
+- **Open punt bij afsluiten:** STRATO toont nog DNSSEC-deactivering in
+  behandeling; publieke DS-records zijn nog aanwezig (TTL 3600 seconden).
+  Nameservers bewust ongewijzigd gelaten om DNSSEC-storingen te vermijden.
+  Beide zones hebben `bristol.ns.cloudflare.com` en
+  `steven.ns.cloudflare.com` toegewezen gekregen. Na afronding van de
+  STRATO-aanvraag (volgens STRATO uiterlijk 24 uur) en veilige cache-uitloop
+  deze instellen en daarna activatie, certificaten en alle HTTPS-redirects
+  werkelijk testen. Niet als automatische achtergrondafronding beloofd.
