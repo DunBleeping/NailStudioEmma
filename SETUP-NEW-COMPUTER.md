@@ -37,7 +37,7 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
 | Onderdeel | Website / route | Account en werkwijze |
 |---|---|---|
 | Domeinregistratie `emmanagelstudio.vip` | https://dash.cloudflare.com → Domains → Registrations | Volgens bevestiging van de eigenaar gekocht bij Cloudflare. Controleer hier de registratie, verlengdatum, automatische verlenging en betaalmethode. De registratie-accountkoppeling is nog niet afzonderlijk gecontroleerd. |
-| Extra domeinen `emmanailsalon.nl` en `nailstudiopurmerend.nl` | https://www.strato.nl → Klantenlogin → Domeinbeheer | Beide staan in hetzelfde domeinpakket. Permanente externe 301-doorsturing naar het hoofddomein ingesteld; HTTP met en zonder `www`, inclusief pad en query, gecontroleerd op 11 november. Gratis HTTPS via Cloudflare wordt voorbereid; zie status hieronder. |
+| Extra domeinen `emmanailsalon.nl` en `nailstudiopurmerend.nl` | https://www.strato.nl → Klantenlogin → Domeinbeheer | Beide staan in hetzelfde domeinpakket. Cloudflare-nameservers op 12 november opgeslagen; activatie en HTTPS nog controleren. HTTP-301 naar het hoofddomein werkt met en zonder `www`, inclusief pad en query. Zie status hieronder. |
 | Live hosting | https://dash.cloudflare.com → **Compute → Workers & Pages → nailstudioemma** | Account **`ogdd....g@gm`**, aanmelden met identity provider **GitHub**. Alleen e-mail/wachtwoord of Google kiezen is niet dezelfde aanmeldroute. |
 | Websitecode | https://github.com/DunBleeping/NailStudioEmma | GitHub-gebruiker **DunBleeping**, productietak `main`. Cloudflare publiceert na een push. |
 | Actieve Turnstile-widget | Cloudflare, in hetzelfde account als de hosting → Turnstile | De nieuwe widget in **`ogdd....g@gm`** wordt door de website gebruikt. Modus Managed; productiehost `emmanagelstudio.vip`. |
@@ -68,12 +68,27 @@ herstelcodes alleen in de eigen wachtwoordmanager, niet in deze repository.
   elk negen gecontroleerde DNS-records en één ingeschakelde 301-regel voor
   alleen de eigen apex- en www-hostnaam, met pad- en querybehoud.
   Toegewezen nameservers voor beide: `bristol.ns.cloudflare.com` en
-  `steven.ns.cloudflare.com`. Deze zijn nog niet bij STRATO ingesteld.
-- DNSSEC-deactivering bij STRATO is aangevraagd. Zolang STRATO nog
-  **Wordt gedeactiveerd** toont of oude DS-records nog geldig kunnen zijn,
-  nameservers niet omschakelen. Na veilige uitloop beide Cloudflare-nameservers
-  overnemen; pas na activatie en certificaatuitgifte HTTPS als werkend melden.
+  `steven.ns.cloudflare.com`. STRATO heeft op **12 november 2026** voor
+  beide domeinen expliciet bevestigd dat deze NS-records zijn opgeslagen en
+  naar de registrar worden doorgestuurd. Bij `emmanailsalon.nl` was de nieuwe
+  instelling ook zichtbaar na terugkeer naar het domeinoverzicht.
+- DNSSEC stond op 12 november bij STRATO voor beide domeinen op **Niet actief**;
+  publieke DS-opvragen leverden geen DS-record op. Daarna zijn de nameservers
+  omgeschakeld. Cloudflare-nameservercontrole gestart voor beide zones.
+  Bij de laatste publieke controle verwezen beide domeinen nog naar STRATO;
+  HTTPS gaf nog een TLS-fout. **Nog niet als opgelost beschouwen.**
+  Pas na activatie en certificaatuitgifte HTTPS als werkend melden.
   Controleer HTTP/HTTPS, met en zonder `www`, pad-/querybehoud en redirectlussen.
+- **`nailsalonemma.nl` hersteld op 12 november 2026:** een Cloudflare
+  Redirect Rule stuurt alleen `nailsalonemma.nl` en `www.nailsalonemma.nl`
+  rechtstreeks met 301 naar `https://emmanagelstudio.vip`, met pad- en
+  querybehoud. Hierdoor is geen TLS-verbinding met de oude origin meer nodig
+  en verdwijnt fout 525 zonder de SSL-beveiliging te verlagen.
+  Alle acht combinaties van HTTP/HTTPS, apex/`www` en root/testpad met query
+  gaven 301 en vervolgens 200, zonder TLS-controle te omzeilen.
+- De bestaande mail-DNS-records zijn behouden en vooraf vergeleken.
+  Mailbezorging is niet end-to-end getest; controleer de records opnieuw na
+  DNS-propagatie. Er is geen betaald SSL-product of domeinverhuizing besteld.
 - Oorspronkelijke nameservers: `docks05.rzone.de` met `shades07.rzone.de`
   voor `emmanailsalon.nl`, en met `shades09.rzone.de` voor
   `nailstudiopurmerend.nl`. DNSSEC-verwerking bij STRATO kan volgens de
