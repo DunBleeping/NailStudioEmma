@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 Disallow: /data/
+Allow: /data/*.json$
 Disallow: /api/
 Disallow: /*.json$
 

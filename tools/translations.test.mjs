@@ -86,3 +86,27 @@ test('SEO uses the live domain and existing assets without exposing the salon ad
   const robots = await readFile(new URL('../robots.txt', import.meta.url), 'utf8');
   assert.ok(robots.includes(`Sitemap: ${canonical}sitemap.xml`));
 });
+
+test('Google can fetch rendering data without indexing data files or crawling the API', async () => {
+  const robots = await readFile(new URL('../robots.txt', import.meta.url), 'utf8');
+  const rules = [...robots.matchAll(/^(Allow|Disallow):\s*(\S+)/gm)].map(([, action, pattern]) => {
+    const anchored = pattern.endsWith('$');
+    const body = anchored ? pattern.slice(0, -1) : pattern;
+    const expression = body.split('*').map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.*');
+    return { action, length: body.replaceAll('*', '').length, regex: new RegExp(`^${expression}${anchored ? '$' : ''}`) };
+  });
+  const allowed = (path) => {
+    const matches = rules.filter((rule) => rule.regex.test(path))
+      .sort((a, b) => b.length - a.length || (a.action === 'Allow' ? -1 : 1));
+    return matches.length === 0 || matches[0].action === 'Allow';
+  };
+  for (const path of ['/data/settings.json', '/data/services.json', '/data/gallery.json',
+    '/data/translations.json', '/data/translations/fr.json', '/data/treatment-translations.json']) {
+    assert.ok(allowed(path), path);
+  }
+  for (const path of ['/api/contact', '/data/private.txt', '/other.json']) {
+    assert.ok(!allowed(path), path);
+  }
+  const headers = await readFile(new URL('../_headers', import.meta.url), 'utf8');
+  assert.match(headers, /\/data\/\*\r?\n(?:[ \t]+[^\r\n]+\r?\n)*[ \t]+X-Robots-Tag:\s*noindex/i);
+});

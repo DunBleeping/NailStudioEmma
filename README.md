@@ -406,6 +406,9 @@ Aanbevolen in het Cloudflare-dashboard (domein → Caching → Configuration):
 - Schema.org `NailSalon` (JSON-LD) gebruikt Purmerend als werkgebied en de bestaande sociale profielen.
   Geen verzonnen adres, coördinaten, beoordelingen, kortingsactie of Maps-link toevoegen.
 - `sitemap.xml` bevat alleen de echte pagina-URL, niet de sectieankers. `robots.txt` verwijst naar die sitemap.
+- Google mag de JSON-gegevens onder `/data/` ophalen om de pagina te renderen. De bestanden
+  krijgen via `_headers` `X-Robots-Tag: noindex`, zodat ze niet als losse zoekresultaten
+  worden opgenomen; `/api/` blijft voor crawlers geblokkeerd.
 - Voor opname in gewone Google-zoekresultaten: verifieer het domein in [Google Search Console](https://search.google.com/search-console),
   inspecteer `https://emmanagelstudio.vip/` en dien `https://emmanagelstudio.vip/sitemap.xml` in.
   Een indexeringsaanvraag kan crawlen versnellen, maar garandeert geen opname of positie; Google kan enkele dagen tot weken nodig hebben.
