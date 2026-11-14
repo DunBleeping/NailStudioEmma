@@ -2,8 +2,9 @@
 
 ## Statische behandelpagina's
 
-De drie echte pagina's `/biab-purmerend/`, `/gellak-purmerend/` en
-`/nail-art-purmerend/` bevatten ook zonder JavaScript eigen behandelinhoud, titel,
+De vijf echte pagina's `/biab-purmerend/`, `/gellak-purmerend/`,
+`/pedicure-purmerend/`, `/babyboom-purmerend/` en `/nail-art-purmerend/`
+bevatten ook zonder JavaScript eigen behandelinhoud, titel,
 omschrijving, canonical, OpenGraph en relevante lijstprijzen. Ze staan in de sitemap
 en zijn vanaf de homepage en onderling bereikbaar. Het hoofddomein blijft
 `emmanagelstudio.vip`; de sitemap is geen garantie op indexering.
@@ -11,7 +12,7 @@ en zijn vanaf de homepage en onderling bereikbaar. Het hoofddomein blijft
 - **Bronnen:** `index.html` is de gedeelde UI; `data/treatments.json` bevat de unieke
   Nederlandse behandelteksten en verwijst met ID's naar `data/services.json`.
   Prijzen, duur en eventuele toeslagnotities komen alleen uit die bestaande services.
-- **Niet handmatig bewerken:** de drie `<behandeling>-purmerend/index.html`-bestanden
+- **Niet handmatig bewerken:** de vijf `<behandeling>-purmerend/index.html`-bestanden
   zijn gegenereerde, mee te publiceren HTML. Er is geen build op Cloudflare nodig.
   Na een wijziging in homepage, behandelteksten, prijzen of assetversies: open het
   publicatiemenu `tools\sync-website.ps1` en kies **6 – Behandelpagina's lokaal vernieuwen**.
@@ -38,6 +39,21 @@ Regressietests (Node.js): `node --test tools\website-features.test.mjs tools\tra
 Controleer daarnaast in de browser direct laden/herladen van elk pad, alle talen
 (ook Arabisch/rechts-naar-links), mandje/contact en de mobiele layout bij alle
 lettergroottes na scrollen en rotatie. Viewportemulatie vervangt geen iPhone/Safari-test.
+
+### Vindbaarheid controleren
+
+- Indexering betekent dat Google een pagina kan tonen, niet dat die altijd of bovenaan
+  verschijnt. Beoordeel gewone zoekresultaten in Search Console, los van Ads en Maps.
+- Het eigen Google Ads-overzicht in Google Zoeken bevat een advertentievoorbeeld dat
+  alleen de eigenaar ziet. Gebruik **Tools → Problemen oplossen → Advertentievoorbeeld
+  en -diagnose** met de gewenste plaats, taal en mobiel voor een advertentiecontrole.
+- Incognito schakelt locatie niet uit. Ook zonder GPS kan Google een locatie schatten,
+  onder andere via de internetverbinding. Noteer de plaats en locatiebron onderaan de
+  zoekresultaten op wifi en 5G; een verkeerde schatting is eerst een onderzoekspunt,
+  geen reden om het hele land te targeten.
+- Zoekwoorden, landingspagina's, locatiekeuze en veilingrang beïnvloeden advertenties.
+  Een hoger budget verhelpt geen ontbrekend zoekwoord of lage organische positie.
+  Ads-instellingen alleen na gerichte toestemming aanpassen.
 
 ## Vriendinnenactie en BIAB-voorbeeld
 
@@ -143,7 +159,7 @@ De salonteksten spreken persoonlijk vanuit Emma: **ik/mijn** en in het Engels **
    Op mobiel staan Bel mij, WhatsApp en Bezoek mij compact onder elkaar naast de openingstijden; op kleine schermen
    staan ze onder elkaar, met openingstijden eerst. Op desktop beslaan de drie compacte kaarten ongeveer de hoogte
    van de openingstijdenkaart. De kaartcombinatie gebruikt twee kolommen op desktop en één kolom op mobiel.
-   In het weekend: gesloten, behalve op speciaal verzoek. Openingstijden worden ook naar Engels vertaald.
+   In het weekend: 08:00–19:00, alleen op afspraak. Openingstijden worden in alle talen vertaald.
    **Toon telefoonnummer** en SMS starten bij de eerste klik een Turnstile-controle.
    Na servercontrole verschijnt het privé-06-nummer en een knop om bellen of SMS te openen.
    WhatsApp opent direct het openbare Business-nummer uit `data/settings.json`.

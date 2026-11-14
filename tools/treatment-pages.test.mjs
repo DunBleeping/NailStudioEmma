@@ -16,7 +16,7 @@ const decode = (text) => text.replace(/&(amp|lt|gt|quot|#039);/g, (_, entity) =>
 
 test('generated treatment pages are committed-ready and exactly match their sources', async () => {
   const pages = renderPages();
-  assert.equal(pages.size, 3);
+  assert.equal(pages.size, Object.keys(treatments).length);
   for (const [path, expected] of pages) {
     assert.equal(await readFile(path, 'utf8'), expected, path);
     assert.doesNotMatch(expected, /[ \t]+(?=\r?$)/m, `${path}: trailing whitespace`);

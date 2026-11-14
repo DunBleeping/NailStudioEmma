@@ -21,6 +21,26 @@
     ],
     "services": ["shellac", "new-set-gellak", "opvullen-gellak"]
   },
+  "pedicure-purmerend": {
+    "title": "Pedicure Purmerend | Emma NailStudio",
+    "description": "Pedicure in Purmerend bij Emma NailStudio. Kies pedicure of pedicure met gellak; bekijk mijn prijzen en behandeltijden. Alleen op afspraak.",
+    "heading": "Pedicure in Purmerend",
+    "intro": "In mijn salon in Purmerend kun je terecht voor pedicure en pedicure met gellak. Hieronder zie je de verschillende opties voor voetverzorging en teennagels, met de bijbehorende prijzen en behandeltijden.",
+    "paragraphs": [
+      "Pedicure en een nieuwe set teennagels met gellak zijn verschillende behandelingen. Vertel mij bij het aanvragen of je voetverzorging, kleur of een nieuwe set wilt, zodat we de juiste optie kunnen bespreken."
+    ],
+    "services": ["pedicure", "pedicure-gellak", "teennagels-new-set-gellak"]
+  },
+  "babyboom-purmerend": {
+    "title": "Babyboom nagels Purmerend | Emma NailStudio",
+    "description": "Babyboom-nagels in Purmerend bij Emma NailStudio: een nieuwe set of opvullen. Bekijk mijn prijzen en behandeltijden en bespreek jouw wensen. Alleen op afspraak.",
+    "heading": "Babyboom in Purmerend",
+    "intro": "Wil je Babyboom-nagels, ook wel babyboomer-nagels genoemd? In mijn nagelstudio in Purmerend kun je kiezen voor een nieuwe set met Babyboom-effect of het opvullen van bestaande Babyboom-nagels.",
+    "paragraphs": [
+      "Een nieuwe set en opvullen hebben elk een eigen prijs en behandeltijd. Vertel mij wat er nu op jouw nagels zit en stuur gerust een inspiratiefoto. Dan bespreken we de vorm, de afwerking en welke behandeling bij jouw wensen past."
+    ],
+    "services": ["babyboom-new-set", "opvullen-babyboom"]
+  },
   "nail-art-purmerend": {
     "title": "Nail art Purmerend | Maatwerk bij Emma NailStudio",
     "description": "Handgetekende nail art in Purmerend, op aanvraag bij Emma NailStudio. Deel jouw idee of inspiratiefoto; ontwerp, prijs en behandeltijd bespreken we vooraf.",

@@ -81,6 +81,8 @@ test('SEO uses the live domain and existing assets without exposing the salon ad
     canonical,
     `${canonical}biab-purmerend/`,
     `${canonical}gellak-purmerend/`,
+    `${canonical}pedicure-purmerend/`,
+    `${canonical}babyboom-purmerend/`,
     `${canonical}nail-art-purmerend/`,
   ]);
   const robots = await readFile(new URL('../robots.txt', import.meta.url), 'utf8');
